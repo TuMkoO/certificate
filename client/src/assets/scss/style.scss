@@ -1,0 +1,375 @@
+@import "vars";
+@import "libs";
+@import "fonts";
+@import "global";
+
+/*----------------------------------- */
+/* Auth
+------------------------------------- */
+.auth {
+  max-width: 400px;
+  margin-top: -56px;
+  &-title {
+    color: gray;
+  }
+}
+
+/*----------------------------------- */
+/* Certificates Table
+------------------------------------- */
+
+.btn-add {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+
+  color: #198754;
+  border: 6px solid #dee2e6;
+  background-color: #fff;
+  &:hover {
+    border-color: #198754;
+    color: #198754;
+  }
+}
+
+/*----------------------------------- */
+/* Certificate
+------------------------------------- */
+.certificate {
+  font-family: "Times New Roman";
+}
+
+.certificate-header__desc {
+  display: none;
+  margin-bottom: 3px;
+  position: relative;
+}
+
+.certificate-header__printlines,
+.certificate-header__director,
+.certificate-header__comission {
+  display: none;
+}
+.printlines {
+  margin-bottom: 5px;
+  width: 100%;
+  font-size: 1px;
+  color: transparent;
+  .printline-first {
+    border-bottom: 2px solid #000;
+  }
+  .printline-second {
+    border-bottom: 1px solid #000;
+  }
+}
+
+.desc-logo {
+  margin-right: 40px;
+  img {
+    max-width: 130px;
+  }
+}
+
+.desc-text {
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.comission-table {
+  width: 100%;
+  margin: 0 35px;
+  text-align: left;
+  td {
+    width: 50%;
+    vertical-align: top;
+  }
+}
+
+.certificate-header__info {
+  padding: 0 35px;
+}
+
+.check-icon svg {
+  width: 20px;
+  color: green;
+}
+.certificate-text-head {
+  height: 120px !important;
+}
+
+.controls-tr-item-main {
+  flex: 1;
+  &__td {
+    width: 211px;
+    margin-left: auto;
+  }
+}
+
+.controls-tr-item-main.single {
+  .controls-tr-item-main__td {
+    width: 626px;
+  }
+}
+.controls-tr-item-main.duo {
+  .controls-tr-item-main__td {
+    width: 313px;
+  }
+}
+
+.controls-tr-item {
+  margin-left: auto;
+}
+.controls-tr-item.duo {
+  width: 313px;
+}
+
+.certificate-nav {
+  position: fixed;
+  bottom: 40px;
+  // left: 0;
+  right: 0;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(248, 249, 250, 1) 35%,
+    rgba(248, 249, 250, 1) 100%
+  );
+  padding: 10px 0;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+    transition: all 0.3s;
+  }
+}
+
+.signature {
+  position: relative;
+  padding: 0 50px;
+  sub {
+    position: absolute;
+    bottom: -5px;
+    right: 0;
+    left: 0;
+    display: block;
+    text-align: center;
+  }
+  &::after {
+    position: absolute;
+    content: "";
+    display: block;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 95px;
+    border-bottom: 1px solid #000;
+  }
+}
+
+.export-pdf {
+  .print {
+    display: block !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+
+  .table-main {
+    min-width: auto;
+    // overflow-x: visible;
+  }
+
+  // font-size: 12px;
+  line-height: 1.2;
+  color: #000;
+  .border-start,
+  .border-bottom,
+  tbody,
+  td,
+  tfoot,
+  th,
+  thead,
+  tr {
+    border-color: #000 !important;
+  }
+
+  .certificate-body .table-responsive {
+    overflow-x: inherit;
+  }
+
+  .certificate-nav {
+    visibility: hidden !important;
+  }
+
+  .certificate-header__desc,
+  .certificate-header__director {
+    display: flex;
+  }
+  .certificate-header__printlines,
+  .certificate-header__comission {
+    display: block;
+  }
+
+  // .table-main {
+  //   min-width: 600px;
+  // }
+
+  // .text-head {
+  //   text-decoration: underline;
+  // }
+}
+
+.certificate-control {
+  .certificate-control-item:first-child {
+    label {
+      border-bottom-left-radius: 0.2rem !important;
+      border-top-left-radius: 0.2rem !important;
+      border-left: 1px solid #0d6efd;
+    }
+  }
+  .certificate-control-item:last-child {
+    label {
+      border-bottom-right-radius: 0.2rem !important;
+      border-top-right-radius: 0.2rem !important;
+    }
+  }
+}
+.certificate-control.btn-group-sm {
+  label {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-left: 0;
+  }
+}
+
+/*----------------------------------- */
+/* Table Main
+------------------------------------- */
+.table-main {
+  min-width: 750px;
+  th {
+    width: 45px;
+    font-weight: 400;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+/*----------------------------------- */
+/* Settings
+------------------------------------- */
+.settings-title {
+  font-weight: 500;
+  color: #666;
+}
+
+/*----------------------------------- */
+/* Add certificate
+------------------------------------- */
+.certificate-form-field-title {
+  margin: 20px 0;
+  position: relative;
+  display: flex;
+  padding-left: 30px;
+  &::before {
+    content: "";
+    height: 1px;
+    width: 100%;
+    display: block;
+    background-color: #ced4da;
+    position: absolute;
+    top: 13px;
+    left: 0;
+  }
+  span {
+    background-color: #fff;
+    position: relative;
+    padding: 0 10px;
+    color: #adb5bd;
+  }
+}
+
+#tabVariable {
+  .nav-item-danger button {
+    --bs-bg-opacity: 1;
+    background-color: rgba(
+      var(--bs-danger-rgb),
+      var(--bs-bg-opacity)
+    ) !important;
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+  }
+}
+
+#tabVariableContent,
+#controlsTabContent {
+  border: 1px solid #dee2e6;
+  border-top: 1px solid transparent;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.cert-control {
+  .cert-control-item {
+    flex: 1;
+  }
+}
+
+/*----------------------------------- */
+/* Edit certificate
+------------------------------------- */
+.certificate-edit-form {
+  input,
+  label,
+  select {
+    font-family: var(--bs-body-font-family);
+    color: #212529;
+  }
+  color: #6c757d;
+}
+
+.btn-cert-control {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: 4px solid #dee2e6;
+}
+.btn-cert-control-primary {
+  &:hover {
+    border-color: #0d6efd;
+  }
+}
+.btn-cert-control-success {
+  &:hover {
+    border-color: #198754;
+  }
+}
+.btn-cert-control-danger {
+  &:hover {
+    border-color: #dc3545;
+  }
+}
+.btn-cert-control-warning {
+  &:hover {
+    border-color: #ffc107;
+  }
+}
+
+/*----------------------------------- */
+/* Statistics
+------------------------------------- */
+.chart__title {
+  min-height: 60px;
+}
+
+@import "media";
