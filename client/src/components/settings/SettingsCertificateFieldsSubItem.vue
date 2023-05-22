@@ -19,8 +19,6 @@
           />
           {{ item.value }}
         </label>
-
-        <!-- <div>Picked: {{ certAccess }}</div> -->
       </div>
     </div>
     <div class="mb-3" v-if="itemsList">
@@ -31,18 +29,19 @@
         aria-label="multiple select example"
         v-model="subItemSelected"
       >
-        <option v-if="certAccess == 0" disabled
-          >Выберите значение основной группы</option
-        >
-        <option v-else-if="filteredAccessSubItems == 0" disabled
-          >Значений нет, добавьте новое</option
-        >
+        <option v-if="certAccess == 0" disabled>
+          Выберите значение основной группы
+        </option>
+        <option v-else-if="filteredAccessSubItems == 0" disabled>
+          Значений нет, добавьте новое
+        </option>
         <option v-else disabled>Выберите значение</option>
         <option
           v-for="subItem in filteredAccessSubItems"
           :key="subItem.id"
           :value="subItem._id"
-          >{{ subItem.value }}
+        >
+          {{ subItem.value }}
         </option>
       </select>
 
@@ -88,16 +87,11 @@ import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
 
 export default {
-  // props: {
-  //   itemsList: { type: Array, required: true },
-  //   certAccessId: { type: String },
-  // },
   props: ["itemsList", "storeLink", "storeName"],
   setup(props) {
     //подключаем store
     const store = useStore();
-    //
-    // const subItemsList = ref(null);
+
     //выбранное значение из select
     const subItemSelected = ref([]);
     //значение выбранного radiobutton
@@ -106,7 +100,7 @@ export default {
     const accessSubItems = ref();
     //filtered
     const filteredAccessSubItems = ref();
-    //
+
     const { isSubmitting, handleSubmit, resetForm } = useForm();
 
     const {
@@ -116,22 +110,16 @@ export default {
       handleChange: subChange,
     } = useField(
       "newSubItem",
-      yup
-        .string()
-        .trim()
-        .required("Введите подгруппу")
+      yup.string().trim().required("Введите подгруппу")
     );
 
     onMounted(() => {
-      // console.log(props.itemsList);
       accessSubItems.value = [];
 
       //получаем подкатегории всех категорий
       const accessSub = computed(
         () => store.getters["certItem/certAccessItems"]
       );
-
-      // console.log("accessSub ===", accessSub);
 
       //заносим значение в массив accessSubItems
       accessSub.value.forEach((item) => {
@@ -140,22 +128,16 @@ export default {
     });
 
     watch(certAccess, (val) => {
-      // console.log("certAccess == ", certAccess.value);
-      // console.log("val == ", val);
-      // accessSubItems.value.filter((item) => item.owner == val);
-
       //очистить список значений на удаление:
       subItemSelected.value = [];
 
       filteredAccessSubItems.value = accessSubItems.value.filter(
         (item) => item.owner == val
       );
-      // console.log("filteredAccessSubItems :::", filteredAccessSubItems.value);
     });
 
     //добавить новое значение подгруппы:
     const submitNewSubItem = async (values) => {
-      // console.log("values:: ", values);
       if (certAccess.value) {
         // link для url в БД на сервере
         const link = props.storeLink;
@@ -199,7 +181,6 @@ export default {
         const link = props.storeLink;
 
         await ids.forEach((id) => {
-          // console.log(id);
           store.dispatch(`certItem/remove`, { id, link });
         });
 
@@ -227,17 +208,13 @@ export default {
     };
 
     return {
-      // subItemsList,
       removeSubItem,
       subItemSelected,
-
       isSubmitting,
       onSubmitNewSubItem,
-
       certAccess,
       accessSubItems,
       filteredAccessSubItems,
-
       newSubItem,
       subError,
       subBlur,

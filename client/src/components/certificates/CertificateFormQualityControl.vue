@@ -24,8 +24,9 @@
                     v-for="option in optionsType"
                     :key="option.id"
                     :value="option.value"
-                    >{{ option.value }}</option
                   >
+                    {{ option.value }}
+                  </option>
                 </select>
                 <label for="controls1">Контроль</label>
               </div>
@@ -52,8 +53,9 @@
                     v-for="option in optionsType"
                     :key="option.id"
                     :value="option.value"
-                    >{{ option.value }}</option
                   >
+                    {{ option.value }}
+                  </option>
                 </select>
                 <label for="controls2">Контроль</label>
               </div>
@@ -80,8 +82,9 @@
                     v-for="option in optionsType"
                     :key="option.id"
                     :value="option.value"
-                    >{{ option.value }}</option
                   >
+                    {{ option.value }}
+                  </option>
                 </select>
                 <label for="controls3">Контроль</label>
               </div>
@@ -197,7 +200,7 @@
                     <div class="row">
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="text"
                               id="controlsNum1"
@@ -230,8 +233,9 @@
                                 v-for="option in optionsGrade"
                                 :key="option.id"
                                 :value="option.value"
-                                >{{ option.value }}</option
                               >
+                                {{ option.value }}
+                              </option>
                             </select>
                             <label for="controlsGrade1">Оценка</label>
                           </div>
@@ -239,7 +243,7 @@
                       </div>
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="date"
                               id="controlsDate1"
@@ -261,7 +265,7 @@
                     <div class="row">
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="text"
                               id="controlsNum2"
@@ -294,8 +298,9 @@
                                 v-for="option in optionsGrade"
                                 :key="option.id"
                                 :value="option.value"
-                                >{{ option.value }}</option
                               >
+                                {{ option.value }}
+                              </option>
                             </select>
                             <label for="controlsGrade2">Оценка</label>
                           </div>
@@ -303,7 +308,7 @@
                       </div>
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="date"
                               id="controlsDate2"
@@ -325,7 +330,7 @@
                     <div class="row">
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="text"
                               id="controlsNum3"
@@ -358,8 +363,9 @@
                                 v-for="option in optionsGrade"
                                 :key="option.id"
                                 :value="option.value"
-                                >{{ option.value }}</option
                               >
+                                {{ option.value }}
+                              </option>
                             </select>
                             <label for="controlsGrade3">Оценка</label>
                           </div>
@@ -367,7 +373,7 @@
                       </div>
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="date"
                               id="controlsDate3"
@@ -396,7 +402,7 @@
                     <div class="row">
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="text"
                               id="controlsNum4"
@@ -429,8 +435,9 @@
                                 v-for="option in optionsGrade"
                                 :key="option.id"
                                 :value="option.value"
-                                >{{ option.value }}</option
                               >
+                                {{ option.value }}
+                              </option>
                             </select>
                             <label for="controlsGrade4">Оценка</label>
                           </div>
@@ -438,7 +445,7 @@
                       </div>
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="date"
                               id="controlsDate4"
@@ -460,7 +467,7 @@
                     <div class="row">
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="text"
                               id="controlsNum5"
@@ -493,8 +500,9 @@
                                 v-for="option in optionsGrade"
                                 :key="option.id"
                                 :value="option.value"
-                                >{{ option.value }}</option
                               >
+                                {{ option.value }}
+                              </option>
                             </select>
                             <label for="controlsGrade5">Оценка</label>
                           </div>
@@ -502,7 +510,7 @@
                       </div>
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="date"
                               id="controlsDate5"
@@ -524,7 +532,7 @@
                     <div class="row">
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="text"
                               id="controlsNum6"
@@ -557,8 +565,9 @@
                                 v-for="option in optionsGrade"
                                 :key="option.id"
                                 :value="option.value"
-                                >{{ option.value }}</option
                               >
+                                {{ option.value }}
+                              </option>
                             </select>
                             <label for="controlsGrade6">Оценка</label>
                           </div>
@@ -566,7 +575,7 @@
                       </div>
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="date"
                               id="controlsDate6"
@@ -595,7 +604,7 @@
                     <div class="row">
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="text"
                               id="controlsNum7"
@@ -628,8 +637,9 @@
                                 v-for="option in optionsGrade"
                                 :key="option.id"
                                 :value="option.value"
-                                >{{ option.value }}</option
                               >
+                                {{ option.value }}
+                              </option>
                             </select>
                             <label for="controlsGrade7">Оценка</label>
                           </div>
@@ -637,7 +647,7 @@
                       </div>
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="date"
                               id="controlsDate7"
@@ -659,7 +669,7 @@
                     <div class="row">
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="text"
                               id="controlsNum8"
@@ -692,8 +702,9 @@
                                 v-for="option in optionsGrade"
                                 :key="option.id"
                                 :value="option.value"
-                                >{{ option.value }}</option
                               >
+                                {{ option.value }}
+                              </option>
                             </select>
                             <label for="controlsGrade8">Оценка</label>
                           </div>
@@ -701,7 +712,7 @@
                       </div>
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="date"
                               id="controlsDate8"
@@ -723,7 +734,7 @@
                     <div class="row">
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="text"
                               id="controlsNum9"
@@ -756,8 +767,9 @@
                                 v-for="option in optionsGrade"
                                 :key="option.id"
                                 :value="option.value"
-                                >{{ option.value }}</option
                               >
+                                {{ option.value }}
+                              </option>
                             </select>
                             <label for="controlsGrade9">Оценка</label>
                           </div>
@@ -765,7 +777,7 @@
                       </div>
                       <div class="col-lg-4">
                         <div class="mb-3">
-                          <div class="form-floating ">
+                          <div class="form-floating">
                             <input
                               type="date"
                               id="controlsDate9"
@@ -789,369 +801,320 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import AppSelect from "../ui/form/AppSelect.vue";
 
-export default {
-  components: { AppSelect },
-  props: {
-    optionsType: { type: Array, required: true },
-    optionsGrade: { type: Array, required: true },
-    defaultOptions: { type: Array },
-  },
-  emits: ["changeControlsItem", "changeType"],
-  setup(props, { emit }) {
-    //массив полей
-    const controls = ref([]);
+const props = defineProps<{
+  optionsType: [];
+  optionsGrade: [];
+  defaultOptions?: [];
+}>();
+const emits = defineEmits<{
+  (e: "changeControlsItem"): void;
+  (e: "changeType"): void;
+}>();
 
-    const controlsType1 = ref("");
-    const controlsType2 = ref("");
-    const controlsType3 = ref("");
+//массив полей
+const controls = ref([]);
 
-    const controlsNum1 = ref("");
-    const controlsNum2 = ref("");
-    const controlsNum3 = ref("");
-    const controlsNum4 = ref("");
-    const controlsNum5 = ref("");
-    const controlsNum6 = ref("");
-    const controlsNum7 = ref("");
-    const controlsNum8 = ref("");
-    const controlsNum9 = ref("");
-    const controlsGrade1 = ref("");
-    const controlsGrade2 = ref("");
-    const controlsGrade3 = ref("");
-    const controlsGrade4 = ref("");
-    const controlsGrade5 = ref("");
-    const controlsGrade6 = ref("");
-    const controlsGrade7 = ref("");
-    const controlsGrade8 = ref("");
-    const controlsGrade9 = ref("");
-    const controlsDate1 = ref("");
-    const controlsDate2 = ref("");
-    const controlsDate3 = ref("");
-    const controlsDate4 = ref("");
-    const controlsDate5 = ref("");
-    const controlsDate6 = ref("");
-    const controlsDate7 = ref("");
-    const controlsDate8 = ref("");
-    const controlsDate9 = ref("");
+const controlsType1 = ref("");
+const controlsType2 = ref("");
+const controlsType3 = ref("");
 
-    onMounted(() => {
-      //когда есть значения по умолчанию
-      if (props.defaultOptions) {
-        // console.log("props.defaultOptions ::: ", props.defaultOptions);
+const controlsNum1 = ref("");
+const controlsNum2 = ref("");
+const controlsNum3 = ref("");
+const controlsNum4 = ref("");
+const controlsNum5 = ref("");
+const controlsNum6 = ref("");
+const controlsNum7 = ref("");
+const controlsNum8 = ref("");
+const controlsNum9 = ref("");
+const controlsGrade1 = ref("");
+const controlsGrade2 = ref("");
+const controlsGrade3 = ref("");
+const controlsGrade4 = ref("");
+const controlsGrade5 = ref("");
+const controlsGrade6 = ref("");
+const controlsGrade7 = ref("");
+const controlsGrade8 = ref("");
+const controlsGrade9 = ref("");
+const controlsDate1 = ref("");
+const controlsDate2 = ref("");
+const controlsDate3 = ref("");
+const controlsDate4 = ref("");
+const controlsDate5 = ref("");
+const controlsDate6 = ref("");
+const controlsDate7 = ref("");
+const controlsDate8 = ref("");
+const controlsDate9 = ref("");
 
-        controls.value = props.defaultOptions;
+onMounted(() => {
+  //когда есть значения по умолчанию
+  if (props.defaultOptions) {
+    controls.value = props.defaultOptions;
 
-        if (props.defaultOptions.length > 0) {
-          controlsType1.value = props.defaultOptions[0].type;
+    if (props.defaultOptions.length > 0) {
+      controlsType1.value = props.defaultOptions[0].type;
 
-          if (
-            props.defaultOptions[0].values.length > 0 &&
-            props.defaultOptions[0].values[0]
-          ) {
-            controlsNum1.value = props.defaultOptions[0].values[0].num;
-            controlsGrade1.value = props.defaultOptions[0].values[0].grade;
-            controlsDate1.value = props.defaultOptions[0].values[0].date;
-          }
-          if (
-            props.defaultOptions[0].values.length > 1 &&
-            props.defaultOptions[0].values[1]
-          ) {
-            controlsNum4.value = props.defaultOptions[0].values[1].num;
-            controlsGrade4.value = props.defaultOptions[0].values[1].grade;
-            controlsDate4.value = props.defaultOptions[0].values[1].date;
-          }
-          if (
-            props.defaultOptions[0].values.length > 2 &&
-            props.defaultOptions[0].values[2]
-          ) {
-            controlsNum7.value = props.defaultOptions[0].values[2].num;
-            controlsGrade7.value = props.defaultOptions[0].values[2].grade;
-            controlsDate7.value = props.defaultOptions[0].values[2].date;
-          }
-        }
-
-        if (props.defaultOptions.length > 1) {
-          controlsType2.value = props.defaultOptions[1].type;
-
-          if (
-            props.defaultOptions[1].values.length > 0 &&
-            props.defaultOptions[1].values[0]
-          ) {
-            controlsNum2.value = props.defaultOptions[1].values[0].num;
-            controlsGrade2.value = props.defaultOptions[1].values[0].grade;
-            controlsDate2.value = props.defaultOptions[1].values[0].date;
-          }
-          if (
-            props.defaultOptions[1].values.length > 1 &&
-            props.defaultOptions[1].values[1]
-          ) {
-            controlsNum5.value = props.defaultOptions[1].values[1].num;
-            controlsGrade5.value = props.defaultOptions[1].values[1].grade;
-            controlsDate5.value = props.defaultOptions[1].values[1].date;
-          }
-          if (
-            props.defaultOptions[1].values.length > 2 &&
-            props.defaultOptions[1].values[2]
-          ) {
-            controlsNum8.value = props.defaultOptions[1].values[2].num;
-            controlsGrade8.value = props.defaultOptions[1].values[2].grade;
-            controlsDate8.value = props.defaultOptions[1].values[2].date;
-          }
-        }
-
-        if (props.defaultOptions.length > 2) {
-          controlsType3.value = props.defaultOptions[2].type;
-
-          if (
-            props.defaultOptions[2].values.length > 0 &&
-            props.defaultOptions[2].values[0]
-          ) {
-            controlsNum3.value = props.defaultOptions[2].values[0].num;
-            controlsGrade3.value = props.defaultOptions[2].values[0].grade;
-            controlsDate3.value = props.defaultOptions[2].values[0].date;
-          }
-          if (
-            props.defaultOptions[2].values.length > 1 &&
-            props.defaultOptions[2].values[1]
-          ) {
-            controlsNum6.value = props.defaultOptions[2].values[1].num;
-            controlsGrade6.value = props.defaultOptions[2].values[1].grade;
-            controlsDate6.value = props.defaultOptions[2].values[1].date;
-          }
-          if (
-            props.defaultOptions[2].values.length > 2 &&
-            props.defaultOptions[2].values[2]
-          ) {
-            controlsNum9.value = props.defaultOptions[2].values[2].num;
-            controlsGrade9.value = props.defaultOptions[2].values[2].grade;
-            controlsDate9.value = props.defaultOptions[2].values[2].date;
-          }
-        }
+      if (
+        props.defaultOptions[0].values.length > 0 &&
+        props.defaultOptions[0].values[0]
+      ) {
+        controlsNum1.value = props.defaultOptions[0].values[0].num;
+        controlsGrade1.value = props.defaultOptions[0].values[0].grade;
+        controlsDate1.value = props.defaultOptions[0].values[0].date;
       }
-    });
-
-    //Функция очистки селектов
-    const clear = (val) => {
-      switch (val) {
-        case "controlsType1":
-          controlsType1.value = "";
-          break;
-        case "controlsType2":
-          controlsType2.value = "";
-          break;
-        case "controlsType3":
-          controlsType3.value = "";
-          break;
-        case "controlsGrade1":
-          controlsGrade1.value = "";
-          break;
-        case "controlsGrade2":
-          controlsGrade2.value = "";
-          break;
-        case "controlsGrade3":
-          controlsGrade3.value = "";
-          break;
-        case "controlsGrade4":
-          controlsGrade4.value = "";
-          break;
-        case "controlsGrade5":
-          controlsGrade5.value = "";
-          break;
-        case "controlsGrade6":
-          controlsGrade6.value = "";
-          break;
-        case "controlsGrade7":
-          controlsGrade7.value = "";
-          break;
-        case "controlsGrade8":
-          controlsGrade8.value = "";
-          break;
-        case "controlsGrade9":
-          controlsGrade9.value = "";
-          break;
-
-        default:
-          break;
+      if (
+        props.defaultOptions[0].values.length > 1 &&
+        props.defaultOptions[0].values[1]
+      ) {
+        controlsNum4.value = props.defaultOptions[0].values[1].num;
+        controlsGrade4.value = props.defaultOptions[0].values[1].grade;
+        controlsDate4.value = props.defaultOptions[0].values[1].date;
       }
-    };
-
-    function changeControlsFields(val, controlsId) {
-      // console.log("val: ", val);
-      // console.log("controls.value: ", controls.value);
-
-      if (!controls.value[controlsId]) {
-        controls.value[controlsId] = {};
+      if (
+        props.defaultOptions[0].values.length > 2 &&
+        props.defaultOptions[0].values[2]
+      ) {
+        controlsNum7.value = props.defaultOptions[0].values[2].num;
+        controlsGrade7.value = props.defaultOptions[0].values[2].grade;
+        controlsDate7.value = props.defaultOptions[0].values[2].date;
       }
-
-      if (val[0]) {
-        controls.value[controlsId] = {
-          controlId: controlsId,
-          type: val[0],
-        };
-      }
-
-      function checkValues(val1, val2, val3, valuesNum) {
-        //если все основные значения заполнены:
-        if (val[val1] && val[val2] && val[val3]) {
-          //добавляем в массив значений
-          if (controls.value[controlsId] && controls.value[controlsId].values) {
-            controls.value[controlsId].values[valuesNum] = {
-              num: val[val1].trim(),
-              grade: val[val2],
-              date: val[val3],
-            };
-          } else {
-            controls.value[controlsId].values = [];
-            controls.value[controlsId].values[valuesNum] = {
-              num: val[val1].trim(),
-              grade: val[val2],
-              date: val[val3],
-            };
-          }
-        } else {
-          // console.log("не все основные поля заполнены");
-          //если не все значения заполнены очищаем массив значений
-          if (controls.value[controlsId] && controls.value[controlsId].values) {
-            controls.value[controlsId].values[valuesNum] = null;
-          }
-
-          if (controls.value[controlsId] && controls.value[controlsId].values) {
-            if (
-              controls.value[controlsId].values.length == 3 &&
-              !controls.value[controlsId].values[2] &&
-              !controls.value[controlsId].values[1]
-            ) {
-              controls.value[controlsId].values.splice(1, 2);
-            } else if (
-              controls.value[controlsId].values.length == 3 &&
-              !controls.value[controlsId].values[2]
-            ) {
-              controls.value[controlsId].values.splice(2, 1);
-            }
-          }
-        }
-      }
-
-      checkValues(1, 2, 3, 0);
-      checkValues(4, 5, 6, 1);
-      checkValues(7, 8, 9, 2);
-
-      if (val[0] && val[1] && val[2] && val[3]) {
-        //передаем выбранные значения для input
-        emit("changeControlsItem", {
-          values: controls.value,
-        });
-        // console.log("controls.value: ", controls.value);
-      } else {
-        // console.log("не все поля заполнены");
-        //если не все значения заполнены удаляем(очищаем) элемент из массива
-        if (controlsId === 0 || !controls.value[controlsId].values) {
-          controls.value[controlsId] = null;
-        }
-
-        //передаем выбранные значения для input
-        emit("changeControlsItem", {
-          values: controls.value,
-        });
-
-        // console.log("controls.value: ", controls.value);
-      }
-      // console.log("controls.value: ", controls.value);
     }
 
-    watch(
-      [
-        controlsType1,
-        controlsNum1,
-        controlsGrade1,
-        controlsDate1,
-        controlsNum4,
-        controlsGrade4,
-        controlsDate4,
-        controlsNum7,
-        controlsGrade7,
-        controlsDate7,
-      ],
-      (val) => {
-        // console.log(val);
-        changeControlsFields(val, 0);
-      }
-    );
-    watch(
-      [
-        controlsType2,
-        controlsNum2,
-        controlsGrade2,
-        controlsDate2,
-        controlsNum5,
-        controlsGrade5,
-        controlsDate5,
-        controlsNum8,
-        controlsGrade8,
-        controlsDate8,
-      ],
-      (val) => {
-        changeControlsFields(val, 1);
-      }
-    );
-    watch(
-      [
-        controlsType3,
-        controlsNum3,
-        controlsGrade3,
-        controlsDate3,
-        controlsNum6,
-        controlsGrade6,
-        controlsDate6,
-        controlsNum9,
-        controlsGrade9,
-        controlsDate9,
-      ],
-      (val) => {
-        changeControlsFields(val, 2);
-      }
-    );
+    if (props.defaultOptions.length > 1) {
+      controlsType2.value = props.defaultOptions[1].type;
 
-    return {
-      controls,
-      clear,
+      if (
+        props.defaultOptions[1].values.length > 0 &&
+        props.defaultOptions[1].values[0]
+      ) {
+        controlsNum2.value = props.defaultOptions[1].values[0].num;
+        controlsGrade2.value = props.defaultOptions[1].values[0].grade;
+        controlsDate2.value = props.defaultOptions[1].values[0].date;
+      }
+      if (
+        props.defaultOptions[1].values.length > 1 &&
+        props.defaultOptions[1].values[1]
+      ) {
+        controlsNum5.value = props.defaultOptions[1].values[1].num;
+        controlsGrade5.value = props.defaultOptions[1].values[1].grade;
+        controlsDate5.value = props.defaultOptions[1].values[1].date;
+      }
+      if (
+        props.defaultOptions[1].values.length > 2 &&
+        props.defaultOptions[1].values[2]
+      ) {
+        controlsNum8.value = props.defaultOptions[1].values[2].num;
+        controlsGrade8.value = props.defaultOptions[1].values[2].grade;
+        controlsDate8.value = props.defaultOptions[1].values[2].date;
+      }
+    }
 
-      controlsType1,
-      controlsType2,
-      controlsType3,
-      controlsNum1,
-      controlsNum2,
-      controlsNum3,
-      controlsNum4,
-      controlsNum5,
-      controlsNum6,
-      controlsNum7,
-      controlsNum8,
-      controlsNum9,
-      controlsGrade1,
-      controlsGrade2,
-      controlsGrade3,
-      controlsGrade4,
-      controlsGrade5,
-      controlsGrade6,
-      controlsGrade7,
-      controlsGrade8,
-      controlsGrade9,
-      controlsDate1,
-      controlsDate2,
-      controlsDate3,
-      controlsDate4,
-      controlsDate5,
-      controlsDate6,
-      controlsDate7,
-      controlsDate8,
-      controlsDate9,
-    };
-  },
+    if (props.defaultOptions.length > 2) {
+      controlsType3.value = props.defaultOptions[2].type;
+
+      if (
+        props.defaultOptions[2].values.length > 0 &&
+        props.defaultOptions[2].values[0]
+      ) {
+        controlsNum3.value = props.defaultOptions[2].values[0].num;
+        controlsGrade3.value = props.defaultOptions[2].values[0].grade;
+        controlsDate3.value = props.defaultOptions[2].values[0].date;
+      }
+      if (
+        props.defaultOptions[2].values.length > 1 &&
+        props.defaultOptions[2].values[1]
+      ) {
+        controlsNum6.value = props.defaultOptions[2].values[1].num;
+        controlsGrade6.value = props.defaultOptions[2].values[1].grade;
+        controlsDate6.value = props.defaultOptions[2].values[1].date;
+      }
+      if (
+        props.defaultOptions[2].values.length > 2 &&
+        props.defaultOptions[2].values[2]
+      ) {
+        controlsNum9.value = props.defaultOptions[2].values[2].num;
+        controlsGrade9.value = props.defaultOptions[2].values[2].grade;
+        controlsDate9.value = props.defaultOptions[2].values[2].date;
+      }
+    }
+  }
+});
+
+//Функция очистки селектов
+const clear = (val) => {
+  switch (val) {
+    case "controlsType1":
+      controlsType1.value = "";
+      break;
+    case "controlsType2":
+      controlsType2.value = "";
+      break;
+    case "controlsType3":
+      controlsType3.value = "";
+      break;
+    case "controlsGrade1":
+      controlsGrade1.value = "";
+      break;
+    case "controlsGrade2":
+      controlsGrade2.value = "";
+      break;
+    case "controlsGrade3":
+      controlsGrade3.value = "";
+      break;
+    case "controlsGrade4":
+      controlsGrade4.value = "";
+      break;
+    case "controlsGrade5":
+      controlsGrade5.value = "";
+      break;
+    case "controlsGrade6":
+      controlsGrade6.value = "";
+      break;
+    case "controlsGrade7":
+      controlsGrade7.value = "";
+      break;
+    case "controlsGrade8":
+      controlsGrade8.value = "";
+      break;
+    case "controlsGrade9":
+      controlsGrade9.value = "";
+      break;
+
+    default:
+      break;
+  }
 };
+
+function changeControlsFields(val, controlsId) {
+  if (!controls.value[controlsId]) {
+    controls.value[controlsId] = {};
+  }
+
+  if (val[0]) {
+    controls.value[controlsId] = {
+      controlId: controlsId,
+      type: val[0],
+    };
+  }
+
+  function checkValues(val1, val2, val3, valuesNum) {
+    //если все основные значения заполнены:
+    if (val[val1] && val[val2] && val[val3]) {
+      //добавляем в массив значений
+      if (controls.value[controlsId] && controls.value[controlsId].values) {
+        controls.value[controlsId].values[valuesNum] = {
+          num: val[val1].trim(),
+          grade: val[val2],
+          date: val[val3],
+        };
+      } else {
+        controls.value[controlsId].values = [];
+        controls.value[controlsId].values[valuesNum] = {
+          num: val[val1].trim(),
+          grade: val[val2],
+          date: val[val3],
+        };
+      }
+    } else {
+      //если не все значения заполнены очищаем массив значений
+      if (controls.value[controlsId] && controls.value[controlsId].values) {
+        controls.value[controlsId].values[valuesNum] = null;
+      }
+
+      if (controls.value[controlsId] && controls.value[controlsId].values) {
+        if (
+          controls.value[controlsId].values.length == 3 &&
+          !controls.value[controlsId].values[2] &&
+          !controls.value[controlsId].values[1]
+        ) {
+          controls.value[controlsId].values.splice(1, 2);
+        } else if (
+          controls.value[controlsId].values.length == 3 &&
+          !controls.value[controlsId].values[2]
+        ) {
+          controls.value[controlsId].values.splice(2, 1);
+        }
+      }
+    }
+  }
+
+  checkValues(1, 2, 3, 0);
+  checkValues(4, 5, 6, 1);
+  checkValues(7, 8, 9, 2);
+
+  if (val[0] && val[1] && val[2] && val[3]) {
+    //передаем выбранные значения для input
+    emit("changeControlsItem", {
+      values: controls.value,
+    });
+  } else {
+    //если не все значения заполнены удаляем(очищаем) элемент из массива
+    if (controlsId === 0 || !controls.value[controlsId].values) {
+      controls.value[controlsId] = null;
+    }
+
+    //передаем выбранные значения для input
+    emit("changeControlsItem", {
+      values: controls.value,
+    });
+  }
+}
+
+watch(
+  [
+    controlsType1,
+    controlsNum1,
+    controlsGrade1,
+    controlsDate1,
+    controlsNum4,
+    controlsGrade4,
+    controlsDate4,
+    controlsNum7,
+    controlsGrade7,
+    controlsDate7,
+  ],
+  (val) => {
+    changeControlsFields(val, 0);
+  }
+);
+watch(
+  [
+    controlsType2,
+    controlsNum2,
+    controlsGrade2,
+    controlsDate2,
+    controlsNum5,
+    controlsGrade5,
+    controlsDate5,
+    controlsNum8,
+    controlsGrade8,
+    controlsDate8,
+  ],
+  (val) => {
+    changeControlsFields(val, 1);
+  }
+);
+watch(
+  [
+    controlsType3,
+    controlsNum3,
+    controlsGrade3,
+    controlsDate3,
+    controlsNum6,
+    controlsGrade6,
+    controlsDate6,
+    controlsNum9,
+    controlsGrade9,
+    controlsDate9,
+  ],
+  (val) => {
+    changeControlsFields(val, 2);
+  }
+);
 </script>
 
 <style></style>

@@ -20,7 +20,7 @@
         data-bs-parent="#accordionCertificateSettings"
       >
         <div class="accordion-body">
-          <div class="form-floating ">
+          <div class="form-floating">
             <textarea
               placeholder="Текст шапки"
               id="textHead"
@@ -188,7 +188,7 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { onMounted, ref, computed } from "vue";
 import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
@@ -196,193 +196,135 @@ import * as yup from "yup";
 import SettingsCertificateFieldsItem from "./SettingsCertificateFieldsItem.vue";
 import AppLoader from "../ui/AppLoader.vue";
 
-export default {
-  setup() {
-    //подключаем store
-    const store = useStore();
-    //значение input Текста шапки
-    const textHeadValue = ref({});
-    //значения полей мультиселекта
-    const qualifyingRankItems = [];
-    const attestationTypeItems = [];
-    const weldingMethodItems = [];
-    const weldedTypeItems = [];
-    const weldedSeamItems = [];
-    const weldedConnectionItems = [];
-    const weldedPositionItems = [];
-    const axesPositionItems = [];
-    const weldedJointItems = [];
-    const brandItems = [];
-    const electrodeItems = [];
-    const comissionItems = [];
-    const controlItems = [];
-    const gradeItems = [];
-    const accessItems = [];
-    // const accessSubItems = [];
+//подключаем store
+const store = useStore();
+//значение input Текста шапки
+const textHeadValue = ref({});
+//значения полей мультиселекта
+const qualifyingRankItems = [];
+const attestationTypeItems = [];
+const weldingMethodItems = [];
+const weldedTypeItems = [];
+const weldedSeamItems = [];
+const weldedConnectionItems = [];
+const weldedPositionItems = [];
+const axesPositionItems = [];
+const weldedJointItems = [];
+const brandItems = [];
+const electrodeItems = [];
+const comissionItems = [];
+const controlItems = [];
+const gradeItems = [];
+const accessItems = [];
 
-    const { isSubmitting, handleSubmit } = useForm();
+const { handleSubmit } = useForm();
 
-    const {
-      value: textHead,
-      errorMessage: tHeadError,
-      handleBlur: tHeadBlur,
-      handleChange: tHeadChange,
-    } = useField(
-      "textHead",
-      yup
-        .string()
-        .trim()
-        .required("Введите текст шапки Протокола")
-    );
+const { value: textHead, errorMessage: tHeadError } = useField(
+  "textHead",
+  yup.string().trim().required("Введите текст шапки Протокола")
+);
 
-    //загрузка значений:
-    onMounted(async () => {
-      //получаем значение input
-      textHeadValue.value = computed(
-        () => store.getters["certItem/certTextHeads"]
-      );
-      //добавляем значения в input
-      textHead.value = textHeadValue.value.value[0].value;
+//загрузка значений:
+onMounted(async () => {
+  //получаем значение input
+  textHeadValue.value = computed(() => store.getters["certItem/certTextHeads"]);
+  //добавляем значения в input
+  textHead.value = textHeadValue.value.value[0].value;
 
-      const qualifyingRanks = computed(
-        () => store.getters["certItem/certQualifyingRanks"]
-      );
-      qualifyingRanks.value.forEach((item) => {
-        qualifyingRankItems.push(item);
-      });
-      const attestationTypes = computed(
-        () => store.getters["certItem/certAttestationTypes"]
-      );
-      attestationTypes.value.forEach((item) => {
-        attestationTypeItems.push(item);
-      });
-      const weldingMethods = computed(
-        () => store.getters["certItem/certWeldingMethods"]
-      );
-      weldingMethods.value.forEach((item) => {
-        weldingMethodItems.push(item);
-      });
-      const weldedTypes = computed(
-        () => store.getters["certItem/certWeldedTypes"]
-      );
-      weldedTypes.value.forEach((item) => {
-        weldedTypeItems.push(item);
-      });
-      const weldedSeams = computed(
-        () => store.getters["certItem/certWeldedSeams"]
-      );
-      weldedSeams.value.forEach((item) => {
-        weldedSeamItems.push(item);
-      });
-      const weldedConnections = computed(
-        () => store.getters["certItem/certWeldedConnections"]
-      );
-      weldedConnections.value.forEach((item) => {
-        weldedConnectionItems.push(item);
-      });
+  const qualifyingRanks = computed(
+    () => store.getters["certItem/certQualifyingRanks"]
+  );
+  qualifyingRanks.value.forEach((item) => {
+    qualifyingRankItems.push(item);
+  });
+  const attestationTypes = computed(
+    () => store.getters["certItem/certAttestationTypes"]
+  );
+  attestationTypes.value.forEach((item) => {
+    attestationTypeItems.push(item);
+  });
+  const weldingMethods = computed(
+    () => store.getters["certItem/certWeldingMethods"]
+  );
+  weldingMethods.value.forEach((item) => {
+    weldingMethodItems.push(item);
+  });
+  const weldedTypes = computed(() => store.getters["certItem/certWeldedTypes"]);
+  weldedTypes.value.forEach((item) => {
+    weldedTypeItems.push(item);
+  });
+  const weldedSeams = computed(() => store.getters["certItem/certWeldedSeams"]);
+  weldedSeams.value.forEach((item) => {
+    weldedSeamItems.push(item);
+  });
+  const weldedConnections = computed(
+    () => store.getters["certItem/certWeldedConnections"]
+  );
+  weldedConnections.value.forEach((item) => {
+    weldedConnectionItems.push(item);
+  });
 
-      const weldedPositions = computed(
-        () => store.getters["certItem/certWeldedPositions"]
-      );
-      weldedPositions.value.forEach((item) => {
-        weldedPositionItems.push(item);
-      });
-      const axesPositions = computed(
-        () => store.getters["certItem/certAxesPositions"]
-      );
-      axesPositions.value.forEach((item) => {
-        axesPositionItems.push(item);
-      });
-      const weldedJoints = computed(
-        () => store.getters["certItem/certWeldedJoints"]
-      );
-      weldedJoints.value.forEach((item) => {
-        weldedJointItems.push(item);
-      });
+  const weldedPositions = computed(
+    () => store.getters["certItem/certWeldedPositions"]
+  );
+  weldedPositions.value.forEach((item) => {
+    weldedPositionItems.push(item);
+  });
+  const axesPositions = computed(
+    () => store.getters["certItem/certAxesPositions"]
+  );
+  axesPositions.value.forEach((item) => {
+    axesPositionItems.push(item);
+  });
+  const weldedJoints = computed(
+    () => store.getters["certItem/certWeldedJoints"]
+  );
+  weldedJoints.value.forEach((item) => {
+    weldedJointItems.push(item);
+  });
 
-      const brands = computed(() => store.getters["certItem/certBrands"]);
-      brands.value.forEach((item) => {
-        brandItems.push(item);
-      });
+  const brands = computed(() => store.getters["certItem/certBrands"]);
+  brands.value.forEach((item) => {
+    brandItems.push(item);
+  });
 
-      const electrodes = computed(
-        () => store.getters["certItem/certElectrodes"]
-      );
-      electrodes.value.forEach((item) => {
-        electrodeItems.push(item);
-      });
+  const electrodes = computed(() => store.getters["certItem/certElectrodes"]);
+  electrodes.value.forEach((item) => {
+    electrodeItems.push(item);
+  });
 
-      const comissions = computed(
-        () => store.getters["certItem/certComissions"]
-      );
-      comissions.value.forEach((item) => {
-        comissionItems.push(item);
-      });
+  const comissions = computed(() => store.getters["certItem/certComissions"]);
+  comissions.value.forEach((item) => {
+    comissionItems.push(item);
+  });
 
-      const controls = computed(() => store.getters["certItem/certControls"]);
-      controls.value.forEach((item) => {
-        controlItems.push(item);
-      });
+  const controls = computed(() => store.getters["certItem/certControls"]);
+  controls.value.forEach((item) => {
+    controlItems.push(item);
+  });
 
-      const grades = computed(() => store.getters["certItem/certGrades"]);
-      grades.value.forEach((item) => {
-        gradeItems.push(item);
-      });
+  const grades = computed(() => store.getters["certItem/certGrades"]);
+  grades.value.forEach((item) => {
+    gradeItems.push(item);
+  });
 
-      const accesses = computed(() => store.getters["certItem/certAccesses"]);
-      accesses.value.forEach((item) => {
-        accessItems.push(item);
-      });
-      // const accessSubs = computed(() => store.getters["certItem/certAccessItems"]);
-      // accessSubs.value.forEach((item) => {
-      //   accessSubItems.push(item);
-      // });
-    });
+  const accesses = computed(() => store.getters["certItem/certAccesses"]);
+  accesses.value.forEach((item) => {
+    accessItems.push(item);
+  });
+});
 
-    //сохранить введенное значение
-    const submitTextHead = async (values) => {
-      const link = "certificate-text-head";
-      const id = textHeadValue.value.value[0]._id;
-      const newValues = { value: values.textHead };
+//сохранить введенное значение
+const submitTextHead = async (values) => {
+  const link = "certificate-text-head";
+  const id = textHeadValue.value.value[0]._id;
+  const newValues = { value: values.textHead };
 
-      // вызываем метод update для обновления записи в БД
-      await store.dispatch(`certItem/update`, { newValues, link, id });
-    };
-
-    const onSubmitTextHead = handleSubmit(submitTextHead);
-
-    return {
-      qualifyingRankItems,
-      attestationTypeItems,
-      weldingMethodItems,
-      weldedTypeItems,
-      weldedSeamItems,
-      weldedConnectionItems,
-      weldedPositionItems,
-      axesPositionItems,
-      weldedJointItems,
-      brandItems,
-      electrodeItems,
-      comissionItems,
-      controlItems,
-      gradeItems,
-
-      accessItems,
-      textHeadValue,
-      textHead,
-      tHeadError,
-      tHeadBlur,
-      tHeadChange,
-
-      isSubmitting,
-      onSubmitTextHead,
-    };
-  },
-  components: {
-    SettingsCertificateFieldsItem,
-    AppLoader,
-  },
+  // вызываем метод update для обновления записи в БД
+  await store.dispatch(`certItem/update`, { newValues, link, id });
 };
+
+const onSubmitTextHead = handleSubmit(submitTextHead);
 </script>
 
 <style></style>

@@ -31,32 +31,24 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "vuex";
 
-export default {
-  setup() {
-    const store = useStore();
+const store = useStore();
 
-    const messageTypes = {
-      primary: "primary",
-      danger: "danger",
-      warning: "warning",
-    };
-
-    const message = computed(() => store.state.message);
-    const messageType = computed(() =>
-      message.value ? messageTypes[message.value.type] : null
-    );
-
-    return {
-      message,
-      messageType,
-      close: () => store.commit("clearMessage"),
-    };
-  },
+const messageTypes = {
+  primary: "primary",
+  danger: "danger",
+  warning: "warning",
 };
+
+const message = computed(() => store.state.message);
+const messageType = computed(() =>
+  message.value ? messageTypes[message.value.type] : null
+);
+
+const close = () => store.commit("clearMessage");
 </script>
 
 <style scoped>

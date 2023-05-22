@@ -69,56 +69,42 @@
   </header>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
-export default {
-  setup() {
-    const router = useRouter();
-    const store = useStore();
-    const auth = store.getters["auth/isAuthenticated"];
-    const userRole = store.getters["auth/user"].roles;
-    const isShow = ref(false);
-    const access = ref(false);
+const router = useRouter();
+const store = useStore();
+const auth = store.getters["auth/isAuthenticated"];
+const userRole = store.getters["auth/user"].roles;
+const isShow = ref(false);
+const access = ref(false);
 
-    const systemData = computed(() => store.getters["system/systems"]);
+const systemData = computed(() => store.getters["system/systems"]);
 
-    onMounted(() => {
-      if (userRole) {
-        userRole.includes("admin") || userRole.includes("god")
-          ? (access.value = true)
-          : (access.value = false);
-      }
-    });
+onMounted(() => {
+  if (userRole) {
+    userRole.includes("admin") || userRole.includes("god")
+      ? (access.value = true)
+      : (access.value = false);
+  }
+});
 
-    const show = () => {
-      isShow.value = true;
-      document.getElementById("navbarOffcanvasLg").classList.add("show");
-    };
+const show = () => {
+  isShow.value = true;
+  document.getElementById("navbarOffcanvasLg").classList.add("show");
+};
 
-    const close = () => {
-      document.getElementById("navbarOffcanvasLg").classList.remove("show");
+const close = () => {
+  document.getElementById("navbarOffcanvasLg").classList.remove("show");
 
-      isShow.value = false;
-    };
+  isShow.value = false;
+};
 
-    return {
-      //выход из приложения
-      logout: async () => {
-        await store.dispatch("auth/logout");
-        router.push("/auth");
-      },
-      auth,
-      userRole,
-      access,
-      isShow,
-      show,
-      close,
-      systemData,
-    };
-  },
+const logout = async () => {
+  await store.dispatch("auth/logout");
+  router.push("/auth");
 };
 </script>
 

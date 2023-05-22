@@ -61,8 +61,6 @@ export default {
           { withCredentials: true }
         );
 
-        // console.log("auth.module/login() data.user:: ", data.user);
-
         if (data.accessToken) {
           localStorage.setItem("token", data.accessToken);
           commit("setToken", data.accessToken);
@@ -117,13 +115,6 @@ export default {
 
     async register({ commit, dispatch }, payload) {
       try {
-        // const dataload = {
-        //   email: payload.registerEmail,
-        //   password: payload.registerPassword,
-        //   name: payload.registerName,
-        //   role: payload.registerRole,
-        // };
-
         const { data } = await $api.post(
           "api/auth/register",
           {
@@ -161,12 +152,10 @@ export default {
           withCredentials: true,
         });
 
-        //console.log("loadUsers: ", data); // current user id  ==> data.user
         commit(
           "setUsers",
           data.filter((item) => !item.roles.includes("god"))
         );
-        // return data;
       } catch (e) {
         dispatch(
           "setMessage",
@@ -186,7 +175,6 @@ export default {
         const { data } = await $api.get("api/auth/user", {
           withCredentials: true,
         });
-        console.log("loadCurrentUserId user: ", data); // current user id  ==> data.user
 
         if (data) {
           return data.user;
@@ -213,12 +201,6 @@ export default {
           withCredentials: true,
         });
 
-        // commit("setUser", {
-        //   email: data.email,
-        //   id: data._id,
-        //   roles: data.roles,
-        // });
-
         return data;
       } catch (e) {
         dispatch(
@@ -242,7 +224,7 @@ export default {
           id: userId,
           email: payload.email,
           name: payload.name,
-		  role: payload.role,
+          role: payload.role,
         };
 
         const { data } = await $api.post(
@@ -289,8 +271,6 @@ export default {
           { withCredentials: true }
         );
 
-        // console.log("UPDATE", data);
-
         dispatch(
           "setMessage",
           {
@@ -331,8 +311,6 @@ export default {
           { withCredentials: true }
         );
 
-        // console.log("UPDATE PASSWORD ", data);
-
         dispatch(
           "setMessage",
           {
@@ -342,7 +320,6 @@ export default {
           { root: true }
         );
       } catch (e) {
-        // console.log(e);
         dispatch(
           "setMessage",
           {
@@ -382,11 +359,7 @@ export default {
 
     //для проверки при входе на сайт, вызывается один раз
     async checkAuth({ commit }) {
-      // console.log("auth.module/checkAuth()");
       try {
-        // axios.defaults.baseURL = process.env.VUE_APP_DB_URL;
-        // axios.defaults.baseURL = process.env.VUE_APP_DB_URL_HOSTING;
-
         process.env.NODE_ENV === "production"
           ? (axios.defaults.baseURL = process.env.VUE_APP_DB_URL_HOSTING)
           : (axios.defaults.baseURL = process.env.VUE_APP_DB_URL);

@@ -41,7 +41,7 @@
             </li>
             <li class="nav-item" role="presentation">
               <button
-                class="nav-link "
+                class="nav-link"
                 id="settings-system-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#settings-system"
@@ -72,7 +72,7 @@
             </li>
             <li class="nav-item" role="presentation">
               <button
-                class="nav-link "
+                class="nav-link"
                 id="settings-qr-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#settings-qr"
@@ -104,7 +104,7 @@
             </li>
             <li class="nav-item" role="presentation">
               <button
-                class="nav-link "
+                class="nav-link"
                 id="settings-users-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#settings-users"
@@ -138,15 +138,13 @@
               role="tabpanel"
               aria-labelledby="settings-certificate-tab"
             >
-              <h5 class="tab-pane-title my-4">
-                Настройка выпадающих полей
-              </h5>
+              <h5 class="tab-pane-title my-4">Настройка выпадающих полей</h5>
               <div class="mt-3">
                 <settings-certificate-fields></settings-certificate-fields>
               </div>
             </div>
             <div
-              class="tab-pane fade "
+              class="tab-pane fade"
               id="settings-system"
               role="tabpanel"
               aria-labelledby="settings-system-tab"
@@ -157,7 +155,7 @@
               </div>
             </div>
             <div
-              class="tab-pane fade "
+              class="tab-pane fade"
               id="settings-qr"
               role="tabpanel"
               aria-labelledby="settings-qr-tab"
@@ -168,7 +166,7 @@
               </div>
             </div>
             <div
-              class="tab-pane fade "
+              class="tab-pane fade"
               id="settings-users"
               role="tabpanel"
               aria-labelledby="settings-users-tab"
@@ -185,85 +183,68 @@
   </app-page>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref, computed, onBeforeMount } from "vue";
 import { useStore } from "vuex";
-import AppPage from "../components/ui/AppPage";
+import AppPage from "../components/ui/AppPage.vue";
 import AppLoader from "../components/ui/AppLoader.vue";
 import SettingsCertificateFields from "../components/settings/SettingsCertificateFields.vue";
 import SettingsSystem from "../components/settings/SettingsSystem.vue";
 import SettingsQr from "../components/settings/SettingsQr.vue";
 import SettingsUsers from "../components/settings/SettingsUsers.vue";
 
-export default {
-  setup() {
-    //store
-    const store = useStore();
-    //loader
-    const loading = ref(false);
+//store
+const store = useStore();
+//loader
+const loading = ref(false);
 
-    onBeforeMount(async () => {
-      loading.value = true;
+onBeforeMount(async () => {
+  loading.value = true;
 
-      const linkAccess = "certificate-access";
-      const linkAccessItem = "certificate-access-item";
-      const linkQualifyingRank = "certificate-qualifying-rank";
-      const linkAttestationType = "certificate-attestation-type";
-      const linkWeldingMethod = "certificate-welding-method";
-      const linkWeldedType = "certificate-welded-type";
-      const linkWeldedSeam = "certificate-welded-seam";
-      const linkWeldedConnection = "certificate-welded-connection";
-      const linkWeldedPosition = "certificate-welded-position";
-      const linkAxesPosition = "certificate-axes-position";
-      const linkWeldedJoint = "certificate-welded-joint";
-      const linkBrand = "certificate-brand";
-      const linkElectrode = "certificate-electrode";
-      const linkComission = "certificate-comission";
-      const linkControl = "certificate-control";
-      const linkGrade = "certificate-grade";
-      const linkTextHead = "certificate-text-head";
+  const linkAccess = "certificate-access";
+  const linkAccessItem = "certificate-access-item";
+  const linkQualifyingRank = "certificate-qualifying-rank";
+  const linkAttestationType = "certificate-attestation-type";
+  const linkWeldingMethod = "certificate-welding-method";
+  const linkWeldedType = "certificate-welded-type";
+  const linkWeldedSeam = "certificate-welded-seam";
+  const linkWeldedConnection = "certificate-welded-connection";
+  const linkWeldedPosition = "certificate-welded-position";
+  const linkAxesPosition = "certificate-axes-position";
+  const linkWeldedJoint = "certificate-welded-joint";
+  const linkBrand = "certificate-brand";
+  const linkElectrode = "certificate-electrode";
+  const linkComission = "certificate-comission";
+  const linkControl = "certificate-control";
+  const linkGrade = "certificate-grade";
+  const linkTextHead = "certificate-text-head";
 
-      //выполнение в store экшена load
-      await store.dispatch("certItem/load", linkAccess);
-      await store.dispatch("certItem/load", linkAccessItem);
-      await store.dispatch("certItem/load", linkQualifyingRank);
-      await store.dispatch("certItem/load", linkAttestationType);
-      await store.dispatch("certItem/load", linkWeldingMethod);
-      await store.dispatch("certItem/load", linkWeldedType);
-      await store.dispatch("certItem/load", linkWeldedSeam);
-      await store.dispatch("certItem/load", linkWeldedConnection);
-      await store.dispatch("certItem/load", linkWeldedPosition);
-      await store.dispatch("certItem/load", linkAxesPosition);
-      await store.dispatch("certItem/load", linkWeldedJoint);
-      await store.dispatch("certItem/load", linkBrand);
-      await store.dispatch("certItem/load", linkElectrode);
-      await store.dispatch("certItem/load", linkComission);
-      await store.dispatch("certItem/load", linkControl);
-      await store.dispatch("certItem/load", linkGrade);
-      await store.dispatch(`certItem/load`, linkTextHead);
+  //выполнение в store экшена load
+  await store.dispatch("certItem/load", linkAccess);
+  await store.dispatch("certItem/load", linkAccessItem);
+  await store.dispatch("certItem/load", linkQualifyingRank);
+  await store.dispatch("certItem/load", linkAttestationType);
+  await store.dispatch("certItem/load", linkWeldingMethod);
+  await store.dispatch("certItem/load", linkWeldedType);
+  await store.dispatch("certItem/load", linkWeldedSeam);
+  await store.dispatch("certItem/load", linkWeldedConnection);
+  await store.dispatch("certItem/load", linkWeldedPosition);
+  await store.dispatch("certItem/load", linkAxesPosition);
+  await store.dispatch("certItem/load", linkWeldedJoint);
+  await store.dispatch("certItem/load", linkBrand);
+  await store.dispatch("certItem/load", linkElectrode);
+  await store.dispatch("certItem/load", linkComission);
+  await store.dispatch("certItem/load", linkControl);
+  await store.dispatch("certItem/load", linkGrade);
+  await store.dispatch(`certItem/load`, linkTextHead);
 
-      await store.dispatch("qr/load");
-      await store.dispatch("auth/loadUsers");
+  await store.dispatch("qr/load");
+  await store.dispatch("auth/loadUsers");
 
-      loading.value = false;
-    });
+  loading.value = false;
+});
 
-    const systemSettings = computed(() => store.getters["system/systems"]);
-
-    return {
-      loading,
-      systemSettings,
-    };
-  },
-  components: {
-    AppPage,
-    AppLoader,
-    SettingsCertificateFields,
-    SettingsSystem,
-    SettingsQr,
-    SettingsUsers,
-  },
-};
+const systemSettings = computed(() => store.getters["system/systems"]);
 </script>
 
 <style></style>

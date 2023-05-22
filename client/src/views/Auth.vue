@@ -50,15 +50,41 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { useLoginForm } from "../use/login-form";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { error } from "../utils/error";
-import router from "../router";
+import { useField, useForm } from "vee-validate";
+import * as yup from "yup";
 import AppSystemPage from "../components/ui/AppSystemPage.vue";
 
-const route = useRoute();
 const store = useStore();
+const route = useRoute();
+const router = useRouter();
+
+const { handleSubmit } = useForm();
+
+const PASSWORD_MIN_LENGTH = 7;
+
+const { value: loginEmail, errorMessage: lEmailError } = useField(
+  "loginEmail",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите email")
+    .email("Необходимо ввести корректный email")
+);
+
+const { value: loginPassword, errorMessage: lPasswordError } = useField(
+  "loginPassword",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите пароль")
+    .min(
+      PASSWORD_MIN_LENGTH,
+      `Пароль не может быть меньше ${PASSWORD_MIN_LENGTH} символов`
+    )
+);
 
 onMounted(() => {
   const localStorageToken = localStorage.getItem("token");
@@ -75,12 +101,13 @@ if (route.query.message) {
   });
 }
 
-// export default {
-//   setup() {
-//     return { ...useLoginForm() };
-//   },
-//   components: { AppSystemPage },
-// };
+const onLoginSubmit = handleSubmit(async (values) => {
+  try {
+    await store.dispatch("auth/login", values);
+
+    router.push("/");
+  } catch (e) {}
+});
 </script>
 
 <style scoped></style>

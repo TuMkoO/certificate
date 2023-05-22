@@ -13,7 +13,7 @@
     "@popperjs/core": "^2.11.7",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
-    "chart.js": "^4.3.0",
+    "chart.js": "^3.7.1",
     "cross-env": "^7.0.3",
     "docxtemplater": "^3.37.8",
     "docxtemplater-image-module-free": "^1.1.1",
@@ -24,7 +24,7 @@
     "qrcode.vue": "^3.4.0",
     "vee-validate": "^4.9.4",
     "vue": "^3.3.2",
-    "vue-chartjs": "^5.2.0",
+    "vue-chartjs": "^4.1.0",
     "vue-router": "^4.2.0",
     "vuex": "^4.0.2",
     "yup": "^1.1.1"

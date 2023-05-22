@@ -4,18 +4,12 @@
   </section>
 </template>
 
-<script>
-export default {
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
-    document.title = `${props.title} | Университетские технологии`;
-  },
-};
+<script setup lang="ts">
+const props = defineProps<{
+  title: string;
+}>();
+
+document.title = `${props.title} | Новые технологии`;
 </script>
 
 <style></style>

@@ -19,8 +19,6 @@ const loading = ref(false);
 
 const layout = computed(() => route.meta.layout);
 
-console.log(route.meta.layout);
-
 //проверка авторизации пользователя при входе на сайт
 onBeforeMount(async () => {
   loading.value = true;

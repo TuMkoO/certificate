@@ -44,88 +44,53 @@
   </app-page>
 </template>
 
-<script>
+<script setup lang="ts">
 import { onMounted, ref, computed, watch } from "vue";
 import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
-import AppPage from "../components/ui/AppPage";
+import AppPage from "../components/ui/AppPage.vue";
 import AppLoader from "../components/ui/AppLoader.vue";
 
-export default {
-  setup() {
-    //store
-    const store = useStore();
+//store
+const store = useStore();
 
-    const { handleSubmit, isSubmitting, resetForm, submitCount } = useForm();
+const { handleSubmit, isSubmitting, resetForm, submitCount } = useForm();
 
-    const PASSWORD_MIN_LENGTH = 6;
+const PASSWORD_MIN_LENGTH = 7;
 
-    const {
-      value: oldPassword,
-      errorMessage: oError,
-      handleBlur: oBlur,
-    } = useField(
-      "oldPassword",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите пароль")
-        .min(
-          PASSWORD_MIN_LENGTH,
-          `Пароль не может быть меньше ${PASSWORD_MIN_LENGTH} символов`
-        )
-    );
-    const {
-      value: newPassword,
-      errorMessage: nError,
-      handleBlur: nBlur,
-    } = useField(
-      "newPassword",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите пароль")
-        .min(
-          PASSWORD_MIN_LENGTH,
-          `Пароль не может быть меньше ${PASSWORD_MIN_LENGTH} символов`
-        )
-    );
+const { value: oldPassword, errorMessage: oError } = useField(
+  "oldPassword",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите пароль")
+    .min(
+      PASSWORD_MIN_LENGTH,
+      `Пароль не может быть меньше ${PASSWORD_MIN_LENGTH} символов`
+    )
+);
+const { value: newPassword, errorMessage: nError } = useField(
+  "newPassword",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите пароль")
+    .min(
+      PASSWORD_MIN_LENGTH,
+      `Пароль не может быть меньше ${PASSWORD_MIN_LENGTH} символов`
+    )
+);
 
-    // количество кликов подряд по кнопке входа
-    // const isTooManyAttempts = computed(() => submitCount.value >= 3);
+// функция обновления профиля
+const onSubmit = handleSubmit(async (values) => {
+  try {
+    await store.dispatch("auth/updatePassword", values);
 
-    // разблокировать кнопку входу через время
-    // watch(isTooManyAttempts, (val) => {
-    //   if (val) {
-    //     setTimeout(() => (submitCount.value = 0), 1500);
-    //   }
-    // });
-
-    // функция обновления профиля
-    const onSubmit = handleSubmit(async (values) => {
-      try {
-        await store.dispatch("auth/updatePassword", values);
-
-        // очистка полей после успешной регистрации
-        resetForm();
-      } catch (e) {}
-    });
-
-    return {
-      oldPassword,
-      newPassword,
-      oError,
-      nError,
-      oBlur,
-      nBlur,
-      onSubmit,
-      isSubmitting,
-      // isTooManyAttempts,
-    };
-  },
-  components: { AppPage, AppLoader },
-};
+    // очистка полей после успешной регистрации
+    resetForm();
+  } catch (e) {}
+});
 </script>
 
 <style></style>

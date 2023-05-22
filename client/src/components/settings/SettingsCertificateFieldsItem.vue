@@ -27,12 +27,12 @@
             aria-label="multiple select example"
             v-model="itemSelected"
           >
-            <option v-if="itemsList.length === 0" disabled
-              >Значений нет, добавьте новое</option
-            >
+            <option v-if="itemsList.length === 0" disabled>
+              Значений нет, добавьте новое
+            </option>
             <option v-else disabled>Выберите значение</option>
-            <option v-for="item in itemsList" :key="item.id" :value="item._id"
-              >{{ item.value }}
+            <option v-for="item in itemsList" :key="item.id" :value="item._id">
+              {{ item.value }}
             </option>
           </select>
 
@@ -80,153 +80,118 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
 import SettingsCertificateFieldsSubItem from "./SettingsCertificateFieldsSubItem.vue";
 
-export default {
-  components: { SettingsCertificateFieldsSubItem },
-  props: {
-    storeLink: { type: String, required: true },
-    placeholder: { type: String, required: true },
-    errorText: { type: String, required: true },
-    storeName: { type: String, required: true },
-    headingId: { type: String, required: true },
-    collapseId: { type: String, required: true },
-    opened: { type: Boolean },
-    withItems: { type: Boolean },
-    itemsList: { type: Array, required: true },
-  },
-  setup(props) {
-    //подключаем store
-    const store = useStore();
-    //
-    const itemsList = ref(null);
-    //выбранное значение из select
-    const itemSelected = ref([]);
-    //
-    const { isSubmitting, handleSubmit, resetForm } = useForm();
+const props = defineProps<{
+  storeLink: string;
+  placeholder: string;
+  errorText: string;
+  storeName: string;
+  headingId: string;
+  collapseId: string;
+  opened?: boolean;
+  withItems?: boolean;
+  itemsList: [];
+}>();
 
-    const {
-      value: newItem,
-      errorMessage: iError,
-      handleBlur: iBlur,
-      handleChange: iChange,
-    } = useField(
-      "newItem",
-      yup
-        .string()
-        .trim()
-        .required(props.errorText)
-    );
+//подключаем store
+const store = useStore();
+//
+const itemsList = ref(null);
+//выбранное значение из select
+const itemSelected = ref([]);
+//
+const { handleSubmit, resetForm } = useForm();
 
-    onMounted(() => {
-      itemsList.value = props.itemsList;
-    });
+const {
+  value: newItem,
+  errorMessage: iError,
+  handleBlur: iBlur,
+  handleChange: iChange,
+} = useField("newItem", yup.string().trim().required(props.errorText));
 
-    //добавить новое значение:
-    const submitNewItem = async (values) => {
-      // console.log(values);
-      // link для url в БД на сервере
-      const link = props.storeLink;
+onMounted(() => {
+  itemsList.value = props.itemsList;
+});
 
-      // вызываем метод create для создания записи в БД
-      await store.dispatch("certItem/create", { values, link });
+//добавить новое значение:
+const submitNewItem = async (values) => {
+  // link для url в БД на сервере
+  const link = props.storeLink;
 
-      //обновить список:
-      await store.dispatch(`certItem/load`, link);
+  // вызываем метод create для создания записи в БД
+  await store.dispatch("certItem/create", { values, link });
 
-      const items = computed(
-        () => store.getters[`certItem/${props.storeName}`]
+  //обновить список:
+  await store.dispatch(`certItem/load`, link);
+
+  const items = computed(() => store.getters[`certItem/${props.storeName}`]);
+
+  itemsList.value = items.value;
+
+  //очистка поля ввода
+  resetForm();
+};
+
+const onSubmitNewItem = handleSubmit(submitNewItem);
+
+//удалить значение:
+const removeItem = async (ids) => {
+  if (ids.length) {
+    // link для url в БД на сервере
+    const link = props.storeLink;
+
+    await ids.map((id) => {
+      store.dispatch(`certItem/remove`, { id, link });
+
+      //получаем подкатегории всех категорий
+      const accessSubItems = computed(
+        () => store.getters["certItem/certAccessItems"]
       );
 
-      itemsList.value = items.value;
-
-      //очистка поля ввода
-      resetForm();
-    };
-
-    const onSubmitNewItem = handleSubmit(submitNewItem);
-
-    //удалить значение:
-    const removeItem = async (ids) => {
-      // console.log("ids :", ids);
-      if (ids.length) {
-        // link для url в БД на сервере
-        const link = props.storeLink;
-
-        await ids.map((id) => {
-          store.dispatch(`certItem/remove`, { id, link });
-
-          //получаем подкатегории всех категорий
-          const accessSubItems = computed(
-            () => store.getters["certItem/certAccessItems"]
-          );
-          // console.log("accessSubItems ===", accessSubItems);
-
-          //если есть подкатегории
-          if (accessSubItems.value.length) {
-            //список подкатегорий на удаление:
-            const subItemsToRemove = accessSubItems.value.filter(
-              (item) => item.owner == id
-            );
-
-            // console.log("subItemsToRemove :: ", subItemsToRemove);
-
-            //если есть подкатегории выбранной категории
-            if (subItemsToRemove.length) {
-              // link для url в БД на сервере
-              const linkItem = "certificate-access-item";
-
-              //удалить все подкатегории выбранной категории
-              subItemsToRemove.map((item) => {
-                store.dispatch(`certItem/remove`, {
-                  id: item._id,
-                  link: linkItem,
-                });
-              });
-            }
-          }
-        });
-
-        //обновить список:
-        await store.dispatch(`certItem/load`, link);
-
-        const items = computed(
-          () => store.getters[`certItem/${props.storeName}`]
+      //если есть подкатегории
+      if (accessSubItems.value.length) {
+        //список подкатегорий на удаление:
+        const subItemsToRemove = accessSubItems.value.filter(
+          (item) => item.owner == id
         );
 
-        itemsList.value = items.value;
+        //если есть подкатегории выбранной категории
+        if (subItemsToRemove.length) {
+          // link для url в БД на сервере
+          const linkItem = "certificate-access-item";
 
-        //очистить список значений на удаление:
-        itemSelected.value = [];
-      } else {
-        store.dispatch("setMessage", {
-          value: "Не выбрано значение для удаления",
-          type: "warning",
-        });
+          //удалить все подкатегории выбранной категории
+          subItemsToRemove.map((item) => {
+            store.dispatch(`certItem/remove`, {
+              id: item._id,
+              link: linkItem,
+            });
+          });
+        }
       }
-    };
+    });
 
-    return {
-      itemsList,
-      removeItem,
-      itemSelected,
+    //обновить список:
+    await store.dispatch(`certItem/load`, link);
 
-      isSubmitting,
-      onSubmitNewItem,
+    const items = computed(() => store.getters[`certItem/${props.storeName}`]);
 
-      newItem,
-      iError,
-      iBlur,
-      iChange,
+    itemsList.value = items.value;
 
-      resetForm,
-    };
-  },
+    //очистить список значений на удаление:
+    itemSelected.value = [];
+  } else {
+    store.dispatch("setMessage", {
+      value: "Не выбрано значение для удаления",
+      type: "warning",
+    });
+  }
 };
 </script>
 

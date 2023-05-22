@@ -1,10 +1,8 @@
 <template>
-  <app-page title="Реестр сварочного производства Донецкой Народной Республики">
+  <app-page title="Реестр сварочного производства">
     <div class="container-fluid">
       <div class="py-4">
-        <h4 class="text-center mb-4">
-          Реестр сварочного производства Донецкой Народной Республики
-        </h4>
+        <h4 class="text-center mb-4">Реестр сварочного производства</h4>
       </div>
       <app-loader v-if="loading"></app-loader>
       <certificates-filter
@@ -21,9 +19,7 @@
         class="d-flex flex-column align-items-center"
         v-if="!loading && !storeData.length"
       >
-        <h5 class="text-center">
-          В реестре нет записей
-        </h5>
+        <h5 class="text-center">В реестре нет записей</h5>
         <router-link to="/add-certificate">Добавить новую запись</router-link>
       </div>
     </div>

@@ -65,7 +65,7 @@
       </div>
       <div class="col-lg-4">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="protocolNum"
@@ -82,7 +82,7 @@
       </div>
       <div class="col-lg-4">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="certNum"
@@ -99,7 +99,7 @@
       </div>
       <div class="col-lg-12">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <textarea
               placeholder="Текст шапки"
               id="textHead"
@@ -124,7 +124,7 @@
 
       <div class="col-lg-4">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="firstName"
@@ -141,7 +141,7 @@
       </div>
       <div class="col-lg-4">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               class="form-control"
@@ -159,7 +159,7 @@
       </div>
       <div class="col-lg-4">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="lastName"
@@ -193,7 +193,7 @@
       </div>
       <div class="col-lg-4">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="passport"
@@ -211,7 +211,7 @@
 
       <div class="col-lg-8">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="numOldCert"
@@ -230,7 +230,7 @@
       </div>
       <div class="col-lg-4">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="date"
               id="dateOldCert"
@@ -252,7 +252,7 @@
 
       <div class="col-12">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="work"
@@ -269,7 +269,7 @@
       </div>
       <div class="col-lg-4">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="number"
               min="0"
@@ -295,27 +295,7 @@
             :selectedDefault="certValues.qualifyingRank"
             @select="selectQualifyingRank"
           />
-          <!-- <div class="form-floating">
-            <select
-              aria-label=".form-select-lg"
-              id="qualifyingRank"
-              :class="[
-                'form-select',
-                'form-select-lg',
-                { 'is-invalid': qRankError },
-              ]"
-              v-model="qualifyingRank"
-            >
-              <option selected disabled>Квалификационный разряд</option>
-              <option
-                v-for="option in optionsQualifyingRank"
-                :key="option.id"
-                :value="option.value"
-                >{{ option.value }}</option
-              >
-            </select>
-            <label for="qualifyingRank">Квалификационный разряд</label>
-          </div> -->
+
           <div class="form-text text-danger" v-if="qRankError">
             {{ qRankError }}
           </div>
@@ -331,27 +311,6 @@
             :selectedDefault="certValues.attestationType"
             @select="selectAttestationType"
           />
-          <!-- <div class="form-floating">
-            <select
-              id="attestationType"
-              aria-label=".form-select-lg"
-              :class="[
-                'form-select',
-                'form-select-lg',
-                { 'is-invalid': aTypeError },
-              ]"
-              v-model="attestationType"
-            >
-              <option selected disabled>Вид аттестации</option>
-              <option
-                v-for="option in optionsAttestationType"
-                :key="option.id"
-                :value="option.value"
-                >{{ option.value }}</option
-              >
-            </select>
-            <label for="attestationType">Вид аттестации</label>
-          </div> -->
 
           <div class="form-text text-danger" v-if="aTypeError">
             {{ aTypeError }}
@@ -488,7 +447,7 @@
 
               <div class="col-lg-6">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="stigma1"
@@ -522,7 +481,7 @@
               </div>
               <div class="col-lg-6">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="stigmaGeneral"
@@ -600,7 +559,7 @@
               </div>
               <div v-if="certType == 'sheetPipe'" class="col-lg-6">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="preheating1"
@@ -620,7 +579,7 @@
               </div>
               <div v-if="certType == 'sheetPipe'" class="col-lg-6">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="heatTreatment1"
@@ -690,7 +649,7 @@
               </div>
               <div class="col-lg-4">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="thickness1"
@@ -708,7 +667,7 @@
               </div>
               <div class="col-lg-4">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="diameter1"
@@ -751,7 +710,7 @@
               </div>
               <div class="col-lg-4">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="flux1"
@@ -783,7 +742,7 @@
 
               <div class="col-lg-6">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="stigma2"
@@ -854,7 +813,7 @@
               </div>
               <div v-if="certType == 'sheetPipe'" class="col-lg-6">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="preheating2"
@@ -871,7 +830,7 @@
               </div>
               <div v-if="certType == 'sheetPipe'" class="col-lg-6">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="heatTreatment2"
@@ -927,7 +886,7 @@
               </div>
               <div class="col-lg-4">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="thickness2"
@@ -942,7 +901,7 @@
               </div>
               <div class="col-lg-4">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="diameter2"
@@ -979,7 +938,7 @@
               </div>
               <div class="col-lg-4">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="flux2"
@@ -1007,7 +966,7 @@
 
               <div class="col-lg-6">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="stigma3"
@@ -1078,7 +1037,7 @@
               </div>
               <div v-if="certType == 'sheetPipe'" class="col-lg-6">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="preheating3"
@@ -1095,7 +1054,7 @@
               </div>
               <div v-if="certType == 'sheetPipe'" class="col-lg-6">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="heatTreatment3"
@@ -1151,7 +1110,7 @@
               </div>
               <div class="col-lg-4">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="thickness3"
@@ -1166,7 +1125,7 @@
               </div>
               <div class="col-lg-4">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="diameter3"
@@ -1203,7 +1162,7 @@
               </div>
               <div class="col-lg-4">
                 <div class="mb-3">
-                  <div class="form-floating ">
+                  <div class="form-floating">
                     <input
                       type="text"
                       id="flux3"
@@ -1242,7 +1201,7 @@
 
       <div class="col-lg-12">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="npa"
@@ -1283,7 +1242,7 @@
       </div>
       <div class="col-lg-12">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="decision"
@@ -1449,7 +1408,7 @@
 
       <div class="col-lg-6">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="fluxScope"
@@ -1466,7 +1425,7 @@
       </div>
       <div class="col-lg-6">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="auxiliaryScope"
@@ -1484,7 +1443,7 @@
 
       <div class="col-lg-6">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="thicknessScope"
@@ -1501,7 +1460,7 @@
       </div>
       <div class="col-lg-6">
         <div class="mb-3">
-          <div class="form-floating ">
+          <div class="form-floating">
             <input
               type="text"
               id="diameterScope"
@@ -1580,18 +1539,6 @@
           </div>
         </div>
       </div>
-
-      <!-- <div v-if="certSubmit == 'create'" class="col-12">
-        <div class="text-center mt-3">
-          <button
-            type="button"
-            class="btn btn-lg btn-success mt-0"
-            @click="onSubmit"
-          >
-            Добавить
-          </button>
-        </div>
-      </div> -->
     </form>
 
     <div
@@ -1716,7 +1663,7 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
@@ -1730,1998 +1677,1407 @@ import AppSelect from "../ui/form/AppSelect.vue";
 import AppModal from "../AppModal.vue";
 import CertificateFormQualityControl from "./CertificateFormQualityControl.vue";
 
-export default {
-  components: {
-    AppCheckboxGroup,
-    AppCheckboxDropdown,
-    AppLoader,
-    AppModal,
-    AppSelect,
-    CertificateFormQualityControl,
-  },
-  props: {
-    certValues: { type: Object },
-    certSubmit: { type: String, required: true },
-  },
-  emits: ["hide", "update"],
-  setup(props, { emit }) {
-    //подключаем store
-    const store = useStore();
-    //
-    const router = useRouter();
-    //loader
-    const loading = ref(true);
-    //Показ модального окна
-    const modal = ref(false);
+const props = defineProps<{
+  certValues?: object;
+  certSubmit: string;
+}>();
 
-    //Тип протокола
-    const certType = ref();
+const emits = defineEmits<{
+  (e: "hide"): void;
+  (e: "update"): void;
+}>();
 
-    //значение input
-    const textHeadValue = ref({});
-    const stigma2 = ref();
-    const stigma3 = ref();
-    const weldingMethod2 = ref();
-    const weldingMethod3 = ref();
-    const preheating2 = ref();
-    const preheating3 = ref();
-    const heatTreatment2 = ref();
-    const heatTreatment3 = ref();
-    const thickness2 = ref();
-    const thickness3 = ref();
-    const diameter2 = ref();
-    const diameter3 = ref();
-    const flux2 = ref();
-    const flux3 = ref();
+//подключаем store
+const store = useStore();
+//
+const router = useRouter();
+//loader
+const loading = ref(true);
+//Показ модального окна
+const modal = ref(false);
 
-    //переменные для значений по умолчанию для полей, зависимых от типа протокола
-    const axesPositionDefault = ref();
-    const axesPositionDefault2 = ref();
-    const axesPositionDefault3 = ref();
-    const axesPositionScopeDefault = ref();
-    const weldedJointDefault = ref();
-    const weldedJointDefault2 = ref();
-    const weldedJointDefault3 = ref();
-    const weldedJointScopeDefault = ref();
+//Тип протокола
+const certType = ref();
 
-    const weldedTypeDefault = ref();
-    const weldedTypeDefault2 = ref();
-    const weldedTypeDefault3 = ref();
-    const weldedSeamDefault = ref();
-    const weldedSeamDefault2 = ref();
-    const weldedSeamDefault3 = ref();
-    const weldedConnectionDefault = ref();
-    const weldedConnectionDefault2 = ref();
-    const weldedConnectionDefault3 = ref();
-    const weldedPositionDefault = ref();
-    const weldedPositionDefault2 = ref();
-    const weldedPositionDefault3 = ref();
-    const brandDefault = ref();
-    const brandDefault2 = ref();
-    const brandDefault3 = ref();
-    const electrodeDefault = ref();
-    const electrodeDefault2 = ref();
-    const electrodeDefault3 = ref();
+//значение input
+const textHeadValue = ref({});
+const stigma2 = ref();
+const stigma3 = ref();
+const weldingMethod2 = ref();
+const weldingMethod3 = ref();
+const preheating2 = ref();
+const preheating3 = ref();
+const heatTreatment2 = ref();
+const heatTreatment3 = ref();
+const thickness2 = ref();
+const thickness3 = ref();
+const diameter2 = ref();
+const diameter3 = ref();
+const flux2 = ref();
+const flux3 = ref();
 
-    //значения вариационных параметров для отпрпавки в БД
-    const stigmaVal = ref([]);
-    const weldingMethodVal = ref([]);
-    const weldedTypeVal = ref([]);
-    const weldedSeamVal = ref([]);
-    const weldedConnectionVal = ref([]);
-    const weldedPositionVal = ref([]);
-    const axesPositionVal = ref([]);
-    const weldedJointVal = ref([]);
-    const preheatingVal = ref([]);
-    const heatTreatmentVal = ref([]);
-    const brandVal = ref([]);
-    const thicknessVal = ref([]);
-    const diameterVal = ref([]);
-    const electrodeVal = ref([]);
-    const fluxVal = ref([]);
-    // const controlsVal = ref([]);
+//переменные для значений по умолчанию для полей, зависимых от типа протокола
+const axesPositionDefault = ref();
+const axesPositionDefault2 = ref();
+const axesPositionDefault3 = ref();
+const axesPositionScopeDefault = ref();
+const weldedJointDefault = ref();
+const weldedJointDefault2 = ref();
+const weldedJointDefault3 = ref();
+const weldedJointScopeDefault = ref();
 
-    //список option в мультиселекте
-    const optionsWeldedPosition = [];
-    const optionsAxesPosition = [];
-    const optionsWeldedJoint = [];
-    const optionsWeldedType = [];
-    const optionsWeldedSeam = [];
-    const optionsWeldedConnection = [];
-    const optionsBrand = [];
-    const optionsElectrode = [];
-    const optionsComission = [];
+const weldedTypeDefault = ref();
+const weldedTypeDefault2 = ref();
+const weldedTypeDefault3 = ref();
+const weldedSeamDefault = ref();
+const weldedSeamDefault2 = ref();
+const weldedSeamDefault3 = ref();
+const weldedConnectionDefault = ref();
+const weldedConnectionDefault2 = ref();
+const weldedConnectionDefault3 = ref();
+const weldedPositionDefault = ref();
+const weldedPositionDefault2 = ref();
+const weldedPositionDefault3 = ref();
+const brandDefault = ref();
+const brandDefault2 = ref();
+const brandDefault3 = ref();
+const electrodeDefault = ref();
+const electrodeDefault2 = ref();
+const electrodeDefault3 = ref();
 
-    //значение для групп технических устройств
-    const checkboxDropdownAccess = ref([]);
-    const checkboxDropdownAccessItems = ref([]);
+//значения вариационных параметров для отпрпавки в БД
+const stigmaVal = ref([]);
+const weldingMethodVal = ref([]);
+const weldedTypeVal = ref([]);
+const weldedSeamVal = ref([]);
+const weldedConnectionVal = ref([]);
+const weldedPositionVal = ref([]);
+const axesPositionVal = ref([]);
+const weldedJointVal = ref([]);
+const preheatingVal = ref([]);
+const heatTreatmentVal = ref([]);
+const brandVal = ref([]);
+const thicknessVal = ref([]);
+const diameterVal = ref([]);
+const electrodeVal = ref([]);
+const fluxVal = ref([]);
 
-    onMounted(async () => {
-      //лоадер
-      loading.value = true;
+//список option в мультиселекте
+const optionsWeldedPosition = [];
+const optionsAxesPosition = [];
+const optionsWeldedJoint = [];
+const optionsWeldedType = [];
+const optionsWeldedSeam = [];
+const optionsWeldedConnection = [];
+const optionsBrand = [];
+const optionsElectrode = [];
+const optionsComission = [];
 
-      //link для загрузки с сервера
-      const linkQualifyingRank = "certificate-qualifying-rank";
-      const linkAttestationType = "certificate-attestation-type";
-      const linkWeldingMethod = "certificate-welding-method";
-      const linkWeldedType = "certificate-welded-type";
-      const linkWeldedSeam = "certificate-welded-seam";
-      const linkWeldedConnection = "certificate-welded-connection";
-      const linkWeldedPosition = "certificate-welded-position";
-      const linkAxesPosition = "certificate-axes-position";
-      const linkWeldedJoint = "certificate-welded-joint";
-      const linkBrand = "certificate-brand";
-      const linkElectrode = "certificate-electrode";
-      const linkComission = "certificate-comission";
-      const linkControl = "certificate-control";
-      const linkAccess = "certificate-access";
-      const linkAccessItem = "certificate-access-item";
-      const linkGrade = "certificate-grade";
-      const linkTextHead = "certificate-text-head";
+//значение для групп технических устройств
+const checkboxDropdownAccess = ref([]);
+const checkboxDropdownAccessItems = ref([]);
 
-      //загрузка значений в store из БД на сервере (выполнение в store экшена load):
-      await store.dispatch("certItem/load", linkQualifyingRank);
-      await store.dispatch("certItem/load", linkAttestationType);
-      await store.dispatch("certItem/load", linkWeldingMethod);
-      await store.dispatch("certItem/load", linkWeldedType);
-      await store.dispatch("certItem/load", linkWeldedSeam);
-      await store.dispatch("certItem/load", linkWeldedConnection);
-      await store.dispatch("certItem/load", linkWeldedPosition);
-      await store.dispatch("certItem/load", linkAxesPosition);
-      await store.dispatch("certItem/load", linkWeldedJoint);
-      await store.dispatch("certItem/load", linkBrand);
-      await store.dispatch("certItem/load", linkElectrode);
-      await store.dispatch("certItem/load", linkComission);
-      await store.dispatch("certItem/load", linkControl);
-      await store.dispatch("certItem/load", linkAccess);
-      await store.dispatch("certItem/load", linkAccessItem);
-      await store.dispatch("certItem/load", linkGrade);
-      await store.dispatch("certItem/load", linkTextHead);
+onMounted(async () => {
+  //лоадер
+  loading.value = true;
 
-      // возвращаем значение из store (берем список значений из store)
-      const dataAccesses = store.getters["certItem/certAccesses"];
-      const dataAccessItems = store.getters["certItem/certAccessItems"];
-      const dataWeldedPositions = store.getters["certItem/certWeldedPositions"];
-      const dataAxesPositions = store.getters["certItem/certAxesPositions"];
-      const dataWeldedJoints = store.getters["certItem/certWeldedJoints"];
-      const dataWeldedTypes = store.getters["certItem/certWeldedTypes"];
-      const dataWeldedSeams = store.getters["certItem/certWeldedSeams"];
-      const dataWeldedConnections =
-        store.getters["certItem/certWeldedConnections"];
-      const dataBrands = store.getters["certItem/certBrands"];
-      const dataElectrodes = store.getters["certItem/certElectrodes"];
-      const dataComissions = store.getters["certItem/certComissions"];
+  //link для загрузки с сервера
+  const linkQualifyingRank = "certificate-qualifying-rank";
+  const linkAttestationType = "certificate-attestation-type";
+  const linkWeldingMethod = "certificate-welding-method";
+  const linkWeldedType = "certificate-welded-type";
+  const linkWeldedSeam = "certificate-welded-seam";
+  const linkWeldedConnection = "certificate-welded-connection";
+  const linkWeldedPosition = "certificate-welded-position";
+  const linkAxesPosition = "certificate-axes-position";
+  const linkWeldedJoint = "certificate-welded-joint";
+  const linkBrand = "certificate-brand";
+  const linkElectrode = "certificate-electrode";
+  const linkComission = "certificate-comission";
+  const linkControl = "certificate-control";
+  const linkAccess = "certificate-access";
+  const linkAccessItem = "certificate-access-item";
+  const linkGrade = "certificate-grade";
+  const linkTextHead = "certificate-text-head";
 
-      //добавляем полученные значения в массив options
-      dataWeldedPositions.forEach((item) => {
-        const newItem = Object.assign(item, { checked: false });
-        optionsWeldedPosition.push(newItem);
-      });
-      dataAxesPositions.forEach((item) => {
-        const newItem = Object.assign(item, { checked: false });
-        optionsAxesPosition.push(newItem);
-      });
-      dataWeldedJoints.forEach((item) => {
-        const newItem = Object.assign(item, { checked: false });
-        optionsWeldedJoint.push(newItem);
-      });
-      dataWeldedTypes.forEach((item) => {
-        const newItem = Object.assign(item, { checked: false });
-        optionsWeldedType.push(newItem);
-      });
-      dataWeldedSeams.forEach((item) => {
-        const newItem = Object.assign(item, { checked: false });
-        optionsWeldedSeam.push(newItem);
-      });
-      dataWeldedConnections.forEach((item) => {
-        const newItem = Object.assign(item, { checked: false });
-        optionsWeldedConnection.push(newItem);
-      });
-      dataBrands.forEach((item) => {
-        const newItem = Object.assign(item, { checked: false });
-        optionsBrand.push(newItem);
-      });
-      dataElectrodes.forEach((item) => {
-        const newItem = Object.assign(item, { checked: false });
-        optionsElectrode.push(newItem);
-      });
-      dataComissions.forEach((item) => {
-        const newItem = Object.assign(item, { checked: false });
-        optionsComission.push(newItem);
-      });
+  //загрузка значений в store из БД на сервере (выполнение в store экшена load):
+  await store.dispatch("certItem/load", linkQualifyingRank);
+  await store.dispatch("certItem/load", linkAttestationType);
+  await store.dispatch("certItem/load", linkWeldingMethod);
+  await store.dispatch("certItem/load", linkWeldedType);
+  await store.dispatch("certItem/load", linkWeldedSeam);
+  await store.dispatch("certItem/load", linkWeldedConnection);
+  await store.dispatch("certItem/load", linkWeldedPosition);
+  await store.dispatch("certItem/load", linkAxesPosition);
+  await store.dispatch("certItem/load", linkWeldedJoint);
+  await store.dispatch("certItem/load", linkBrand);
+  await store.dispatch("certItem/load", linkElectrode);
+  await store.dispatch("certItem/load", linkComission);
+  await store.dispatch("certItem/load", linkControl);
+  await store.dispatch("certItem/load", linkAccess);
+  await store.dispatch("certItem/load", linkAccessItem);
+  await store.dispatch("certItem/load", linkGrade);
+  await store.dispatch("certItem/load", linkTextHead);
 
-      //получаем значение input
-      textHeadValue.value = computed(
-        () => store.getters["certItem/certTextHeads"]
-      );
-      //добавляем значение в input
-      textHead.value = textHeadValue.value.value[0].value;
+  // возвращаем значение из store (берем список значений из store)
+  const dataAccesses = store.getters["certItem/certAccesses"];
+  const dataAccessItems = store.getters["certItem/certAccessItems"];
+  const dataWeldedPositions = store.getters["certItem/certWeldedPositions"];
+  const dataAxesPositions = store.getters["certItem/certAxesPositions"];
+  const dataWeldedJoints = store.getters["certItem/certWeldedJoints"];
+  const dataWeldedTypes = store.getters["certItem/certWeldedTypes"];
+  const dataWeldedSeams = store.getters["certItem/certWeldedSeams"];
+  const dataWeldedConnections = store.getters["certItem/certWeldedConnections"];
+  const dataBrands = store.getters["certItem/certBrands"];
+  const dataElectrodes = store.getters["certItem/certElectrodes"];
+  const dataComissions = store.getters["certItem/certComissions"];
 
-      //заносим значение групп технических устройств
-      checkboxDropdownAccess.value = dataAccesses;
-      checkboxDropdownAccessItems.value = dataAccessItems;
+  //добавляем полученные значения в массив options
+  dataWeldedPositions.forEach((item) => {
+    const newItem = Object.assign(item, { checked: false });
+    optionsWeldedPosition.push(newItem);
+  });
+  dataAxesPositions.forEach((item) => {
+    const newItem = Object.assign(item, { checked: false });
+    optionsAxesPosition.push(newItem);
+  });
+  dataWeldedJoints.forEach((item) => {
+    const newItem = Object.assign(item, { checked: false });
+    optionsWeldedJoint.push(newItem);
+  });
+  dataWeldedTypes.forEach((item) => {
+    const newItem = Object.assign(item, { checked: false });
+    optionsWeldedType.push(newItem);
+  });
+  dataWeldedSeams.forEach((item) => {
+    const newItem = Object.assign(item, { checked: false });
+    optionsWeldedSeam.push(newItem);
+  });
+  dataWeldedConnections.forEach((item) => {
+    const newItem = Object.assign(item, { checked: false });
+    optionsWeldedConnection.push(newItem);
+  });
+  dataBrands.forEach((item) => {
+    const newItem = Object.assign(item, { checked: false });
+    optionsBrand.push(newItem);
+  });
+  dataElectrodes.forEach((item) => {
+    const newItem = Object.assign(item, { checked: false });
+    optionsElectrode.push(newItem);
+  });
+  dataComissions.forEach((item) => {
+    const newItem = Object.assign(item, { checked: false });
+    optionsComission.push(newItem);
+  });
 
-      //Задаем тип протокола по умолчанию
-      certType.value = "sheetPipe";
+  //получаем значение input
+  textHeadValue.value = computed(() => store.getters["certItem/certTextHeads"]);
+  //добавляем значение в input
+  textHead.value = textHeadValue.value.value[0].value;
+
+  //заносим значение групп технических устройств
+  checkboxDropdownAccess.value = dataAccesses;
+  checkboxDropdownAccessItems.value = dataAccessItems;
+
+  //Задаем тип протокола по умолчанию
+  certType.value = "sheetPipe";
+  weldedJoint.value = [];
+  weldedJointScope.value = [];
+  axesPosition.value = [];
+  axesPositionScope.value = [];
+
+  //Значения по умолчанию для создания вкладыша
+  if (props.certValues.id && props.certSubmit == "create") {
+    numOldCert.value = props.certValues.numCertificate;
+    dateOldCert.value = dateFormatForInput(props.certValues.date);
+  }
+
+  if (props.certValues.id || props.certValues._id) {
+    firstname.value = props.certValues.firstname;
+    secondname.value = props.certValues.secondname;
+    lastname.value = props.certValues.lastname;
+    passport.value = props.certValues.passport;
+    birthday.value = dateFormatForInput(props.certValues.birthday);
+    work.value = props.certValues.work;
+    workYears.value = props.certValues.workYears;
+    qualifyingRank.value = props.certValues.qualifyingRank;
+  }
+
+  //Значения для редактирования вкладыша
+  if (
+    props.certValues.numOldCert &&
+    props.certValues.dateOldCert &&
+    props.certSubmit == "edit"
+  ) {
+    numOldCert.value = props.certValues.numOldCert;
+    dateOldCert.value = dateFormatForInput(props.certValues.dateOldCert);
+  }
+
+  //Значения по умолчанию для редактирования
+  if (props.certValues._id && props.certSubmit == "edit") {
+    certType.value = props.certValues.certType;
+    date.value = dateFormatForInput(props.certValues.date);
+    numProtocol.value = props.certValues.numProtocol;
+    textHead.value = props.certValues.textHead;
+    attestationType.value = props.certValues.attestationType;
+
+    stigmaGeneral.value = props.certValues.stigmaGeneral;
+    stigma.value = props.certValues.stigma[0];
+    if (props.certValues.stigma[1]) {
+      stigma2.value = props.certValues.stigma[1];
+    }
+    if (props.certValues.stigma[2]) {
+      stigma3.value = props.certValues.stigma[2];
+    }
+
+    weldingMethod.value = props.certValues.weldingMethod[0];
+    weldingMethodScope.value = props.certValues.weldingMethodScope;
+    if (props.certValues.weldingMethod[1]) {
+      weldingMethod2.value = props.certValues.weldingMethod[1];
+    }
+    if (props.certValues.weldingMethod[2]) {
+      weldingMethod3.value = props.certValues.weldingMethod[2];
+    }
+
+    if (certType.value == "fittings") {
+      preheating.value = "-";
+      heatTreatment.value = "-";
+
+      if (props.certValues.axesPosition[0]) {
+        axesPosition.value = props.certValues.axesPosition[0];
+      }
+      if (props.certValues.weldedJoint[0]) {
+        weldedJoint.value = props.certValues.weldedJoint[0];
+      }
+      if (props.certValues.weldedJointScope.length) {
+        weldedJointScope.value = props.certValues.weldedJointScope;
+      }
+      if (props.certValues.axesPositionScope.length) {
+        axesPositionScope.value = props.certValues.axesPositionScope;
+      }
+    } else if (certType.value == "sheetPipe") {
+      preheating.value = props.certValues.preheating[0];
+      heatTreatment.value = props.certValues.heatTreatment[0];
       weldedJoint.value = [];
       weldedJointScope.value = [];
       axesPosition.value = [];
       axesPositionScope.value = [];
+    }
 
-      // console.log("props.certValues:::", props.certValues);
+    if (props.certValues.preheating[1]) {
+      preheating2.value = props.certValues.preheating[1];
+    }
+    if (props.certValues.preheating[2]) {
+      preheating3.value = props.certValues.preheating[2];
+    }
 
-      //Значения по умолчанию для создания вкладыша
-      if (props.certValues.id && props.certSubmit == "create") {
-        numOldCert.value = props.certValues.numCertificate;
-        dateOldCert.value = dateFormatForInput(props.certValues.date);
+    if (props.certValues.heatTreatment[1]) {
+      heatTreatment2.value = props.certValues.heatTreatment[1];
+    }
+    if (props.certValues.heatTreatment[2]) {
+      heatTreatment3.value = props.certValues.heatTreatment[2];
+    }
+
+    thickness.value = props.certValues.thickness[0];
+    thicknessScope.value = props.certValues.thicknessScope;
+    if (props.certValues.thickness[1]) {
+      thickness2.value = props.certValues.thickness[1];
+    }
+    if (props.certValues.thickness[2]) {
+      thickness3.value = props.certValues.thickness[2];
+    }
+
+    diameter.value = props.certValues.diameter[0];
+    diameterScope.value = props.certValues.diameterScope;
+    if (props.certValues.diameter[1]) {
+      diameter2.value = props.certValues.diameter[1];
+    }
+    if (props.certValues.diameter[2]) {
+      diameter3.value = props.certValues.diameter[2];
+    }
+
+    flux.value = props.certValues.flux[0];
+    fluxScope.value = props.certValues.fluxScope;
+
+    if (props.certValues.flux[1]) {
+      flux2.value = props.certValues.flux[1];
+    }
+    if (props.certValues.flux[2]) {
+      flux3.value = props.certValues.flux[2];
+    }
+
+    weldedType.value = props.certValues.weldedType[0];
+    weldedTypeDefault.value = props.certValues.weldedType[0];
+    weldedTypeDefault2.value = props.certValues.weldedType[1];
+    weldedTypeDefault3.value = props.certValues.weldedType[2];
+    weldedSeam.value = props.certValues.weldedSeam[0];
+    weldedSeamDefault.value = props.certValues.weldedSeam[0];
+    weldedSeamDefault2.value = props.certValues.weldedSeam[1];
+    weldedSeamDefault3.value = props.certValues.weldedSeam[2];
+    weldedConnection.value = props.certValues.weldedConnection[0];
+    weldedConnectionDefault.value = props.certValues.weldedConnection[0];
+    weldedConnectionDefault2.value = props.certValues.weldedConnection[1];
+    weldedConnectionDefault3.value = props.certValues.weldedConnection[2];
+    weldedPosition.value = props.certValues.weldedPosition[0];
+    weldedPositionDefault.value = props.certValues.weldedPosition[0];
+    weldedPositionDefault2.value = props.certValues.weldedPosition[1];
+    weldedPositionDefault3.value = props.certValues.weldedPosition[2];
+    brand.value = props.certValues.brand[0];
+    brandDefault.value = props.certValues.brand[0];
+    brandDefault2.value = props.certValues.brand[1];
+    brandDefault3.value = props.certValues.brand[2];
+    electrode.value = props.certValues.electrode[0];
+    electrodeDefault.value = props.certValues.electrode[0];
+    electrodeDefault2.value = props.certValues.electrode[1];
+    electrodeDefault3.value = props.certValues.electrode[2];
+
+    weldedTypeScope.value = props.certValues.weldedTypeScope;
+    weldedSeamScope.value = props.certValues.weldedSeamScope;
+    weldedConnectionScope.value = props.certValues.weldedConnectionScope;
+    weldedPositionScope.value = props.certValues.weldedPositionScope;
+
+    brandScope.value = props.certValues.brandScope;
+    electrodeScope.value = props.certValues.electrodeScope;
+    auxiliaryScope.value = props.certValues.auxiliaryScope;
+
+    expiration.value = dateFormatForInput(props.certValues.expiration);
+    comission.value = props.certValues.comission;
+    numCertificate.value = props.certValues.numCertificate;
+
+    npa.value = props.certValues.npa;
+    grade.value = props.certValues.grade;
+    decision.value = props.certValues.decision;
+    accesses.value = props.certValues.accesses;
+
+    //вносим текущие(загруженные с сервера) значения в переменные для отправки на сервер
+    stigmaVal.value = props.certValues.stigma;
+    weldingMethodVal.value = props.certValues.weldingMethod;
+    weldedTypeVal.value = props.certValues.weldedType;
+    weldedSeamVal.value = props.certValues.weldedSeam;
+    weldedConnectionVal.value = props.certValues.weldedConnection;
+    weldedPositionVal.value = props.certValues.weldedPosition;
+    weldedJointVal.value = props.certValues.weldedJoint;
+    axesPositionVal.value = props.certValues.axesPosition;
+    preheatingVal.value = props.certValues.preheating;
+    heatTreatmentVal.value = props.certValues.heatTreatment;
+    brandVal.value = props.certValues.brand;
+    thicknessVal.value = props.certValues.thickness;
+    diameterVal.value = props.certValues.diameter;
+    electrodeVal.value = props.certValues.electrode;
+    fluxVal.value = props.certValues.flux;
+    controls.value = props.certValues.controls;
+
+    //значения по умолчанию для мультичекбоксов, зависимых от типа протокола
+    if (props.certValues.axesPosition[0]) {
+      axesPositionDefault.value = props.certValues.axesPosition[0];
+    }
+    if (props.certValues.axesPosition[1]) {
+      axesPositionDefault2.value = props.certValues.axesPosition[1];
+    }
+    if (props.certValues.axesPosition[2]) {
+      axesPositionDefault3.value = props.certValues.axesPosition[2];
+    }
+
+    axesPositionScopeDefault.value = props.certValues.axesPositionScope;
+
+    if (props.certValues.weldedJoint[0]) {
+      weldedJointDefault.value = props.certValues.weldedJoint[0];
+    }
+    if (props.certValues.weldedJoint[1]) {
+      weldedJointDefault2.value = props.certValues.weldedJoint[1];
+    }
+    if (props.certValues.weldedJoint[2]) {
+      weldedJointDefault3.value = props.certValues.weldedJoint[2];
+    }
+
+    weldedJointScopeDefault.value = props.certValues.weldedJointScope;
+  }
+
+  //лоадер
+  loading.value = false;
+});
+
+//заносим значения мультичекбоксов
+const onCheckedWeldedPosition = (data) => {
+  if (!weldedPosition.value) {
+    weldedPosition.value = [];
+  }
+
+  if (data.values.length == 0) {
+    weldedPosition.value = undefined;
+    weldedPositionVal.value[0] = undefined;
+  } else {
+    weldedPosition.value = data.values;
+    weldedPositionVal.value[0] = data.values;
+  }
+};
+const onCheckedWeldedPosition2 = (data) => {
+  if (data.values.length == 0) {
+    if (weldedPositionVal.value.length == 2) {
+      weldedPositionVal.value.splice(1, 1);
+    } else {
+      weldedPositionVal.value[1] = "";
+    }
+  } else {
+    weldedPositionVal.value[1] = data.values;
+  }
+};
+const onCheckedWeldedPosition3 = (data) => {
+  if (data.values.length == 0) {
+    if (
+      weldedPositionVal.value[1] == "" ||
+      weldedPositionVal.value[1] == null
+    ) {
+      weldedPositionVal.value.splice(1, 2);
+    } else if (weldedPositionVal.value.length == 3) {
+      weldedPositionVal.value.splice(2, 1);
+    }
+  } else {
+    weldedPositionVal.value[2] = data.values;
+  }
+};
+
+const onCheckedWeldedJoint = (data) => {
+  if (!weldedJoint.value) {
+    weldedJoint.value = [];
+  }
+
+  if (data.values.length == 0) {
+    weldedJoint.value = undefined;
+    weldedJointVal.value[0] = undefined;
+  } else {
+    weldedJoint.value = data.values;
+    weldedJointVal.value[0] = data.values;
+  }
+};
+const onCheckedWeldedJoint2 = (data) => {
+  if (data.values.length == 0) {
+    if (weldedJointVal.value.length == 2) {
+      weldedJointVal.value.splice(1, 1);
+    } else {
+      weldedJointVal.value[1] = "";
+    }
+  } else {
+    weldedJointVal.value[1] = data.values;
+  }
+};
+const onCheckedWeldedJoint3 = (data) => {
+  if (data.values.length == 0) {
+    if (weldedJointVal.value[1] == "" || weldedJointVal.value[1] == null) {
+      weldedJointVal.value.splice(1, 2);
+    } else if (weldedJointVal.value.length == 3) {
+      weldedJointVal.value.splice(2, 1);
+    }
+  } else {
+    weldedJointVal.value[2] = data.values;
+  }
+};
+
+const onCheckedAxesPosition = (data) => {
+  if (!axesPosition.value) {
+    axesPosition.value = [];
+  }
+
+  if (data.values.length == 0) {
+    axesPosition.value = undefined;
+    axesPositionVal.value[0] = undefined;
+  } else {
+    axesPosition.value = data.values;
+    axesPositionVal.value[0] = data.values;
+  }
+};
+const onCheckedAxesPosition2 = (data) => {
+  if (data.values.length == 0) {
+    if (axesPositionVal.value.length == 2) {
+      axesPositionVal.value.splice(1, 1);
+    } else {
+      axesPositionVal.value[1] = "";
+    }
+  } else {
+    axesPositionVal.value[1] = data.values;
+  }
+};
+const onCheckedAxesPosition3 = (data) => {
+  if (data.values.length == 0) {
+    if (axesPositionVal.value[1] == "" || axesPositionVal.value[1] == null) {
+      axesPositionVal.value.splice(1, 2);
+    } else if (axesPositionVal.value.length == 3) {
+      axesPositionVal.value.splice(2, 1);
+    }
+  } else {
+    axesPositionVal.value[2] = data.values;
+  }
+};
+
+const onCheckedWeldedType = (data) => {
+  if (!weldedType.value) {
+    weldedType.value = [];
+  }
+
+  if (data.values.length == 0) {
+    weldedType.value = undefined;
+    weldedTypeVal.value[0] = undefined;
+  } else {
+    weldedType.value = data.values;
+    weldedTypeVal.value[0] = data.values;
+  }
+};
+const onCheckedWeldedType2 = (data) => {
+  if (data.values.length == 0) {
+    if (weldedTypeVal.value.length == 2) {
+      weldedTypeVal.value.splice(1, 1);
+    } else {
+      weldedTypeVal.value[1] = "";
+    }
+  } else {
+    weldedTypeVal.value[1] = data.values;
+  }
+};
+const onCheckedWeldedType3 = (data) => {
+  if (data.values.length == 0) {
+    if (weldedTypeVal.value[1] == "" || weldedTypeVal.value[1] == null) {
+      weldedTypeVal.value.splice(1, 2);
+    } else if (weldedTypeVal.value.length == 3) {
+      weldedTypeVal.value.splice(2, 1);
+    }
+  } else {
+    weldedTypeVal.value[2] = data.values;
+  }
+};
+
+const onCheckedWeldedSeam = (data) => {
+  if (!weldedSeam.value) {
+    weldedSeam.value = [];
+  }
+
+  if (data.values.length == 0) {
+    weldedSeam.value = undefined;
+    weldedSeamVal.value[0] = undefined;
+  } else {
+    weldedSeam.value = data.values;
+    weldedSeamVal.value[0] = data.values;
+  }
+};
+const onCheckedWeldedSeam2 = (data) => {
+  if (data.values.length == 0) {
+    if (weldedSeamVal.value.length == 2) {
+      weldedSeamVal.value.splice(1, 1);
+    } else {
+      weldedSeamVal.value[1] = "";
+    }
+  } else {
+    weldedSeamVal.value[1] = data.values;
+  }
+};
+const onCheckedWeldedSeam3 = (data) => {
+  if (data.values.length == 0) {
+    if (weldedSeamVal.value[1] == "" || weldedSeamVal.value[1] == null) {
+      weldedSeamVal.value.splice(1, 2);
+    } else if (weldedSeamVal.value.length == 3) {
+      weldedSeamVal.value.splice(2, 1);
+    }
+  } else {
+    weldedSeamVal.value[2] = data.values;
+  }
+};
+const onCheckedWeldedConnection = (data) => {
+  if (!weldedConnection.value) {
+    weldedConnection.value = [];
+  }
+
+  if (data.values.length == 0) {
+    weldedConnection.value = undefined;
+    weldedConnectionVal.value[0] = undefined;
+  } else {
+    weldedConnection.value = data.values;
+    weldedConnectionVal.value[0] = data.values;
+  }
+};
+const onCheckedWeldedConnection2 = (data) => {
+  if (data.values.length == 0) {
+    if (weldedConnectionVal.value.length == 2) {
+      weldedConnectionVal.value.splice(1, 1);
+    } else {
+      weldedConnectionVal.value[1] = "";
+    }
+  } else {
+    weldedConnectionVal.value[1] = data.values;
+  }
+};
+const onCheckedWeldedConnection3 = (data) => {
+  if (data.values.length == 0) {
+    if (
+      weldedConnectionVal.value[1] == "" ||
+      weldedConnectionVal.value[1] == null
+    ) {
+      weldedConnectionVal.value.splice(1, 2);
+    } else if (weldedConnectionVal.value.length == 3) {
+      weldedConnectionVal.value.splice(2, 1);
+    }
+  } else {
+    weldedConnectionVal.value[2] = data.values;
+  }
+};
+const onCheckedBrand = (data) => {
+  if (!brand.value) {
+    brand.value = [];
+  }
+
+  if (data.values.length == 0) {
+    brand.value = undefined;
+    brandVal.value[0] = undefined;
+  } else {
+    brand.value = data.values;
+    brandVal.value[0] = data.values;
+  }
+};
+const onCheckedBrand2 = (data) => {
+  if (data.values.length == 0) {
+    if (brandVal.value.length == 2) {
+      brandVal.value.splice(1, 1);
+    } else {
+      brandVal.value[1] = "";
+    }
+  } else {
+    brandVal.value[1] = data.values;
+  }
+};
+const onCheckedBrand3 = (data) => {
+  if (data.values.length == 0) {
+    if (brandVal.value[1] == "" || brandVal.value[1] == null) {
+      brandVal.value.splice(1, 2);
+    } else if (brandVal.value.length == 3) {
+      brandVal.value.splice(2, 1);
+    }
+  } else {
+    brandVal.value[2] = data.values;
+  }
+};
+const onCheckedElectrode = (data) => {
+  if (!electrode.value) {
+    electrode.value = [];
+  }
+
+  if (data.values.length == 0) {
+    electrode.value = undefined;
+    electrodeVal.value[0] = undefined;
+  } else {
+    electrode.value = data.values;
+    electrodeVal.value[0] = data.values;
+  }
+};
+const onCheckedElectrode2 = (data) => {
+  if (data.values.length == 0) {
+    if (electrodeVal.value.length == 2) {
+      electrodeVal.value.splice(1, 1);
+    } else {
+      electrodeVal.value[1] = "";
+    }
+  } else {
+    electrodeVal.value[1] = data.values;
+  }
+};
+const onCheckedElectrode3 = (data) => {
+  if (data.values.length == 0) {
+    if (electrodeVal.value[1] == "" || electrodeVal.value[1] == null) {
+      electrodeVal.value.splice(1, 2);
+    } else if (electrodeVal.value.length == 3) {
+      electrodeVal.value.splice(2, 1);
+    }
+  } else {
+    electrodeVal.value[2] = data.values;
+  }
+};
+
+const onCheckedQualityControls = (data) => {
+  if (!data.values || data.values.length == 0 || !data.values[0]) {
+    controls.value = undefined;
+  } else {
+    controls.value = data.values;
+  }
+};
+
+const onCheckedComission = (data) => {
+  if (!data.values.length) {
+    comission.value = undefined;
+  } else {
+    comission.value = data.values;
+  }
+};
+
+const onCheckedWeldedPositionScope = (data) => {
+  if (!data.values.length) {
+    weldedPositionScope.value = undefined;
+  } else {
+    weldedPositionScope.value = data.values;
+  }
+};
+const onCheckedAxesPositionScope = (data) => {
+  if (!data.values.length) {
+    axesPositionScope.value = undefined;
+  } else {
+    axesPositionScope.value = data.values;
+  }
+};
+const onCheckedWeldedJointScope = (data) => {
+  if (!data.values.length) {
+    weldedJointScope.value = undefined;
+  } else {
+    weldedJointScope.value = data.values;
+  }
+};
+const onCheckedWeldedTypeScope = (data) => {
+  if (!data.values.length) {
+    weldedTypeScope.value = undefined;
+  } else {
+    weldedTypeScope.value = data.values;
+  }
+};
+const onCheckedWeldedSeamScope = (data) => {
+  if (!data.values.length) {
+    weldedSeamScope.value = undefined;
+  } else {
+    weldedSeamScope.value = data.values;
+  }
+};
+const onCheckedWeldedConnectionScope = (data) => {
+  if (!data.values.length) {
+    weldedConnectionScope.value = undefined;
+  } else {
+    weldedConnectionScope.value = data.values;
+  }
+};
+const onCheckedBrandScope = (data) => {
+  if (!data.values.length) {
+    brandScope.value = undefined;
+  } else {
+    brandScope.value = data.values;
+  }
+};
+const onCheckedElectrodeScope = (data) => {
+  if (!data.values.length) {
+    electrodeScope.value = undefined;
+  } else {
+    electrodeScope.value = data.values;
+  }
+};
+
+//Заносим значения селектов
+const selectQualifyingRank = (value) => {
+  qualifyingRank.value = value.value;
+};
+const selectAttestationType = (value) => {
+  attestationType.value = value.value;
+};
+const selectWeldingMethod1 = (value) => {
+  weldingMethod.value = value.value;
+  onChangeItem(weldingMethodVal.value, 0, weldingMethod.value);
+};
+const selectWeldingMethod2 = (value) => {
+  weldingMethod2.value = value.value;
+  onChangeItem(weldingMethodVal.value, 1, weldingMethod2.value);
+};
+const selectWeldingMethod3 = (value) => {
+  weldingMethod3.value = value.value;
+  onChangeItem(weldingMethodVal.value, 2, weldingMethod3.value);
+};
+const selectGrade = (value) => {
+  grade.value = value.value;
+};
+const selectWeldingMethodScope = (value) => {
+  weldingMethodScope.value = value.value;
+};
+
+//функция добавления значений Групп технических устройств в массиив
+const onCheckedAccessSubItems = (data) => {
+  if (!accesses.value) {
+    accesses.value = [];
+  }
+
+  //поиск элемента в массиаве
+  const idx = accesses.value.findIndex((item) => item.item == data.values.item);
+
+  //если уже есть в массиве
+  if (idx > -1) {
+    //заменить на новое значение
+    accesses.value.splice(idx, 1, data.values);
+
+    //если снимаем все значения подгрупп
+    if (data.values.values && !data.values.values.length) {
+      accesses.value.splice(idx, 1);
+
+      if (!accesses.value.length) {
+        accesses.value = undefined;
       }
+    }
+  } else {
+    //если нет в массиве, добавить
+    accesses.value.push(data.values);
+  }
+};
 
-      if (props.certValues.id || props.certValues._id) {
-        firstname.value = props.certValues.firstname;
-        secondname.value = props.certValues.secondname;
-        lastname.value = props.certValues.lastname;
-        passport.value = props.certValues.passport;
-        birthday.value = dateFormatForInput(props.certValues.birthday);
-        work.value = props.certValues.work;
-        workYears.value = props.certValues.workYears;
-        qualifyingRank.value = props.certValues.qualifyingRank;
-      }
+//функция смены тип протокола
+const changeCertType = () => {
+  // console.log(certType.value);
 
-      //Значения для редактирования вкладыша
-      if (
-        props.certValues.numOldCert &&
-        props.certValues.dateOldCert &&
-        props.certSubmit == "edit"
-      ) {
-        numOldCert.value = props.certValues.numOldCert;
-        dateOldCert.value = dateFormatForInput(props.certValues.dateOldCert);
-      }
+  if (certType.value == "sheetPipe") {
+    weldedJoint.value = [];
+    weldedJointScope.value = [];
+    axesPosition.value = [];
+    axesPositionScope.value = [];
+    weldedJointVal.value = [];
+    axesPositionVal.value = [];
 
-      //Значения по умолчанию для редактирования
-      if (props.certValues._id && props.certSubmit == "edit") {
-        certType.value = props.certValues.certType;
-        date.value = dateFormatForInput(props.certValues.date);
-        numProtocol.value = props.certValues.numProtocol;
-        textHead.value = props.certValues.textHead;
-        attestationType.value = props.certValues.attestationType;
+    axesPositionDefault.value = [];
+    axesPositionDefault2.value = [];
+    axesPositionDefault3.value = [];
+    axesPositionScopeDefault.value = [];
+    weldedJointDefault.value = [];
+    weldedJointDefault2.value = [];
+    weldedJointDefault3.value = [];
+    weldedJointScopeDefault.value = [];
 
-        stigmaGeneral.value = props.certValues.stigmaGeneral;
-        stigma.value = props.certValues.stigma[0];
-        if (props.certValues.stigma[1]) {
-          stigma2.value = props.certValues.stigma[1];
-        }
-        if (props.certValues.stigma[2]) {
-          stigma3.value = props.certValues.stigma[2];
-        }
+    preheating.value = "";
+    preheating2.value = "";
+    preheating3.value = "";
+    preheatingVal.value = [];
 
-        weldingMethod.value = props.certValues.weldingMethod[0];
-        weldingMethodScope.value = props.certValues.weldingMethodScope;
-        if (props.certValues.weldingMethod[1]) {
-          weldingMethod2.value = props.certValues.weldingMethod[1];
-        }
-        if (props.certValues.weldingMethod[2]) {
-          weldingMethod3.value = props.certValues.weldingMethod[2];
-        }
+    heatTreatment.value = "";
+    heatTreatment2.value = "";
+    heatTreatment3.value = "";
+    heatTreatmentVal.value = [];
+  } else if (certType.value == "fittings") {
+    weldedJoint.value = undefined;
+    weldedJointScope.value = undefined;
+    axesPosition.value = undefined;
+    axesPositionScope.value = undefined;
+    weldedJointVal.value = [];
+    axesPositionVal.value = [];
 
-        if (certType.value == "fittings") {
-          preheating.value = "-";
-          heatTreatment.value = "-";
+    preheating.value = "-";
+    preheating2.value = "";
+    preheating3.value = "";
 
-          if (props.certValues.axesPosition[0]) {
-            axesPosition.value = props.certValues.axesPosition[0];
-          }
-          if (props.certValues.weldedJoint[0]) {
-            weldedJoint.value = props.certValues.weldedJoint[0];
-          }
-          if (props.certValues.weldedJointScope.length) {
-            weldedJointScope.value = props.certValues.weldedJointScope;
-          }
-          if (props.certValues.axesPositionScope.length) {
-            axesPositionScope.value = props.certValues.axesPositionScope;
-          }
-        } else if (certType.value == "sheetPipe") {
-          preheating.value = props.certValues.preheating[0];
-          heatTreatment.value = props.certValues.heatTreatment[0];
-          weldedJoint.value = [];
-          weldedJointScope.value = [];
-          axesPosition.value = [];
-          axesPositionScope.value = [];
-        }
+    heatTreatment.value = "-";
+    heatTreatment2.value = "";
+    heatTreatment3.value = "";
 
-        if (props.certValues.preheating[1]) {
-          preheating2.value = props.certValues.preheating[1];
-        }
-        if (props.certValues.preheating[2]) {
-          preheating3.value = props.certValues.preheating[2];
-        }
+    preheatingVal.value = [];
+    heatTreatmentVal.value = [];
+  }
+};
 
-        if (props.certValues.heatTreatment[1]) {
-          heatTreatment2.value = props.certValues.heatTreatment[1];
-        }
-        if (props.certValues.heatTreatment[2]) {
-          heatTreatment3.value = props.certValues.heatTreatment[2];
-        }
+//список option в селекте
+const optionsQualifyingRank = computed(
+  () => store.getters["certItem/certQualifyingRanks"]
+);
+const optionsAttestationType = computed(
+  () => store.getters["certItem/certAttestationTypes"]
+);
+const optionsWeldingMethod = computed(
+  () => store.getters["certItem/certWeldingMethods"]
+);
 
-        thickness.value = props.certValues.thickness[0];
-        thicknessScope.value = props.certValues.thicknessScope;
-        if (props.certValues.thickness[1]) {
-          thickness2.value = props.certValues.thickness[1];
-        }
-        if (props.certValues.thickness[2]) {
-          thickness3.value = props.certValues.thickness[2];
-        }
+const optionsControl = computed(() => store.getters["certItem/certControls"]);
+const optionsGrade = computed(() => store.getters["certItem/certGrades"]);
 
-        diameter.value = props.certValues.diameter[0];
-        diameterScope.value = props.certValues.diameterScope;
-        if (props.certValues.diameter[1]) {
-          diameter2.value = props.certValues.diameter[1];
-        }
-        if (props.certValues.diameter[2]) {
-          diameter3.value = props.certValues.diameter[2];
-        }
-
-        flux.value = props.certValues.flux[0];
-        fluxScope.value = props.certValues.fluxScope;
-
-        if (props.certValues.flux[1]) {
-          flux2.value = props.certValues.flux[1];
-        }
-        if (props.certValues.flux[2]) {
-          flux3.value = props.certValues.flux[2];
-        }
-
-        weldedType.value = props.certValues.weldedType[0];
-        weldedTypeDefault.value = props.certValues.weldedType[0];
-        weldedTypeDefault2.value = props.certValues.weldedType[1];
-        weldedTypeDefault3.value = props.certValues.weldedType[2];
-        weldedSeam.value = props.certValues.weldedSeam[0];
-        weldedSeamDefault.value = props.certValues.weldedSeam[0];
-        weldedSeamDefault2.value = props.certValues.weldedSeam[1];
-        weldedSeamDefault3.value = props.certValues.weldedSeam[2];
-        weldedConnection.value = props.certValues.weldedConnection[0];
-        weldedConnectionDefault.value = props.certValues.weldedConnection[0];
-        weldedConnectionDefault2.value = props.certValues.weldedConnection[1];
-        weldedConnectionDefault3.value = props.certValues.weldedConnection[2];
-        weldedPosition.value = props.certValues.weldedPosition[0];
-        weldedPositionDefault.value = props.certValues.weldedPosition[0];
-        weldedPositionDefault2.value = props.certValues.weldedPosition[1];
-        weldedPositionDefault3.value = props.certValues.weldedPosition[2];
-        brand.value = props.certValues.brand[0];
-        brandDefault.value = props.certValues.brand[0];
-        brandDefault2.value = props.certValues.brand[1];
-        brandDefault3.value = props.certValues.brand[2];
-        electrode.value = props.certValues.electrode[0];
-        electrodeDefault.value = props.certValues.electrode[0];
-        electrodeDefault2.value = props.certValues.electrode[1];
-        electrodeDefault3.value = props.certValues.electrode[2];
-
-        weldedTypeScope.value = props.certValues.weldedTypeScope;
-        weldedSeamScope.value = props.certValues.weldedSeamScope;
-        weldedConnectionScope.value = props.certValues.weldedConnectionScope;
-        weldedPositionScope.value = props.certValues.weldedPositionScope;
-
-        brandScope.value = props.certValues.brandScope;
-        electrodeScope.value = props.certValues.electrodeScope;
-        auxiliaryScope.value = props.certValues.auxiliaryScope;
-
-        expiration.value = dateFormatForInput(props.certValues.expiration);
-        comission.value = props.certValues.comission;
-        numCertificate.value = props.certValues.numCertificate;
-
-        npa.value = props.certValues.npa;
-        grade.value = props.certValues.grade;
-        decision.value = props.certValues.decision;
-        accesses.value = props.certValues.accesses;
-
-        //вносим текущие(загруженные с сервера) значения в переменные для отправки на сервер
-        stigmaVal.value = props.certValues.stigma;
-        weldingMethodVal.value = props.certValues.weldingMethod;
-        weldedTypeVal.value = props.certValues.weldedType;
-        weldedSeamVal.value = props.certValues.weldedSeam;
-        weldedConnectionVal.value = props.certValues.weldedConnection;
-        weldedPositionVal.value = props.certValues.weldedPosition;
-        weldedJointVal.value = props.certValues.weldedJoint;
-        axesPositionVal.value = props.certValues.axesPosition;
-        preheatingVal.value = props.certValues.preheating;
-        heatTreatmentVal.value = props.certValues.heatTreatment;
-        brandVal.value = props.certValues.brand;
-        thicknessVal.value = props.certValues.thickness;
-        diameterVal.value = props.certValues.diameter;
-        electrodeVal.value = props.certValues.electrode;
-        fluxVal.value = props.certValues.flux;
-        controls.value = props.certValues.controls;
-
-        //значения по умолчанию для мультичекбоксов, зависимых от типа протокола
-        if (props.certValues.axesPosition[0]) {
-          axesPositionDefault.value = props.certValues.axesPosition[0];
-        }
-        if (props.certValues.axesPosition[1]) {
-          axesPositionDefault2.value = props.certValues.axesPosition[1];
-        }
-        if (props.certValues.axesPosition[2]) {
-          axesPositionDefault3.value = props.certValues.axesPosition[2];
-        }
-
-        axesPositionScopeDefault.value = props.certValues.axesPositionScope;
-
-        if (props.certValues.weldedJoint[0]) {
-          weldedJointDefault.value = props.certValues.weldedJoint[0];
-        }
-        if (props.certValues.weldedJoint[1]) {
-          weldedJointDefault2.value = props.certValues.weldedJoint[1];
-        }
-        if (props.certValues.weldedJoint[2]) {
-          weldedJointDefault3.value = props.certValues.weldedJoint[2];
-        }
-
-        weldedJointScopeDefault.value = props.certValues.weldedJointScope;
-      }
-
-      //лоадер
-      loading.value = false;
-    });
-
-    //заносим значения мультичекбоксов
-    const onCheckedWeldedPosition = (data) => {
-      if (!weldedPosition.value) {
-        weldedPosition.value = [];
-      }
-
-      if (data.values.length == 0) {
-        weldedPosition.value = undefined;
-        weldedPositionVal.value[0] = undefined;
-      } else {
-        weldedPosition.value = data.values;
-        weldedPositionVal.value[0] = data.values;
-      }
-    };
-    const onCheckedWeldedPosition2 = (data) => {
-      if (data.values.length == 0) {
-        if (weldedPositionVal.value.length == 2) {
-          weldedPositionVal.value.splice(1, 1);
-        } else {
-          weldedPositionVal.value[1] = "";
-        }
-      } else {
-        weldedPositionVal.value[1] = data.values;
-      }
-    };
-    const onCheckedWeldedPosition3 = (data) => {
-      if (data.values.length == 0) {
-        if (
-          weldedPositionVal.value[1] == "" ||
-          weldedPositionVal.value[1] == null
-        ) {
-          weldedPositionVal.value.splice(1, 2);
-        } else if (weldedPositionVal.value.length == 3) {
-          weldedPositionVal.value.splice(2, 1);
-        }
-      } else {
-        weldedPositionVal.value[2] = data.values;
-      }
-    };
-
-    const onCheckedWeldedJoint = (data) => {
-      if (!weldedJoint.value) {
-        weldedJoint.value = [];
-      }
-
-      if (data.values.length == 0) {
-        weldedJoint.value = undefined;
-        weldedJointVal.value[0] = undefined;
-      } else {
-        weldedJoint.value = data.values;
-        weldedJointVal.value[0] = data.values;
-      }
-    };
-    const onCheckedWeldedJoint2 = (data) => {
-      if (data.values.length == 0) {
-        if (weldedJointVal.value.length == 2) {
-          weldedJointVal.value.splice(1, 1);
-        } else {
-          weldedJointVal.value[1] = "";
-        }
-      } else {
-        weldedJointVal.value[1] = data.values;
-      }
-    };
-    const onCheckedWeldedJoint3 = (data) => {
-      if (data.values.length == 0) {
-        if (weldedJointVal.value[1] == "" || weldedJointVal.value[1] == null) {
-          weldedJointVal.value.splice(1, 2);
-        } else if (weldedJointVal.value.length == 3) {
-          weldedJointVal.value.splice(2, 1);
-        }
-      } else {
-        weldedJointVal.value[2] = data.values;
-      }
-    };
-
-    const onCheckedAxesPosition = (data) => {
-      if (!axesPosition.value) {
-        axesPosition.value = [];
-      }
-
-      if (data.values.length == 0) {
-        axesPosition.value = undefined;
-        axesPositionVal.value[0] = undefined;
-      } else {
-        axesPosition.value = data.values;
-        axesPositionVal.value[0] = data.values;
-      }
-    };
-    const onCheckedAxesPosition2 = (data) => {
-      if (data.values.length == 0) {
-        if (axesPositionVal.value.length == 2) {
-          axesPositionVal.value.splice(1, 1);
-        } else {
-          axesPositionVal.value[1] = "";
-        }
-      } else {
-        axesPositionVal.value[1] = data.values;
-      }
-    };
-    const onCheckedAxesPosition3 = (data) => {
-      if (data.values.length == 0) {
-        if (
-          axesPositionVal.value[1] == "" ||
-          axesPositionVal.value[1] == null
-        ) {
-          axesPositionVal.value.splice(1, 2);
-        } else if (axesPositionVal.value.length == 3) {
-          axesPositionVal.value.splice(2, 1);
-        }
-      } else {
-        axesPositionVal.value[2] = data.values;
-      }
-    };
-
-    const onCheckedWeldedType = (data) => {
-      if (!weldedType.value) {
-        weldedType.value = [];
-      }
-
-      if (data.values.length == 0) {
-        weldedType.value = undefined;
-        weldedTypeVal.value[0] = undefined;
-      } else {
-        weldedType.value = data.values;
-        weldedTypeVal.value[0] = data.values;
-      }
-    };
-    const onCheckedWeldedType2 = (data) => {
-      if (data.values.length == 0) {
-        if (weldedTypeVal.value.length == 2) {
-          weldedTypeVal.value.splice(1, 1);
-        } else {
-          weldedTypeVal.value[1] = "";
-        }
-      } else {
-        weldedTypeVal.value[1] = data.values;
-      }
-    };
-    const onCheckedWeldedType3 = (data) => {
-      if (data.values.length == 0) {
-        if (weldedTypeVal.value[1] == "" || weldedTypeVal.value[1] == null) {
-          weldedTypeVal.value.splice(1, 2);
-        } else if (weldedTypeVal.value.length == 3) {
-          weldedTypeVal.value.splice(2, 1);
-        }
-      } else {
-        weldedTypeVal.value[2] = data.values;
-      }
-    };
-
-    const onCheckedWeldedSeam = (data) => {
-      if (!weldedSeam.value) {
-        weldedSeam.value = [];
-      }
-
-      if (data.values.length == 0) {
-        weldedSeam.value = undefined;
-        weldedSeamVal.value[0] = undefined;
-      } else {
-        weldedSeam.value = data.values;
-        weldedSeamVal.value[0] = data.values;
-      }
-    };
-    const onCheckedWeldedSeam2 = (data) => {
-      if (data.values.length == 0) {
-        if (weldedSeamVal.value.length == 2) {
-          weldedSeamVal.value.splice(1, 1);
-        } else {
-          weldedSeamVal.value[1] = "";
-        }
-      } else {
-        weldedSeamVal.value[1] = data.values;
-      }
-    };
-    const onCheckedWeldedSeam3 = (data) => {
-      if (data.values.length == 0) {
-        if (weldedSeamVal.value[1] == "" || weldedSeamVal.value[1] == null) {
-          weldedSeamVal.value.splice(1, 2);
-        } else if (weldedSeamVal.value.length == 3) {
-          weldedSeamVal.value.splice(2, 1);
-        }
-      } else {
-        weldedSeamVal.value[2] = data.values;
-      }
-    };
-    const onCheckedWeldedConnection = (data) => {
-      if (!weldedConnection.value) {
-        weldedConnection.value = [];
-      }
-
-      if (data.values.length == 0) {
-        weldedConnection.value = undefined;
-        weldedConnectionVal.value[0] = undefined;
-      } else {
-        weldedConnection.value = data.values;
-        weldedConnectionVal.value[0] = data.values;
-      }
-    };
-    const onCheckedWeldedConnection2 = (data) => {
-      if (data.values.length == 0) {
-        if (weldedConnectionVal.value.length == 2) {
-          weldedConnectionVal.value.splice(1, 1);
-        } else {
-          weldedConnectionVal.value[1] = "";
-        }
-      } else {
-        weldedConnectionVal.value[1] = data.values;
-      }
-    };
-    const onCheckedWeldedConnection3 = (data) => {
-      if (data.values.length == 0) {
-        if (
-          weldedConnectionVal.value[1] == "" ||
-          weldedConnectionVal.value[1] == null
-        ) {
-          weldedConnectionVal.value.splice(1, 2);
-        } else if (weldedConnectionVal.value.length == 3) {
-          weldedConnectionVal.value.splice(2, 1);
-        }
-      } else {
-        weldedConnectionVal.value[2] = data.values;
-      }
-    };
-    const onCheckedBrand = (data) => {
-      if (!brand.value) {
-        brand.value = [];
-      }
-
-      if (data.values.length == 0) {
-        brand.value = undefined;
-        brandVal.value[0] = undefined;
-      } else {
-        brand.value = data.values;
-        brandVal.value[0] = data.values;
-      }
-    };
-    const onCheckedBrand2 = (data) => {
-      if (data.values.length == 0) {
-        if (brandVal.value.length == 2) {
-          brandVal.value.splice(1, 1);
-        } else {
-          brandVal.value[1] = "";
-        }
-      } else {
-        brandVal.value[1] = data.values;
-      }
-    };
-    const onCheckedBrand3 = (data) => {
-      if (data.values.length == 0) {
-        if (brandVal.value[1] == "" || brandVal.value[1] == null) {
-          brandVal.value.splice(1, 2);
-        } else if (brandVal.value.length == 3) {
-          brandVal.value.splice(2, 1);
-        }
-      } else {
-        brandVal.value[2] = data.values;
-      }
-    };
-    const onCheckedElectrode = (data) => {
-      if (!electrode.value) {
-        electrode.value = [];
-      }
-
-      if (data.values.length == 0) {
-        electrode.value = undefined;
-        electrodeVal.value[0] = undefined;
-      } else {
-        electrode.value = data.values;
-        electrodeVal.value[0] = data.values;
-      }
-    };
-    const onCheckedElectrode2 = (data) => {
-      if (data.values.length == 0) {
-        if (electrodeVal.value.length == 2) {
-          electrodeVal.value.splice(1, 1);
-        } else {
-          electrodeVal.value[1] = "";
-        }
-      } else {
-        electrodeVal.value[1] = data.values;
-      }
-    };
-    const onCheckedElectrode3 = (data) => {
-      if (data.values.length == 0) {
-        if (electrodeVal.value[1] == "" || electrodeVal.value[1] == null) {
-          electrodeVal.value.splice(1, 2);
-        } else if (electrodeVal.value.length == 3) {
-          electrodeVal.value.splice(2, 1);
-        }
-      } else {
-        electrodeVal.value[2] = data.values;
-      }
-    };
-
-    const onCheckedQualityControls = (data) => {
-      // console.log("onCheckedQualityControls: ", data);
-
-      if (!data.values || data.values.length == 0 || !data.values[0]) {
-        controls.value = undefined;
-      } else {
-        controls.value = data.values;
-      }
-
-      // console.log("controls.value: ", controls.value);
-    };
-
-    const onCheckedComission = (data) => {
-      if (!data.values.length) {
-        comission.value = undefined;
-      } else {
-        comission.value = data.values;
-      }
-    };
-
-    const onCheckedWeldedPositionScope = (data) => {
-      if (!data.values.length) {
-        weldedPositionScope.value = undefined;
-      } else {
-        weldedPositionScope.value = data.values;
-      }
-    };
-    const onCheckedAxesPositionScope = (data) => {
-      if (!data.values.length) {
-        axesPositionScope.value = undefined;
-      } else {
-        axesPositionScope.value = data.values;
-      }
-    };
-    const onCheckedWeldedJointScope = (data) => {
-      if (!data.values.length) {
-        weldedJointScope.value = undefined;
-      } else {
-        weldedJointScope.value = data.values;
-      }
-    };
-    const onCheckedWeldedTypeScope = (data) => {
-      if (!data.values.length) {
-        weldedTypeScope.value = undefined;
-      } else {
-        weldedTypeScope.value = data.values;
-      }
-    };
-    const onCheckedWeldedSeamScope = (data) => {
-      if (!data.values.length) {
-        weldedSeamScope.value = undefined;
-      } else {
-        weldedSeamScope.value = data.values;
-      }
-    };
-    const onCheckedWeldedConnectionScope = (data) => {
-      if (!data.values.length) {
-        weldedConnectionScope.value = undefined;
-      } else {
-        weldedConnectionScope.value = data.values;
-      }
-    };
-    const onCheckedBrandScope = (data) => {
-      if (!data.values.length) {
-        brandScope.value = undefined;
-      } else {
-        brandScope.value = data.values;
-      }
-    };
-    const onCheckedElectrodeScope = (data) => {
-      if (!data.values.length) {
-        electrodeScope.value = undefined;
-      } else {
-        electrodeScope.value = data.values;
-      }
-    };
-
-    //Заносим значения селектов
-    const selectQualifyingRank = (value) => {
-      qualifyingRank.value = value.value;
-    };
-    const selectAttestationType = (value) => {
-      attestationType.value = value.value;
-    };
-    const selectWeldingMethod1 = (value) => {
-      weldingMethod.value = value.value;
-      onChangeItem(weldingMethodVal.value, 0, weldingMethod.value);
-    };
-    const selectWeldingMethod2 = (value) => {
-      weldingMethod2.value = value.value;
-      onChangeItem(weldingMethodVal.value, 1, weldingMethod2.value);
-    };
-    const selectWeldingMethod3 = (value) => {
-      weldingMethod3.value = value.value;
-      onChangeItem(weldingMethodVal.value, 2, weldingMethod3.value);
-    };
-    const selectGrade = (value) => {
-      grade.value = value.value;
-    };
-    const selectWeldingMethodScope = (value) => {
-      weldingMethodScope.value = value.value;
-    };
-
-    //функция добавления значений Групп технических устройств в массиив
-    const onCheckedAccessSubItems = (data) => {
-      if (!accesses.value) {
-        accesses.value = [];
-      }
-
-      //поиск элемента в массиаве
-      const idx = accesses.value.findIndex(
-        (item) => item.item == data.values.item
-      );
-
-      // console.log(idx);
-
-      //если уже есть в массиве
-      if (idx > -1) {
-        //заменить на новое значение
-        accesses.value.splice(idx, 1, data.values);
-
-        //если снимаем все значения подгрупп
-        if (data.values.values && !data.values.values.length) {
-          accesses.value.splice(idx, 1);
-
-          if (!accesses.value.length) {
-            accesses.value = undefined;
-          }
-        }
-      } else {
-        //если нет в массиве, добавить
-        accesses.value.push(data.values);
-      }
-    };
-
-    //функция смены тип протокола
-    const changeCertType = () => {
-      // console.log(certType.value);
-
-      if (certType.value == "sheetPipe") {
-        weldedJoint.value = [];
-        weldedJointScope.value = [];
-        axesPosition.value = [];
-        axesPositionScope.value = [];
-        weldedJointVal.value = [];
-        axesPositionVal.value = [];
-
-        axesPositionDefault.value = [];
-        axesPositionDefault2.value = [];
-        axesPositionDefault3.value = [];
-        axesPositionScopeDefault.value = [];
-        weldedJointDefault.value = [];
-        weldedJointDefault2.value = [];
-        weldedJointDefault3.value = [];
-        weldedJointScopeDefault.value = [];
-
-        preheating.value = "";
-        preheating2.value = "";
-        preheating3.value = "";
-        preheatingVal.value = [];
-
-        heatTreatment.value = "";
-        heatTreatment2.value = "";
-        heatTreatment3.value = "";
-        heatTreatmentVal.value = [];
-      } else if (certType.value == "fittings") {
-        weldedJoint.value = undefined;
-        weldedJointScope.value = undefined;
-        axesPosition.value = undefined;
-        axesPositionScope.value = undefined;
-        weldedJointVal.value = [];
-        axesPositionVal.value = [];
-
-        preheating.value = "-";
-        preheating2.value = "";
-        preheating3.value = "";
-
-        heatTreatment.value = "-";
-        heatTreatment2.value = "";
-        heatTreatment3.value = "";
-
-        preheatingVal.value = [];
-        heatTreatmentVal.value = [];
-      }
-    };
-
-    //список option в селекте
-    const optionsQualifyingRank = computed(
-      () => store.getters["certItem/certQualifyingRanks"]
-    );
-    const optionsAttestationType = computed(
-      () => store.getters["certItem/certAttestationTypes"]
-    );
-    const optionsWeldingMethod = computed(
-      () => store.getters["certItem/certWeldingMethods"]
-    );
-
-    const optionsControl = computed(
-      () => store.getters["certItem/certControls"]
-    );
-    const optionsGrade = computed(() => store.getters["certItem/certGrades"]);
-
-    //обработчик изменения полей с вариациями значений
-    const onChangeItem = (item, itemNum, currentItem) => {
-      if (itemNum == 1) {
-        if (currentItem.length == 0) {
-          if (item.length == 2) {
-            item.splice(1, 1);
-          } else {
-            item[itemNum] = currentItem;
-          }
-        } else {
-          item[itemNum] = currentItem;
-        }
-      } else if (itemNum == 2) {
-        if (currentItem.length == 0) {
-          if (item[1] == "" || item[1] == null) {
-            item.splice(1, 2);
-          } else if (item.length == 3) {
-            item.splice(2, 1);
-          }
-        } else {
-          item[itemNum] = currentItem;
-          if (item[1] == null) {
-            item[1] = "";
-          }
-        }
+//обработчик изменения полей с вариациями значений
+const onChangeItem = (item, itemNum, currentItem) => {
+  if (itemNum == 1) {
+    if (currentItem.length == 0) {
+      if (item.length == 2) {
+        item.splice(1, 1);
       } else {
         item[itemNum] = currentItem;
       }
-
-      // console.log(`${item}`, item);
-    };
-
-    //Vee-validate
-    const { handleSubmit, isSubmitting } = useForm();
-
-    const { value: date, errorMessage: dError, handleBlur: dBlur } = useField(
-      "date",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите дату протокола")
-    );
-
-    const {
-      value: numProtocol,
-      errorMessage: numProtError,
-      handleBlur: numProtBlur,
-    } = useField(
-      "numProtocol",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите номер протокола")
-    );
-
-    const {
-      value: textHead,
-      errorMessage: tHeadError,
-      handleBlur: tHeadBlur,
-    } = useField(
-      "textHead",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите текст в шапке протокола")
-    );
-
-    const {
-      value: firstname,
-      errorMessage: fNameError,
-      handleBlur: fNameBlur,
-    } = useField(
-      "firstname",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите Фамилию")
-    );
-
-    const {
-      value: secondname,
-      errorMessage: sNameError,
-      handleBlur: sNameBlur,
-    } = useField(
-      "secondname",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите Имя")
-    );
-
-    const {
-      value: lastname,
-      errorMessage: lNameError,
-      handleBlur: lNameBlur,
-    } = useField(
-      "lastname",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите Отчество")
-    );
-
-    const {
-      value: birthday,
-      errorMessage: bDayError,
-      handleBlur: bDayBlur,
-    } = useField(
-      "birthday",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите дату рождения")
-    );
-
-    const {
-      value: passport,
-      errorMessage: passportError,
-      handleBlur: passportBlur,
-    } = useField(
-      "passport",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите серию и номер паспорта")
-    );
-
-    const {
-      value: numOldCert,
-      errorMessage: numOldCertError,
-      handleBlur: numOldCertBlur,
-    } = useField("numOldCert", yup.string().trim());
-
-    const {
-      value: dateOldCert,
-      errorMessage: dateOldCertError,
-      handleBlur: dateOldCertBlur,
-    } = useField("dateOldCert", yup.string().trim());
-
-    const { value: work, errorMessage: wError, handleBlur: wBlur } = useField(
-      "work",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите место работы")
-    );
-
-    const {
-      value: workYears,
-      errorMessage: wYearsError,
-      handleBlur: wYearsBlur,
-    } = useField(
-      "workYears",
-      yup
-        .number()
-        .typeError("Пожалуйста, введите число")
-        .required("Пожалуйста, введите стаж работы по сварке")
-        .integer("Пожалуйста, введите целое число")
-    );
-
-    const {
-      value: qualifyingRank,
-      errorMessage: qRankError,
-      handleBlur: qRankBlur,
-    } = useField(
-      "qualifyingRank",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите квалификационный разряд")
-    );
-
-    const {
-      value: attestationType,
-      errorMessage: aTypeError,
-      handleBlur: aTypeBlur,
-    } = useField(
-      "attestationType",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите вид аттестации")
-    );
-
-    const { value: stigma, errorMessage: sError, handleBlur: sBlur } = useField(
-      "stigma",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите маркировку образца (клеймо)")
-    );
-
-    const {
-      value: stigmaGeneral,
-      errorMessage: sGError,
-      handleBlur: sGBlur,
-    } = useField(
-      "stigmaGeneral",
-      yup
-        .string()
-        .trim()
-        .required(
-          "Пожалуйста, введите маркировку образца (клеймо)(общее значение)"
-        )
-    );
-
-    const {
-      value: weldingMethod,
-      errorMessage: wMethodError,
-      handleBlur: wMethodBlur,
-    } = useField(
-      "weldingMethod",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, укажите способ сварки")
-    );
-    const {
-      value: weldingMethodScope,
-      errorMessage: wMethodSError,
-      handleBlur: wMethodSBlur,
-    } = useField(
-      "weldingMethodScope",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, укажите способ сварки")
-    );
-
-    const {
-      value: weldedType,
-      errorMessage: wTypeError,
-      handleBlur: wTypeBlur,
-    } = useField(
-      "weldedType",
-      yup.array().required("Пожалуйста, введите вид свариваемых деталей")
-    );
-    const {
-      value: weldedTypeScope,
-      errorMessage: wTypeSError,
-      handleBlur: wTypeSBlur,
-    } = useField(
-      "weldedTypeScope",
-      yup.array().required("Пожалуйста, введите вид свариваемых деталей")
-    );
-
-    const {
-      value: weldedSeam,
-      errorMessage: wSeamError,
-      handleBlur: wSeamBlur,
-    } = useField(
-      "weldedSeam",
-      yup.array().required("Пожалуйста, укажите тип сварного шва")
-    );
-    const {
-      value: weldedSeamScope,
-      errorMessage: wSeamSError,
-      handleBlur: wSeamSBlur,
-    } = useField(
-      "weldedSeamScope",
-      yup.array().required("Пожалуйста, укажите тип сварного шва")
-    );
-    const {
-      value: weldedConnection,
-      errorMessage: wConnectionError,
-      handleBlur: wConnectionBlur,
-    } = useField(
-      "weldedConnection",
-      yup.array().required("Пожалуйста, укажите тип и вид соединения")
-    );
-    const {
-      value: weldedConnectionScope,
-      errorMessage: wConnectionSError,
-      handleBlur: wConnectionSBlur,
-    } = useField(
-      "weldedConnectionScope",
-      yup.array().required("Пожалуйста, укажите тип и вид соединения")
-    );
-
-    const {
-      value: weldedPosition,
-      errorMessage: wpError,
-      handleBlur: wpBlur,
-    } = useField(
-      "weldedPosition",
-      yup.array().required("Пожалуйста, укажите положение при сварке")
-    );
-    const {
-      value: weldedPositionScope,
-      errorMessage: wpSError,
-      handleBlur: wpSBlur,
-    } = useField(
-      "weldedPositionScope",
-      yup.array().required("Пожалуйста, укажите положение при сварке")
-    );
-    const {
-      value: axesPosition,
-      errorMessage: apError,
-      handleBlur: apBlur,
-    } = useField(
-      "axesPosition",
-      yup.array().required("Пожалуйста, укажите положение осей стержней")
-    );
-    const {
-      value: axesPositionScope,
-      errorMessage: apSError,
-      handleBlur: apSBlur,
-    } = useField(
-      "axesPositionScope",
-      yup.array().required("Пожалуйста, укажите положение осей стержней")
-    );
-    const {
-      value: weldedJoint,
-      errorMessage: wjError,
-      handleBlur: wjBlur,
-    } = useField(
-      "weldedJoint",
-      yup.array().required("Пожалуйста, укажите тип сварного соединения")
-    );
-    const {
-      value: weldedJointScope,
-      errorMessage: wjSError,
-      handleBlur: wjSBlur,
-    } = useField(
-      "weldedJointScope",
-      yup.array().required("Пожалуйста, укажите тип сварного соединения")
-    );
-    const {
-      value: preheating,
-      errorMessage: pError,
-      handleBlur: pBlur,
-    } = useField(
-      "preheating",
-      yup
-        .string()
-        .trim()
-        .required(
-          "Пожалуйста, введите предварительный и сопутствующий подогрев"
-        )
-    );
-    const {
-      value: heatTreatment,
-      errorMessage: hTreatmentError,
-      handleBlur: hTreatmentBlur,
-    } = useField(
-      "heatTreatment",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите термическую обработку")
-    );
-    const { value: brand, errorMessage: bError, handleBlur: bBlur } = useField(
-      "brand",
-      yup.array().required("Пожалуйста, укажите марку и группу")
-    );
-    const {
-      value: brandScope,
-      errorMessage: bSError,
-      handleBlur: bSBlur,
-    } = useField(
-      "brandScope",
-      yup.array().required("Пожалуйста, укажите марку и группу")
-    );
-    const {
-      value: thickness,
-      errorMessage: tError,
-      handleBlur: tBlur,
-    } = useField(
-      "thickness",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите толщину образца (мм)")
-    );
-    const {
-      value: thicknessScope,
-      errorMessage: tSError,
-      handleBlur: tSBlur,
-    } = useField(
-      "thicknessScope",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите толщину образца (мм)")
-    );
-    const {
-      value: diameter,
-      errorMessage: diameterError,
-      handleBlur: diameterBlur,
-    } = useField(
-      "diameter",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите наружный диаметр трубы (мм)")
-    );
-    const {
-      value: diameterScope,
-      errorMessage: diameterSError,
-      handleBlur: diameterSBlur,
-    } = useField(
-      "diameterScope",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите наружный диаметр трубы (мм)")
-    );
-    const {
-      value: electrode,
-      errorMessage: eError,
-      handleBlur: eBlur,
-    } = useField(
-      "electrode",
-      yup
-        .array()
-        .required("Пожалуйста, укажите электрод или присадочную проволоку")
-    );
-    const {
-      value: electrodeScope,
-      errorMessage: eSError,
-      handleBlur: eSBlur,
-    } = useField(
-      "electrodeScope",
-      yup
-        .array()
-        .required("Пожалуйста, укажите электрод или присадочную проволоку")
-    );
-    const { value: flux, errorMessage: fError, handleBlur: fBlur } = useField(
-      "flux",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите защитный газ и флюс")
-    );
-    const {
-      value: fluxScope,
-      errorMessage: fSError,
-      handleBlur: fSBlur,
-    } = useField(
-      "fluxScope",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите защитный газ и флюс")
-    );
-
-    const {
-      value: npa,
-      errorMessage: npaError,
-      handleBlur: npaBlur,
-    } = useField(
-      "npa",
-      yup
-        .string()
-        .trim()
-        .required(
-          "Пожалуйста, введите наименование НПА по нормам оценки качества"
-        )
-    );
-    const {
-      value: auxiliaryScope,
-      errorMessage: auxiliarySError,
-      handleBlur: auxiliarySBlur,
-    } = useField(
-      "auxiliaryScope",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите вспомогательные материалы")
-    );
-    const { value: grade, errorMessage: gError, handleBlur: gBlur } = useField(
-      "grade",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите оценку теоретических знаний")
-    );
-    const {
-      value: decision,
-      errorMessage: decisionError,
-      handleBlur: decisionBlur,
-    } = useField(
-      "decision",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите решение комиссии")
-    );
-
-    const {
-      value: expiration,
-      errorMessage: expError,
-      handleBlur: expBlur,
-    } = useField(
-      "expiration",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите срок периодической аттестации")
-    );
-    const {
-      value: comission,
-      errorMessage: сError,
-      handleBlur: сBlur,
-    } = useField(
-      "comission",
-      yup.array().required("Пожалуйста, укажите аттестационную комиссию")
-    );
-    const {
-      value: controls,
-      errorMessage: controlsError,
-      handleBlur: controlsBlur,
-    } = useField(
-      "controls",
-      yup
-        .array()
-        .required(
-          "Пожалуйста, укажите в первой сроке основного раздела данные контроля качества образца"
-        )
-    );
-    const {
-      value: accesses,
-      errorMessage: accessesError,
-      handleBlur: accessesBlur,
-    } = useField(
-      "accesses",
-      yup
-        .array()
-        .required(
-          "Пожалуйста, укажите группы технических устройств опасных производственных объектов"
-        )
-    );
-    const {
-      value: numCertificate,
-      errorMessage: numCertError,
-      handleBlur: numCertBlur,
-    } = useField(
-      "numCertificate",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите номер удостоверения")
-    );
-
-    //функция автоматического изменения даты окончания срока действия удостоверения
-    const dateChange = () => {
-      let newDate = new Date(date.value);
-
-      newDate.setFullYear(newDate.getFullYear() + 2);
-
-      let month =
-        newDate.getMonth() + 1 < 10
-          ? "0" + (newDate.getMonth() + 1)
-          : newDate.getMonth() + 1;
-      let day =
-        newDate.getDate() < 10 ? "0" + newDate.getDate() : newDate.getDate();
-
-      expiration.value = newDate.getFullYear() + "-" + month + "-" + day;
-    };
-
-    //Функция закрития модального окна
-    function closeModal() {
-      modal.value = false;
+    } else {
+      item[itemNum] = currentItem;
     }
-
-    //Функция показа модального окна
-    function showModal() {
-      modal.value = true;
-      setTimeout(() => {
-        let systemModal = document.getElementById("systemModal");
-        systemModal.classList.add("show");
-      }, 0);
-    }
-
-    // функция создания нового протокола удостоверения/вкладыша
-    const createCertificate = async () => {
-      try {
-        const values = {
-          certType: certType.value,
-          date: date.value,
-          numProtocol: numProtocol.value,
-          textHead: textHead.value,
-          firstname: firstname.value,
-          secondname: secondname.value,
-          lastname: lastname.value,
-          birthday: birthday.value,
-          passport: passport.value,
-          numOldCert: numOldCert.value,
-          dateOldCert: dateOldCert.value,
-          work: work.value,
-          workYears: workYears.value,
-          qualifyingRank: qualifyingRank.value,
-          attestationType: attestationType.value,
-          stigma: stigmaVal.value,
-          stigmaGeneral: stigmaGeneral.value,
-          weldingMethod: weldingMethodVal.value,
-          weldedType: weldedTypeVal.value,
-          weldedSeam: weldedSeamVal.value,
-          weldedConnection: weldedConnectionVal.value,
-          weldedPosition: weldedPositionVal.value,
-          weldedJoint: weldedJointVal.value,
-          axesPosition: axesPositionVal.value,
-          preheating: preheatingVal.value,
-          heatTreatment: heatTreatmentVal.value,
-          brand: brandVal.value,
-          thickness: thicknessVal.value,
-          diameter: diameterVal.value,
-          electrode: electrodeVal.value,
-          flux: fluxVal.value,
-          controls: controls.value,
-          npa: npa.value,
-          grade: grade.value,
-          decision: decision.value,
-          accesses: accesses.value,
-          expiration: expiration.value,
-          comission: comission.value,
-          numCertificate: numCertificate.value,
-          weldingMethodScope: weldingMethodScope.value,
-          weldedTypeScope: weldedTypeScope.value,
-          weldedSeamScope: weldedSeamScope.value,
-          weldedConnectionScope: weldedConnectionScope.value,
-          weldedPositionScope: weldedPositionScope.value,
-          weldedJointScope: weldedJointScope.value,
-          axesPositionScope: axesPositionScope.value,
-          brandScope: brandScope.value,
-          thicknessScope: thicknessScope.value,
-          diameterScope: diameterScope.value,
-          electrodeScope: electrodeScope.value,
-          fluxScope: fluxScope.value,
-          auxiliaryScope: auxiliaryScope.value,
-        };
-
-        let link = "certificate/create";
-
-        if (props.certValues.id) {
-          link = "certificateSub/create";
-          values.certId = props.certValues.id;
-        }
-
-        // console.log("link==", link);
-        // console.log("values==", values);
-
-        // await store.dispatch("certificate/create", values);
-        await store.dispatch(link, values);
-
-        //переход на главную после создания
-        router.push("/");
-      } catch (e) {}
-    };
-
-    function onInvalidSubmit({ values, errors, results }) {
-      // console.log(values); // current form values
-      //console.log(errors); // a map of field names and their first error message
-      // console.log(results); // a detailed map of field names and their validation results
-
-      if (errors) {
-        store.dispatch("setMessage", {
-          value: "Не все поля заполнены. Введите значения",
-          type: "warning",
-        });
-
-        //закрыть модальное окно
-        closeModal();
+  } else if (itemNum == 2) {
+    if (currentItem.length == 0) {
+      if (item[1] == "" || item[1] == null) {
+        item.splice(1, 2);
+      } else if (item.length == 3) {
+        item.splice(2, 1);
+      }
+    } else {
+      item[itemNum] = currentItem;
+      if (item[1] == null) {
+        item[1] = "";
       }
     }
-
-    //Функция сохранения изменений значений протокола
-    const updateCertificate = async () => {
-      // console.log("certificate.value:: ", certificate.value);
-      // console.log("props.certValues:: ", props.certValues);
-      // const id = certificate.value._id;
-      const id = props.certValues._id;
-
-      try {
-        const values = {
-          certType: certType.value,
-          date: date.value,
-          numProtocol: numProtocol.value,
-          textHead: textHead.value,
-          firstname: firstname.value,
-          secondname: secondname.value,
-          lastname: lastname.value,
-          birthday: birthday.value,
-          passport: passport.value,
-          numOldCert: numOldCert.value,
-          dateOldCert: dateOldCert.value,
-          work: work.value,
-          workYears: workYears.value,
-          qualifyingRank: qualifyingRank.value,
-          attestationType: attestationType.value,
-          stigma: stigmaVal.value,
-          stigmaGeneral: stigmaGeneral.value,
-          weldingMethod: weldingMethodVal.value,
-          weldedType: weldedTypeVal.value,
-          weldedSeam: weldedSeamVal.value,
-          weldedConnection: weldedConnectionVal.value,
-          weldedPosition: weldedPositionVal.value,
-          weldedJoint: weldedJointVal.value,
-          axesPosition: axesPositionVal.value,
-          preheating: preheatingVal.value,
-          heatTreatment: heatTreatmentVal.value,
-          brand: brandVal.value,
-          thickness: thicknessVal.value,
-          diameter: diameterVal.value,
-          electrode: electrodeVal.value,
-          flux: fluxVal.value,
-          controls: controls.value,
-          npa: npa.value,
-          grade: grade.value,
-          decision: decision.value,
-          accesses: accesses.value,
-          expiration: expiration.value,
-          comission: comission.value,
-          numCertificate: numCertificate.value,
-          weldingMethodScope: weldingMethodScope.value,
-          weldedTypeScope: weldedTypeScope.value,
-          weldedSeamScope: weldedSeamScope.value,
-          weldedConnectionScope: weldedConnectionScope.value,
-          weldedPositionScope: weldedPositionScope.value,
-          weldedJointScope: weldedJointScope.value,
-          axesPositionScope: axesPositionScope.value,
-          brandScope: brandScope.value,
-          thicknessScope: thicknessScope.value,
-          diameterScope: diameterScope.value,
-          electrodeScope: electrodeScope.value,
-          fluxScope: fluxScope.value,
-          auxiliaryScope: auxiliaryScope.value,
-        };
-
-        // console.log(updateValues);
-
-        // вызываем метод update для обновления записи в БД
-        if (props.certValues.owner) {
-          await store.dispatch("certificateSub/update", { values, id });
-        } else {
-          await store.dispatch("certificate/update", { values, id });
-        }
-
-        //закрыть модальное окно
-        closeModal();
-
-        //скрыть форму редактирования
-        emit("hide");
-        emit("update");
-      } catch (error) {
-        //закрыть модальное окно
-        closeModal();
-      }
-    };
-
-    //Отправка формы на сервер
-    const onSubmit = handleSubmit(() => {
-      if (props.certSubmit == "edit") {
-        updateCertificate();
-      } else if (props.certSubmit == "create") {
-        createCertificate();
-      }
-    }, onInvalidSubmit);
-
-    return {
-      changeCertType,
-
-      onCheckedWeldedPosition,
-      onCheckedWeldedPosition2,
-      onCheckedWeldedPosition3,
-      onCheckedAxesPosition,
-      onCheckedAxesPosition2,
-      onCheckedAxesPosition3,
-      onCheckedWeldedJoint,
-      onCheckedWeldedJoint2,
-      onCheckedWeldedJoint3,
-      onCheckedWeldedType,
-      onCheckedWeldedType2,
-      onCheckedWeldedType3,
-      onCheckedWeldedSeam,
-      onCheckedWeldedSeam2,
-      onCheckedWeldedSeam3,
-      onCheckedWeldedConnection,
-      onCheckedWeldedConnection2,
-      onCheckedWeldedConnection3,
-      onCheckedBrand,
-      onCheckedBrand2,
-      onCheckedBrand3,
-      onCheckedElectrode,
-      onCheckedElectrode2,
-      onCheckedElectrode3,
-      onCheckedComission,
-
-      onCheckedWeldedPositionScope,
-      onCheckedWeldedJointScope,
-      onCheckedAxesPositionScope,
-      onCheckedWeldedTypeScope,
-      onCheckedWeldedSeamScope,
-      onCheckedWeldedConnectionScope,
-      onCheckedBrandScope,
-      onCheckedElectrodeScope,
-
-      onCheckedQualityControls,
-      // onCheckedControls,
-      // onCheckedControls2,
-      // onCheckedControls3,
-      onCheckedAccessSubItems,
-
-      onChangeItem,
-
-      selectQualifyingRank,
-      selectAttestationType,
-      selectWeldingMethod1,
-      selectWeldingMethod2,
-      selectWeldingMethod3,
-      selectGrade,
-      selectWeldingMethodScope,
-
-      checkboxDropdownAccess,
-      checkboxDropdownAccessItems,
-
-      optionsWeldedPosition,
-      optionsAxesPosition,
-      optionsWeldedJoint,
-      optionsWeldedType,
-      optionsWeldedSeam,
-      optionsWeldedConnection,
-      optionsBrand,
-      optionsElectrode,
-      optionsComission,
-
-      optionsQualifyingRank,
-      optionsAttestationType,
-      optionsWeldingMethod,
-
-      optionsGrade,
-      optionsControl,
-
-      certType,
-
-      stigmaVal,
-      weldingMethodVal,
-      weldedTypeVal,
-      weldedSeamVal,
-      weldedConnectionVal,
-      weldedPositionVal,
-      axesPositionVal,
-      weldedJointVal,
-      preheatingVal,
-      heatTreatmentVal,
-      brandVal,
-      thicknessVal,
-      diameterVal,
-      electrodeVal,
-      fluxVal,
-      // controlsVal,
-      stigma2,
-      stigma3,
-      weldingMethod2,
-      weldingMethod3,
-      preheating2,
-      preheating3,
-      heatTreatment2,
-      heatTreatment3,
-      thickness2,
-      thickness3,
-      diameter2,
-      diameter3,
-      flux2,
-      flux3,
-
-      axesPositionDefault,
-      axesPositionDefault2,
-      axesPositionDefault3,
-      axesPositionScopeDefault,
-      weldedJointDefault,
-      weldedJointDefault2,
-      weldedJointDefault3,
-      weldedJointScopeDefault,
-
-      weldedTypeDefault,
-      weldedTypeDefault2,
-      weldedTypeDefault3,
-      weldedSeamDefault,
-      weldedSeamDefault2,
-      weldedSeamDefault3,
-      weldedConnectionDefault,
-      weldedConnectionDefault2,
-      weldedConnectionDefault3,
-      weldedPositionDefault,
-      weldedPositionDefault2,
-      weldedPositionDefault3,
-      brandDefault,
-      brandDefault2,
-      brandDefault3,
-      electrodeDefault,
-      electrodeDefault2,
-      electrodeDefault3,
-
-      date,
-      dError,
-      dBlur,
-      numProtocol,
-      numProtError,
-      numProtBlur,
-      textHead,
-      tHeadError,
-      tHeadBlur,
-      firstname,
-      fNameError,
-      fNameBlur,
-      secondname,
-      sNameError,
-      sNameBlur,
-      lastname,
-      lNameError,
-      lNameBlur,
-      birthday,
-      bDayError,
-      bDayBlur,
-      passport,
-      passportError,
-      passportBlur,
-      numOldCert,
-      numOldCertError,
-      numOldCertBlur,
-      dateOldCert,
-      dateOldCertError,
-      dateOldCertBlur,
-      work,
-      wError,
-      wBlur,
-      workYears,
-      wYearsError,
-      wYearsBlur,
-      qualifyingRank,
-      qRankError,
-      qRankBlur,
-      attestationType,
-      aTypeError,
-      aTypeBlur,
-      stigma,
-      sError,
-      sBlur,
-      stigmaGeneral,
-      sGError,
-      sGBlur,
-      weldingMethod,
-      wMethodError,
-      wMethodBlur,
-      weldedType,
-      wTypeError,
-      wTypeBlur,
-      weldedSeam,
-      wSeamError,
-      wSeamBlur,
-      weldedConnection,
-      wConnectionError,
-      wConnectionBlur,
-      weldedPosition,
-      wpError,
-      wpBlur,
-      weldedJoint,
-      wjError,
-      wjBlur,
-      weldedJointScope,
-      wjSError,
-      wjSBlur,
-      axesPosition,
-      apError,
-      apBlur,
-      axesPositionScope,
-      apSError,
-      apSBlur,
-      weldingMethodScope,
-      wMethodSError,
-      wMethodSBlur,
-      weldedTypeScope,
-      wTypeSError,
-      wTypeSBlur,
-      weldedSeamScope,
-      wSeamSError,
-      wSeamSBlur,
-      weldedConnectionScope,
-      wConnectionSError,
-      wConnectionSBlur,
-      weldedPositionScope,
-      wpSError,
-      wpSBlur,
-      preheating,
-      pError,
-      pBlur,
-      heatTreatment,
-      hTreatmentError,
-      hTreatmentBlur,
-      brand,
-      bError,
-      bBlur,
-      brandScope,
-      bSError,
-      bSBlur,
-      thickness,
-      tError,
-      tBlur,
-      thicknessScope,
-      tSError,
-      tSBlur,
-      diameter,
-      diameterError,
-      diameterBlur,
-      diameterScope,
-      diameterSError,
-      diameterSBlur,
-      electrode,
-      eError,
-      eBlur,
-      electrodeScope,
-      eSError,
-      eSBlur,
-      flux,
-      fError,
-      fBlur,
-      fluxScope,
-      fSError,
-      fSBlur,
-      npa,
-      npaError,
-      npaBlur,
-      auxiliaryScope,
-      auxiliarySError,
-      auxiliarySBlur,
-      grade,
-      gError,
-      gBlur,
-      decision,
-      decisionError,
-      decisionBlur,
-      expiration,
-      expError,
-      expBlur,
-      comission,
-      сError,
-      сBlur,
-      numCertificate,
-      numCertError,
-      numCertBlur,
-      controls,
-      controlsError,
-      controlsBlur,
-      accesses,
-      accessesError,
-      accessesBlur,
-
-      createCertificate,
-      isSubmitting,
-      updateCertificate,
-      onSubmit,
-
-      loading,
-      modal,
-      showModal,
-      closeModal,
-
-      dateChange,
-
-      dateFormatForInput,
-    };
-  },
+  } else {
+    item[itemNum] = currentItem;
+  }
 };
+
+//Vee-validate
+const { handleSubmit, isSubmitting } = useForm();
+
+const { value: date, errorMessage: dError } = useField(
+  "date",
+  yup.string().trim().required("Пожалуйста, введите дату протокола")
+);
+
+const { value: numProtocol, errorMessage: numProtError } = useField(
+  "numProtocol",
+  yup.string().trim().required("Пожалуйста, введите номер протокола")
+);
+
+const { value: textHead, errorMessage: tHeadError } = useField(
+  "textHead",
+  yup.string().trim().required("Пожалуйста, введите текст в шапке протокола")
+);
+
+const { value: firstname, errorMessage: fNameError } = useField(
+  "firstname",
+  yup.string().trim().required("Пожалуйста, введите Фамилию")
+);
+
+const { value: secondname, errorMessage: sNameError } = useField(
+  "secondname",
+  yup.string().trim().required("Пожалуйста, введите Имя")
+);
+
+const { value: lastname, errorMessage: lNameError } = useField(
+  "lastname",
+  yup.string().trim().required("Пожалуйста, введите Отчество")
+);
+
+const { value: birthday, errorMessage: bDayError } = useField(
+  "birthday",
+  yup.string().trim().required("Пожалуйста, введите дату рождения")
+);
+
+const { value: passport, errorMessage: passportError } = useField(
+  "passport",
+  yup.string().trim().required("Пожалуйста, введите серию и номер паспорта")
+);
+
+const { value: numOldCert, errorMessage: numOldCertError } = useField(
+  "numOldCert",
+  yup.string().trim()
+);
+
+const { value: dateOldCert, errorMessage: dateOldCertError } = useField(
+  "dateOldCert",
+  yup.string().trim()
+);
+
+const { value: work, errorMessage: wError } = useField(
+  "work",
+  yup.string().trim().required("Пожалуйста, введите место работы")
+);
+
+const { value: workYears, errorMessage: wYearsError } = useField(
+  "workYears",
+  yup
+    .number()
+    .typeError("Пожалуйста, введите число")
+    .required("Пожалуйста, введите стаж работы по сварке")
+    .integer("Пожалуйста, введите целое число")
+);
+
+const { value: qualifyingRank, errorMessage: qRankError } = useField(
+  "qualifyingRank",
+  yup.string().trim().required("Пожалуйста, введите квалификационный разряд")
+);
+
+const { value: attestationType, errorMessage: aTypeError } = useField(
+  "attestationType",
+  yup.string().trim().required("Пожалуйста, введите вид аттестации")
+);
+
+const { value: stigma, errorMessage: sError } = useField(
+  "stigma",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите маркировку образца (клеймо)")
+);
+
+const { value: stigmaGeneral, errorMessage: sGError } = useField(
+  "stigmaGeneral",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите маркировку образца (клеймо)(общее значение)")
+);
+
+const { value: weldingMethod, errorMessage: wMethodError } = useField(
+  "weldingMethod",
+  yup.string().trim().required("Пожалуйста, укажите способ сварки")
+);
+const { value: weldingMethodScope, errorMessage: wMethodSError } = useField(
+  "weldingMethodScope",
+  yup.string().trim().required("Пожалуйста, укажите способ сварки")
+);
+
+const { value: weldedType, errorMessage: wTypeError } = useField(
+  "weldedType",
+  yup.array().required("Пожалуйста, введите вид свариваемых деталей")
+);
+const { value: weldedTypeScope, errorMessage: wTypeSError } = useField(
+  "weldedTypeScope",
+  yup.array().required("Пожалуйста, введите вид свариваемых деталей")
+);
+
+const { value: weldedSeam, errorMessage: wSeamError } = useField(
+  "weldedSeam",
+  yup.array().required("Пожалуйста, укажите тип сварного шва")
+);
+const { value: weldedSeamScope, errorMessage: wSeamSError } = useField(
+  "weldedSeamScope",
+  yup.array().required("Пожалуйста, укажите тип сварного шва")
+);
+const { value: weldedConnection, errorMessage: wConnectionError } = useField(
+  "weldedConnection",
+  yup.array().required("Пожалуйста, укажите тип и вид соединения")
+);
+const { value: weldedConnectionScope, errorMessage: wConnectionSError } =
+  useField(
+    "weldedConnectionScope",
+    yup.array().required("Пожалуйста, укажите тип и вид соединения")
+  );
+
+const { value: weldedPosition, errorMessage: wpError } = useField(
+  "weldedPosition",
+  yup.array().required("Пожалуйста, укажите положение при сварке")
+);
+const { value: weldedPositionScope, errorMessage: wpSError } = useField(
+  "weldedPositionScope",
+  yup.array().required("Пожалуйста, укажите положение при сварке")
+);
+const { value: axesPosition, errorMessage: apError } = useField(
+  "axesPosition",
+  yup.array().required("Пожалуйста, укажите положение осей стержней")
+);
+const { value: axesPositionScope, errorMessage: apSError } = useField(
+  "axesPositionScope",
+  yup.array().required("Пожалуйста, укажите положение осей стержней")
+);
+const { value: weldedJoint, errorMessage: wjError } = useField(
+  "weldedJoint",
+  yup.array().required("Пожалуйста, укажите тип сварного соединения")
+);
+const { value: weldedJointScope, errorMessage: wjSError } = useField(
+  "weldedJointScope",
+  yup.array().required("Пожалуйста, укажите тип сварного соединения")
+);
+const { value: preheating, errorMessage: pError } = useField(
+  "preheating",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите предварительный и сопутствующий подогрев")
+);
+const { value: heatTreatment, errorMessage: hTreatmentError } = useField(
+  "heatTreatment",
+  yup.string().trim().required("Пожалуйста, введите термическую обработку")
+);
+const { value: brand, errorMessage: bError } = useField(
+  "brand",
+  yup.array().required("Пожалуйста, укажите марку и группу")
+);
+const { value: brandScope, errorMessage: bSError } = useField(
+  "brandScope",
+  yup.array().required("Пожалуйста, укажите марку и группу")
+);
+const { value: thickness, errorMessage: tError } = useField(
+  "thickness",
+  yup.string().trim().required("Пожалуйста, введите толщину образца (мм)")
+);
+const { value: thicknessScope, errorMessage: tSError } = useField(
+  "thicknessScope",
+  yup.string().trim().required("Пожалуйста, введите толщину образца (мм)")
+);
+const { value: diameter, errorMessage: diameterError } = useField(
+  "diameter",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите наружный диаметр трубы (мм)")
+);
+const { value: diameterScope, errorMessage: diameterSError } = useField(
+  "diameterScope",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите наружный диаметр трубы (мм)")
+);
+const { value: electrode, errorMessage: eError } = useField(
+  "electrode",
+  yup.array().required("Пожалуйста, укажите электрод или присадочную проволоку")
+);
+const { value: electrodeScope, errorMessage: eSError } = useField(
+  "electrodeScope",
+  yup.array().required("Пожалуйста, укажите электрод или присадочную проволоку")
+);
+const { value: flux, errorMessage: fError } = useField(
+  "flux",
+  yup.string().trim().required("Пожалуйста, введите защитный газ и флюс")
+);
+const { value: fluxScope, errorMessage: fSError } = useField(
+  "fluxScope",
+  yup.string().trim().required("Пожалуйста, введите защитный газ и флюс")
+);
+
+const { value: npa, errorMessage: npaError } = useField(
+  "npa",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите наименование НПА по нормам оценки качества")
+);
+const { value: auxiliaryScope, errorMessage: auxiliarySError } = useField(
+  "auxiliaryScope",
+  yup.string().trim().required("Пожалуйста, введите вспомогательные материалы")
+);
+const { value: grade, errorMessage: gError } = useField(
+  "grade",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите оценку теоретических знаний")
+);
+const { value: decision, errorMessage: decisionError } = useField(
+  "decision",
+  yup.string().trim().required("Пожалуйста, введите решение комиссии")
+);
+
+const { value: expiration, errorMessage: expError } = useField(
+  "expiration",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите срок периодической аттестации")
+);
+const { value: comission, errorMessage: сError } = useField(
+  "comission",
+  yup.array().required("Пожалуйста, укажите аттестационную комиссию")
+);
+const { value: controls, errorMessage: controlsError } = useField(
+  "controls",
+  yup
+    .array()
+    .required(
+      "Пожалуйста, укажите в первой сроке основного раздела данные контроля качества образца"
+    )
+);
+const { value: accesses, errorMessage: accessesError } = useField(
+  "accesses",
+  yup
+    .array()
+    .required(
+      "Пожалуйста, укажите группы технических устройств опасных производственных объектов"
+    )
+);
+const { value: numCertificate, errorMessage: numCertError } = useField(
+  "numCertificate",
+  yup.string().trim().required("Пожалуйста, введите номер удостоверения")
+);
+
+//функция автоматического изменения даты окончания срока действия удостоверения
+const dateChange = () => {
+  let newDate = new Date(date.value);
+
+  newDate.setFullYear(newDate.getFullYear() + 2);
+
+  let month =
+    newDate.getMonth() + 1 < 10
+      ? "0" + (newDate.getMonth() + 1)
+      : newDate.getMonth() + 1;
+  let day =
+    newDate.getDate() < 10 ? "0" + newDate.getDate() : newDate.getDate();
+
+  expiration.value = newDate.getFullYear() + "-" + month + "-" + day;
+};
+
+//Функция закрития модального окна
+function closeModal() {
+  modal.value = false;
+}
+
+//Функция показа модального окна
+function showModal() {
+  modal.value = true;
+  setTimeout(() => {
+    let systemModal = document.getElementById("systemModal");
+    systemModal.classList.add("show");
+  }, 0);
+}
+
+// функция создания нового протокола удостоверения/вкладыша
+const createCertificate = async () => {
+  try {
+    const values = {
+      certType: certType.value,
+      date: date.value,
+      numProtocol: numProtocol.value,
+      textHead: textHead.value,
+      firstname: firstname.value,
+      secondname: secondname.value,
+      lastname: lastname.value,
+      birthday: birthday.value,
+      passport: passport.value,
+      numOldCert: numOldCert.value,
+      dateOldCert: dateOldCert.value,
+      work: work.value,
+      workYears: workYears.value,
+      qualifyingRank: qualifyingRank.value,
+      attestationType: attestationType.value,
+      stigma: stigmaVal.value,
+      stigmaGeneral: stigmaGeneral.value,
+      weldingMethod: weldingMethodVal.value,
+      weldedType: weldedTypeVal.value,
+      weldedSeam: weldedSeamVal.value,
+      weldedConnection: weldedConnectionVal.value,
+      weldedPosition: weldedPositionVal.value,
+      weldedJoint: weldedJointVal.value,
+      axesPosition: axesPositionVal.value,
+      preheating: preheatingVal.value,
+      heatTreatment: heatTreatmentVal.value,
+      brand: brandVal.value,
+      thickness: thicknessVal.value,
+      diameter: diameterVal.value,
+      electrode: electrodeVal.value,
+      flux: fluxVal.value,
+      controls: controls.value,
+      npa: npa.value,
+      grade: grade.value,
+      decision: decision.value,
+      accesses: accesses.value,
+      expiration: expiration.value,
+      comission: comission.value,
+      numCertificate: numCertificate.value,
+      weldingMethodScope: weldingMethodScope.value,
+      weldedTypeScope: weldedTypeScope.value,
+      weldedSeamScope: weldedSeamScope.value,
+      weldedConnectionScope: weldedConnectionScope.value,
+      weldedPositionScope: weldedPositionScope.value,
+      weldedJointScope: weldedJointScope.value,
+      axesPositionScope: axesPositionScope.value,
+      brandScope: brandScope.value,
+      thicknessScope: thicknessScope.value,
+      diameterScope: diameterScope.value,
+      electrodeScope: electrodeScope.value,
+      fluxScope: fluxScope.value,
+      auxiliaryScope: auxiliaryScope.value,
+    };
+
+    let link = "certificate/create";
+
+    if (props.certValues.id) {
+      link = "certificateSub/create";
+      values.certId = props.certValues.id;
+    }
+
+    await store.dispatch(link, values);
+
+    //переход на главную после создания
+    router.push("/");
+  } catch (e) {}
+};
+
+function onInvalidSubmit({ values, errors, results }) {
+  if (errors) {
+    store.dispatch("setMessage", {
+      value: "Не все поля заполнены. Введите значения",
+      type: "warning",
+    });
+
+    //закрыть модальное окно
+    closeModal();
+  }
+}
+
+//Функция сохранения изменений значений протокола
+const updateCertificate = async () => {
+  const id = props.certValues._id;
+
+  try {
+    const values = {
+      certType: certType.value,
+      date: date.value,
+      numProtocol: numProtocol.value,
+      textHead: textHead.value,
+      firstname: firstname.value,
+      secondname: secondname.value,
+      lastname: lastname.value,
+      birthday: birthday.value,
+      passport: passport.value,
+      numOldCert: numOldCert.value,
+      dateOldCert: dateOldCert.value,
+      work: work.value,
+      workYears: workYears.value,
+      qualifyingRank: qualifyingRank.value,
+      attestationType: attestationType.value,
+      stigma: stigmaVal.value,
+      stigmaGeneral: stigmaGeneral.value,
+      weldingMethod: weldingMethodVal.value,
+      weldedType: weldedTypeVal.value,
+      weldedSeam: weldedSeamVal.value,
+      weldedConnection: weldedConnectionVal.value,
+      weldedPosition: weldedPositionVal.value,
+      weldedJoint: weldedJointVal.value,
+      axesPosition: axesPositionVal.value,
+      preheating: preheatingVal.value,
+      heatTreatment: heatTreatmentVal.value,
+      brand: brandVal.value,
+      thickness: thicknessVal.value,
+      diameter: diameterVal.value,
+      electrode: electrodeVal.value,
+      flux: fluxVal.value,
+      controls: controls.value,
+      npa: npa.value,
+      grade: grade.value,
+      decision: decision.value,
+      accesses: accesses.value,
+      expiration: expiration.value,
+      comission: comission.value,
+      numCertificate: numCertificate.value,
+      weldingMethodScope: weldingMethodScope.value,
+      weldedTypeScope: weldedTypeScope.value,
+      weldedSeamScope: weldedSeamScope.value,
+      weldedConnectionScope: weldedConnectionScope.value,
+      weldedPositionScope: weldedPositionScope.value,
+      weldedJointScope: weldedJointScope.value,
+      axesPositionScope: axesPositionScope.value,
+      brandScope: brandScope.value,
+      thicknessScope: thicknessScope.value,
+      diameterScope: diameterScope.value,
+      electrodeScope: electrodeScope.value,
+      fluxScope: fluxScope.value,
+      auxiliaryScope: auxiliaryScope.value,
+    };
+
+    // вызываем метод update для обновления записи в БД
+    if (props.certValues.owner) {
+      await store.dispatch("certificateSub/update", { values, id });
+    } else {
+      await store.dispatch("certificate/update", { values, id });
+    }
+
+    //закрыть модальное окно
+    closeModal();
+
+    //скрыть форму редактирования
+    emit("hide");
+    emit("update");
+  } catch (error) {
+    //закрыть модальное окно
+    closeModal();
+  }
+};
+
+//Отправка формы на сервер
+const onSubmit = handleSubmit(() => {
+  if (props.certSubmit == "edit") {
+    updateCertificate();
+  } else if (props.certSubmit == "create") {
+    createCertificate();
+  }
+}, onInvalidSubmit);
 </script>
 
 <style></style>

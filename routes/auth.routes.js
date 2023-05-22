@@ -9,7 +9,7 @@ router.post(
   "/register",
   body("email").isEmail(),
   body("name").isLength({ min: 3, max: 32 }),
-  body("password").isLength({ min: 6, max: 32 }),
+  body("password").isLength({ min: 7, max: 32 }),
   authMiddleware,
   roleMiddleware(["admin", "god"]),
   userController.registration

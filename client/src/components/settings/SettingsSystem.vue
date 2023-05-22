@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="onSubmit">
     <div class="mb-3">
-      <div class="form-floating ">
+      <div class="form-floating">
         <input
           type="text"
           :class="['form-control', { 'is-invalid': bError }]"
@@ -87,117 +87,78 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">
-      Сохранить
-    </button>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
   </form>
 </template>
 
-<script>
+<script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
 
-export default {
-  props: {
-    system: {
-      type: Object,
-      required: true,
+const props = defineProps<{
+  system: object;
+}>();
+
+//подключаем store
+const store = useStore();
+
+const footerText2 = ref("");
+const footerLink = ref("");
+const footerLinkTitle = ref("");
+
+//Vee-validate
+const { handleSubmit } = useForm();
+
+const { value: link, errorMessage: lError } = useField(
+  "link",
+  yup.string().trim().required("Пожалуйста, введите ссылку для логотипа")
+);
+const { value: brand, errorMessage: bError } = useField(
+  "brand",
+  yup.string().trim().required("Пожалуйста, введите название Организации")
+);
+const { value: footerText1, errorMessage: ft1Error } = useField(
+  "footerText1",
+  yup.string().trim().required("Пожалуйста, введите текст для футера")
+);
+
+onMounted(() => {
+  brand.value = props.system.brand;
+  link.value = props.system.link;
+  footerText1.value = props.system.footer.mainText;
+  props.system.footer.secondaryText
+    ? (footerText2.value = props.system.footer.secondaryText)
+    : (footerText2.value = "");
+  props.system.footer.link
+    ? (footerLink.value = props.system.footer.link)
+    : (footerLink.value = "");
+  props.system.footer.linkTitle
+    ? (footerLinkTitle.value = props.system.footer.linkTitle)
+    : (footerLinkTitle.value = "");
+});
+
+// функция изменения
+const submit = handleSubmit(async () => {
+  const id = props.system._id;
+  const values = {
+    brand: brand.value,
+    link: link.value,
+    footer: {
+      mainText: footerText1.value,
+      secondaryText: footerText2.value,
+      link: footerLink.value,
+      linkTitle: footerLinkTitle.value,
     },
-  },
-  setup(props) {
-    //подключаем store
-    const store = useStore();
+  };
 
-    const footerText2 = ref("");
-    const footerLink = ref("");
-    const footerLinkTitle = ref("");
+  try {
+    await store.dispatch("system/update", { values, id });
+  } catch (e) {}
+});
 
-    //Vee-validate
-    const { handleSubmit } = useForm();
-
-    const { value: link, errorMessage: lError, handleBlur: lBlur } = useField(
-      "link",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите ссылку для логотипа")
-    );
-    const { value: brand, errorMessage: bError, handleBlur: bBlur } = useField(
-      "brand",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите название Организации")
-    );
-    const {
-      value: footerText1,
-      errorMessage: ft1Error,
-      handleBlur: ft1Blur,
-    } = useField(
-      "footerText1",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите текст для футера")
-    );
-
-    onMounted(() => {
-      // console.log(props.system);
-      brand.value = props.system.brand;
-      link.value = props.system.link;
-      footerText1.value = props.system.footer.mainText;
-      props.system.footer.secondaryText
-        ? (footerText2.value = props.system.footer.secondaryText)
-        : (footerText2.value = "");
-      props.system.footer.link
-        ? (footerLink.value = props.system.footer.link)
-        : (footerLink.value = "");
-      props.system.footer.linkTitle
-        ? (footerLinkTitle.value = props.system.footer.linkTitle)
-        : (footerLinkTitle.value = "");
-    });
-
-    // функция изменения
-    const submit = handleSubmit(async () => {
-      const id = props.system._id;
-      const values = {
-        brand: brand.value,
-        link: link.value,
-        footer: {
-          mainText: footerText1.value,
-          secondaryText: footerText2.value,
-          link: footerLink.value,
-          linkTitle: footerLinkTitle.value,
-        },
-      };
-
-      try {
-        await store.dispatch("system/update", { values, id });
-      } catch (e) {}
-    });
-
-    const onSubmit = handleSubmit(submit);
-
-    return {
-      link,
-      lError,
-      lBlur,
-      brand,
-      bError,
-      bBlur,
-      footerText1,
-      ft1Error,
-      ft1Blur,
-      footerText2,
-      footerLink,
-      footerLinkTitle,
-
-      onSubmit,
-    };
-  },
-};
+const onSubmit = handleSubmit(submit);
 </script>
 
 <style></style>

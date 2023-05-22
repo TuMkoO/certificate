@@ -16,67 +16,47 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">
-      Сохранить
-    </button>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
   </form>
 </template>
 
-<script>
+<script setup lang="ts">
 import { onMounted, ref, computed } from "vue";
 import { useStore } from "vuex";
-// import { useRoute } from "vue-router";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
 
-export default {
-  setup() {
-    //подключаем store
-    const store = useStore();
-    //
-    // const route = useRoute();
-    const linkId = ref(null);
+//подключаем store
+const store = useStore();
 
-    //Vee-validate
-    const { handleSubmit, isSubmitting, submitCount } = useForm();
+// const route = useRoute();
+const linkId = ref(null);
 
-    const { value: link, errorMessage: lError, handleBlur: lBlur } = useField(
-      "link",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите базовую ссылку для Qr кода")
-    );
+//Vee-validate
+const { handleSubmit } = useForm();
 
-    onMounted(() => {
-      const qrLink = computed(() => store.getters["qr/qrs"]);
+const { value: link, errorMessage: lError } = useField(
+  "link",
+  yup.string().trim().required("Пожалуйста, введите базовую ссылку для Qr кода")
+);
 
-      link.value = qrLink.value[0].link;
-      linkId.value = qrLink.value[0]._id;
-    });
+onMounted(() => {
+  const qrLink = computed(() => store.getters["qr/qrs"]);
 
-    // функция изменения
-    const submit = handleSubmit(async (values) => {
-      // console.log("link.value", link.value);
-      // const id = props.qrlink._id;
-      const id = linkId.value;
+  link.value = qrLink.value[0].link;
+  linkId.value = qrLink.value[0]._id;
+});
 
-      try {
-        await store.dispatch("qr/update", { values, id });
-      } catch (e) {}
-    });
+// функция изменения
+const submit = handleSubmit(async (values) => {
+  const id = linkId.value;
 
-    const onSubmit = handleSubmit(submit);
+  try {
+    await store.dispatch("qr/update", { values, id });
+  } catch (e) {}
+});
 
-    return {
-      link,
-      lError,
-      lBlur,
-      linkId,
-      onSubmit,
-    };
-  },
-};
+const onSubmit = handleSubmit(submit);
 </script>
 
 <style></style>

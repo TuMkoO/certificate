@@ -35,67 +35,44 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { onMounted, ref } from "vue";
 
-export default {
-  props: {
-    options: {
-      type: Array,
-      required: true,
-    },
-    defaultOptions: {},
-    // defaultOptions: {
-    //   type: Array,
-    // },
-    title: {
-      type: String,
-      required: true,
-    },
-  },
-  emits: ["checked"],
-  setup(props, { emit }) {
-    //массив всех начальных значений
-    const checkboxItems = ref([]);
+const props = defineProps<{
+  options: [];
+  title: string;
+  defaultOptions?: object;
+}>();
+const emits = defineEmits<{
+  (e: "checked"): void;
+}>();
 
-    const checkbox = ref([]);
+//массив всех начальных значений
+const checkboxItems = ref([]);
 
-    onMounted(() => {
-      // console.log("props.defaultOptions ::", props.defaultOptions);
+const checkbox = ref([]);
 
-      //если указаны дефольные значения
-      if (props.defaultOptions && props.defaultOptions.length) {
-        checkbox.value = props.defaultOptions;
-      }
-    });
+onMounted(() => {
+  // console.log("props.defaultOptions ::", props.defaultOptions);
 
-    const check = (val) => {
-      // console.log(val);
-      // if (val.length) {
-      //   emit("checked", {
-      //     values: val,
-      //   });
-      // }
-      emit("checked", {
-        values: val,
-      });
-    };
+  //если указаны дефольные значения
+  if (props.defaultOptions && props.defaultOptions.length) {
+    checkbox.value = props.defaultOptions;
+  }
+});
 
-    const clear = () => {
-      checkbox.value = [];
+const check = (val) => {
+  emit("checked", {
+    values: val,
+  });
+};
 
-      emit("checked", {
-        values: [],
-      });
-    };
+const clear = () => {
+  checkbox.value = [];
 
-    return {
-      checkboxItems,
-      checkbox,
-      check,
-      clear,
-    };
-  },
+  emit("checked", {
+    values: [],
+  });
 };
 </script>
 

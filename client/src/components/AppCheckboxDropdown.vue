@@ -41,96 +41,83 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 
-export default {
-  props: {
-    collapseId: { type: String, required: true },
-    mainItem: { type: Array, required: true },
-    items: { type: Array },
-    defaultItems: { type: Array },
-  },
-  emits: ["checked"],
-  setup(props, { emit }) {
-    //дефолтное значение главное чекбокса
-    const mainCheckbox = ref(false);
+const props = defineProps<{
+  collapseId: string;
+  mainItem: [];
+  items?: [];
+  defaultItems?: [];
+}>();
 
-    //массив выбранных значений чекбоксов
-    const checkbox = ref([]);
+const emits = defineEmits<{
+  (e: "checked"): void;
+}>();
 
-    const checkboxItems = ref([]);
+//дефолтное значение главное чекбокса
+const mainCheckbox = ref(false);
 
-    //
-    const defaultItems = ref();
+//массив выбранных значений чекбоксов
+const checkbox = ref([]);
 
-    onMounted(() => {
-      checkboxItems.value = props.items.filter(
-        (item) => item.owner == props.mainItem[1]
-      );
+const checkboxItems = ref([]);
 
-      // console.log("props.defaultItems :: ", props.defaultItems);
-      // console.log("props.defaultItems.values :: ", props.defaultItems.values);
+//
+const defaultItems = ref();
 
-      //дефолтные значения
-      if (props.defaultItems) {
-        defaultItems.value = props.defaultItems.find(
-          (item) => item.item == props.mainItem[0]
-        );
+onMounted(() => {
+  checkboxItems.value = props.items.filter(
+    (item) => item.owner == props.mainItem[1]
+  );
 
-        if (defaultItems.value) {
-          mainCheckbox.value = true;
-          checkbox.value = defaultItems.value.values;
-        }
-      }
+  //дефолтные значения
+  if (props.defaultItems) {
+    defaultItems.value = props.defaultItems.find(
+      (item) => item.item == props.mainItem[0]
+    );
+
+    if (defaultItems.value) {
+      mainCheckbox.value = true;
+      checkbox.value = defaultItems.value.values;
+    }
+  }
+});
+
+const classes = computed(() => {
+  if (props.defaultItems && defaultItems.value) {
+    return ["collapse", "show"];
+  } else {
+    return ["collapse"];
+  }
+});
+
+const checkMainCheckbox = () => {
+  mainCheckbox.value = !mainCheckbox.value;
+
+  if (mainCheckbox.value) {
+    emit("checked", {
+      values: { item: props.mainItem[0] },
     });
-
-    const classes = computed(() => {
-      if (props.defaultItems && defaultItems.value) {
-        return ["collapse", "show"];
-      } else {
-        return ["collapse"];
-      }
+  } else {
+    //сбросить значения всех чекбоксов
+    checkbox.value = [];
+    emit("checked", {
+      values: { item: props.mainItem[0], values: [] },
     });
+  }
+};
 
-    const checkMainCheckbox = () => {
-      mainCheckbox.value = !mainCheckbox.value;
-
-      if (mainCheckbox.value) {
-        emit("checked", {
-          values: { item: props.mainItem[0] },
-        });
-      } else {
-        //сбросить значения всех чекбоксов
-        checkbox.value = [];
-        emit("checked", {
-          values: { item: props.mainItem[0], values: [] },
-        });
-      }
-    };
-
-    const check = (val) => {
-      if (val.length) {
-        emit("checked", {
-          values: { item: props.mainItem[0], values: val },
-        });
-      } else {
-        emit("checked", {
-          values: { item: props.mainItem[0] },
-        });
-      }
-    };
-
-    return {
-      mainCheckbox,
-      checkbox,
-      checkboxItems,
-      classes,
-
-      checkMainCheckbox,
-      check,
-    };
-  },
+const check = (val) => {
+  if (val.length) {
+    emit("checked", {
+      values: { item: props.mainItem[0], values: val },
+    });
+  } else {
+    emit("checked", {
+      values: { item: props.mainItem[0] },
+    });
+  }
 };
 </script>
 

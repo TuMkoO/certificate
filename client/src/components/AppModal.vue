@@ -1,7 +1,7 @@
 <template>
   <div class="modal-backdrop fade show"></div>
   <div
-    class="modal fade "
+    class="modal fade"
     id="systemModal"
     tabindex="-1"
     aria-labelledby="systemModalLabel"
@@ -25,24 +25,11 @@
   </div>
 </template>
 
-<script>
-// import { ref } from "vue";
-export default {
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-  },
-  emits: ["close"],
-  setup() {
-    // const modal = ref(true);
-
-    return {
-      // modal,
-    };
-  },
-};
+<script setup lang="ts">
+const props = defineProps<{ title: string }>();
+const emits = defineEmits<{
+  (e: "close"): void;
+}>();
 </script>
 
 <style scoped></style>

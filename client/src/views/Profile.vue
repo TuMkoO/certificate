@@ -71,99 +71,67 @@
   </app-page>
 </template>
 
-<script>
+<script setup lang="ts">
 import { onMounted, ref, computed, watch } from "vue";
 import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
-import AppPage from "../components/ui/AppPage";
+import AppPage from "../components/ui/AppPage.vue";
 import AppLoader from "../components/ui/AppLoader.vue";
 
-export default {
-  setup() {
-    //store
-    const store = useStore();
-    //loader
-    const loading = ref(false);
-    //user
-    const user = ref(null);
-    //user id
-    const id = ref(null);
-    //user role
-    const roles = ref(null);
+//store
+const store = useStore();
+//loader
+const loading = ref(false);
+//user
+const user = ref(null);
+//user id
+const id = ref(null);
+//user role
+const roles = ref(null);
 
-    const { handleSubmit, isSubmitting, submitCount } = useForm();
+const { handleSubmit } = useForm();
 
-    const { value: email, errorMessage: eError, handleBlur: eBlur } = useField(
-      "email",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите email")
-        .email("Необходимо ввести корректный email")
-    );
+const { value: email, errorMessage: eError } = useField(
+  "email",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите email")
+    .email("Необходимо ввести корректный email")
+);
 
-    const { value: name, errorMessage: nError, handleBlur: nBlur } = useField(
-      "name",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите имя")
-        .min(5, "Имя не может быть меньше 5 символов")
-    );
+const { value: name, errorMessage: nError } = useField(
+  "name",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите имя")
+    .min(5, "Имя не может быть меньше 5 символов")
+);
 
-    // количество кликов подряд по кнопке входа
-    // const isTooManyAttempts = computed(() => submitCount.value >= 3);
+onMounted(async () => {
+  loading.value = true;
 
-    // разблокировать кнопку входу через время
-    // watch(isTooManyAttempts, (val) => {
-    //   if (val) {
-    //     setTimeout(() => (submitCount.value = 0), 1500);
-    //   }
-    // });
+  id.value = store.getters["auth/user"].id;
+  if (!id.value) {
+    id.value = await store.dispatch("auth/loadCurrentUserId");
+  }
+  user.value = await store.dispatch("auth/loadUserById", id.value);
 
-    onMounted(async () => {
-      loading.value = true;
+  email.value = user.value.email;
+  name.value = user.value.name;
+  roles.value = user.value.roles;
 
-      id.value = store.getters["auth/user"].id;
-      // console.log("id.value :::", id.value);
-      if (!id.value) {
-        id.value = await store.dispatch("auth/loadCurrentUserId");
-      }
-      user.value = await store.dispatch("auth/loadUserById", id.value);
+  loading.value = false;
+});
 
-      email.value = user.value.email;
-      name.value = user.value.name;
-      roles.value = user.value.roles;
-
-      loading.value = false;
-    });
-
-    // функция обновления профиля
-    const onSubmit = handleSubmit(async (values) => {
-      try {
-        await store.dispatch("auth/update", values);
-      } catch (e) {}
-    });
-
-    return {
-      user,
-      loading,
-
-      email,
-      name,
-      eError,
-      nError,
-      eBlur,
-      nBlur,
-      roles,
-      onSubmit,
-      isSubmitting,
-      // isTooManyAttempts,
-    };
-  },
-  components: { AppPage, AppLoader },
-};
+// функция обновления профиля
+const onSubmit = handleSubmit(async (values) => {
+  try {
+    await store.dispatch("auth/update", values);
+  } catch (e) {}
+});
 </script>
 
 <style></style>

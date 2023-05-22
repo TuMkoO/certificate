@@ -56,13 +56,9 @@
             <table class="table table-sm table-bordered">
               <thead class="fs-7">
                 <tr>
-                  <th scope="col" class="text-center align-middle">
-                    Email
-                  </th>
+                  <th scope="col" class="text-center align-middle">Email</th>
                   <th scope="col" class="text-center align-middle">ФИО</th>
-                  <th scope="col" class="text-center align-middle">
-                    Права
-                  </th>
+                  <th scope="col" class="text-center align-middle">Права</th>
                   <th scope="col" class="text-center align-middle">
                     Управление
                   </th>
@@ -187,81 +183,61 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { onMounted, ref } from "vue";
-// import { useRegisterForm } from "../../use/register-form";
 import { useStore } from "vuex";
 import AppModal from "../AppModal.vue";
 import SettingsUsersForm from "./SettingsUsersForm.vue";
 
-export default {
-  components: { AppModal, SettingsUsersForm },
-  setup() {
-    const store = useStore();
-    //Модальное окно
-    const modal = ref(false);
+const store = useStore();
+//Модальное окно
+const modal = ref(false);
 
-    const modalType = ref("");
+const modalType = ref("");
 
-    //Список пользователей
-    const users = ref([]);
-    const currentUser = ref();
-    // const currentUserId = ref("");
+//Список пользователей
+const users = ref([]);
+const currentUser = ref();
 
-    onMounted(() => {
-      users.value = store.getters["auth/users"];
-    });
+onMounted(() => {
+  users.value = store.getters["auth/users"];
+});
 
-    function showModal(user, action) {
-      modal.value = true;
-      setTimeout(() => {
-        let systemModal = document.getElementById("systemModal");
-        systemModal.classList.add("show");
-      }, 0);
+function showModal(user, action) {
+  modal.value = true;
+  setTimeout(() => {
+    let systemModal = document.getElementById("systemModal");
+    systemModal.classList.add("show");
+  }, 0);
 
-      currentUser.value = user;
+  currentUser.value = user;
 
-      if (action == "delete") {
-        modalType.value = "delete";
-      }
-    }
+  if (action == "delete") {
+    modalType.value = "delete";
+  }
+}
 
-    function closeModal() {
-      modal.value = false;
-      modalType.value = "";
-    }
+function closeModal() {
+  modal.value = false;
+  modalType.value = "";
+}
 
-    async function updateUsers() {
-      modal.value = false;
+async function updateUsers() {
+  modal.value = false;
 
-      await store.dispatch("auth/loadUsers");
-      users.value = store.getters["auth/users"];
-    }
+  await store.dispatch("auth/loadUsers");
+  users.value = store.getters["auth/users"];
+}
 
-    async function deleteUser(id) {
-      await store.dispatch("auth/remove", id);
+async function deleteUser(id) {
+  await store.dispatch("auth/remove", id);
 
-      await store.dispatch("auth/loadUsers");
-      users.value = store.getters["auth/users"];
+  await store.dispatch("auth/loadUsers");
+  users.value = store.getters["auth/users"];
 
-      modal.value = false;
-      modalType.value = "";
-    }
-
-    return {
-      // ...useRegisterForm(),
-      users,
-      currentUser,
-      // currentUserId,
-      modal,
-      modalType,
-      showModal,
-      closeModal,
-      updateUsers,
-      deleteUser,
-    };
-  },
-};
+  modal.value = false;
+  modalType.value = "";
+}
 </script>
 
 <style></style>

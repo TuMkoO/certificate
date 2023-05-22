@@ -16,20 +16,12 @@
   </footer>
 </template>
 
-<script>
+<script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "vuex";
 
-export default {
-  setup() {
-    const store = useStore();
-    const systemData = computed(() => store.getters["system/systems"]);
-
-    return {
-      systemData,
-    };
-  },
-};
+const store = useStore();
+const systemData = computed(() => store.getters["system/systems"]);
 </script>
 
 <style scoped></style>

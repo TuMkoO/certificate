@@ -14,9 +14,7 @@
                     Номер удостоверения
                   </th>
                   <th scope="col" class="text-center align-middle">ФИО</th>
-                  <th scope="col" class="text-center align-middle">
-                    Клеймо
-                  </th>
+                  <th scope="col" class="text-center align-middle">Клеймо</th>
                   <th scope="col" class="text-center align-middle">
                     Способ сварки
                   </th>
@@ -36,10 +34,10 @@
                   <td>
                     {{
                       cert.firstname +
-                        " " +
-                        cert.secondname +
-                        " " +
-                        cert.lastname
+                      " " +
+                      cert.secondname +
+                      " " +
+                      cert.lastname
                     }}
                   </td>
                   <td>{{ cert.stigmaGeneral }}</td>
@@ -193,8 +191,6 @@ export default {
 
     //максимальное количество нуерных кнопок страниц
     const maxVisibleButtons = ref(5);
-    //общее количество удостоверений
-    // const total = ref(props.certificates.length);
     //количество на странице
     const perPage = ref(props.perPage);
     //текущая страница
@@ -240,7 +236,6 @@ export default {
       let start = (currentPage.value - 1) * perPage.value,
         end = start + perPage.value;
 
-      // return certs.value.slice(start, end);
       return props.certificates.slice(start, end);
     });
 

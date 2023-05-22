@@ -60,7 +60,7 @@
             </div>
           </div>
 
-          <div class="certificate " id="exportContent">
+          <div class="certificate" id="exportContent">
             <div class="certificate-header text-center mb-4">
               <div class="certificate-header__desc justify-content-center">
                 <div class="desc-logo">
@@ -71,32 +71,32 @@
                     Общество с ограниченной ответственностью
                   </p>
                   <p class="fw-bold mb-1 line-height-print-1">
-                    «ТЕХНОПАРК «УНИВЕРСИТЕТСКИЕ ТЕХНОЛОГИИ»
+                    «ТЕХНОПАРК «НОВЫЕ ТЕХНОЛОГИИ»
                   </p>
                   <p class="fs-print-9 line-height-print-09">
                     <span class="fw-bold">Юридический адрес:</span>
-                    г. Донецк, Ворошиловский район, ул. Артема, д. 58, оф. 311
+                    г. Минск, Ивановский район, ул. Гагарина, д. 8, оф. 11
                   </p>
                   <p class="fs-print-9 line-height-print-09">
-                    <span class="fw-bold">Фактический адрес:</span> г. Донецк,
-                    Ворошиловский район, ул. Постышева, д. 52, оф. 13
+                    <span class="fw-bold">Фактический адрес:</span> г. Минск,
+                    Ивановский район, ул. Андреева, д. 2, оф. 3
                   </p>
                   <p class="fs-print-9 line-height-print-09">
-                    <span class="fw-bold">Телефон:</span> +380 (71) 327-38-97.
-                    <span class="fw-bold">Эл. почта:</span> 0623351828@mail.ru
+                    <span class="fw-bold">Телефон:</span> +333 (22) 123-45-67.
+                    <span class="fw-bold">Эл. почта:</span> email@mail.ru
                   </p>
                   <p class="fw-bold fs-print-9 line-height-print-09 mb-1">
                     Рабочее время с 9.00 до 17.00 (без перерыва)
                   </p>
                   <p class="fw-bold fs-print-8 line-height-print-08">
-                    Свидетельство о гос. регистрации от 21.10.2015 г. АА03
+                    Свидетельство о гос. регистрации от 21.10.2015 г. А123
                     №014242
                   </p>
                   <p class="fw-bold fs-print-8 line-height-print-08">
-                    Идентификационный код: 50013084
+                    Идентификационный код: 12311113084
                   </p>
                   <p class="fw-bold fs-print-8 line-height-print-08">
-                    Т/счет: 40702810820260000449 в ЦРБ ДНР, БИК 310101001
+                    Т/счет: 4576678780260009049 в ЦРБ, БИК 345667681001
                   </p>
                 </div>
               </div>
@@ -118,7 +118,7 @@
                 <div class="director text-start">
                   <p class="mb-0">Утверждаю</p>
                   <p>Директор</p>
-                  <p class="mb-4">____________ Сотников А.Л.</p>
+                  <p class="mb-4">____________ Пастухов В.Л.</p>
                 </div>
               </div>
               <div class="certificate-header__title text-uppercase">
@@ -142,13 +142,13 @@
                   <tbody>
                     <tr>
                       <td>председатель комиссии</td>
-                      <td>Сотников А.Л., III уровень (НАКС, ВИК)</td>
+                      <td>Пастухов В.Л., III уровень (НАКС, ВИК)</td>
                     </tr>
                     <tr>
                       <td>члены комиссии:</td>
                       <td>
-                        Пасечник С.Ю., III уровень (НАКС) <br />
-                        Бабак К.Ю., III уровень (НАКС)
+                        Печник С.Ю., III уровень (НАКС) <br />
+                        Вакамов К.Ю., III уровень (НАКС)
                       </td>
                     </tr>
                   </tbody>
@@ -200,7 +200,7 @@
                     <td
                       v-if="
                         (certificate.numOldCert && certificate.dateOldCert) ||
-                          showEditFields
+                        showEditFields
                       "
                       class="w-50 border-bottom"
                     >
@@ -216,9 +216,7 @@
                           : ""
                       }}
                     </td>
-                    <td v-else class="w-50 border-bottom">
-                      -
-                    </td>
+                    <td v-else class="w-50 border-bottom">-</td>
                   </tr>
                   <tr class="d-flex">
                     <th scope="row">4.</th>
@@ -238,45 +236,45 @@
                     <td class="w-50 border-bottom">
                       {{
                         certificate.workYears +
-                          (certificate.workYears == 1 ||
-                          certificate.workYears == 21 ||
-                          certificate.workYears == 31 ||
-                          certificate.workYears == 41 ||
-                          certificate.workYears == 51 ||
-                          certificate.workYears == 61 ||
-                          certificate.workYears == 71 ||
-                          certificate.workYears == 81 ||
-                          certificate.workYears == 91
-                            ? " год"
-                            : certificate.workYears == 2 ||
-                              certificate.workYears == 3 ||
-                              certificate.workYears == 4 ||
-                              certificate.workYears == 22 ||
-                              certificate.workYears == 23 ||
-                              certificate.workYears == 24 ||
-                              certificate.workYears == 32 ||
-                              certificate.workYears == 33 ||
-                              certificate.workYears == 34 ||
-                              certificate.workYears == 42 ||
-                              certificate.workYears == 43 ||
-                              certificate.workYears == 44 ||
-                              certificate.workYears == 52 ||
-                              certificate.workYears == 53 ||
-                              certificate.workYears == 54 ||
-                              certificate.workYears == 62 ||
-                              certificate.workYears == 63 ||
-                              certificate.workYears == 64 ||
-                              certificate.workYears == 72 ||
-                              certificate.workYears == 73 ||
-                              certificate.workYears == 74 ||
-                              certificate.workYears == 82 ||
-                              certificate.workYears == 83 ||
-                              certificate.workYears == 84 ||
-                              certificate.workYears == 92 ||
-                              certificate.workYears == 93 ||
-                              certificate.workYears == 94
-                            ? " года"
-                            : " лет")
+                        (certificate.workYears == 1 ||
+                        certificate.workYears == 21 ||
+                        certificate.workYears == 31 ||
+                        certificate.workYears == 41 ||
+                        certificate.workYears == 51 ||
+                        certificate.workYears == 61 ||
+                        certificate.workYears == 71 ||
+                        certificate.workYears == 81 ||
+                        certificate.workYears == 91
+                          ? " год"
+                          : certificate.workYears == 2 ||
+                            certificate.workYears == 3 ||
+                            certificate.workYears == 4 ||
+                            certificate.workYears == 22 ||
+                            certificate.workYears == 23 ||
+                            certificate.workYears == 24 ||
+                            certificate.workYears == 32 ||
+                            certificate.workYears == 33 ||
+                            certificate.workYears == 34 ||
+                            certificate.workYears == 42 ||
+                            certificate.workYears == 43 ||
+                            certificate.workYears == 44 ||
+                            certificate.workYears == 52 ||
+                            certificate.workYears == 53 ||
+                            certificate.workYears == 54 ||
+                            certificate.workYears == 62 ||
+                            certificate.workYears == 63 ||
+                            certificate.workYears == 64 ||
+                            certificate.workYears == 72 ||
+                            certificate.workYears == 73 ||
+                            certificate.workYears == 74 ||
+                            certificate.workYears == 82 ||
+                            certificate.workYears == 83 ||
+                            certificate.workYears == 84 ||
+                            certificate.workYears == 92 ||
+                            certificate.workYears == 93 ||
+                            certificate.workYears == 94
+                          ? " года"
+                          : " лет")
                       }}
                     </td>
                   </tr>
@@ -322,7 +320,7 @@
                         <div
                           v-if="
                             certificate.stigma[1] ||
-                              certificate.stigma.length > 1
+                            certificate.stigma.length > 1
                           "
                           :class="[
                             { 'col-4': classCol_4 },
@@ -369,7 +367,7 @@
                         <div
                           v-if="
                             certificate.weldingMethod[1] ||
-                              certificate.weldingMethod.length > 1
+                            certificate.weldingMethod.length > 1
                           "
                           :class="[
                             {
@@ -418,7 +416,7 @@
                         <div
                           v-if="
                             certificate.weldedType[1] ||
-                              certificate.weldedType.length > 1
+                            certificate.weldedType.length > 1
                           "
                           :class="[
                             { 'col-4': classCol_4 },
@@ -468,16 +466,16 @@
                         >
                           {{
                             arrayFormat(certificate.weldedSeam[0]) +
-                              ", " +
-                              arrayFormat(certificate.weldedConnection[0])
+                            ", " +
+                            arrayFormat(certificate.weldedConnection[0])
                           }}
                         </div>
                         <div
                           v-if="
                             (certificate.weldedSeam[1] &&
                               certificate.weldedConnection[1]) ||
-                              (certificate.weldedSeam.length > 1 &&
-                                certificate.weldedConnection.length > 1)
+                            (certificate.weldedSeam.length > 1 &&
+                              certificate.weldedConnection.length > 1)
                           "
                           :class="[
                             {
@@ -500,7 +498,7 @@
                         <div
                           v-if="
                             certificate.weldedSeam[2] &&
-                              certificate.weldedConnection[2]
+                            certificate.weldedConnection[2]
                           "
                           class="col-4 text-center border-start"
                         >
@@ -538,7 +536,7 @@
                         <div
                           v-if="
                             certificate.weldedPosition[1] ||
-                              certificate.weldedPosition.length > 1
+                            certificate.weldedPosition.length > 1
                           "
                           :class="[
                             {
@@ -555,7 +553,7 @@
                         >
                           {{
                             arrayFormat(certificate.weldedPosition[1]) + "" ||
-                              ""
+                            ""
                           }}
                         </div>
                         <div
@@ -564,7 +562,7 @@
                         >
                           {{
                             arrayFormat(certificate.weldedPosition[2]) + "" ||
-                              ""
+                            ""
                           }}
                         </div>
                       </div>
@@ -600,7 +598,7 @@
                         <div
                           v-if="
                             certificate.preheating[1] ||
-                              certificate.preheating.length > 1
+                            certificate.preheating.length > 1
                           "
                           :class="[
                             { 'col-4': classCol_4 },
@@ -645,7 +643,7 @@
                         <div
                           v-if="
                             certificate.axesPosition[1] ||
-                              certificate.axesPosition.length > 1
+                            certificate.axesPosition.length > 1
                           "
                           :class="[
                             {
@@ -707,7 +705,7 @@
                         <div
                           v-if="
                             certificate.heatTreatment[1] ||
-                              certificate.heatTreatment.length > 1
+                            certificate.heatTreatment.length > 1
                           "
                           :class="[
                             {
@@ -754,7 +752,7 @@
                         <div
                           v-if="
                             certificate.weldedJoint[1] ||
-                              certificate.weldedJoint.length > 1
+                            certificate.weldedJoint.length > 1
                           "
                           :class="[
                             {
@@ -857,7 +855,7 @@
                         <div
                           v-if="
                             certificate.thickness[1] ||
-                              certificate.thickness.length > 1
+                            certificate.thickness.length > 1
                           "
                           :class="[
                             { 'col-4': classCol_4 },
@@ -907,7 +905,7 @@
                         <div
                           v-if="
                             certificate.diameter[1] ||
-                              certificate.diameter.length > 1
+                            certificate.diameter.length > 1
                           "
                           :class="[
                             { 'col-4': classCol_4 },
@@ -957,7 +955,7 @@
                         <div
                           v-if="
                             certificate.electrode[1] ||
-                              certificate.electrode.length > 1
+                            certificate.electrode.length > 1
                           "
                           :class="[
                             { 'col-4': classCol_4 },
@@ -1039,7 +1037,7 @@
                     <td class="w-50">
                       {{ certificate.controls[0].type }}
                     </td>
-                    <td class="w-50 ">
+                    <td class="w-50">
                       <div class="row px-2">
                         <div
                           v-for="(control, idx) in certificate.controls[0]
@@ -1080,7 +1078,7 @@
                         <div
                           v-if="
                             certificate.controls[0].values.length < 3 &&
-                              classCol_4
+                            classCol_4
                           "
                           :class="[
                             {
@@ -1099,7 +1097,7 @@
                         <div
                           v-if="
                             certificate.controls[0].values.length < 2 &&
-                              classCol_6
+                            classCol_6
                           "
                           :class="[
                             {
@@ -1123,7 +1121,7 @@
                     <td class="w-50">
                       {{ certificate.controls[1].type }}
                     </td>
-                    <td class="w-50 ">
+                    <td class="w-50">
                       <div class="row px-2">
                         <div
                           v-for="(control, idx) in certificate.controls[1]
@@ -1164,7 +1162,7 @@
                         <div
                           v-if="
                             certificate.controls[1].values.length < 3 &&
-                              classCol_4
+                            classCol_4
                           "
                           :class="[
                             {
@@ -1183,7 +1181,7 @@
                         <div
                           v-if="
                             certificate.controls[1].values.length < 2 &&
-                              classCol_6
+                            classCol_6
                           "
                           :class="[
                             {
@@ -1207,7 +1205,7 @@
                     <td class="w-50">
                       {{ certificate.controls[2].type }}
                     </td>
-                    <td class="w-50 ">
+                    <td class="w-50">
                       <div class="row px-2">
                         <div
                           v-for="(control, idx) in certificate.controls[2]
@@ -1248,7 +1246,7 @@
                         <div
                           v-if="
                             certificate.controls[2].values.length < 3 &&
-                              classCol_4
+                            classCol_4
                           "
                           :class="[
                             {
@@ -1267,7 +1265,7 @@
                         <div
                           v-if="
                             certificate.controls[2].values.length < 2 &&
-                              classCol_6
+                            classCol_6
                           "
                           :class="[
                             {
@@ -1356,9 +1354,7 @@
                         <table class="table-main w-100 mb-1">
                           <thead>
                             <tr>
-                              <td class="border w-50 px-2">
-                                Параметры сварки
-                              </td>
+                              <td class="border w-50 px-2">Параметры сварки</td>
                               <td class="border w-50 px-2 text-center">
                                 Область распространения аттестации
                               </td>
@@ -1467,7 +1463,7 @@
                               <td class="border w-50 px-2 text-center">
                                 {{
                                   arrayFormat(certificate.weldedPositionScope) +
-                                    ""
+                                  ""
                                 }}
                               </td>
                             </tr>
@@ -1490,7 +1486,7 @@
                               <td class="border w-50 px-2 text-center">
                                 {{
                                   arrayFormat(certificate.axesPositionScope) +
-                                    ""
+                                  ""
                                 }}
                               </td>
                             </tr>
@@ -1803,15 +1799,15 @@
               >
             </p>
             <p class="mb-sm-2 mb-md-0 mb-lg-0 mb-xl-0">
-              В реестр "Университетские технологии" внесено
+              В реестр "Новые технологии" внесено
             </p>
             <p class="mb-sm-2 mb-md-0 mb-lg-0 mb-xl-0">
               {{
                 certificate.firstname +
-                  " " +
-                  certificate.secondname +
-                  " " +
-                  certificate.lastname
+                " " +
+                certificate.secondname +
+                " " +
+                certificate.lastname
               }}
             </p>
             <p class="mb-sm-2 mb-md-0 mb-lg-0 mb-xl-0">
@@ -1864,11 +1860,10 @@
   </app-page>
 </template>
 
-<script>
+<script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { ref, onMounted, computed, watch } from "vue";
-// import { Tooltip } from "bootstrap";
 import { dateFormat } from "../utils/dateFormat";
 import { protocolDateFormat } from "../utils/protocolDateFormat";
 import { shortingTableItems } from "../utils/shortingTableItems";
@@ -1880,7 +1875,7 @@ import { saveAs } from "file-saver";
 import * as ImageModule from "docxtemplater-image-module-free/build/imagemodule";
 import * as html2pdf from "html2pdf.js";
 import AppPage from "../components/ui/AppPage.vue";
-import AppModal from "../components/AppModal";
+import AppModal from "../components/AppModal.vue";
 import AppLoader from "../components/ui/AppLoader.vue";
 import NewCertificateForm from "../components/certificates/NewCertificateForm.vue";
 import CertificateQr from "../components/certificates/CertificateQr.vue";
@@ -1889,898 +1884,801 @@ function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
 }
 
-// new Tooltip(document.body, {
-//   selector: "[data-bs-toggle='tooltip']",
-//   trigger: "hover",
-// });
+const route = useRoute();
+const router = useRouter();
+const store = useStore();
+const loading = ref(true);
+const modal = ref(false);
+const certificateData = ref({});
+const certificateSubData = ref([]);
+const certificate = ref();
+const auth = store.getters["auth/isAuthenticated"];
+const userRole = store.getters["auth/user"].roles;
+const access = ref(false);
+const showEditFields = ref(false);
+const isId = ref(true);
 
-export default {
-  setup() {
-    const route = useRoute();
-    const router = useRouter();
-    const store = useStore();
-    const loading = ref(true);
-    const modal = ref(false);
-    const certificateData = ref({});
-    const certificateSubData = ref([]);
-    const certificate = ref();
-    const auth = store.getters["auth/isAuthenticated"];
-    const userRole = store.getters["auth/user"].roles;
-    const access = ref(false);
-    const showEditFields = ref(false);
-    const isId = ref(true);
+//срок действия удостоверения окончен
+const expired = ref(false);
 
-    //срок действия удостоверения окончен
-    const expired = ref(false);
+//Переключатель удостоверений и вкладышей
+const certs = ref(0);
 
-    //Переключатель удостоверений и вкладышей
-    const certs = ref(0);
+onMounted(() => {
+  loadingData();
+});
 
-    onMounted(() => {
-      loadingData();
+const classCol_4 = computed(() => {
+  let mainBool =
+    certificate.value.stigma.length == 3 ||
+    certificate.value.weldingMethod.length == 3 ||
+    certificate.value.weldedType.length == 3 ||
+    certificate.value.weldedPosition.length == 3 ||
+    certificate.value.brand.length == 3 ||
+    certificate.value.thickness.length == 3 ||
+    certificate.value.diameter.length == 3 ||
+    certificate.value.electrode.length == 3 ||
+    certificate.value.flux.length == 3 ||
+    (certificate.value.weldedConnection.length == 3 &&
+      certificate.value.weldedSeam.length == 3);
+  let variableBool;
+  let controlsBool;
 
-      // console.log("classCol_6:", classCol_6.value);
-    });
+  if (certificate.value.certType == "sheetPipe") {
+    variableBool =
+      certificate.value.preheating.length == 3 ||
+      certificate.value.heatTreatment.length == 3;
+  } else if (certificate.value.certType == "fittings") {
+    variableBool =
+      certificate.value.axesPosition.length == 3 ||
+      certificate.value.weldedJoint.length == 3;
+  }
 
-    const classCol_4 = computed(() => {
-      let mainBool =
-        certificate.value.stigma.length == 3 ||
-        certificate.value.weldingMethod.length == 3 ||
-        certificate.value.weldedType.length == 3 ||
-        certificate.value.weldedPosition.length == 3 ||
-        certificate.value.brand.length == 3 ||
-        certificate.value.thickness.length == 3 ||
-        certificate.value.diameter.length == 3 ||
-        certificate.value.electrode.length == 3 ||
-        certificate.value.flux.length == 3 ||
-        (certificate.value.weldedConnection.length == 3 &&
-          certificate.value.weldedSeam.length == 3);
-      let variableBool;
-      let controlsBool;
+  if (certificate.value.controls[0]) {
+    controlsBool = certificate.value.controls[0].values.length == 3;
+  }
+  if (certificate.value.controls[1]) {
+    controlsBool =
+      certificate.value.controls[0].values.length == 3 &&
+      certificate.value.controls[1].values.length == 3;
+  }
+  if (certificate.value.controls[2]) {
+    controlsBool =
+      certificate.value.controls[0].values.length == 3 &&
+      certificate.value.controls[1].values.length == 3 &&
+      certificate.value.controls[2].values.length == 3;
+  }
 
-      if (certificate.value.certType == "sheetPipe") {
-        variableBool =
-          certificate.value.preheating.length == 3 ||
-          certificate.value.heatTreatment.length == 3;
-      } else if (certificate.value.certType == "fittings") {
-        variableBool =
-          certificate.value.axesPosition.length == 3 ||
-          certificate.value.weldedJoint.length == 3;
-      }
+  return mainBool || variableBool || controlsBool;
+});
 
-      if (certificate.value.controls[0]) {
-        controlsBool = certificate.value.controls[0].values.length == 3;
-      }
-      if (certificate.value.controls[1]) {
-        controlsBool =
-          certificate.value.controls[0].values.length == 3 &&
-          certificate.value.controls[1].values.length == 3;
-      }
-      if (certificate.value.controls[2]) {
-        controlsBool =
-          certificate.value.controls[0].values.length == 3 &&
-          certificate.value.controls[1].values.length == 3 &&
-          certificate.value.controls[2].values.length == 3;
-      }
+const classCol_6 = computed(() => {
+  let mainBoolAND =
+    certificate.value.stigma.length < 3 &&
+    certificate.value.weldingMethod.length < 3 &&
+    certificate.value.weldedType.length < 3 &&
+    certificate.value.weldedConnection.length < 3 &&
+    certificate.value.weldedSeam.length < 3 &&
+    certificate.value.weldedPosition.length < 3 &&
+    certificate.value.brand.length < 3 &&
+    certificate.value.thickness.length < 3 &&
+    certificate.value.diameter.length < 3 &&
+    certificate.value.electrode.length < 3 &&
+    certificate.value.flux.length < 3;
 
-      return mainBool || variableBool || controlsBool;
-    });
+  let mainBoolOR =
+    certificate.value.stigma.length > 1 ||
+    certificate.value.weldingMethod.length > 1 ||
+    certificate.value.weldedType.length > 1 ||
+    certificate.value.weldedPosition.length > 1 ||
+    certificate.value.brand.length > 1 ||
+    certificate.value.thickness.length > 1 ||
+    certificate.value.diameter.length > 1 ||
+    certificate.value.electrode.length > 1 ||
+    certificate.value.flux.length > 1 ||
+    (certificate.value.weldedConnection.length > 1 &&
+      certificate.value.weldedSeam.length > 1);
 
-    const classCol_6 = computed(() => {
-      let mainBoolAND =
-        certificate.value.stigma.length < 3 &&
-        certificate.value.weldingMethod.length < 3 &&
-        certificate.value.weldedType.length < 3 &&
-        certificate.value.weldedConnection.length < 3 &&
-        certificate.value.weldedSeam.length < 3 &&
-        certificate.value.weldedPosition.length < 3 &&
-        certificate.value.brand.length < 3 &&
-        certificate.value.thickness.length < 3 &&
-        certificate.value.diameter.length < 3 &&
-        certificate.value.electrode.length < 3 &&
-        certificate.value.flux.length < 3;
+  let variableBoolAND;
+  let variableBoolOR;
+  let controlsBoolAND;
+  let controlsBoolOR;
 
-      let mainBoolOR =
-        certificate.value.stigma.length > 1 ||
-        certificate.value.weldingMethod.length > 1 ||
-        certificate.value.weldedType.length > 1 ||
-        certificate.value.weldedPosition.length > 1 ||
-        certificate.value.brand.length > 1 ||
-        certificate.value.thickness.length > 1 ||
-        certificate.value.diameter.length > 1 ||
-        certificate.value.electrode.length > 1 ||
-        certificate.value.flux.length > 1 ||
-        (certificate.value.weldedConnection.length > 1 &&
-          certificate.value.weldedSeam.length > 1);
+  if (certificate.value.certType == "sheetPipe") {
+    variableBoolAND =
+      certificate.value.preheating.length < 3 &&
+      certificate.value.heatTreatment.length < 3;
+    variableBoolOR =
+      certificate.value.preheating.length > 1 ||
+      certificate.value.heatTreatment.length > 1;
+  } else if (certificate.value.certType == "fittings") {
+    variableBoolAND =
+      certificate.value.axesPosition.length < 3 &&
+      certificate.value.weldedJoint.length < 3;
+    variableBoolOR =
+      certificate.value.axesPosition.length > 1 ||
+      certificate.value.weldedJoint.length > 1;
+  }
 
-      let variableBoolAND;
-      let variableBoolOR;
-      let controlsBoolAND;
-      let controlsBoolOR;
+  if (certificate.value.controls[0]) {
+    controlsBoolAND = certificate.value.controls[0].values.length < 3;
+    controlsBoolOR = certificate.value.controls[0].values.length > 1;
+  }
+  if (certificate.value.controls[1]) {
+    controlsBoolAND =
+      certificate.value.controls[0].values.length < 3 &&
+      certificate.value.controls[1].values.length < 3;
+    controlsBoolOR =
+      certificate.value.controls[0].values.length > 1 ||
+      certificate.value.controls[1].values.length > 1;
+  }
+  if (certificate.value.controls[2]) {
+    controlsBoolAND =
+      certificate.value.controls[0].values.length < 3 &&
+      certificate.value.controls[1].values.length < 3 &&
+      certificate.value.controls[2].values.length < 3;
+    controlsBoolOR =
+      certificate.value.controls[0].values.length > 1 ||
+      certificate.value.controls[1].values.length > 1 ||
+      certificate.value.controls[2].values.length > 1;
+  }
 
-      if (certificate.value.certType == "sheetPipe") {
-        variableBoolAND =
-          certificate.value.preheating.length < 3 &&
-          certificate.value.heatTreatment.length < 3;
-        variableBoolOR =
-          certificate.value.preheating.length > 1 ||
-          certificate.value.heatTreatment.length > 1;
-      } else if (certificate.value.certType == "fittings") {
-        variableBoolAND =
-          certificate.value.axesPosition.length < 3 &&
-          certificate.value.weldedJoint.length < 3;
-        variableBoolOR =
-          certificate.value.axesPosition.length > 1 ||
-          certificate.value.weldedJoint.length > 1;
-      }
+  return (
+    mainBoolAND &&
+    controlsBoolAND &&
+    variableBoolAND &&
+    (mainBoolOR || variableBoolOR || controlsBoolOR)
+  );
+});
 
-      if (certificate.value.controls[0]) {
-        controlsBoolAND = certificate.value.controls[0].values.length < 3;
-        controlsBoolOR = certificate.value.controls[0].values.length > 1;
-      }
-      if (certificate.value.controls[1]) {
-        controlsBoolAND =
-          certificate.value.controls[0].values.length < 3 &&
-          certificate.value.controls[1].values.length < 3;
-        controlsBoolOR =
-          certificate.value.controls[0].values.length > 1 ||
-          certificate.value.controls[1].values.length > 1;
-      }
-      if (certificate.value.controls[2]) {
-        controlsBoolAND =
-          certificate.value.controls[0].values.length < 3 &&
-          certificate.value.controls[1].values.length < 3 &&
-          certificate.value.controls[2].values.length < 3;
-        controlsBoolOR =
-          certificate.value.controls[0].values.length > 1 ||
-          certificate.value.controls[1].values.length > 1 ||
-          certificate.value.controls[2].values.length > 1;
-      }
+const classCol_12 = computed(() => {
+  let mainBool =
+    certificate.value.stigma.length == 1 &&
+    certificate.value.weldingMethod.length == 1 &&
+    certificate.value.weldedType.length == 1 &&
+    certificate.value.weldedConnection.length == 1 &&
+    certificate.value.weldedSeam.length == 1 &&
+    certificate.value.weldedPosition.length == 1 &&
+    certificate.value.brand.length == 1 &&
+    certificate.value.thickness.length == 1 &&
+    certificate.value.diameter.length == 1 &&
+    certificate.value.electrode.length == 1 &&
+    certificate.value.flux.length == 1;
+  let variableBool;
+  let controlsBool;
 
-      // return mainBool && variableBool && controlsBool;
+  if (certificate.value.certType == "sheetPipe") {
+    variableBool =
+      certificate.value.preheating.length == 1 &&
+      certificate.value.heatTreatment.length == 1;
+  } else if (certificate.value.certType == "fittings") {
+    variableBool =
+      certificate.value.axesPosition.length == 1 &&
+      certificate.value.weldedJoint.length == 1;
+  }
 
-      return (
-        mainBoolAND &&
-        controlsBoolAND &&
-        variableBoolAND &&
-        (mainBoolOR || variableBoolOR || controlsBoolOR)
-      );
-    });
+  if (certificate.value.controls[0]) {
+    controlsBool = certificate.value.controls[0].values.length == 1;
+  }
+  if (certificate.value.controls[1]) {
+    controlsBool =
+      certificate.value.controls[0].values.length == 1 &&
+      certificate.value.controls[1].values.length == 1;
+  }
+  if (certificate.value.controls[2]) {
+    controlsBool =
+      certificate.value.controls[0].values.length == 1 &&
+      certificate.value.controls[1].values.length == 1 &&
+      certificate.value.controls[2].values.length == 1;
+  }
 
-    const classCol_12 = computed(() => {
-      let mainBool =
-        certificate.value.stigma.length == 1 &&
-        certificate.value.weldingMethod.length == 1 &&
-        certificate.value.weldedType.length == 1 &&
-        certificate.value.weldedConnection.length == 1 &&
-        certificate.value.weldedSeam.length == 1 &&
-        certificate.value.weldedPosition.length == 1 &&
-        certificate.value.brand.length == 1 &&
-        certificate.value.thickness.length == 1 &&
-        certificate.value.diameter.length == 1 &&
-        certificate.value.electrode.length == 1 &&
-        certificate.value.flux.length == 1;
-      let variableBool;
-      let controlsBool;
+  return mainBool && variableBool && controlsBool;
+});
 
-      if (certificate.value.certType == "sheetPipe") {
-        variableBool =
-          certificate.value.preheating.length == 1 &&
-          certificate.value.heatTreatment.length == 1;
-      } else if (certificate.value.certType == "fittings") {
-        variableBool =
-          certificate.value.axesPosition.length == 1 &&
-          certificate.value.weldedJoint.length == 1;
-      }
+const loadingData = async () => {
+  try {
+    loading.value = true;
 
-      if (certificate.value.controls[0]) {
-        controlsBool = certificate.value.controls[0].values.length == 1;
-      }
-      if (certificate.value.controls[1]) {
-        controlsBool =
-          certificate.value.controls[0].values.length == 1 &&
-          certificate.value.controls[1].values.length == 1;
-      }
-      if (certificate.value.controls[2]) {
-        controlsBool =
-          certificate.value.controls[0].values.length == 1 &&
-          certificate.value.controls[1].values.length == 1 &&
-          certificate.value.controls[2].values.length == 1;
-      }
-
-      return mainBool && variableBool && controlsBool;
-    });
-
-    const loadingData = async () => {
-      try {
-        loading.value = true;
-
-        if (userRole) {
-          userRole.includes("admin") || userRole.includes("god")
-            ? (access.value = true)
-            : (access.value = false);
-        }
-
-        certificateData.value = await store.dispatch(
-          "certificate/loadById",
-          route.params.id
-        );
-        certificateSubData.value = await store.dispatch(
-          "certificateSub/loadOwner",
-          route.params.id
-        );
-
-        certificate.value = certificateData.value;
-
-        //сбросить переключатель вкладышей
-        certs.value = 0;
-
-        // certificate.value = certificateData.value;
-
-        // console.log("certificateData", certificateData);
-        //console.log("certificate", certificate.value);
-        // console.log("certificateSub", certificateSubData);
-        //console.log("classCol_4:", classCol_4.value);
-        //console.log("classCol_6:", classCol_6.value);
-        // console.log("classCol_12:", classCol_12.value);
-
-        //проверка срока действия удостоверения
-        new Date(certificate.value.expiration) < new Date()
-          ? (expired.value = true)
-          : (expired.value = false);
-
-        // console.log("certificate::: ", certificate.value);
-
-        loading.value = false;
-      } catch (error) {
-        isId.value = false;
-        loading.value = false;
-      }
-    };
-
-    watch(certs, (val, prevVal) => {
-      if (val == 0) {
-        certificate.value = certificateData.value;
-      } else {
-        certificate.value = certificateSubData.value[val - 1];
-      }
-    });
-
-    const removeCertificate = async (id) => {
-      try {
-        if (certificate.value.owner) {
-          //удалить вкладыш
-          await store.dispatch("certificateSub/remove", certificate.value._id);
-          modal.value = false;
-
-          //обновление данных удостоверения
-          loadingData();
-        } else {
-          //проверить, есть ли у удаляемого удостоверерния вкладыши
-          const certSubToRemove = await store.dispatch(
-            "certificateSub/loadOwner",
-            id
-          );
-          // console.log("certSubToRemove : ", certSubToRemove);
-          //если есть вкладыши, то удалить их
-          if (certSubToRemove.length) {
-            certSubToRemove.forEach(async (item) => {
-              await store.dispatch("certificateSub/remove", item._id);
-            });
-          }
-
-          //удалить удостоверение
-          await store.dispatch("certificate/remove", id);
-          modal.value = false;
-          router.push("/");
-        }
-      } catch (e) {
-        // console.log(e);
-      }
-
-      // certificate.value = await store.dispatch("certificate/remove", id);
-    };
-
-    function showModal() {
-      modal.value = true;
-      setTimeout(() => {
-        let systemModal = document.getElementById("systemModal");
-        systemModal.classList.add("show");
-      }, 0);
+    if (userRole) {
+      userRole.includes("admin") || userRole.includes("god")
+        ? (access.value = true)
+        : (access.value = false);
     }
 
-    function closeModal() {
+    certificateData.value = await store.dispatch(
+      "certificate/loadById",
+      route.params.id
+    );
+    certificateSubData.value = await store.dispatch(
+      "certificateSub/loadOwner",
+      route.params.id
+    );
+
+    certificate.value = certificateData.value;
+
+    //сбросить переключатель вкладышей
+    certs.value = 0;
+
+    //проверка срока действия удостоверения
+    new Date(certificate.value.expiration) < new Date()
+      ? (expired.value = true)
+      : (expired.value = false);
+
+    loading.value = false;
+  } catch (error) {
+    isId.value = false;
+    loading.value = false;
+  }
+};
+
+watch(certs, (val, prevVal) => {
+  if (val == 0) {
+    certificate.value = certificateData.value;
+  } else {
+    certificate.value = certificateSubData.value[val - 1];
+  }
+});
+
+const removeCertificate = async (id) => {
+  try {
+    if (certificate.value.owner) {
+      //удалить вкладыш
+      await store.dispatch("certificateSub/remove", certificate.value._id);
       modal.value = false;
+
+      //обновление данных удостоверения
+      loadingData();
+    } else {
+      //проверить, есть ли у удаляемого удостоверерния вкладыши
+      const certSubToRemove = await store.dispatch(
+        "certificateSub/loadOwner",
+        id
+      );
+      //если есть вкладыши, то удалить их
+      if (certSubToRemove.length) {
+        certSubToRemove.forEach(async (item) => {
+          await store.dispatch("certificateSub/remove", item._id);
+        });
+      }
+
+      //удалить удостоверение
+      await store.dispatch("certificate/remove", id);
+      modal.value = false;
+      router.push("/");
+    }
+  } catch (e) {}
+};
+
+function showModal() {
+  modal.value = true;
+  setTimeout(() => {
+    let systemModal = document.getElementById("systemModal");
+    systemModal.classList.add("show");
+  }, 0);
+}
+
+function closeModal() {
+  modal.value = false;
+}
+
+const print = () => {
+  window.print();
+};
+
+const exportToPDF = async () => {
+  let content = document.getElementById("exportContent");
+  content.classList.add("export-pdf");
+
+  let element = document.getElementById("exportContent");
+
+  let opt = {
+    margin: [0.4, 0.5, 0.4, 0.5],
+    filename: `${certificate.value.numCertificate}.pdf`,
+    image: { type: "jpeg", quality: 1 },
+    pagebreak: { mode: ["avoid-all", "css"] },
+    html2canvas: { scale: 5 },
+    jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+  };
+
+  loading.value = true;
+
+  // New Promise-based usage:
+  await html2pdf().set(opt).from(element).save();
+
+  // html2pdf(element);
+
+  content.classList.remove("export-pdf");
+
+  loading.value = false;
+};
+
+const exportToWord = () => {
+  let templateFile = "";
+  let col2 =
+    certificate.value.stigma.length == 2 &&
+    certificate.value.weldingMethod == 2 &&
+    certificate.value.weldedType == 2 &&
+    certificate.value.weldedSeam == 2 &&
+    certificate.value.weldedConnection == 2 &&
+    certificate.value.weldedPosition == 2 &&
+    certificate.value.brand == 2 &&
+    certificate.value.thickness == 2 &&
+    certificate.value.diameter == 2 &&
+    certificate.value.electrode == 2 &&
+    certificate.value.flux == 2;
+  let col3 =
+    certificate.value.stigma.length == 3 ||
+    certificate.value.weldingMethod == 3 ||
+    certificate.value.weldedType == 3 ||
+    certificate.value.weldedSeam == 3 ||
+    certificate.value.weldedConnection == 3 ||
+    certificate.value.weldedPosition == 3 ||
+    certificate.value.brand == 3 ||
+    certificate.value.thickness == 3 ||
+    certificate.value.diameter == 3 ||
+    certificate.value.electrode == 3 ||
+    certificate.value.flux == 3;
+
+  if (
+    certificate.value.controls[0].values.length == 1 &&
+    certificate.value.controls.length == 1 &&
+    !certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col1-controls1.docx";
+  } else if (
+    ((certificate.value.controls[0].values.length == 2 &&
+      certificate.value.controls.length == 1) ||
+      col2) &&
+    !certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col2-controls1.docx";
+  } else if (
+    ((certificate.value.controls[0].values.length == 3 &&
+      certificate.value.controls.length == 1) ||
+      col3) &&
+    !certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col3-controls1.docx";
+  } else if (
+    certificate.value.controls[0].values.length == 1 &&
+    certificate.value.controls.length == 2 &&
+    !certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col1-controls2.docx";
+  } else if (
+    ((certificate.value.controls[0].values.length == 2 &&
+      certificate.value.controls.length == 2) ||
+      col2) &&
+    !certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col2-controls2.docx";
+  } else if (
+    ((certificate.value.controls[0].values.length == 3 &&
+      certificate.value.controls.length == 2) ||
+      col3) &&
+    !certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col3-controls2.docx";
+  } else if (
+    certificate.value.controls[0].values.length == 1 &&
+    certificate.value.controls.length == 3 &&
+    !certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col1-controls3.docx";
+  } else if (
+    ((certificate.value.controls[0].values.length == 2 &&
+      certificate.value.controls.length == 3) ||
+      col2) &&
+    !certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col2-controls3.docx";
+  } else if (
+    ((certificate.value.controls[0].values.length == 3 &&
+      certificate.value.controls.length == 3) ||
+      col3) &&
+    !certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col3-controls3.docx";
+  } else if (
+    certificate.value.controls[0].values.length == 1 &&
+    certificate.value.controls.length == 1 &&
+    certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col1-controls1v.docx";
+  } else if (
+    ((certificate.value.controls[0].values.length == 2 &&
+      certificate.value.controls.length == 1) ||
+      col2) &&
+    certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col2-controls1v.docx";
+  } else if (
+    ((certificate.value.controls[0].values.length == 3 &&
+      certificate.value.controls.length == 1) ||
+      col3) &&
+    certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col3-controls1v.docx";
+  } else if (
+    certificate.value.controls[0].values.length == 1 &&
+    certificate.value.controls.length == 2 &&
+    certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col1-controls2v.docx";
+  } else if (
+    ((certificate.value.controls[0].values.length == 2 &&
+      certificate.value.controls.length == 2) ||
+      col2) &&
+    certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col2-controls2v.docx";
+  } else if (
+    ((certificate.value.controls[0].values.length == 3 &&
+      certificate.value.controls.length == 2) ||
+      col3) &&
+    certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col3-controls2v.docx";
+  } else if (
+    certificate.value.controls[0].values.length == 1 &&
+    certificate.value.controls.length == 3 &&
+    certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col1-controls3v.docx";
+  } else if (
+    ((certificate.value.controls[0].values.length == 2 &&
+      certificate.value.controls.length == 3) ||
+      col2) &&
+    certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col2-controls3v.docx";
+  } else if (
+    ((certificate.value.controls[0].values.length == 3 &&
+      certificate.value.controls.length == 3) ||
+      col3) &&
+    certificate.value.numOldCert
+  ) {
+    templateFile = "/temp-col3-controls3v.docx";
+  }
+
+  let variableTitle1,
+    variableTitle2,
+    variableTitle3,
+    variableTitle4,
+    variableTitle5,
+    variableString1Val1,
+    variableString1Val2,
+    variableString1Val3,
+    variableString2Val1,
+    variableString2Val2,
+    variableString2Val3,
+    variableString3Val,
+    variableString4Val = "";
+
+  if (certificate.value.certType == "sheetPipe") {
+    variableTitle1 = "Предварительный и сопутствующий подогрев";
+    variableTitle2 = "Термическая обработка";
+    variableTitle3 = "Наружный диаметр трубы, мм";
+    variableTitle4 = "Положение при сварке";
+    variableTitle5 = "Исполнение сварного шва";
+    variableString1Val1 = certificate.value.preheating[0];
+    variableString1Val2 = certificate.value.preheating[1];
+    variableString1Val3 = certificate.value.preheating[2];
+    variableString2Val1 = certificate.value.heatTreatment[0];
+    variableString2Val2 = certificate.value.heatTreatment[1];
+    variableString2Val3 = certificate.value.heatTreatment[2];
+    variableString3Val =
+      arrayFormat(certificate.value.weldedPositionScope) + "";
+    variableString4Val =
+      arrayFormat(certificate.value.weldedConnectionScope) + "";
+  } else if (certificate.value.certType == "fittings") {
+    variableTitle1 = "Положение осей стержней";
+    variableTitle2 = "Тип сварного соединения";
+    variableTitle3 = "Диаметр стержня, мм";
+    variableTitle4 = "Положение осей стержней";
+    variableTitle5 = "Тип сварного соединения";
+    variableString1Val1 = arrayFormat(certificate.value.axesPosition[0]) + "";
+    variableString1Val2 = arrayFormat(certificate.value.axesPosition[1]) + "";
+    variableString1Val3 = arrayFormat(certificate.value.axesPosition[2]) + "";
+    variableString2Val1 = arrayFormat(certificate.value.weldedJoint[0]) + "";
+    variableString2Val2 = arrayFormat(certificate.value.weldedJoint[1]) + "";
+    variableString2Val3 = arrayFormat(certificate.value.weldedJoint[2]) + "";
+    variableString3Val = arrayFormat(certificate.value.axesPositionScope) + "";
+    variableString4Val = arrayFormat(certificate.value.weldedJointScope) + "";
+  }
+
+  loadFile(templateFile, function (error, content) {
+    if (error) {
+      // console.log("ERROR");
+      throw error;
+    }
+    const zip = new PizZip(content);
+
+    const base64Regex = /^data:image\/(png|jpg|svg|svg\+xml);base64,/;
+    function base64Parser(dataURL) {
+      if (typeof dataURL !== "string" || !base64Regex.test(dataURL)) {
+        return false;
+      }
+      const stringBase64 = dataURL.replace(base64Regex, "");
+
+      // For browsers :
+      const binaryString = window.atob(stringBase64);
+      const len = binaryString.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) {
+        const ascii = binaryString.charCodeAt(i);
+        bytes[i] = ascii;
+      }
+      return bytes.buffer;
     }
 
-    const print = () => {
-      window.print();
+    const imageOpts = {
+      centered: false,
+      getImage: function (tagValue, tagName) {
+        const canvas = document.getElementsByTagName("canvas")[0];
+        const ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+        ctx.stroke();
+        return base64Parser(canvas.toDataURL());
+      },
+      getSize: function (img, tagValue, tagName) {
+        // FOR FIXED SIZE IMAGE :
+        return [150, 150];
+
+        // FOR IMAGE COMING FROM A URL (IF TAGVALUE IS AN ADDRESS) :
+        // To use this feature, you have to be using docxtemplater async
+        // (if you are calling render(), you are not using async).
+        return new Promise(function (resolve, reject) {
+          const image = new Image();
+          image.src = url;
+          image.onload = function () {
+            resolve([image.width, image.height]);
+          };
+          image.onerror = function (e) {
+            console.log("img, tagValue, tagName : ", img, tagValue, tagName);
+            alert("An error occured while loading " + tagValue);
+            reject(e);
+          };
+        });
+      },
     };
 
-    const exportToPDF = async () => {
-      let content = document.getElementById("exportContent");
-      content.classList.add("export-pdf");
-
-      let element = document.getElementById("exportContent");
-
-      let opt = {
-        margin: [0.4, 0.5, 0.4, 0.5],
-        filename: `${certificate.value.numCertificate}.pdf`,
-        image: { type: "jpeg", quality: 1 },
-        pagebreak: { mode: ["avoid-all", "css"] },
-        html2canvas: { scale: 5 },
-        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-      };
-
-      loading.value = true;
-
-      // New Promise-based usage:
-      await html2pdf()
-        .set(opt)
-        .from(element)
-        .save();
-
-      // html2pdf(element);
-
-      content.classList.remove("export-pdf");
-
-      loading.value = false;
-    };
-
-    const exportToWord = () => {
-      let templateFile = "";
-      let col2 =
-        certificate.value.stigma.length == 2 &&
-        certificate.value.weldingMethod == 2 &&
-        certificate.value.weldedType == 2 &&
-        certificate.value.weldedSeam == 2 &&
-        certificate.value.weldedConnection == 2 &&
-        certificate.value.weldedPosition == 2 &&
-        certificate.value.brand == 2 &&
-        certificate.value.thickness == 2 &&
-        certificate.value.diameter == 2 &&
-        certificate.value.electrode == 2 &&
-        certificate.value.flux == 2;
-      let col3 =
-        certificate.value.stigma.length == 3 ||
-        certificate.value.weldingMethod == 3 ||
-        certificate.value.weldedType == 3 ||
-        certificate.value.weldedSeam == 3 ||
-        certificate.value.weldedConnection == 3 ||
-        certificate.value.weldedPosition == 3 ||
-        certificate.value.brand == 3 ||
-        certificate.value.thickness == 3 ||
-        certificate.value.diameter == 3 ||
-        certificate.value.electrode == 3 ||
-        certificate.value.flux == 3;
-
-      if (
-        certificate.value.controls[0].values.length == 1 &&
-        certificate.value.controls.length == 1 &&
-        !certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col1-controls1.docx";
-      } else if (
-        ((certificate.value.controls[0].values.length == 2 &&
-          certificate.value.controls.length == 1) ||
-          col2) &&
-        !certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col2-controls1.docx";
-      } else if (
-        ((certificate.value.controls[0].values.length == 3 &&
-          certificate.value.controls.length == 1) ||
-          col3) &&
-        !certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col3-controls1.docx";
-      } else if (
-        certificate.value.controls[0].values.length == 1 &&
-        certificate.value.controls.length == 2 &&
-        !certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col1-controls2.docx";
-      } else if (
-        ((certificate.value.controls[0].values.length == 2 &&
-          certificate.value.controls.length == 2) ||
-          col2) &&
-        !certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col2-controls2.docx";
-      } else if (
-        ((certificate.value.controls[0].values.length == 3 &&
-          certificate.value.controls.length == 2) ||
-          col3) &&
-        !certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col3-controls2.docx";
-      } else if (
-        certificate.value.controls[0].values.length == 1 &&
-        certificate.value.controls.length == 3 &&
-        !certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col1-controls3.docx";
-      } else if (
-        ((certificate.value.controls[0].values.length == 2 &&
-          certificate.value.controls.length == 3) ||
-          col2) &&
-        !certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col2-controls3.docx";
-      } else if (
-        ((certificate.value.controls[0].values.length == 3 &&
-          certificate.value.controls.length == 3) ||
-          col3) &&
-        !certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col3-controls3.docx";
-      } else if (
-        certificate.value.controls[0].values.length == 1 &&
-        certificate.value.controls.length == 1 &&
-        certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col1-controls1v.docx";
-      } else if (
-        ((certificate.value.controls[0].values.length == 2 &&
-          certificate.value.controls.length == 1) ||
-          col2) &&
-        certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col2-controls1v.docx";
-      } else if (
-        ((certificate.value.controls[0].values.length == 3 &&
-          certificate.value.controls.length == 1) ||
-          col3) &&
-        certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col3-controls1v.docx";
-      } else if (
-        certificate.value.controls[0].values.length == 1 &&
-        certificate.value.controls.length == 2 &&
-        certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col1-controls2v.docx";
-      } else if (
-        ((certificate.value.controls[0].values.length == 2 &&
-          certificate.value.controls.length == 2) ||
-          col2) &&
-        certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col2-controls2v.docx";
-      } else if (
-        ((certificate.value.controls[0].values.length == 3 &&
-          certificate.value.controls.length == 2) ||
-          col3) &&
-        certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col3-controls2v.docx";
-      } else if (
-        certificate.value.controls[0].values.length == 1 &&
-        certificate.value.controls.length == 3 &&
-        certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col1-controls3v.docx";
-      } else if (
-        ((certificate.value.controls[0].values.length == 2 &&
-          certificate.value.controls.length == 3) ||
-          col2) &&
-        certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col2-controls3v.docx";
-      } else if (
-        ((certificate.value.controls[0].values.length == 3 &&
-          certificate.value.controls.length == 3) ||
-          col3) &&
-        certificate.value.numOldCert
-      ) {
-        templateFile = "/temp-col3-controls3v.docx";
-      }
-
-      let variableTitle1,
-        variableTitle2,
-        variableTitle3,
-        variableTitle4,
-        variableTitle5,
-        variableString1Val1,
-        variableString1Val2,
-        variableString1Val3,
-        variableString2Val1,
-        variableString2Val2,
-        variableString2Val3,
-        variableString3Val,
-        variableString4Val = "";
-
-      if (certificate.value.certType == "sheetPipe") {
-        variableTitle1 = "Предварительный и сопутствующий подогрев";
-        variableTitle2 = "Термическая обработка";
-        variableTitle3 = "Наружный диаметр трубы, мм";
-        variableTitle4 = "Положение при сварке";
-        variableTitle5 = "Исполнение сварного шва";
-        variableString1Val1 = certificate.value.preheating[0];
-        variableString1Val2 = certificate.value.preheating[1];
-        variableString1Val3 = certificate.value.preheating[2];
-        variableString2Val1 = certificate.value.heatTreatment[0];
-        variableString2Val2 = certificate.value.heatTreatment[1];
-        variableString2Val3 = certificate.value.heatTreatment[2];
-        variableString3Val =
-          arrayFormat(certificate.value.weldedPositionScope) + "";
-        variableString4Val =
-          arrayFormat(certificate.value.weldedConnectionScope) + "";
-      } else if (certificate.value.certType == "fittings") {
-        variableTitle1 = "Положение осей стержней";
-        variableTitle2 = "Тип сварного соединения";
-        variableTitle3 = "Диаметр стержня, мм";
-        variableTitle4 = "Положение осей стержней";
-        variableTitle5 = "Тип сварного соединения";
-        variableString1Val1 =
-          arrayFormat(certificate.value.axesPosition[0]) + "";
-        variableString1Val2 =
-          arrayFormat(certificate.value.axesPosition[1]) + "";
-        variableString1Val3 =
-          arrayFormat(certificate.value.axesPosition[2]) + "";
-        variableString2Val1 =
-          arrayFormat(certificate.value.weldedJoint[0]) + "";
-        variableString2Val2 =
-          arrayFormat(certificate.value.weldedJoint[1]) + "";
-        variableString2Val3 =
-          arrayFormat(certificate.value.weldedJoint[2]) + "";
-        variableString3Val =
-          arrayFormat(certificate.value.axesPositionScope) + "";
-        variableString4Val =
-          arrayFormat(certificate.value.weldedJointScope) + "";
-      }
-
-      loadFile(templateFile, function(error, content) {
-        if (error) {
-          // console.log("ERROR");
-          throw error;
-        }
-        const zip = new PizZip(content);
-
-        const base64Regex = /^data:image\/(png|jpg|svg|svg\+xml);base64,/;
-        function base64Parser(dataURL) {
-          if (typeof dataURL !== "string" || !base64Regex.test(dataURL)) {
-            return false;
-          }
-          const stringBase64 = dataURL.replace(base64Regex, "");
-
-          // For browsers :
-          const binaryString = window.atob(stringBase64);
-          const len = binaryString.length;
-          const bytes = new Uint8Array(len);
-          for (let i = 0; i < len; i++) {
-            const ascii = binaryString.charCodeAt(i);
-            bytes[i] = ascii;
-          }
-          return bytes.buffer;
-        }
-
-        const imageOpts = {
-          centered: false,
-          getImage: function(tagValue, tagName) {
-            const canvas = document.getElementsByTagName("canvas")[0];
-            const ctx = canvas.getContext("2d");
-            ctx.beginPath();
-            ctx.arc(100, 75, 50, 0, 2 * Math.PI);
-            ctx.stroke();
-            return base64Parser(canvas.toDataURL());
+    const doc = new Docxtemplater(zip, {
+      modules: [new ImageModule(imageOpts)],
+      paragraphLoop: true,
+      linebreaks: true,
+    });
+    doc.setData({
+      date: protocolDateFormat(certificate.value.date),
+      numProtocol: certificate.value.numProtocol,
+      textHead: certificate.value.textHead,
+      firstname: certificate.value.firstname,
+      secondname: certificate.value.secondname,
+      lastname: certificate.value.lastname,
+      birthday: dateFormat(certificate.value.birthday),
+      passport: certificate.value.passport,
+      work: certificate.value.work,
+      workYears: certificate.value.workYears,
+      qualifyingRank: certificate.value.qualifyingRank,
+      numOldCert: certificate.value.numOldCert,
+      dateOldCert: dateFormat(certificate.value.dateOldCert),
+      attestationType: certificate.value.attestationType,
+      stigma1: certificate.value.stigma[0],
+      stigma2: certificate.value.stigma[1] ? certificate.value.stigma[1] : "",
+      stigma3: certificate.value.stigma[2] ? certificate.value.stigma[2] : "",
+      weldingMethod1: certificate.value.weldingMethod[0],
+      weldingMethod2: certificate.value.weldingMethod[1]
+        ? certificate.value.weldingMethod[1]
+        : "",
+      weldingMethod3: certificate.value.weldingMethod[2]
+        ? certificate.value.weldingMethod[2]
+        : "",
+      weldedType1: certificate.value.weldedType[0],
+      weldedType2: certificate.value.weldedType[1]
+        ? certificate.value.weldedType[1]
+        : "",
+      weldedType3: certificate.value.weldedType[2]
+        ? certificate.value.weldedType[2]
+        : "",
+      weldedSeamConnection1:
+        arrayFormat(certificate.value.weldedSeam[0]) +
+        ", " +
+        arrayFormat(certificate.value.weldedConnection[0]),
+      weldedSeamConnection2:
+        arrayFormat(certificate.value.weldedSeam[1]) +
+        (certificate.value.weldedSeam[1] &&
+        certificate.value.weldedConnection[1]
+          ? ", "
+          : "") +
+        arrayFormat(certificate.value.weldedConnection[1]),
+      weldedSeamConnection3:
+        arrayFormat(certificate.value.weldedSeam[2]) +
+        (certificate.value.weldedSeam[2] &&
+        certificate.value.weldedConnection[2]
+          ? ", "
+          : "") +
+        arrayFormat(certificate.value.weldedConnection[2]),
+      weldedPosition1: arrayFormat(certificate.value.weldedPosition[0]),
+      weldedPosition2: arrayFormat(certificate.value.weldedPosition[1]),
+      weldedPosition3: arrayFormat(certificate.value.weldedPosition[2]),
+      variableTitle1: variableTitle1,
+      variableTitle2: variableTitle2,
+      variableTitle3: variableTitle3,
+      variableTitle4: variableTitle4,
+      variableTitle5: variableTitle5,
+      variableString1Val1: variableString1Val1,
+      variableString1Val2: variableString1Val2,
+      variableString1Val3: variableString1Val3,
+      variableString2Val1: variableString2Val1,
+      variableString2Val2: variableString2Val2,
+      variableString2Val3: variableString2Val3,
+      variableString3Val: variableString3Val,
+      variableString4Val: variableString4Val,
+      brand1: certificate.value.brand[0],
+      brand2: certificate.value.brand[1] ? certificate.value.brand[1] : "",
+      brand3: certificate.value.brand[2] ? certificate.value.brand[2] : "",
+      thickness1: certificate.value.thickness[0],
+      thickness2: certificate.value.thickness[1],
+      thickness3: certificate.value.thickness[2],
+      diameter1: certificate.value.diameter[0],
+      diameter2: certificate.value.diameter[1],
+      diameter3: certificate.value.diameter[2],
+      electrode1: arrayFormat(certificate.value.electrode[0]) + "",
+      electrode2: arrayFormat(certificate.value.electrode[1]) + "",
+      electrode3: arrayFormat(certificate.value.electrode[2]) + "",
+      flux1: certificate.value.flux[0],
+      flux2: certificate.value.flux[1],
+      flux3: certificate.value.flux[2],
+      controls1Type: certificate.value.controls[0].type,
+      controls1Grade1: certificate.value.controls[0].values[0].grade,
+      controls1Num1: certificate.value.controls[0].values[0].num,
+      controls1Date1: dateFormat(certificate.value.controls[0].values[0].date),
+      controls1Grade2: certificate.value.controls[0].values[1]
+        ? certificate.value.controls[0].values[1].grade
+        : "",
+      controls1Num2: certificate.value.controls[0].values[1]
+        ? certificate.value.controls[0].values[1].num
+        : "",
+      controls1Date2: certificate.value.controls[0].values[1]
+        ? dateFormat(certificate.value.controls[0].values[1].date)
+        : "",
+      controls1Grade3: certificate.value.controls[0].values[2]
+        ? certificate.value.controls[0].values[2].grade
+        : "",
+      controls1Num3: certificate.value.controls[0].values[2]
+        ? certificate.value.controls[0].values[2].num
+        : "",
+      controls1Date3: certificate.value.controls[0].values[2]
+        ? dateFormat(certificate.value.controls[0].values[2].date)
+        : "",
+      controls2Type: certificate.value.controls[1]
+        ? certificate.value.controls[1].type
+        : "",
+      controls2Grade1:
+        certificate.value.controls[1] && certificate.value.controls[1].values[0]
+          ? certificate.value.controls[1].values[0].grade
+          : "",
+      controls2Num1:
+        certificate.value.controls[1] && certificate.value.controls[1].values[0]
+          ? certificate.value.controls[1].values[0].num
+          : "",
+      controls2Date1:
+        certificate.value.controls[1] && certificate.value.controls[1].values[0]
+          ? dateFormat(certificate.value.controls[1].values[0].date)
+          : "",
+      controls2Grade2:
+        certificate.value.controls[1] && certificate.value.controls[1].values[1]
+          ? certificate.value.controls[1].values[1].grade
+          : "",
+      controls2Num2:
+        certificate.value.controls[1] && certificate.value.controls[1].values[1]
+          ? certificate.value.controls[1].values[1].num
+          : "",
+      controls2Date2:
+        certificate.value.controls[1] && certificate.value.controls[1].values[1]
+          ? dateFormat(certificate.value.controls[1].values[1].date)
+          : "",
+      controls2Grade3:
+        certificate.value.controls[1] && certificate.value.controls[1].values[2]
+          ? certificate.value.controls[1].values[2].grade
+          : "",
+      controls2Num3:
+        certificate.value.controls[1] && certificate.value.controls[1].values[2]
+          ? certificate.value.controls[1].values[2].num
+          : "",
+      controls2Date3:
+        certificate.value.controls[1] && certificate.value.controls[1].values[2]
+          ? dateFormat(certificate.value.controls[1].values[2].date)
+          : "",
+      controls3Type: certificate.value.controls[2]
+        ? certificate.value.controls[2].type
+        : "",
+      controls3Grade1: certificate.value.controls[2]
+        ? certificate.value.controls[2].values[0].grade
+        : "",
+      controls3Num1: certificate.value.controls[2]
+        ? certificate.value.controls[2].values[0].num
+        : "",
+      controls3Date1: certificate.value.controls[2]
+        ? dateFormat(certificate.value.controls[2].values[0].date)
+        : "",
+      controls3Grade2: certificate.value.controls[2]
+        ? certificate.value.controls[2].values[1].grade
+        : "",
+      controls3Num2: certificate.value.controls[2]
+        ? certificate.value.controls[2].values[1].num
+        : "",
+      controls3Date2: certificate.value.controls[2]
+        ? dateFormat(certificate.value.controls[2].values[1].date)
+        : "",
+      controls3Grade3: certificate.value.controls[2]
+        ? certificate.value.controls[2].values[2].grade
+        : "",
+      controls3Num3: certificate.value.controls[2]
+        ? certificate.value.controls[2].values[2].num
+        : "",
+      controls3Date3: certificate.value.controls[2]
+        ? dateFormat(certificate.value.controls[2].values[2].date)
+        : "",
+      npa: certificate.value.npa + "",
+      grade: certificate.value.grade,
+      decision: certificate.value.decision + "",
+      accesses: certificate.value.accesses,
+      accessesShortingTable:
+        arrayFormat(shortingTableItems(certificate.value.accesses)) + "",
+      weldingMethodScope: certificate.value.weldingMethodScope,
+      weldedTypeScope: arrayFormat(certificate.value.weldedTypeScope) + "",
+      weldedSeamScope: arrayFormat(certificate.value.weldedSeamScope) + "",
+      brandScope: arrayFormat(certificate.value.brandScope) + "",
+      electrodeScope: arrayFormat(certificate.value.electrodeScope) + "",
+      fluxScope: certificate.value.fluxScope,
+      auxiliaryScope: certificate.value.auxiliaryScope,
+      thicknessScope: certificate.value.thicknessScope,
+      diameterScope: certificate.value.diameterScope,
+      expiration: dateFormat(certificate.value.expiration),
+      myImage: "sampleImage.png",
+    });
+    try {
+      // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+      doc.render();
+    } catch (error) {
+      // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+      function replaceErrors(key, value) {
+        if (value instanceof Error) {
+          return Object.getOwnPropertyNames(value).reduce(function (
+            error,
+            key
+          ) {
+            error[key] = value[key];
+            return error;
           },
-          getSize: function(img, tagValue, tagName) {
-            // FOR FIXED SIZE IMAGE :
-            return [150, 150];
-
-            // FOR IMAGE COMING FROM A URL (IF TAGVALUE IS AN ADDRESS) :
-            // To use this feature, you have to be using docxtemplater async
-            // (if you are calling render(), you are not using async).
-            return new Promise(function(resolve, reject) {
-              const image = new Image();
-              image.src = url;
-              image.onload = function() {
-                resolve([image.width, image.height]);
-              };
-              image.onerror = function(e) {
-                console.log(
-                  "img, tagValue, tagName : ",
-                  img,
-                  tagValue,
-                  tagName
-                );
-                alert("An error occured while loading " + tagValue);
-                reject(e);
-              };
-            });
-          },
-        };
-
-        const doc = new Docxtemplater(zip, {
-          modules: [new ImageModule(imageOpts)],
-          paragraphLoop: true,
-          linebreaks: true,
-        });
-        doc.setData({
-          date: protocolDateFormat(certificate.value.date),
-          numProtocol: certificate.value.numProtocol,
-          textHead: certificate.value.textHead,
-          firstname: certificate.value.firstname,
-          secondname: certificate.value.secondname,
-          lastname: certificate.value.lastname,
-          birthday: dateFormat(certificate.value.birthday),
-          passport: certificate.value.passport,
-          work: certificate.value.work,
-          workYears: certificate.value.workYears,
-          qualifyingRank: certificate.value.qualifyingRank,
-          numOldCert: certificate.value.numOldCert,
-          dateOldCert: dateFormat(certificate.value.dateOldCert),
-          attestationType: certificate.value.attestationType,
-          stigma1: certificate.value.stigma[0],
-          stigma2: certificate.value.stigma[1]
-            ? certificate.value.stigma[1]
-            : "",
-          stigma3: certificate.value.stigma[2]
-            ? certificate.value.stigma[2]
-            : "",
-          weldingMethod1: certificate.value.weldingMethod[0],
-          weldingMethod2: certificate.value.weldingMethod[1]
-            ? certificate.value.weldingMethod[1]
-            : "",
-          weldingMethod3: certificate.value.weldingMethod[2]
-            ? certificate.value.weldingMethod[2]
-            : "",
-          weldedType1: certificate.value.weldedType[0],
-          weldedType2: certificate.value.weldedType[1]
-            ? certificate.value.weldedType[1]
-            : "",
-          weldedType3: certificate.value.weldedType[2]
-            ? certificate.value.weldedType[2]
-            : "",
-          weldedSeamConnection1:
-            arrayFormat(certificate.value.weldedSeam[0]) +
-            ", " +
-            arrayFormat(certificate.value.weldedConnection[0]),
-          weldedSeamConnection2:
-            arrayFormat(certificate.value.weldedSeam[1]) +
-            (certificate.value.weldedSeam[1] &&
-            certificate.value.weldedConnection[1]
-              ? ", "
-              : "") +
-            arrayFormat(certificate.value.weldedConnection[1]),
-          weldedSeamConnection3:
-            arrayFormat(certificate.value.weldedSeam[2]) +
-            (certificate.value.weldedSeam[2] &&
-            certificate.value.weldedConnection[2]
-              ? ", "
-              : "") +
-            arrayFormat(certificate.value.weldedConnection[2]),
-          weldedPosition1: arrayFormat(certificate.value.weldedPosition[0]),
-          weldedPosition2: arrayFormat(certificate.value.weldedPosition[1]),
-          weldedPosition3: arrayFormat(certificate.value.weldedPosition[2]),
-          variableTitle1: variableTitle1,
-          variableTitle2: variableTitle2,
-          variableTitle3: variableTitle3,
-          variableTitle4: variableTitle4,
-          variableTitle5: variableTitle5,
-          variableString1Val1: variableString1Val1,
-          variableString1Val2: variableString1Val2,
-          variableString1Val3: variableString1Val3,
-          variableString2Val1: variableString2Val1,
-          variableString2Val2: variableString2Val2,
-          variableString2Val3: variableString2Val3,
-          variableString3Val: variableString3Val,
-          variableString4Val: variableString4Val,
-          brand1: certificate.value.brand[0],
-          brand2: certificate.value.brand[1] ? certificate.value.brand[1] : "",
-          brand3: certificate.value.brand[2] ? certificate.value.brand[2] : "",
-          thickness1: certificate.value.thickness[0],
-          thickness2: certificate.value.thickness[1],
-          thickness3: certificate.value.thickness[2],
-          diameter1: certificate.value.diameter[0],
-          diameter2: certificate.value.diameter[1],
-          diameter3: certificate.value.diameter[2],
-          electrode1: arrayFormat(certificate.value.electrode[0]) + "",
-          electrode2: arrayFormat(certificate.value.electrode[1]) + "",
-          electrode3: arrayFormat(certificate.value.electrode[2]) + "",
-          flux1: certificate.value.flux[0],
-          flux2: certificate.value.flux[1],
-          flux3: certificate.value.flux[2],
-          controls1Type: certificate.value.controls[0].type,
-          controls1Grade1: certificate.value.controls[0].values[0].grade,
-          controls1Num1: certificate.value.controls[0].values[0].num,
-          controls1Date1: dateFormat(
-            certificate.value.controls[0].values[0].date
-          ),
-          controls1Grade2: certificate.value.controls[0].values[1]
-            ? certificate.value.controls[0].values[1].grade
-            : "",
-          controls1Num2: certificate.value.controls[0].values[1]
-            ? certificate.value.controls[0].values[1].num
-            : "",
-          controls1Date2: certificate.value.controls[0].values[1]
-            ? dateFormat(certificate.value.controls[0].values[1].date)
-            : "",
-          controls1Grade3: certificate.value.controls[0].values[2]
-            ? certificate.value.controls[0].values[2].grade
-            : "",
-          controls1Num3: certificate.value.controls[0].values[2]
-            ? certificate.value.controls[0].values[2].num
-            : "",
-          controls1Date3: certificate.value.controls[0].values[2]
-            ? dateFormat(certificate.value.controls[0].values[2].date)
-            : "",
-          controls2Type: certificate.value.controls[1]
-            ? certificate.value.controls[1].type
-            : "",
-          controls2Grade1:
-            certificate.value.controls[1] &&
-            certificate.value.controls[1].values[0]
-              ? certificate.value.controls[1].values[0].grade
-              : "",
-          controls2Num1:
-            certificate.value.controls[1] &&
-            certificate.value.controls[1].values[0]
-              ? certificate.value.controls[1].values[0].num
-              : "",
-          controls2Date1:
-            certificate.value.controls[1] &&
-            certificate.value.controls[1].values[0]
-              ? dateFormat(certificate.value.controls[1].values[0].date)
-              : "",
-          controls2Grade2:
-            certificate.value.controls[1] &&
-            certificate.value.controls[1].values[1]
-              ? certificate.value.controls[1].values[1].grade
-              : "",
-          controls2Num2:
-            certificate.value.controls[1] &&
-            certificate.value.controls[1].values[1]
-              ? certificate.value.controls[1].values[1].num
-              : "",
-          controls2Date2:
-            certificate.value.controls[1] &&
-            certificate.value.controls[1].values[1]
-              ? dateFormat(certificate.value.controls[1].values[1].date)
-              : "",
-          controls2Grade3:
-            certificate.value.controls[1] &&
-            certificate.value.controls[1].values[2]
-              ? certificate.value.controls[1].values[2].grade
-              : "",
-          controls2Num3:
-            certificate.value.controls[1] &&
-            certificate.value.controls[1].values[2]
-              ? certificate.value.controls[1].values[2].num
-              : "",
-          controls2Date3:
-            certificate.value.controls[1] &&
-            certificate.value.controls[1].values[2]
-              ? dateFormat(certificate.value.controls[1].values[2].date)
-              : "",
-          controls3Type: certificate.value.controls[2]
-            ? certificate.value.controls[2].type
-            : "",
-          controls3Grade1: certificate.value.controls[2]
-            ? certificate.value.controls[2].values[0].grade
-            : "",
-          controls3Num1: certificate.value.controls[2]
-            ? certificate.value.controls[2].values[0].num
-            : "",
-          controls3Date1: certificate.value.controls[2]
-            ? dateFormat(certificate.value.controls[2].values[0].date)
-            : "",
-          controls3Grade2: certificate.value.controls[2]
-            ? certificate.value.controls[2].values[1].grade
-            : "",
-          controls3Num2: certificate.value.controls[2]
-            ? certificate.value.controls[2].values[1].num
-            : "",
-          controls3Date2: certificate.value.controls[2]
-            ? dateFormat(certificate.value.controls[2].values[1].date)
-            : "",
-          controls3Grade3: certificate.value.controls[2]
-            ? certificate.value.controls[2].values[2].grade
-            : "",
-          controls3Num3: certificate.value.controls[2]
-            ? certificate.value.controls[2].values[2].num
-            : "",
-          controls3Date3: certificate.value.controls[2]
-            ? dateFormat(certificate.value.controls[2].values[2].date)
-            : "",
-          npa: certificate.value.npa + "",
-          grade: certificate.value.grade,
-          decision: certificate.value.decision + "",
-          accesses: certificate.value.accesses,
-          accessesShortingTable:
-            arrayFormat(shortingTableItems(certificate.value.accesses)) + "",
-          weldingMethodScope: certificate.value.weldingMethodScope,
-          weldedTypeScope: arrayFormat(certificate.value.weldedTypeScope) + "",
-          weldedSeamScope: arrayFormat(certificate.value.weldedSeamScope) + "",
-          brandScope: arrayFormat(certificate.value.brandScope) + "",
-          electrodeScope: arrayFormat(certificate.value.electrodeScope) + "",
-          fluxScope: certificate.value.fluxScope,
-          auxiliaryScope: certificate.value.auxiliaryScope,
-          thicknessScope: certificate.value.thicknessScope,
-          diameterScope: certificate.value.diameterScope,
-          expiration: dateFormat(certificate.value.expiration),
-          myImage: "sampleImage.png",
-        });
-        try {
-          // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
-          doc.render();
-        } catch (error) {
-          // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
-          function replaceErrors(key, value) {
-            if (value instanceof Error) {
-              return Object.getOwnPropertyNames(value).reduce(function(
-                error,
-                key
-              ) {
-                error[key] = value[key];
-                return error;
-              },
-              {});
-            }
-            return value;
-          }
-          console.log(JSON.stringify({ error: error }, replaceErrors));
-
-          if (error.properties && error.properties.errors instanceof Array) {
-            const errorMessages = error.properties.errors
-              .map(function(error) {
-                return error.properties.explanation;
-              })
-              .join("\n");
-            console.log("errorMessages", errorMessages);
-            // errorMessages is a humanly readable message looking like this :
-            // 'The tag beginning with "foobar" is unopened'
-          }
-          throw error;
+          {});
         }
-        const out = doc.getZip().generate({
-          type: "blob",
-          mimeType:
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        });
-        // Output the document using Data-URI
-        saveAs(out, certificate.value.numCertificate + ".docx");
-      });
-    };
+        return value;
+      }
+      console.log(JSON.stringify({ error: error }, replaceErrors));
 
-    return {
-      loading,
-      isId,
-      showModal,
-      closeModal,
-      certificate,
-      certificateData,
-      certificateSubData,
-      dateFormat,
-      protocolDateFormat,
-      shortingTableItems,
-      arrayFormat,
-      removeCertificate,
-      print,
-      exportToPDF,
-      exportToWord,
-
-      auth,
-      access,
-      modal,
-      showEditFields,
-      loadingData,
-      expired,
-      certs,
-
-      classCol_4,
-      classCol_6,
-      classCol_12,
-    };
-  },
-  components: {
-    AppPage,
-    AppLoader,
-    AppModal,
-    NewCertificateForm,
-    CertificateQr,
-  },
+      if (error.properties && error.properties.errors instanceof Array) {
+        const errorMessages = error.properties.errors
+          .map(function (error) {
+            return error.properties.explanation;
+          })
+          .join("\n");
+        console.log("errorMessages", errorMessages);
+        // errorMessages is a humanly readable message looking like this :
+        // 'The tag beginning with "foobar" is unopened'
+      }
+      throw error;
+    }
+    const out = doc.getZip().generate({
+      type: "blob",
+      mimeType:
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    });
+    // Output the document using Data-URI
+    saveAs(out, certificate.value.numCertificate + ".docx");
+  });
 };
 </script>
 

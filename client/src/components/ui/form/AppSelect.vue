@@ -11,72 +11,63 @@
       @change="select(value)"
     >
       <option selected disabled>{{ label }}</option>
-      <option
-        v-for="(option, idx) in options"
-        :key="idx"
-        :value="option.value"
-        >{{ option.value }}</option
-      >
+      <option v-for="(option, idx) in options" :key="idx" :value="option.value">
+        {{ option.value }}
+      </option>
     </select>
     <label :for="name">{{ label }}</label>
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { onMounted, ref } from "vue";
 
-export default {
-  props: {
-    options: {
-      type: Array,
-      default: () => [],
-    },
-    selectedDefault: {
-      type: String,
-      default: "",
-    },
-    label: {
-      type: String,
-      default: "",
-    },
-    name: {
-      type: String,
-      default: "",
-      required: true,
-    },
-    invalid: {
-      type: Boolean,
-    },
+const props = defineProps({
+  options: {
+    type: Array,
+    default: () => [],
   },
-  emits: ["select"],
-  setup(props, { emit }) {
-    const value = ref("");
-
-    onMounted(() => {
-      if (props.selectedDefault) {
-        value.value = props.selectedDefault;
-      }
-    });
-
-    const select = (value) => {
-      emit("select", {
-        value: value,
-      });
-    };
-
-    const clear = () => {
-      value.value = "";
-      emit("select", {
-        value: "",
-      });
-    };
-
-    return {
-      value,
-      select,
-      clear,
-    };
+  selectedDefault: {
+    type: String,
+    default: "",
   },
+  label: {
+    type: String,
+    default: "",
+  },
+  name: {
+    type: String,
+    default: "",
+    required: true,
+  },
+  invalid: {
+    type: Boolean,
+  },
+});
+
+const emits = defineEmits<{
+  (e: "select"): void;
+}>();
+
+const value = ref("");
+
+onMounted(() => {
+  if (props.selectedDefault) {
+    value.value = props.selectedDefault;
+  }
+});
+
+const select = (value) => {
+  emit("select", {
+    value: value,
+  });
+};
+
+const clear = () => {
+  value.value = "";
+  emit("select", {
+    value: "",
+  });
 };
 </script>
 

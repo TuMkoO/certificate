@@ -61,141 +61,117 @@
   </form>
 </template>
 
-<script>
+<script setup lang="ts">
 import { onMounted } from "vue";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
 import { useStore } from "vuex";
 
-export default {
-  props: {
-    buttonTitle: { type: String, required: true },
-    submitType: { type: String, required: true },
-    user: { type: Object, required: false },
-  },
-  emits: ["success"],
-  setup(props, { emit }) {
-    const store = useStore();
+const props = defineProps<{
+  buttonTitle: string;
+  submitType: string;
+  user?: {};
+}>();
 
-    const { handleSubmit, isSubmitting, submitCount, resetForm } = useForm();
+const emits = defineEmits<{
+  (e: "success"): void;
+}>();
 
-    const PASSWORD_MIN_LENGTH = 7;
+const store = useStore();
 
-    onMounted(() => {
-      role.value = "user";
+const { handleSubmit, resetForm } = useForm();
 
-      if (props.user) {
-        email.value = props.user.email;
-        name.value = props.user.name;
-        role.value = props.user.roles[0];
-      }
+const PASSWORD_MIN_LENGTH = 7;
+
+onMounted(() => {
+  role.value = "user";
+
+  if (props.user) {
+    email.value = props.user.email;
+    name.value = props.user.name;
+    role.value = props.user.roles[0];
+  }
+});
+
+const { value: email, errorMessage: eError } = useField(
+  "email",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите email")
+    .email("Необходимо ввести корректный email")
+);
+
+const { value: password, errorMessage: pError } = useField(
+  "password",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите пароль")
+    .min(
+      PASSWORD_MIN_LENGTH,
+      `Пароль не может быть меньше ${PASSWORD_MIN_LENGTH} символов`
+    )
+);
+
+const { value: name, errorMessage: nError } = useField(
+  "name",
+  yup
+    .string()
+    .trim()
+    .required("Пожалуйста, введите имя")
+    .min(5, "Имя не может быть меньше 5 символов")
+);
+
+const { value: role, errorMessage: rError } = useField(
+  "role",
+  yup.string().required("Пожалуйста, укажите права пользователя")
+);
+
+//Обработка ошибок формы при регистрации
+async function onInvalidSubmit({ values, errors, results }) {
+  if (
+    props.submitType == "update" &&
+    errors.password &&
+    values.email &&
+    values.name &&
+    values.role
+  ) {
+    await store.dispatch("auth/updateById", {
+      ...values,
+      id: props.user._id,
     });
 
-    const { value: email, errorMessage: eError, handleBlur: eBlur } = useField(
-      "email",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите email")
-        .email("Необходимо ввести корректный email")
-    );
+    emit("success");
 
-    const {
-      value: password,
-      errorMessage: pError,
-      handleBlur: pBlur,
-    } = useField(
-      "password",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите пароль")
-        .min(
-          PASSWORD_MIN_LENGTH,
-          `Пароль не может быть меньше ${PASSWORD_MIN_LENGTH} символов`
-        )
-    );
+    store.dispatch("setMessage", {
+      value: "Данные пользователя успешно обновлены",
+      type: "primary",
+    });
+    //закрыть модальное окно
+    // closeModal();
+  } else {
+    store.dispatch("setMessage", {
+      value: "Не все поля заполнены. Введите значения",
+      type: "warning",
+    });
+  }
+}
 
-    const { value: name, errorMessage: nError, handleBlur: nBlur } = useField(
-      "name",
-      yup
-        .string()
-        .trim()
-        .required("Пожалуйста, введите имя")
-        .min(5, "Имя не может быть меньше 5 символов")
-    );
+// функция регистрации
+const onSubmit = handleSubmit(async (values) => {
+  try {
+    if (props.submitType == "register") {
+      await store.dispatch("auth/register", values);
 
-    const { value: role, errorMessage: rError, handleBlur: rBlur } = useField(
-      "role",
-      yup.string().required("Пожалуйста, укажите права пользователя")
-    );
+      emit("success");
 
-    //Обработка ошибок формы при регистрации
-    async function onInvalidSubmit({ values, errors, results }) {
-      //console.log(values); // current form values
-      //console.log(errors); // a map of field names and their first error message
-      //console.log(results); // a detailed map of field names and their validation results
-
-      if (
-        props.submitType == "update" &&
-        errors.password &&
-        values.email &&
-        values.name &&
-        values.role
-      ) {
-        await store.dispatch("auth/updateById", {
-          ...values,
-          id: props.user._id,
-        });
-
-        emit("success");
-
-        store.dispatch("setMessage", {
-          value: "Данные пользователя успешно обновлены",
-          type: "primary",
-        });
-        //закрыть модальное окно
-        // closeModal();
-      } else {
-        store.dispatch("setMessage", {
-          value: "Не все поля заполнены. Введите значения",
-          type: "warning",
-        });
-      }
+      // очистка полей после успешной регистрации
+      resetForm();
+      role.value = "user";
     }
-
-    // функция регистрации
-    const onSubmit = handleSubmit(async (values) => {
-      try {
-        if (props.submitType == "register") {
-          await store.dispatch("auth/register", values);
-
-          emit("success");
-
-          // очистка полей после успешной регистрации
-          resetForm();
-          role.value = "user";
-        }
-      } catch (e) {}
-    }, onInvalidSubmit);
-
-    return {
-      email,
-      password,
-      name,
-      role,
-      eError,
-      nError,
-      pError,
-      rError,
-      eBlur,
-      pBlur,
-      nBlur,
-      rBlur,
-      onSubmit,
-    };
-  },
-};
+  } catch (e) {}
+}, onInvalidSubmit);
 </script>
 
 <style></style>
