@@ -10,33 +10,24 @@
   </main>
 </template>
 
-<script>
-import { ref, computed, onBeforeMount } from "vue";
+<script setup lang="ts">
+import { ref, onBeforeMount } from "vue";
 import { useStore } from "vuex";
 import AppLoader from "../components/ui/AppLoader.vue";
-import TheNavbar from "../components/TheNavbar";
-import TheFooter from "../components/TheFooter";
-import AppMessage from "../components/AppMessage";
+import TheNavbar from "../components/TheNavbar.vue";
+import TheFooter from "../components/TheFooter.vue";
+import AppMessage from "../components/AppMessage.vue";
 
-export default {
-  setup() {
-    //store
-    const store = useStore();
-    //loader
-    const loading = ref(false);
+//store
+const store = useStore();
+//loader
+const loading = ref(false);
 
-    onBeforeMount(async () => {
-      loading.value = true;
-      await store.dispatch("system/load");
-      loading.value = false;
-    });
-
-    return {
-      loading,
-    };
-  },
-  components: { TheNavbar, TheFooter, AppMessage, AppLoader },
-};
+onBeforeMount(async () => {
+  loading.value = true;
+  await store.dispatch("system/load");
+  loading.value = false;
+});
 </script>
 
 <style></style>

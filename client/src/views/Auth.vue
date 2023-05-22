@@ -41,48 +41,46 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary">
-            Войти
-          </button>
+          <button type="submit" class="btn btn-primary">Войти</button>
         </form>
       </div>
     </div>
   </app-system-page>
 </template>
 
-<script>
+<script setup lang="ts">
 import { onMounted } from "vue";
 import { useLoginForm } from "../use/login-form";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { error } from "../utils/error";
 import router from "../router";
-import AppSystemPage from "../components/ui/AppSystemPage";
+import AppSystemPage from "../components/ui/AppSystemPage.vue";
 
-export default {
-  setup() {
-    const route = useRoute();
-    const store = useStore();
+const route = useRoute();
+const store = useStore();
 
-    onMounted(() => {
-      const localStorageToken = localStorage.getItem("token");
+onMounted(() => {
+  const localStorageToken = localStorage.getItem("token");
 
-      if (localStorageToken) {
-        router.push("/");
-      }
-    });
+  if (localStorageToken) {
+    router.push("/");
+  }
+});
 
-    if (route.query.message) {
-      store.dispatch("setMessage", {
-        value: error(route.query.message),
-        type: "warning",
-      });
-    }
+if (route.query.message) {
+  store.dispatch("setMessage", {
+    value: error(route.query.message),
+    type: "warning",
+  });
+}
 
-    return { ...useLoginForm() };
-  },
-  components: { AppSystemPage },
-};
+// export default {
+//   setup() {
+//     return { ...useLoginForm() };
+//   },
+//   components: { AppSystemPage },
+// };
 </script>
 
 <style scoped></style>

@@ -1,19 +1,13 @@
 import axios from "axios";
 import router from "../router";
 import store from "@/store";
-// import "dotenv/config";
-// import dotenv from "dotenv";
-
-// dotenv.config();
-
-console.log(import.meta.env);
 
 const $api = axios.create({
   withCredentials: true,
   baseURL:
-    process.env.NODE_ENV === "production"
-      ? process.env.VUE_APP_DB_URL_HOSTING
-      : process.env.VUE_APP_DB_URL,
+    import.meta.env.MODE === "production"
+      ? import.meta.env.VITE_DB_URL_HOSTING
+      : import.meta.env.VITE_DB_URL,
 });
 
 $api.interceptors.request.use((config) => {
@@ -38,9 +32,9 @@ $api.interceptors.response.use(
       originalRequest._isRetry = true;
 
       try {
-        process.env.NODE_ENV === "production"
-          ? (axios.defaults.baseURL = process.env.VUE_APP_DB_URL_HOSTING)
-          : (axios.defaults.baseURL = process.env.VUE_APP_DB_URL);
+        import.meta.env.MODE === "production"
+          ? (axios.defaults.baseURL = import.meta.env.VITE_DB_URL_HOSTING)
+          : (axios.defaults.baseURL = import.meta.env.VITE_DB_URL);
 
         const { data } = await axios.get("api/auth/refresh", {
           withCredentials: true,
