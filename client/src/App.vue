@@ -28,11 +28,11 @@ onBeforeMount(async () => {
     await store.dispatch("auth/checkAuth");
 
     //получаем права текущего пользователя
-    const userRole = store.getters["auth/user"].roles;
+    const userRole = computed(() => store.getters["auth/user"].roles);
 
     //проверка прав доступа
-    if (userRole && route.meta.access) {
-      userRole.forEach((role) => {
+    if (userRole.value && route.meta.access) {
+      userRole.value.forEach((role) => {
         if (
           !route.meta.access.includes(role) &&
           route.fullPath !== "/privacy-policy"

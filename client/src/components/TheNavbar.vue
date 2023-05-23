@@ -76,16 +76,17 @@ import { useStore } from "vuex";
 
 const router = useRouter();
 const store = useStore();
-const auth = store.getters["auth/isAuthenticated"];
-const userRole = store.getters["auth/user"].roles;
+
+const auth = computed(() => store.getters["auth/isAuthenticated"]);
+const userRole = computed(() => store.getters["auth/user"].roles);
+const systemData = computed(() => store.getters["system/systems"]);
+
 const isShow = ref(false);
 const access = ref(false);
 
-const systemData = computed(() => store.getters["system/systems"]);
-
 onMounted(() => {
-  if (userRole) {
-    userRole.includes("admin") || userRole.includes("god")
+  if (userRole.value) {
+    userRole.value.includes("admin") || userRole.value.includes("god")
       ? (access.value = true)
       : (access.value = false);
   }

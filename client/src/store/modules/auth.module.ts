@@ -14,7 +14,6 @@ export default {
       user: {},
       users: [],
       isAuth: false,
-      abc: {},
     };
   },
   mutations: {
@@ -40,9 +39,6 @@ export default {
     },
     clearIsAuth(state) {
       state.isAuth = false;
-    },
-    setAbc(state, abc) {
-      state.abc = abc;
     },
   },
   actions: {
@@ -361,8 +357,8 @@ export default {
     async checkAuth({ commit }) {
       try {
         process.env.NODE_ENV === "production"
-          ? (axios.defaults.baseURL = process.env.VUE_APP_DB_URL_HOSTING)
-          : (axios.defaults.baseURL = process.env.VUE_APP_DB_URL);
+          ? (axios.defaults.baseURL = import.meta.env.VITE_DB_URL_HOSTING)
+          : (axios.defaults.baseURL = import.meta.env.VITE_DB_URL);
 
         const { data } = await axios.get("/api/auth/refresh", {
           withCredentials: true,
@@ -396,9 +392,6 @@ export default {
     },
     users(state) {
       return state.users;
-    },
-    abc(state) {
-      return state.abc;
     },
   },
 };
