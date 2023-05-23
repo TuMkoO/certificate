@@ -106,7 +106,12 @@ class UserService {
 
   async getAllUsers() {
     const users = await User.find();
-    return users;
+
+    const allUsers = users.map((user) => {
+      return new UserDto(user);
+    });
+
+    return allUsers;
   }
 
   async getUserById(id) {

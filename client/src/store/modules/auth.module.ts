@@ -1,13 +1,24 @@
 import axios from "axios";
 import store from "../index";
 import $api from "../../axios/request";
-import { error } from "../../utils/error";
+import { ActionContext } from "vuex";
+import type { User } from "@/types/User";
 
 interface State {
   token: string | null;
   user: {};
-  users: [];
+  users: User[];
   isAuth: boolean;
+}
+
+interface Passwords {
+  oldPassword: string;
+  newPassword: string;
+}
+
+interface LoginData {
+  email: string;
+  password: string;
 }
 
 const TOKEN_KEY = "token";
@@ -17,7 +28,7 @@ export default {
   state(): State {
     return {
       token: localStorage.getItem(TOKEN_KEY),
-      user: {},
+      user: {} as User,
       users: [],
       isAuth: false,
     };
@@ -27,10 +38,10 @@ export default {
     setToken(state: State, token: string) {
       state.token = token;
     },
-    setUser(state: State, user) {
+    setUser(state: State, user: User) {
       state.user = user;
     },
-    setUsers(state: State, users) {
+    setUsers(state: State, users: User[]) {
       state.users = users;
     },
     // очистка токена при logout
@@ -48,7 +59,10 @@ export default {
     },
   },
   actions: {
-    async login({ commit, dispatch }, payload) {
+    async login(
+      { commit, dispatch }: ActionContext<State, any>,
+      payload: LoginData
+    ) {
       try {
         const { data } = await $api.post(
           "api/auth/login",
@@ -69,14 +83,15 @@ export default {
         }
       } catch (e) {
         let error = null;
-        if (e == "Error: Request failed with status code 400") {
+
+        if (e.response.status == 400) {
           error = "Введены неверные логин или пароль";
         }
 
         dispatch(
           "setMessage",
           {
-            value: error || e,
+            value: error || e.message,
             type: "danger",
           },
           {
@@ -88,7 +103,7 @@ export default {
       }
     },
 
-    async logout({ commit }) {
+    async logout({ commit }: ActionContext<State, any>) {
       //получаем токен из store
       const token = store.getters["auth/token"];
 
@@ -110,7 +125,7 @@ export default {
       } catch (error) {}
     },
 
-    async register({ commit, dispatch }, payload) {
+    async register({ dispatch }: ActionContext<State, any>, payload: User) {
       try {
         await $api.post(
           "api/auth/register",
@@ -143,7 +158,7 @@ export default {
       }
     },
 
-    async loadUsers({ commit, dispatch }) {
+    async loadUsers({ commit, dispatch }: ActionContext<State, any>) {
       try {
         const { data } = await $api.get("api/auth/users", {
           withCredentials: true,
@@ -151,7 +166,7 @@ export default {
 
         commit(
           "setUsers",
-          data.filter((item) => !item.roles.includes("god"))
+          data.filter((item: User) => !item.role?.includes("god"))
         );
       } catch (e) {
         dispatch(
@@ -167,7 +182,7 @@ export default {
       }
     },
 
-    async loadCurrentUserId({ commit, dispatch }) {
+    async loadCurrentUserId({ commit, dispatch }: ActionContext<State, any>) {
       try {
         const { data } = await $api.get("api/auth/user", {
           withCredentials: true,
@@ -192,7 +207,7 @@ export default {
       }
     },
 
-    async loadUserById({ commit, dispatch }, id) {
+    async loadUserById({ dispatch }: ActionContext<State, any>, id: string) {
       try {
         const { data } = await $api.get(`api/auth/users/${id}`, {
           withCredentials: true,
@@ -213,7 +228,10 @@ export default {
       }
     },
 
-    async update({ commit, dispatch }, payload) {
+    async update(
+      { commit, dispatch }: ActionContext<State, any>,
+      payload: User
+    ) {
       try {
         const userId = store.getters["auth/user"].id;
 
@@ -258,9 +276,9 @@ export default {
       }
     },
 
-    async updateById({ commit, dispatch }, payload) {
+    async updateById({ dispatch }: ActionContext<State, any>, payload: User) {
       try {
-        const { data } = await $api.post(
+        await $api.post(
           "api/auth/update",
           {
             ...payload,
@@ -290,7 +308,10 @@ export default {
       }
     },
 
-    async updatePassword({ dispatch }, payload) {
+    async updatePassword(
+      { dispatch }: ActionContext<State, any>,
+      payload: Passwords
+    ) {
       try {
         const userId = store.getters["auth/user"].id;
 
@@ -330,9 +351,9 @@ export default {
       }
     },
 
-    async remove({ commit, dispatch }, id) {
+    async remove({ dispatch }: ActionContext<State, any>, id: string) {
       try {
-        const { data } = await $api.delete(`api/auth/${id}`);
+        await $api.delete(`api/auth/${id}`);
 
         dispatch(
           "setMessage",
@@ -355,7 +376,7 @@ export default {
     },
 
     //для проверки при входе на сайт, вызывается один раз
-    async checkAuth({ commit }) {
+    async checkAuth({ commit }: ActionContext<State, any>) {
       try {
         process.env.NODE_ENV === "production"
           ? (axios.defaults.baseURL = import.meta.env.VITE_DB_URL_HOSTING)
@@ -373,25 +394,23 @@ export default {
           commit("setToken", data.accessToken);
           commit("setUser", data.user);
         }
-      } catch (e) {
-        // console.log("auth.module/checkAuth e", e);
-      }
+      } catch (e) {}
     },
   },
   getters: {
-    token(state) {
+    token(state: State) {
       return state.token;
     },
-    isAuthenticated(_, getters) {
+    isAuthenticated(_: State, getters: any) {
       return !!getters.token;
     },
-    isAuth(state) {
+    isAuth(state: State) {
       return state.isAuth;
     },
-    user(state) {
+    user(state: State) {
       return state.user;
     },
-    users(state) {
+    users(state: State) {
       return state.users;
     },
   },

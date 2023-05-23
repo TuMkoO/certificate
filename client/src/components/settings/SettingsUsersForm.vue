@@ -73,7 +73,7 @@ const props = defineProps<{
   user?: {};
 }>();
 
-const emits = defineEmits<{
+const emit = defineEmits<{
   (e: "success"): void;
 }>();
 
@@ -128,7 +128,7 @@ const { value: role, errorMessage: rError } = useField(
   yup.string().required("Пожалуйста, укажите права пользователя")
 );
 
-//Обработка ошибок формы при регистрации
+//Обработка ошибок формы при регистрации ==> Редактирование пользователя
 async function onInvalidSubmit({ values, errors, results }) {
   if (
     props.submitType == "update" &&
@@ -138,8 +138,10 @@ async function onInvalidSubmit({ values, errors, results }) {
     values.role
   ) {
     await store.dispatch("auth/updateById", {
-      ...values,
-      id: props.user._id,
+      email: values.email,
+      name: values.name,
+      role: values.role,
+      id: props.user.id,
     });
 
     emit("success");
