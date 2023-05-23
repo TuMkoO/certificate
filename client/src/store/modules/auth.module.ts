@@ -3,12 +3,18 @@ import store from "../index";
 import $api from "../../axios/request";
 import { error } from "../../utils/error";
 
-// const TOKEN_KEY = "jwt-token";
+interface State {
+  token: string | null;
+  user: {};
+  users: [];
+  isAuth: boolean;
+}
+
 const TOKEN_KEY = "token";
 
 export default {
   namespaced: true,
-  state() {
+  state(): State {
     return {
       token: localStorage.getItem(TOKEN_KEY),
       user: {},
@@ -18,41 +24,36 @@ export default {
   },
   mutations: {
     // получение токена для login
-    setToken(state, token) {
+    setToken(state: State, token: string) {
       state.token = token;
     },
-    setUser(state, user) {
+    setUser(state: State, user) {
       state.user = user;
     },
-    setUsers(state, users) {
+    setUsers(state: State, users) {
       state.users = users;
     },
     // очистка токена при logout
-    logout(state) {
+    logout(state: State) {
       state.token = null;
       state.isAuth = false;
       state.user = {};
       localStorage.removeItem(TOKEN_KEY);
     },
-    setIsAuth(state) {
+    setIsAuth(state: State) {
       state.isAuth = true;
     },
-    clearIsAuth(state) {
+    clearIsAuth(state: State) {
       state.isAuth = false;
     },
   },
   actions: {
     async login({ commit, dispatch }, payload) {
       try {
-        const dataload = {
-          email: payload.loginEmail,
-          password: payload.loginPassword,
-        };
-
         const { data } = await $api.post(
           "api/auth/login",
           {
-            ...dataload,
+            ...payload,
           },
           { withCredentials: true }
         );
@@ -97,7 +98,7 @@ export default {
       };
 
       try {
-        const data = await $api.post(
+        await $api.post(
           "api/auth/logout",
           {
             headers: headers,
@@ -111,7 +112,7 @@ export default {
 
     async register({ commit, dispatch }, payload) {
       try {
-        const { data } = await $api.post(
+        await $api.post(
           "api/auth/register",
           {
             ...payload,

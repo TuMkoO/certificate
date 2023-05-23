@@ -6,6 +6,10 @@ import certificateSub from "./modules/certificate-sub.module";
 import system from "./modules/system.module";
 import qr from "./modules/qr.module";
 
+interface State {
+  message: string | null;
+}
+
 const plugins = [];
 
 if (import.meta.env.MODE === "development") {
@@ -14,21 +18,21 @@ if (import.meta.env.MODE === "development") {
 
 export default createStore({
   plugins,
-  state() {
+  state(): State {
     return {
       message: null,
     };
   },
   mutations: {
-    setMessage(state, message) {
+    setMessage(state: State, message: string) {
       state.message = message;
     },
-    clearMessage(state) {
+    clearMessage(state: State) {
       state.message = null;
     },
   },
   actions: {
-    setMessage({ commit }, message) {
+    setMessage({ commit }, message: string) {
       commit("setMessage", message);
 
       setTimeout(() => {

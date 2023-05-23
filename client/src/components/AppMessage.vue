@@ -34,10 +34,11 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { type MessageTypes } from "@/types/MessageTypes";
 
 const store = useStore();
 
-const messageTypes = {
+const messageTypes: MessageTypes = {
   primary: "primary",
   danger: "danger",
   warning: "warning",

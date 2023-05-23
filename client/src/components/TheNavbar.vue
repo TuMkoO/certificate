@@ -81,8 +81,8 @@ const auth = computed(() => store.getters["auth/isAuthenticated"]);
 const userRole = computed(() => store.getters["auth/user"].roles);
 const systemData = computed(() => store.getters["system/systems"]);
 
-const isShow = ref(false);
-const access = ref(false);
+const isShow = ref<boolean>(false);
+const access = ref<boolean>(false);
 
 onMounted(() => {
   if (userRole.value) {

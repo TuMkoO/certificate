@@ -20,7 +20,7 @@ import AppMessage from "../components/AppMessage.vue";
 //store
 const store = useStore();
 //loader
-const loading = ref(false);
+const loading = ref<boolean>(false);
 
 onBeforeMount(async () => {
   loading.value = true;

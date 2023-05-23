@@ -12,16 +12,16 @@
             <div class="form-floating mb-1">
               <input
                 type="email"
-                :class="['form-control', { 'is-invalid': lEmailError }]"
-                id="loginEmail"
+                :class="['form-control', { 'is-invalid': emailError }]"
+                id="email"
                 aria-describedby="emailHelp"
                 placeholder="name@example.com"
-                v-model="loginEmail"
+                v-model="email"
               />
-              <label for="loginEmail" class="form-label">Email</label>
+              <label for="email" class="form-label">Email</label>
             </div>
-            <div class="form-text text-danger mb-3" v-if="lEmailError">
-              {{ lEmailError }}
+            <div class="form-text text-danger mb-3" v-if="emailError">
+              {{ emailError }}
             </div>
           </div>
 
@@ -29,15 +29,15 @@
             <div class="form-floating mb-1">
               <input
                 type="password"
-                :class="['form-control', { 'is-invalid': lPasswordError }]"
-                id="loginPassword"
+                :class="['form-control', { 'is-invalid': passwordError }]"
+                id="password"
                 placeholder="Пароль"
-                v-model="loginPassword"
+                v-model="password"
               />
-              <label for="loginPassword" class="form-label">Пароль</label>
+              <label for="password" class="form-label">Пароль</label>
             </div>
-            <div class="form-text text-danger mb-3" v-if="lPasswordError">
-              {{ lPasswordError }}
+            <div class="form-text text-danger mb-3" v-if="passwordError">
+              {{ passwordError }}
             </div>
           </div>
 
@@ -65,8 +65,8 @@ const { handleSubmit } = useForm();
 
 const PASSWORD_MIN_LENGTH = 7;
 
-const { value: loginEmail, errorMessage: lEmailError } = useField(
-  "loginEmail",
+const { value: email, errorMessage: emailError } = useField(
+  "email",
   yup
     .string()
     .trim()
@@ -74,8 +74,8 @@ const { value: loginEmail, errorMessage: lEmailError } = useField(
     .email("Необходимо ввести корректный email")
 );
 
-const { value: loginPassword, errorMessage: lPasswordError } = useField(
-  "loginPassword",
+const { value: password, errorMessage: passwordError } = useField(
+  "password",
   yup
     .string()
     .trim()

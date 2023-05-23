@@ -15,7 +15,9 @@ const router = useRouter();
 //store
 const store = useStore();
 //loading
-const loading = ref(false);
+const loading = ref<boolean>(false);
+//получаем права текущего пользователя
+const userRole = computed(() => store.getters["auth/user"].roles);
 
 const layout = computed(() => route.meta.layout);
 
@@ -27,12 +29,9 @@ onBeforeMount(async () => {
   if (localStorage.getItem("token")) {
     await store.dispatch("auth/checkAuth");
 
-    //получаем права текущего пользователя
-    const userRole = computed(() => store.getters["auth/user"].roles);
-
     //проверка прав доступа
     if (userRole.value && route.meta.access) {
-      userRole.value.forEach((role) => {
+      userRole.value.forEach((role: string) => {
         if (
           !route.meta.access.includes(role) &&
           route.fullPath !== "/privacy-policy"
