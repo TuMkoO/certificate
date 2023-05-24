@@ -96,17 +96,18 @@ import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
+import type { SystemsSettings } from "@/types/SettingsSystem";
 
 const props = defineProps<{
-  system: object;
+  system: SystemsSettings;
 }>();
 
 //подключаем store
 const store = useStore();
 
-const footerText2 = ref("");
-const footerLink = ref("");
-const footerLinkTitle = ref("");
+const footerText2 = ref<string>("");
+const footerLink = ref<string>("");
+const footerLinkTitle = ref<string>("");
 
 //Vee-validate
 const { handleSubmit } = useForm();
@@ -140,7 +141,7 @@ onMounted(() => {
 });
 
 // функция изменения
-const submit = handleSubmit(async () => {
+const onSubmit = handleSubmit(async () => {
   const id = props.system._id;
   const values = {
     brand: brand.value,
@@ -157,8 +158,6 @@ const submit = handleSubmit(async () => {
     await store.dispatch("system/update", { values, id });
   } catch (e) {}
 });
-
-const onSubmit = handleSubmit(submit);
 </script>
 
 <style></style>

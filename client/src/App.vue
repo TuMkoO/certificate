@@ -29,8 +29,6 @@ onBeforeMount(async () => {
   if (localStorage.getItem("token")) {
     await store.dispatch("auth/checkAuth");
 
-    console.log(userRole.value);
-
     //проверка прав доступа
     if (userRole.value && route.meta.access) {
       userRole.value.forEach((role: string) => {

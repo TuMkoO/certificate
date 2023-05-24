@@ -190,6 +190,16 @@ ChartJS.register(
   ArcElement
 );
 
+interface ChartData {
+  labels: string[];
+  datasets: ChartDataDatasets[];
+}
+interface ChartDataDatasets {
+  label: string;
+  backgroundColor: string | string[];
+  data: number[];
+}
+
 //store
 const store = useStore();
 //loader
@@ -206,28 +216,28 @@ let typeWorkResult = {};
 let yearsAttestationResult = {};
 
 //Подписи значений графика
-const weldingMethodLabels = [];
-const accessesLabels = [];
-const agesLabels = [];
-const workYearsLabels = [];
-const qualifyingRankLabels = [];
-const workLabels = [];
-const typeWorkLabels = [];
-const yearsAttestationLabels = [];
+const weldingMethodLabels: string[] = [];
+const accessesLabels: string[] = [];
+const agesLabels: string[] = [];
+const workYearsLabels: string[] = [];
+const qualifyingRankLabels: string[] = [];
+const workLabels: string[] = [];
+const typeWorkLabels: string[] = [];
+const yearsAttestationLabels: string[] = [];
 
 //Значения графика
-const weldingMethodData = [];
-const accessesData = [];
-const agesData = [];
-const workYearsData = [];
-const qualifyingRankData = [];
-const workData = [];
-const typeWorkData = [];
-const yearsAttestationData = [];
-const monthAttestationData = [];
+const weldingMethodData: number[] = [];
+const accessesData: number[] = [];
+const agesData: number[] = [];
+const workYearsData: number[] = [];
+const qualifyingRankData: number[] = [];
+const workData: number[] = [];
+const typeWorkData: number[] = [];
+const yearsAttestationData: number[] = [];
+const monthAttestationData: number[] = [];
 const alltimeAttestationData = [];
 
-const weldingMethodChartData = {
+const weldingMethodChartData: ChartData = {
   labels: weldingMethodLabels,
   datasets: [
     {
@@ -238,7 +248,7 @@ const weldingMethodChartData = {
   ],
 };
 
-const accessesChartData = {
+const accessesChartData: ChartData = {
   labels: accessesLabels,
   datasets: [
     {
@@ -257,7 +267,7 @@ const accessesChartData = {
   ],
 };
 
-const agesChartData = {
+const agesChartData: ChartData = {
   labels: agesLabels,
   datasets: [
     {
@@ -268,7 +278,7 @@ const agesChartData = {
   ],
 };
 
-const workYearsChartData = {
+const workYearsChartData: ChartData = {
   labels: workYearsLabels,
   datasets: [
     {
@@ -279,7 +289,7 @@ const workYearsChartData = {
   ],
 };
 
-const qualifyingRankChartData = {
+const qualifyingRankChartData: ChartData = {
   labels: qualifyingRankLabels,
   datasets: [
     {
@@ -290,7 +300,7 @@ const qualifyingRankChartData = {
   ],
 };
 
-const workChartData = {
+const workChartData: ChartData = {
   labels: workLabels,
   datasets: [
     {
@@ -301,7 +311,7 @@ const workChartData = {
   ],
 };
 
-const typeWorkChartData = {
+const typeWorkChartData: ChartData = {
   labels: typeWorkLabels,
   datasets: [
     {
@@ -312,7 +322,7 @@ const typeWorkChartData = {
   ],
 };
 
-const yearsAttestationChartData = {
+const yearsAttestationChartData: ChartData = {
   labels: yearsAttestationLabels,
   datasets: [
     {
@@ -323,7 +333,7 @@ const yearsAttestationChartData = {
   ],
 };
 
-const monthAttestationChartData = {
+const monthAttestationChartData: ChartData = {
   labels: [
     "январь",
     "февраль",
@@ -346,7 +356,7 @@ const monthAttestationChartData = {
     },
   ],
 };
-const alltimeAttestationChartData = {
+const alltimeAttestationChartData: ChartData = {
   labels: [
     "январь",
     "февраль",

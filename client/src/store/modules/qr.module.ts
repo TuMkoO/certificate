@@ -1,39 +1,37 @@
 import $api from "../../axios/request";
-// import store from "../index";
+import { ActionContext } from "vuex";
+
+interface State {
+  qrs: string;
+}
+
+interface UpdatePayload {
+  id: string;
+  values: { link: string };
+}
 
 export default {
   namespaced: true,
-  state() {
+  state(): State {
     return {
-      // qrs: [],
       qrs: "",
     };
   },
 
   mutations: {
-    //обновление в хранилище []
-    setQrs(state, qrs) {
+    //обновление в хранилище
+    setQrs(state: State, qrs: string) {
       state.qrs = qrs;
-    },
-    //добавление новых значений в хранилище []
-    addQr(state, qr) {
-      // state.qrs.push(qr);
-      state.qrs = qr;
     },
   },
 
   actions: {
-    async create({ commit, dispatch }, payload) {
+    async create(
+      { commit, dispatch }: ActionContext<State, any>,
+      payload: string
+    ): Promise<any> {
       try {
-        //получаем токен из store
-        // const token = store.getters["auth/token"];
-
-        // const headers = {
-        //   "Content-Type": "application/json",
-        //   Authorization: `Bearer ${token}`,
-        // };
-
-        const { data } = await $api.post("api/qr-code/create", payload);
+        await $api.post("api/qr-code/create", payload);
 
         dispatch(
           "setMessage",
@@ -56,20 +54,9 @@ export default {
         throw e;
       }
     },
-    async load({ commit, dispatch }) {
+    async load({ commit, dispatch }: ActionContext<State, any>): Promise<void> {
       try {
-        //получаем токен из store
-        // const token = store.getters["auth/token"];
-
-        // const headers = {
-        //   "Content-Type": "application/json",
-        //   Authorization: `Bearer ${token}`,
-        // };
-
-        //загрузка с БД сервера
         const { data } = await $api.get("/api/qr-code");
-
-        // console.log("data", data);
 
         //вызываем mutation
         commit("setQrs", data);
@@ -87,48 +74,15 @@ export default {
       }
     },
 
-    async loadById({ commit, dispatch }, id) {
+    async update(
+      { dispatch }: ActionContext<State, any>,
+      payload: UpdatePayload
+    ): Promise<void> {
       try {
-        // const headers = {
-        //   "Content-Type": "application/json",
-        // };
-
-        //загрузка с БД сервера
-        const { data } = await $api.get(`/api/qr-code/${id}`);
-
-        return data;
-      } catch (e) {
-        dispatch(
-          "setMessage",
-          {
-            value: e,
-            type: "danger",
-          },
-          { root: true }
-        );
-
-        throw e;
-      }
-    },
-
-    async update({ dispatch }, payload) {
-      try {
-        //получаем токен из store
-        // const token = store.getters["auth/token"];
-        // id
         const id = payload.id;
-        // данные для передачи в БД на сервере
         const dataload = payload.values;
 
-        // console.log(payload);
-
-        // const headers = {
-        //   "Content-Type": "application/json",
-        //   Authorization: `Bearer ${token}`,
-        // };
-
         if (id) {
-          // console.log("certificate id", id);
           const data = await $api.put(`api/qr-code/${id}`, dataload);
 
           dispatch(
@@ -149,7 +103,7 @@ export default {
             { root: true }
           );
         }
-      } catch (e) {
+      } catch (e: any) {
         dispatch(
           "setMessage",
           {
@@ -160,43 +114,9 @@ export default {
         );
       }
     },
-
-    /*async remove({ commit, dispatch }, id) {
-      try {
-        //получаем токен из store
-        const token = store.getters["auth/token"];
-
-        const headers = {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        };
-
-        const { data } = await axios.delete(`api/qr-code/${id}`, {
-          headers: headers,
-        });
-
-        dispatch(
-          "setMessage",
-          {
-            value: "Настройки QR кода успешно удален",
-            type: "primary",
-          },
-          { root: true }
-        );
-      } catch (e) {
-        dispatch(
-          "setMessage",
-          {
-            value: e.message,
-            type: "danger",
-          },
-          { root: true }
-        );
-      }
-    },*/
   },
   getters: {
-    qrs(state) {
+    qrs(state: State) {
       return state.qrs;
     },
   },

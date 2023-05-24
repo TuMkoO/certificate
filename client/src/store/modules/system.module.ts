@@ -1,75 +1,48 @@
-import axios from "../../axios/request";
-// import $api from "../../axios/request";
+import axios from "axios";
+import $api from "../../axios/request";
 import store from "../index";
+import { ActionContext } from "vuex";
+import type { SystemsSettings } from "@/types/SettingsSystem";
+
+interface State {
+  systems: SystemsSettings[];
+}
+
+interface SystemsUpdatePayload {
+  id: string;
+  values: SystemsSettings;
+}
 
 export default {
   namespaced: true,
-  state() {
+  state(): State {
     return {
-      systems: [],
+      systems: [] as SystemsSettings[],
     };
   },
 
   mutations: {
     //обновление в хранилище []
-    setSystems(state, systems) {
+    setSystems(state: State, systems: SystemsSettings[]) {
       state.systems = systems;
     },
     //добавление новых значений в хранилище []
-    addSystem(state, system) {
+    addSystem(state: State, system: any) {
       state.systems.push(system);
     },
   },
 
   actions: {
-    async create({ commit, dispatch }, payload) {
-      try {
-        //получаем токен из store
-        const token = store.getters["auth/token"];
-
-        const headers = {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        };
-
-        const { data } = await axios.post("api/system/create", payload, {
-          headers: headers,
-        });
-
-        dispatch(
-          "setMessage",
-          {
-            value: "Системные настройки успешно добавлены",
-            type: "primary",
-          },
-          { root: true }
-        );
-      } catch (e) {
-        dispatch(
-          "setMessage",
-          {
-            value: e,
-            type: "danger",
-          },
-          { root: true }
-        );
-
-        throw e;
-      }
-    },
-    async load({ commit, dispatch }) {
+    async load({ commit, dispatch }: ActionContext<State, any>): Promise<void> {
       try {
         const headers = {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${token}`,
         };
 
         //загрузка с БД сервера
-        const { data } = await axios.get("/api/system/", {
+        const { data } = await axios.get<SystemsSettings[]>("/api/system/", {
           headers: headers,
         });
-
-        // console.log("system/module load data::: ", data);
 
         //вызываем mutation
         commit("setSystems", data[0]);
@@ -87,55 +60,21 @@ export default {
       }
     },
 
-    async loadById({ commit, dispatch }, id) {
+    async update(
+      { commit, dispatch }: ActionContext<State, any>,
+      payload: SystemsUpdatePayload
+    ): Promise<void> {
       try {
-        const headers = {
-          "Content-Type": "application/json",
-        };
-
-        //загрузка с БД сервера
-        const { data } = await axios.get(`api/system/${id}`, {
-          headers: headers,
-        });
-
-        return data;
-      } catch (e) {
-        dispatch(
-          "setMessage",
-          {
-            value: e,
-            type: "danger",
-          },
-          { root: true }
-        );
-
-        throw e;
-      }
-    },
-
-    async update({ commit, dispatch }, payload) {
-      try {
-        //получаем токен из store
-        const token = store.getters["auth/token"];
-        // id
         const id = payload.id;
         // данные для передачи в БД на сервере
         const dataload = payload.values;
 
-        // console.log(payload);
-
-        const headers = {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        };
-
         if (id) {
-          // console.log("certificate id", id);
-          const { data } = await axios.put(`api/system/${id}`, dataload, {
-            headers: headers,
-          });
-
-          // console.log("system/module update data::: ", data.systemData);
+          const { data } = await $api.put(
+            `api/system/${id}`,
+            { ...dataload },
+            { withCredentials: true }
+          );
 
           commit("setSystems", data.systemData);
 
@@ -157,7 +96,7 @@ export default {
             { root: true }
           );
         }
-      } catch (e) {
+      } catch (e: any) {
         dispatch(
           "setMessage",
           {
@@ -168,43 +107,9 @@ export default {
         );
       }
     },
-
-    /*async remove({ commit, dispatch }, id) {
-      try {
-        //получаем токен из store
-        const token = store.getters["auth/token"];
-
-        const headers = {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        };
-
-        const { data } = await axios.delete(`api/certificate/${id}`, {
-          headers: headers,
-        });
-
-        dispatch(
-          "setMessage",
-          {
-            value: "Протокол успешно удален",
-            type: "primary",
-          },
-          { root: true }
-        );
-      } catch (e) {
-        dispatch(
-          "setMessage",
-          {
-            value: e.message,
-            type: "danger",
-          },
-          { root: true }
-        );
-      }
-    },*/
   },
   getters: {
-    systems(state) {
+    systems(state: State) {
       return state.systems;
     },
   },
