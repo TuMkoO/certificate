@@ -94,11 +94,11 @@ onMounted(() => {
 
 const show = () => {
   isShow.value = true;
-  document.getElementById("navbarOffcanvasLg").classList.add("show");
+  document.getElementById("navbarOffcanvasLg")?.classList.add("show");
 };
 
 const close = () => {
-  document.getElementById("navbarOffcanvasLg").classList.remove("show");
+  document.getElementById("navbarOffcanvasLg")?.classList.remove("show");
 
   isShow.value = false;
 };

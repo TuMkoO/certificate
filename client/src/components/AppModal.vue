@@ -10,8 +10,8 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 v-if="title" class="modal-title" id="systemModalLabel">
-            {{ title }}
+          <h5 v-if="props.title" class="modal-title" id="systemModalLabel">
+            {{ props.title }}
           </h5>
           <button
             type="button"

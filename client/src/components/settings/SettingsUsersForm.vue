@@ -66,11 +66,12 @@ import { onMounted } from "vue";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
 import { useStore } from "vuex";
+import type { IUser } from "@/types/IUser";
 
 const props = defineProps<{
   buttonTitle: string;
   submitType: string;
-  user?: {};
+  user?: IUser;
 }>();
 
 const emit = defineEmits<{
@@ -86,7 +87,7 @@ const PASSWORD_MIN_LENGTH = 7;
 onMounted(() => {
   role.value = "user";
 
-  if (props.user) {
+  if (props.user && props.user.roles?.length) {
     email.value = props.user.email;
     name.value = props.user.name;
     role.value = props.user.roles[0];
@@ -141,7 +142,7 @@ async function onInvalidSubmit({ values, errors, results }) {
       email: values.email,
       name: values.name,
       role: values.role,
-      id: props.user.id,
+      id: props.user?.id,
     });
 
     emit("success");

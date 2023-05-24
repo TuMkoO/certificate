@@ -5,39 +5,43 @@
         <h4 class="text-center mb-4">Сменить пароль</h4>
       </div>
       <div class="profile">
-        <div class="row">
-          <form @submit.prevent="onSubmit">
-            <div class="mb-3">
-              <label for="oldPassword" class="form-label">Текущий пароль</label>
-              <input
-                type="password"
-                :class="['form-control', { 'is-invalid': oError }]"
-                id="oldPassword"
-                placeholder="Введите ваш текущий пароль"
-                v-model="oldPassword"
-              />
-              <div class="form-text text-danger" v-if="oError">
-                {{ oError }}
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <form @submit.prevent="onSubmit">
+              <div class="mb-3">
+                <label for="oldPassword" class="form-label"
+                  >Текущий пароль</label
+                >
+                <input
+                  type="password"
+                  :class="['form-control', { 'is-invalid': oError }]"
+                  id="oldPassword"
+                  placeholder="Введите ваш текущий пароль"
+                  v-model="oldPassword"
+                />
+                <div class="form-text text-danger" v-if="oError">
+                  {{ oError }}
+                </div>
               </div>
-            </div>
-            <div class="mb-3">
-              <label for="newPassword" class="form-label">Новый пароль</label>
-              <input
-                type="password"
-                :class="['form-control', { 'is-invalid': nError }]"
-                id="newPassword"
-                placeholder="Введите ваш новый пароль"
-                v-model="newPassword"
-              />
-              <div class="form-text text-danger" v-if="nError">
-                {{ nError }}
+              <div class="mb-3">
+                <label for="newPassword" class="form-label">Новый пароль</label>
+                <input
+                  type="password"
+                  :class="['form-control', { 'is-invalid': nError }]"
+                  id="newPassword"
+                  placeholder="Введите ваш новый пароль"
+                  v-model="newPassword"
+                />
+                <div class="form-text text-danger" v-if="nError">
+                  {{ nError }}
+                </div>
               </div>
-            </div>
 
-            <button type="submit" class="btn btn-primary mt-3">
-              Сохранить
-            </button>
-          </form>
+              <button type="submit" class="btn btn-primary mt-3">
+                Сохранить
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

@@ -129,7 +129,7 @@ onMounted(async () => {
 // функция обновления профиля
 const onSubmit = handleSubmit(async (values) => {
   try {
-    await store.dispatch("auth/update", values);
+    await store.dispatch("auth/update", { ...values, role: roles.value[0] });
   } catch (e) {}
 });
 </script>

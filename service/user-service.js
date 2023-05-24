@@ -116,7 +116,7 @@ class UserService {
 
   async getUserById(id) {
     const user = await User.findById({ _id: id });
-    return user;
+    return new UserDto(user);
   }
 
   async getUserCurrent(refreshToken) {

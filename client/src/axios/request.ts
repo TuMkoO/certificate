@@ -1,6 +1,7 @@
 import axios from "axios";
 import router from "../router";
 import store from "@/store";
+import type { AuthResponse } from "@/types/response/AuthResponse";
 
 const $api = axios.create({
   withCredentials: true,
@@ -36,7 +37,7 @@ $api.interceptors.response.use(
           ? (axios.defaults.baseURL = import.meta.env.VITE_DB_URL_HOSTING)
           : (axios.defaults.baseURL = import.meta.env.VITE_DB_URL);
 
-        const { data } = await axios.get("api/auth/refresh", {
+        const { data } = await axios.get<AuthResponse>("api/auth/refresh", {
           withCredentials: true,
         });
 

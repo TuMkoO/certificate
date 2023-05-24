@@ -168,9 +168,10 @@
         </div>
         <div v-if="modalType == 'delete'" class="modal-footer">
           <button
+            v-if="currentUser.id"
             type="button"
             class="btn btn-success"
-            @click="deleteUser(currentUser._id)"
+            @click="deleteUser(currentUser.id)"
           >
             Удалить
           </button>
@@ -188,26 +189,27 @@ import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import AppModal from "../AppModal.vue";
 import SettingsUsersForm from "./SettingsUsersForm.vue";
+import type { IUser } from "@/types/IUser";
 
 const store = useStore();
 //Модальное окно
-const modal = ref(false);
+const modal = ref<boolean>(false);
 
-const modalType = ref("");
+const modalType = ref<string>("");
 
 //Список пользователей
-const users = ref([]);
-const currentUser = ref();
+const users = ref<IUser[]>([]);
+const currentUser = ref<IUser>({} as IUser);
 
 onMounted(() => {
   users.value = store.getters["auth/users"];
 });
 
-function showModal(user, action) {
+function showModal(user: IUser, action?: string) {
   modal.value = true;
   setTimeout(() => {
     let systemModal = document.getElementById("systemModal");
-    systemModal.classList.add("show");
+    systemModal?.classList.add("show");
   }, 0);
 
   currentUser.value = user;
@@ -229,10 +231,10 @@ async function updateUsers() {
   users.value = store.getters["auth/users"];
 }
 
-async function deleteUser(id) {
+async function deleteUser(id: string) {
   await store.dispatch("auth/remove", id);
-
   await store.dispatch("auth/loadUsers");
+
   users.value = store.getters["auth/users"];
 
   modal.value = false;
