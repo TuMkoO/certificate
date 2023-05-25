@@ -21,8 +21,6 @@ export default {
   actions: {
     async create({ commit, dispatch }, payload) {
       try {
-        // console.log("payload::: ", payload);
-
         const { data } = await $api.post("api/certificate-sub/create", payload);
 
         dispatch(

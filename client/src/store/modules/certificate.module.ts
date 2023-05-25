@@ -1,6 +1,5 @@
 import axios from "../../axios/request";
 import $api from "../../axios/request";
-// import store from "../index";
 
 export default {
   namespaced: true,

@@ -1,10 +1,45 @@
-import axios from "../../axios/request";
 import $api from "../../axios/request";
 import store from "../index";
+import { ActionContext } from "vuex";
+import type { ICertificateItem } from "@/types/ICertificateItem";
+
+interface State {
+  certTextHeads: ICertificateItem[];
+  certQualifyingRanks: ICertificateItem[];
+  certAttestationTypes: ICertificateItem[];
+  certWeldingMethods: ICertificateItem[];
+  certWeldedTypes: ICertificateItem[];
+  certWeldedSeams: ICertificateItem[];
+  certWeldedConnections: ICertificateItem[];
+  certWeldedPositions: ICertificateItem[];
+  certAxesPositions: ICertificateItem[];
+  certWeldedJoints: ICertificateItem[];
+  certBrands: ICertificateItem[];
+  certElectrodes: ICertificateItem[];
+  certComissions: ICertificateItem[];
+  certControls: ICertificateItem[];
+  certVisuals: ICertificateItem[];
+  certUltrasonicTestings: ICertificateItem[];
+  certGrades: ICertificateItem[];
+  certAccesses: ICertificateItem[];
+  certAccessItems: ICertificateItem[];
+}
+
+interface ICertificateItemPayload {
+  certAccessId?: string;
+  link: string;
+  values: { newItem?: string; newSubItem?: string };
+}
+
+interface ICertificateItemEdit {
+  id: string;
+  link: string;
+  newValues?: { value: string };
+}
 
 export default {
   namespaced: true,
-  state() {
+  state(): State {
     return {
       certTextHeads: [],
       certQualifyingRanks: [],
@@ -25,182 +60,209 @@ export default {
       certGrades: [],
       certAccesses: [],
       certAccessItems: [],
-      system: [],
     };
   },
   mutations: {
     //обновление в хранилище setCertQualifyingRanks[]
-    setCertQualifyingRanks(state, certQualifyingRanks) {
+    setCertQualifyingRanks(
+      state: State,
+      certQualifyingRanks: ICertificateItem[]
+    ) {
       state.certQualifyingRanks = certQualifyingRanks;
-      // console.log("MUTATION:Set from state: ", state.certQualifyingRanks);
     },
     //добавление новых значений в хранилище setCertQualifyingRanks[]
-    addCertQualifyingRank(state, certQualifyingRank) {
+    addCertQualifyingRank(state: State, certQualifyingRank: ICertificateItem) {
       state.certQualifyingRanks.push(certQualifyingRank);
-      // console.log("MUTATION:Add to state: ", state.certQualifyingRanks);
     },
     //обновление в хранилище []
-    setCertAttestationTypes(state, certAttestationTypes) {
+    setCertAttestationTypes(
+      state: State,
+      certAttestationTypes: ICertificateItem[]
+    ) {
       state.certAttestationTypes = certAttestationTypes;
     },
     //добавление новых значений в хранилище []
-    addCertAttestationType(state, certAttestationType) {
+    addCertAttestationType(
+      state: State,
+      certAttestationType: ICertificateItem
+    ) {
       state.certAttestationTypes.push(certAttestationType);
     },
 
     //обновление в хранилище []
-    setCertWeldingMethods(state, certWeldingMethods) {
+    setCertWeldingMethods(
+      state: State,
+      certWeldingMethods: ICertificateItem[]
+    ) {
       state.certWeldingMethods = certWeldingMethods;
     },
     //добавление новых значений в хранилище []
-    addCertWeldingMethod(state, certWeldingMethod) {
+    addCertWeldingMethod(state: State, certWeldingMethod: ICertificateItem) {
       state.certWeldingMethods.push(certWeldingMethod);
     },
 
     //обновление в хранилище []
-    setCertWeldedTypes(state, certWeldedTypes) {
+    setCertWeldedTypes(state: State, certWeldedTypes: ICertificateItem[]) {
       state.certWeldedTypes = certWeldedTypes;
     },
     //добавление новых значений в хранилище []
-    addCertWeldedType(state, certWeldedType) {
+    addCertWeldedType(state: State, certWeldedType: ICertificateItem) {
       state.certWeldedTypes.push(certWeldedType);
     },
 
     //обновление в хранилище []
-    setCertWeldedSeams(state, certWeldedSeams) {
+    setCertWeldedSeams(state: State, certWeldedSeams: ICertificateItem[]) {
       state.certWeldedSeams = certWeldedSeams;
     },
     //добавление новых значений в хранилище []
-    addCertWeldedSeam(state, certWeldedSeam) {
+    addCertWeldedSeam(state: State, certWeldedSeam: ICertificateItem) {
       state.certWeldedSeams.push(certWeldedSeam);
     },
 
     //обновление в хранилище []
-    setCertWeldedConnections(state, certWeldedConnections) {
+    setCertWeldedConnections(
+      state: State,
+      certWeldedConnections: ICertificateItem[]
+    ) {
       state.certWeldedConnections = certWeldedConnections;
     },
     //добавление новых значений в хранилище []
-    addCertWeldedConnection(state, certWeldedConnection) {
+    addCertWeldedConnection(
+      state: State,
+      certWeldedConnection: ICertificateItem
+    ) {
       state.certWeldedConnections.push(certWeldedConnection);
     },
 
     //обновление в хранилище []
-    setCertWeldedPositions(state, certWeldedPositions) {
+    setCertWeldedPositions(
+      state: State,
+      certWeldedPositions: ICertificateItem[]
+    ) {
       state.certWeldedPositions = certWeldedPositions;
     },
     //добавление новых значений в хранилище []
-    addCertWeldedPosition(state, certWeldedPosition) {
+    addCertWeldedPosition(state: State, certWeldedPosition: ICertificateItem) {
       state.certWeldedPositions.push(certWeldedPosition);
     },
     //обновление в хранилище []
-    setCertAxesPositions(state, certAxesPositions) {
+    setCertAxesPositions(state: State, certAxesPositions: ICertificateItem[]) {
       state.certAxesPositions = certAxesPositions;
     },
     //добавление новых значений в хранилище []
-    addCertAxesPosition(state, certAxesPosition) {
+    addCertAxesPosition(state: State, certAxesPosition: ICertificateItem) {
       state.certAxesPositions.push(certAxesPosition);
     },
     //обновление в хранилище []
-    setCertWeldedJoints(state, certWeldedJoints) {
+    setCertWeldedJoints(state: State, certWeldedJoints: ICertificateItem[]) {
       state.certWeldedJoints = certWeldedJoints;
     },
     //добавление новых значений в хранилище []
-    addCertWeldedJoint(state, certWeldedJoint) {
+    addCertWeldedJoint(state: State, certWeldedJoint: ICertificateItem) {
       state.certWeldedJoints.push(certWeldedJoint);
     },
 
     //обновление в хранилище []
-    setCertBrands(state, certBrands) {
+    setCertBrands(state: State, certBrands: ICertificateItem[]) {
       state.certBrands = certBrands;
     },
     //добавление новых значений в хранилище []
-    addCertBrand(state, certBrand) {
+    addCertBrand(state: State, certBrand: ICertificateItem) {
       state.certBrands.push(certBrand);
     },
 
     //обновление в хранилище []
-    setCertElectrodes(state, certElectrodes) {
+    setCertElectrodes(state: State, certElectrodes: ICertificateItem[]) {
       state.certElectrodes = certElectrodes;
     },
     //добавление новых значений в хранилище []
-    addCertElectrode(state, certElectrode) {
+    addCertElectrode(state: State, certElectrode: ICertificateItem) {
       state.certElectrodes.push(certElectrode);
     },
 
     //обновление в хранилище []
-    setCertComissions(state, certComissions) {
+    setCertComissions(state: State, certComissions: ICertificateItem[]) {
       state.certComissions = certComissions;
     },
     //добавление новых значений в хранилище []
-    addCertComission(state, certComission) {
+    addCertComission(state: State, certComission: ICertificateItem) {
       state.certComissions.push(certComission);
     },
 
     //обновление в хранилище []
-    setCertControls(state, certControls) {
+    setCertControls(state: State, certControls: ICertificateItem[]) {
       state.certControls = certControls;
     },
     //добавление новых значений в хранилище []
-    addCertControl(state, certControl) {
+    addCertControl(state: State, certControl: ICertificateItem) {
       state.certControls.push(certControl);
     },
 
     //обновление в хранилище []
-    setCertVisuals(state, certVisuals) {
+    setCertVisuals(state: State, certVisuals: ICertificateItem[]) {
       state.certVisuals = certVisuals;
     },
     //добавление новых значений в хранилище []
-    addCertVisual(state, certVisual) {
+    addCertVisual(state: State, certVisual: ICertificateItem) {
       state.certVisuals.push(certVisual);
     },
 
     //обновление в хранилище []
-    setCertUltrasonicTestings(state, certUltrasonicTestings) {
+    setCertUltrasonicTestings(
+      state: State,
+      certUltrasonicTestings: ICertificateItem[]
+    ) {
       state.certUltrasonicTestings = certUltrasonicTestings;
     },
     //добавление новых значений в хранилище []
-    addCertUltrasonicTesting(state, certUltrasonicTesting) {
+    addCertUltrasonicTesting(
+      state: State,
+      certUltrasonicTesting: ICertificateItem
+    ) {
       state.certUltrasonicTestings.push(certUltrasonicTesting);
     },
 
     //обновление в хранилище []
-    setCertGrades(state, certGrades) {
+    setCertGrades(state: State, certGrades: ICertificateItem[]) {
       state.certGrades = certGrades;
     },
     //добавление новых значений в хранилище []
-    addCertGrade(state, certGrade) {
+    addCertGrade(state: State, certGrade: ICertificateItem) {
       state.certGrades.push(certGrade);
     },
 
     //обновление в хранилище []
-    setCertAccesses(state, certAccesses) {
+    setCertAccesses(state: State, certAccesses: ICertificateItem[]) {
       state.certAccesses = certAccesses;
     },
     //добавление новых значений в хранилище []
-    addCertAccess(state, certAccess) {
+    addCertAccess(state: State, certAccess: ICertificateItem) {
       state.certAccesses.push(certAccess);
     },
 
     //обновление в хранилище []
-    setCertAccessItems(state, certAccessItems) {
+    setCertAccessItems(state: State, certAccessItems: ICertificateItem[]) {
       state.certAccessItems = certAccessItems;
     },
     //добавление новых значений в хранилище []
-    addCertAccessItem(state, certAccessItem) {
+    addCertAccessItem(state: State, certAccessItem: ICertificateItem) {
       state.certAccessItems.push(certAccessItem);
     },
 
     //обновление в хранилище []
-    setCertTextHeads(state, certTextHeads) {
+    setCertTextHeads(state: State, certTextHeads: ICertificateItem[]) {
       state.certTextHeads = certTextHeads;
     },
     //добавление новых значений в хранилище []
-    addCertTextHead(state, certTextHead) {
+    addCertTextHead(state: State, certTextHead: ICertificateItem) {
       state.certTextHeads.push(certTextHead);
     },
   },
   actions: {
-    async create({ commit, dispatch }, payload) {
+    async create(
+      { dispatch }: ActionContext<State, any>,
+      payload: ICertificateItemPayload
+    ) {
       try {
         const dataload = {
           value: payload.values.newItem,
@@ -208,7 +270,7 @@ export default {
         // link для запроса
         const link = payload.link;
 
-        const data = await $api.post(`api/${link}/create`, dataload);
+        await $api.post(`api/${link}/create`, dataload);
 
         dispatch(
           "setMessage",
@@ -218,7 +280,7 @@ export default {
           },
           { root: true }
         );
-      } catch (e) {
+      } catch (e: any) {
         if (e.message === "Request failed with status code 400") {
           dispatch(
             "setMessage",
@@ -242,7 +304,10 @@ export default {
         throw e;
       }
     },
-    async createSub({ commit, dispatch }, payload) {
+    async createSub(
+      { dispatch }: ActionContext<State, any>,
+      payload: ICertificateItemPayload
+    ) {
       try {
         const dataload = {
           value: payload.values.newSubItem,
@@ -251,7 +316,7 @@ export default {
         // link для запроса
         const link = payload.link;
 
-        const data = await $api.post(`api/${link}/create`, dataload);
+        await $api.post(`api/${link}/create`, dataload);
 
         dispatch(
           "setMessage",
@@ -261,7 +326,7 @@ export default {
           },
           { root: true }
         );
-      } catch (e) {
+      } catch (e: any) {
         if (e.message === "Request failed with status code 400") {
           dispatch(
             "setMessage",
@@ -285,10 +350,10 @@ export default {
         throw e;
       }
     },
-    async load({ commit, dispatch }, link) {
+    async load({ commit, dispatch }: ActionContext<State, any>, link: string) {
       try {
         //загрузка с БД сервера
-        const { data } = await $api.get(`/api/${link}`);
+        const { data } = await $api.get<ICertificateItem[]>(`/api/${link}`);
 
         const certItems = Object.keys(data).map((id) => ({
           ...data[id],
@@ -349,7 +414,7 @@ export default {
             commit("setCertTextHeads", certItems);
             break;
         }
-      } catch (e) {
+      } catch (e: any) {
         if (e.message === "Request failed with status code 403") {
           dispatch(
             "setMessage",
@@ -374,7 +439,10 @@ export default {
       }
     },
 
-    async remove({ commit, dispatch }, payload) {
+    async remove(
+      { dispatch }: ActionContext<State, any>,
+      payload: ICertificateItemEdit
+    ) {
       try {
         // link запроса
         const link = payload.link;
@@ -383,7 +451,7 @@ export default {
         const id = payload.id;
 
         if (id) {
-          const data = await $api.delete(`/api/${link}/${id}`);
+          await $api.delete(`/api/${link}/${id}`);
 
           dispatch(
             "setMessage",
@@ -403,7 +471,7 @@ export default {
             { root: true }
           );
         }
-      } catch (e) {
+      } catch (e: any) {
         dispatch(
           "setMessage",
           {
@@ -415,7 +483,11 @@ export default {
       }
     },
 
-    async update({ dispatch }, payload) {
+    //for textHead
+    async update(
+      { dispatch }: ActionContext<State, any>,
+      payload: ICertificateItemEdit
+    ) {
       try {
         // link запроса
         const link = payload.link;
@@ -423,11 +495,11 @@ export default {
         const id = payload.id;
         // данные для передачи в БД на сервере
         const dataload = {
-          value: payload.newValues.value,
+          value: payload.newValues?.value,
         };
 
         if (id) {
-          const data = await $api.patch(`/api/${link}/${id}`, dataload);
+          await $api.patch(`/api/${link}/${id}`, dataload);
 
           dispatch(
             "setMessage",
@@ -447,7 +519,7 @@ export default {
             { root: true }
           );
         }
-      } catch (e) {
+      } catch (e: any) {
         dispatch(
           "setMessage",
           {
@@ -460,55 +532,55 @@ export default {
     },
   },
   getters: {
-    certQualifyingRanks(state) {
+    certQualifyingRanks(state: State) {
       return state.certQualifyingRanks;
     },
-    certWeldingMethods(state) {
+    certWeldingMethods(state: State) {
       return state.certWeldingMethods;
     },
-    certWeldedTypes(state) {
+    certWeldedTypes(state: State) {
       return state.certWeldedTypes;
     },
-    certWeldedSeams(state) {
+    certWeldedSeams(state: State) {
       return state.certWeldedSeams;
     },
-    certWeldedConnections(state) {
+    certWeldedConnections(state: State) {
       return state.certWeldedConnections;
     },
-    certAttestationTypes(state) {
+    certAttestationTypes(state: State) {
       return state.certAttestationTypes;
     },
-    certWeldedPositions(state) {
+    certWeldedPositions(state: State) {
       return state.certWeldedPositions;
     },
-    certAxesPositions(state) {
+    certAxesPositions(state: State) {
       return state.certAxesPositions;
     },
-    certWeldedJoints(state) {
+    certWeldedJoints(state: State) {
       return state.certWeldedJoints;
     },
-    certBrands(state) {
+    certBrands(state: State) {
       return state.certBrands;
     },
-    certElectrodes(state) {
+    certElectrodes(state: State) {
       return state.certElectrodes;
     },
-    certComissions(state) {
+    certComissions(state: State) {
       return state.certComissions;
     },
-    certControls(state) {
+    certControls(state: State) {
       return state.certControls;
     },
-    certGrades(state) {
+    certGrades(state: State) {
       return state.certGrades;
     },
-    certAccesses(state) {
+    certAccesses(state: State) {
       return state.certAccesses;
     },
-    certAccessItems(state) {
+    certAccessItems(state: State) {
       return state.certAccessItems;
     },
-    certTextHeads(state) {
+    certTextHeads(state: State) {
       return state.certTextHeads;
     },
   },
