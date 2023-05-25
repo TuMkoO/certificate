@@ -45,7 +45,7 @@
     </div>
 
     <SettingsCertificateFieldsItem
-      :itemsList="qualifyingRankItems"
+      :itemsList="qualifyingRanks"
       placeholder="Квалификационный разряд"
       storeName="certQualifyingRanks"
       storeLink="certificate-qualifying-rank"
@@ -54,7 +54,7 @@
       collapseId="collapseQualifyingRanks"
     />
     <SettingsCertificateFieldsItem
-      :itemsList="attestationTypeItems"
+      :itemsList="attestationTypes"
       placeholder="Вид аттестации"
       storeName="certAttestationTypes"
       storeLink="certificate-attestation-type"
@@ -63,7 +63,7 @@
       collapseId="collapseAttestationType"
     />
     <SettingsCertificateFieldsItem
-      :itemsList="brandItems"
+      :itemsList="brands"
       placeholder="Марка и группа"
       storeName="certBrands"
       storeLink="certificate-brand"
@@ -72,7 +72,7 @@
       collapseId="collapseBrand"
     />
     <SettingsCertificateFieldsItem
-      :itemsList="weldingMethodItems"
+      :itemsList="weldingMethods"
       placeholder="Способ сварки"
       storeName="certWeldingMethods"
       storeLink="certificate-welding-method"
@@ -81,7 +81,7 @@
       collapseId="collapseWeldingMethod"
     />
     <SettingsCertificateFieldsItem
-      :itemsList="weldedTypeItems"
+      :itemsList="weldedTypes"
       placeholder="Вид свариваемых деталей"
       storeName="certWeldedTypes"
       storeLink="certificate-welded-type"
@@ -90,7 +90,7 @@
       collapseId="collapseWeldedType"
     />
     <SettingsCertificateFieldsItem
-      :itemsList="weldedSeamItems"
+      :itemsList="weldedSeams"
       placeholder="Тип сварного шва"
       storeName="certWeldedSeams"
       storeLink="certificate-welded-seam"
@@ -99,7 +99,7 @@
       collapseId="collapseWeldedSeam"
     />
     <SettingsCertificateFieldsItem
-      :itemsList="weldedConnectionItems"
+      :itemsList="weldedConnections"
       placeholder="Тип и вид соединения"
       storeName="certWeldedConnections"
       storeLink="certificate-welded-connection"
@@ -109,7 +109,7 @@
     />
 
     <SettingsCertificateFieldsItem
-      :itemsList="weldedPositionItems"
+      :itemsList="weldedPositions"
       placeholder="Положение при сварке"
       storeName="certWeldedPositions"
       storeLink="certificate-welded-position"
@@ -118,7 +118,7 @@
       collapseId="collapseWeldedPosition"
     />
     <SettingsCertificateFieldsItem
-      :itemsList="axesPositionItems"
+      :itemsList="axesPositions"
       placeholder="Положение осей стержней"
       storeName="certAxesPositions"
       storeLink="certificate-axes-position"
@@ -127,7 +127,7 @@
       collapseId="collapseAxesPosition"
     />
     <SettingsCertificateFieldsItem
-      :itemsList="weldedJointItems"
+      :itemsList="weldedJoints"
       placeholder="Тип сварного соединения"
       storeName="certWeldedJoints"
       storeLink="certificate-welded-joint"
@@ -137,7 +137,7 @@
     />
 
     <SettingsCertificateFieldsItem
-      :itemsList="electrodeItems"
+      :itemsList="electrodes"
       placeholder="Электрод или присадочная проволока"
       storeName="certElectrodes"
       storeLink="certificate-electrode"
@@ -147,7 +147,7 @@
     />
 
     <SettingsCertificateFieldsItem
-      :itemsList="gradeItems"
+      :itemsList="grades"
       placeholder="Оценка"
       storeName="certGrades"
       storeLink="certificate-grade"
@@ -156,7 +156,7 @@
       collapseId="collapseGrade"
     />
     <SettingsCertificateFieldsItem
-      :itemsList="controlItems"
+      :itemsList="controls"
       placeholder="Контроль качества образца"
       storeName="certControls"
       storeLink="certificate-control"
@@ -166,7 +166,7 @@
     />
 
     <SettingsCertificateFieldsItem
-      :itemsList="accessItems"
+      :itemsList="accesses"
       placeholder="Группы технических устройств опасных производственных объектов"
       storeName="certAccesses"
       storeLink="certificate-access"
@@ -177,7 +177,7 @@
     />
 
     <SettingsCertificateFieldsItem
-      :itemsList="comissionItems"
+      :itemsList="comissions"
       placeholder="Аттестационная комиссия"
       storeName="certComissions"
       storeLink="certificate-comission"
@@ -194,28 +194,38 @@ import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
 import SettingsCertificateFieldsItem from "./SettingsCertificateFieldsItem.vue";
-import AppLoader from "../ui/AppLoader.vue";
 
 //подключаем store
 const store = useStore();
-//значение input Текста шапки
-const textHeadValue = ref({});
-//значения полей мультиселекта
-const qualifyingRankItems = [];
-const attestationTypeItems = [];
-const weldingMethodItems = [];
-const weldedTypeItems = [];
-const weldedSeamItems = [];
-const weldedConnectionItems = [];
-const weldedPositionItems = [];
-const axesPositionItems = [];
-const weldedJointItems = [];
-const brandItems = [];
-const electrodeItems = [];
-const comissionItems = [];
-const controlItems = [];
-const gradeItems = [];
-const accessItems = [];
+
+const textHeadValue = computed(() => store.getters["certItem/certTextHeads"]);
+const qualifyingRanks = computed(
+  () => store.getters["certItem/certQualifyingRanks"]
+);
+const attestationTypes = computed(
+  () => store.getters["certItem/certAttestationTypes"]
+);
+const weldingMethods = computed(
+  () => store.getters["certItem/certWeldingMethods"]
+);
+const weldedTypes = computed(() => store.getters["certItem/certWeldedTypes"]);
+const weldedSeams = computed(() => store.getters["certItem/certWeldedSeams"]);
+const weldedConnections = computed(
+  () => store.getters["certItem/certWeldedConnections"]
+);
+const weldedPositions = computed(
+  () => store.getters["certItem/certWeldedPositions"]
+);
+const axesPositions = computed(
+  () => store.getters["certItem/certAxesPositions"]
+);
+const weldedJoints = computed(() => store.getters["certItem/certWeldedJoints"]);
+const brands = computed(() => store.getters["certItem/certBrands"]);
+const electrodes = computed(() => store.getters["certItem/certElectrodes"]);
+const comissions = computed(() => store.getters["certItem/certComissions"]);
+const controls = computed(() => store.getters["certItem/certControls"]);
+const grades = computed(() => store.getters["certItem/certGrades"]);
+const accesses = computed(() => store.getters["certItem/certAccesses"]);
 
 const { handleSubmit } = useForm();
 
@@ -224,107 +234,19 @@ const { value: textHead, errorMessage: tHeadError } = useField(
   yup.string().trim().required("Введите текст шапки Протокола")
 );
 
-//загрузка значений:
 onMounted(async () => {
-  //получаем значение input
-  textHeadValue.value = computed(() => store.getters["certItem/certTextHeads"]);
-  //добавляем значения в input
-  textHead.value = textHeadValue.value.value[0].value;
-
-  const qualifyingRanks = computed(
-    () => store.getters["certItem/certQualifyingRanks"]
-  );
-  qualifyingRanks.value.forEach((item) => {
-    qualifyingRankItems.push(item);
-  });
-  const attestationTypes = computed(
-    () => store.getters["certItem/certAttestationTypes"]
-  );
-  attestationTypes.value.forEach((item) => {
-    attestationTypeItems.push(item);
-  });
-  const weldingMethods = computed(
-    () => store.getters["certItem/certWeldingMethods"]
-  );
-  weldingMethods.value.forEach((item) => {
-    weldingMethodItems.push(item);
-  });
-  const weldedTypes = computed(() => store.getters["certItem/certWeldedTypes"]);
-  weldedTypes.value.forEach((item) => {
-    weldedTypeItems.push(item);
-  });
-  const weldedSeams = computed(() => store.getters["certItem/certWeldedSeams"]);
-  weldedSeams.value.forEach((item) => {
-    weldedSeamItems.push(item);
-  });
-  const weldedConnections = computed(
-    () => store.getters["certItem/certWeldedConnections"]
-  );
-  weldedConnections.value.forEach((item) => {
-    weldedConnectionItems.push(item);
-  });
-
-  const weldedPositions = computed(
-    () => store.getters["certItem/certWeldedPositions"]
-  );
-  weldedPositions.value.forEach((item) => {
-    weldedPositionItems.push(item);
-  });
-  const axesPositions = computed(
-    () => store.getters["certItem/certAxesPositions"]
-  );
-  axesPositions.value.forEach((item) => {
-    axesPositionItems.push(item);
-  });
-  const weldedJoints = computed(
-    () => store.getters["certItem/certWeldedJoints"]
-  );
-  weldedJoints.value.forEach((item) => {
-    weldedJointItems.push(item);
-  });
-
-  const brands = computed(() => store.getters["certItem/certBrands"]);
-  brands.value.forEach((item) => {
-    brandItems.push(item);
-  });
-
-  const electrodes = computed(() => store.getters["certItem/certElectrodes"]);
-  electrodes.value.forEach((item) => {
-    electrodeItems.push(item);
-  });
-
-  const comissions = computed(() => store.getters["certItem/certComissions"]);
-  comissions.value.forEach((item) => {
-    comissionItems.push(item);
-  });
-
-  const controls = computed(() => store.getters["certItem/certControls"]);
-  controls.value.forEach((item) => {
-    controlItems.push(item);
-  });
-
-  const grades = computed(() => store.getters["certItem/certGrades"]);
-  grades.value.forEach((item) => {
-    gradeItems.push(item);
-  });
-
-  const accesses = computed(() => store.getters["certItem/certAccesses"]);
-  accesses.value.forEach((item) => {
-    accessItems.push(item);
-  });
+  textHead.value = textHeadValue.value[0].value;
 });
 
 //сохранить введенное значение
-const submitTextHead = async (values) => {
+const onSubmitTextHead = handleSubmit(async (values) => {
   const link = "certificate-text-head";
   const id = textHeadValue.value.value[0]._id;
   const newValues = { value: values.textHead };
 
   // вызываем метод update для обновления записи в БД
   await store.dispatch(`certItem/update`, { newValues, link, id });
-};
-
-const onSubmitTextHead = handleSubmit(submitTextHead);
+});
 </script>
 
 <style></style>

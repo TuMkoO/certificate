@@ -29,10 +29,10 @@
         aria-label="multiple select example"
         v-model="subItemSelected"
       >
-        <option v-if="certAccess == 0" disabled>
+        <option v-if="!certAccess" disabled>
           Выберите значение основной группы
         </option>
-        <option v-else-if="filteredAccessSubItems == 0" disabled>
+        <option v-else-if="filteredAccessSubItems.length == 0" disabled>
           Значений нет, добавьте новое
         </option>
         <option v-else disabled>Выберите значение</option>
@@ -80,148 +80,128 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
+import type { ICertificateItem } from "@/types/ICertificateItem";
 
-export default {
-  props: ["itemsList", "storeLink", "storeName"],
-  setup(props) {
-    //подключаем store
-    const store = useStore();
+const props = defineProps<{
+  storeLink: string;
+  storeName: string;
+  itemsList: ICertificateItem[];
+}>();
 
-    //выбранное значение из select
-    const subItemSelected = ref([]);
-    //значение выбранного radiobutton
-    const certAccess = ref("");
-    //
-    const accessSubItems = ref();
-    //filtered
-    const filteredAccessSubItems = ref();
+//подключаем store
+const store = useStore();
 
-    const { isSubmitting, handleSubmit, resetForm } = useForm();
+//выбранное значение из select
+const subItemSelected = ref<string[]>([]);
+//значение выбранного radiobutton
+const certAccess = ref<string>("");
+//
+const accessSubItems = ref<ICertificateItem[]>([]);
+//filtered
+const filteredAccessSubItems = ref<ICertificateItem[]>([]);
 
-    const {
-      value: newSubItem,
-      errorMessage: subError,
-      handleBlur: subBlur,
-      handleChange: subChange,
-    } = useField(
-      "newSubItem",
-      yup.string().trim().required("Введите подгруппу")
+const { handleSubmit, resetForm } = useForm();
+
+const {
+  value: newSubItem,
+  errorMessage: subError,
+  handleBlur: subBlur,
+  handleChange: subChange,
+} = useField("newSubItem", yup.string().trim().required("Введите подгруппу"));
+
+onMounted(() => {
+  accessSubItems.value = [];
+
+  //получаем подкатегории всех категорий
+  const accessSub = computed(() => store.getters["certItem/certAccessItems"]);
+
+  //заносим значение в массив accessSubItems
+  accessSub.value.forEach((item: ICertificateItem) => {
+    accessSubItems.value.push(item);
+  });
+});
+
+watch(certAccess, (val) => {
+  //очистить список значений на удаление:
+  subItemSelected.value = [];
+
+  filteredAccessSubItems.value = accessSubItems.value.filter(
+    (item: ICertificateItem) => item.owner == val
+  );
+});
+
+//добавить новое значение подгруппы:
+const onSubmitNewSubItem = handleSubmit(async (values) => {
+  if (certAccess.value) {
+    // link для url в БД на сервере
+    const link = props.storeLink;
+
+    // вызываем метод create для создания записи в БД
+    await store.dispatch("certItem/createSub", {
+      values,
+      link,
+      certAccessId: certAccess.value,
+    });
+
+    //обновить список:
+    await store.dispatch("certItem/load", link);
+
+    const subItems = computed(
+      () => store.getters[`certItem/${props.storeName}`]
     );
 
-    onMounted(() => {
-      accessSubItems.value = [];
+    filteredAccessSubItems.value = subItems.value.filter(
+      (item: ICertificateItem) => item.owner == certAccess.value
+    );
 
-      //получаем подкатегории всех категорий
-      const accessSub = computed(
-        () => store.getters["certItem/certAccessItems"]
-      );
+    accessSubItems.value = subItems.value;
 
-      //заносим значение в массив accessSubItems
-      accessSub.value.forEach((item) => {
-        accessSubItems.value.push(item);
-      });
+    //очистка поля ввода
+    resetForm();
+  } else {
+    store.dispatch("setMessage", {
+      value: "Не выбрано значение основной группы",
+      type: "warning",
+    });
+  }
+});
+
+//удалить значение:
+const removeSubItem = async (ids: string[]) => {
+  if (ids.length) {
+    // link для url в БД на сервере
+    const link = props.storeLink;
+
+    await ids.forEach((id) => {
+      store.dispatch(`certItem/remove`, { id, link });
     });
 
-    watch(certAccess, (val) => {
-      //очистить список значений на удаление:
-      subItemSelected.value = [];
+    //обновить список:
+    await store.dispatch("certItem/load", link);
 
-      filteredAccessSubItems.value = accessSubItems.value.filter(
-        (item) => item.owner == val
-      );
+    const subItems = computed(
+      () => store.getters[`certItem/${props.storeName}`]
+    );
+
+    filteredAccessSubItems.value = subItems.value.filter(
+      (item: ICertificateItem) => item.owner == certAccess.value
+    );
+
+    accessSubItems.value = subItems.value;
+
+    //очистить список значений на удаление:
+    subItemSelected.value = [];
+  } else {
+    store.dispatch("setMessage", {
+      value: "Не выбрано значение для удаления",
+      type: "warning",
     });
-
-    //добавить новое значение подгруппы:
-    const submitNewSubItem = async (values) => {
-      if (certAccess.value) {
-        // link для url в БД на сервере
-        const link = props.storeLink;
-
-        // вызываем метод create для создания записи в БД
-        await store.dispatch("certItem/createSub", {
-          values,
-          link,
-          certAccessId: certAccess.value,
-        });
-
-        //обновить список:
-        await store.dispatch("certItem/load", link);
-
-        const subItems = computed(
-          () => store.getters[`certItem/${props.storeName}`]
-        );
-
-        filteredAccessSubItems.value = subItems.value.filter(
-          (item) => item.owner == certAccess.value
-        );
-
-        accessSubItems.value = subItems.value;
-
-        //очистка поля ввода
-        resetForm();
-      } else {
-        store.dispatch("setMessage", {
-          value: "Не выбрано значение основной группы",
-          type: "warning",
-        });
-      }
-    };
-
-    const onSubmitNewSubItem = handleSubmit(submitNewSubItem);
-
-    //удалить значение:
-    const removeSubItem = async (ids) => {
-      if (ids.length) {
-        // link для url в БД на сервере
-        const link = props.storeLink;
-
-        await ids.forEach((id) => {
-          store.dispatch(`certItem/remove`, { id, link });
-        });
-
-        //обновить список:
-        await store.dispatch("certItem/load", link);
-
-        const subItems = computed(
-          () => store.getters[`certItem/${props.storeName}`]
-        );
-
-        filteredAccessSubItems.value = subItems.value.filter(
-          (item) => item.owner == certAccess.value
-        );
-
-        accessSubItems.value = subItems.value;
-
-        //очистить список значений на удаление:
-        subItemSelected.value = [];
-      } else {
-        store.dispatch("setMessage", {
-          value: "Не выбрано значение для удаления",
-          type: "warning",
-        });
-      }
-    };
-
-    return {
-      removeSubItem,
-      subItemSelected,
-      isSubmitting,
-      onSubmitNewSubItem,
-      certAccess,
-      accessSubItems,
-      filteredAccessSubItems,
-      newSubItem,
-      subError,
-      subBlur,
-      subChange,
-      resetForm,
-    };
-  },
+  }
 };
 </script>
 

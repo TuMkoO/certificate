@@ -86,6 +86,20 @@ import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
 import SettingsCertificateFieldsSubItem from "./SettingsCertificateFieldsSubItem.vue";
+import type { ICertificateItem } from "@/types/ICertificateItem";
+
+// interface CertificateItem {
+//   _id: string;
+//   id: string;
+//   value: string;
+// }
+
+interface accessSubItem {
+  owner: string;
+  value: string;
+  _id: string;
+  id?: string;
+}
 
 const props = defineProps<{
   storeLink: string;
@@ -96,16 +110,23 @@ const props = defineProps<{
   collapseId: string;
   opened?: boolean;
   withItems?: boolean;
-  itemsList: [];
+  itemsList: ICertificateItem[];
 }>();
 
 //подключаем store
 const store = useStore();
 //
-const itemsList = ref(null);
+const itemsList = ref<ICertificateItem[]>([]);
 //выбранное значение из select
-const itemSelected = ref([]);
-//
+const itemSelected = ref<string[]>([]);
+
+const items = computed(() => store.getters[`certItem/${props.storeName}`]);
+
+//получаем подкатегории всех категорий
+const accessSubItems = computed(
+  () => store.getters["certItem/certAccessItems"]
+);
+
 const { handleSubmit, resetForm } = useForm();
 
 const {
@@ -120,9 +141,9 @@ onMounted(() => {
 });
 
 //добавить новое значение:
-const submitNewItem = async (values) => {
+const onSubmitNewItem = handleSubmit(async (values) => {
   // link для url в БД на сервере
-  const link = props.storeLink;
+  const link: string = props.storeLink;
 
   // вызываем метод create для создания записи в БД
   await store.dispatch("certItem/create", { values, link });
@@ -130,35 +151,26 @@ const submitNewItem = async (values) => {
   //обновить список:
   await store.dispatch(`certItem/load`, link);
 
-  const items = computed(() => store.getters[`certItem/${props.storeName}`]);
-
   itemsList.value = items.value;
 
   //очистка поля ввода
   resetForm();
-};
-
-const onSubmitNewItem = handleSubmit(submitNewItem);
+});
 
 //удалить значение:
-const removeItem = async (ids) => {
+const removeItem = async (ids: string[]) => {
   if (ids.length) {
     // link для url в БД на сервере
-    const link = props.storeLink;
+    const link: string = props.storeLink;
 
-    await ids.map((id) => {
+    await ids.forEach((id) => {
       store.dispatch(`certItem/remove`, { id, link });
-
-      //получаем подкатегории всех категорий
-      const accessSubItems = computed(
-        () => store.getters["certItem/certAccessItems"]
-      );
 
       //если есть подкатегории
       if (accessSubItems.value.length) {
         //список подкатегорий на удаление:
         const subItemsToRemove = accessSubItems.value.filter(
-          (item) => item.owner == id
+          (item: accessSubItem) => item.owner == id
         );
 
         //если есть подкатегории выбранной категории
@@ -167,7 +179,7 @@ const removeItem = async (ids) => {
           const linkItem = "certificate-access-item";
 
           //удалить все подкатегории выбранной категории
-          subItemsToRemove.map((item) => {
+          subItemsToRemove.forEach((item: accessSubItem) => {
             store.dispatch(`certItem/remove`, {
               id: item._id,
               link: linkItem,
@@ -179,8 +191,6 @@ const removeItem = async (ids) => {
 
     //обновить список:
     await store.dispatch(`certItem/load`, link);
-
-    const items = computed(() => store.getters[`certItem/${props.storeName}`]);
 
     itemsList.value = items.value;
 
