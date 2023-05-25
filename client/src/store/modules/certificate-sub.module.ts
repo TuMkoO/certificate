@@ -1,27 +1,36 @@
 import axios from "../../axios/request";
 import $api from "../../axios/request";
+import { ActionContext } from "vuex";
+import type { ICertificate } from "@/types/ICertificate";
+
+interface State {
+  certificatesSub: ICertificate[];
+}
 
 export default {
   namespaced: true,
-  state() {
+  state(): State {
     return {
       certificatesSub: [],
     };
   },
   mutations: {
     //обновление в хранилище []
-    setCertificatesSub(state, certificatesSub) {
+    setCertificatesSub(state: State, certificatesSub: ICertificate[]) {
       state.certificatesSub = certificatesSub;
     },
     //добавление новых значений в хранилище []
-    addCertificate(state, certificateSub) {
+    addCertificate(state: State, certificateSub: ICertificate) {
       state.certificatesSub.push(certificateSub);
     },
   },
   actions: {
-    async create({ commit, dispatch }, payload) {
+    async create(
+      { dispatch }: ActionContext<State, any>,
+      payload
+    ): Promise<void> {
       try {
-        const { data } = await $api.post("api/certificate-sub/create", payload);
+        await $api.post("api/certificate-sub/create", payload);
 
         dispatch(
           "setMessage",
@@ -31,7 +40,7 @@ export default {
           },
           { root: true }
         );
-      } catch (e) {
+      } catch (e: any) {
         if (e.message === "Request failed with status code 400") {
           dispatch(
             "setMessage",
@@ -56,22 +65,10 @@ export default {
       }
     },
 
-    async load({ commit, dispatch }) {
+    async load({ commit, dispatch }: ActionContext<State, any>): Promise<void> {
       try {
         const { data } = await $api.get("api/certificate-sub");
 
-        // console.log("certificate-sub.module/load data::: ", data);
-
-        // сначала вывод новых записей, добавляем поле id
-        // const certificatesSub = Object.keys(data.slice().reverse()).map(
-        //   (id) => ({
-        //     ...data.slice().reverse()[id],
-        //     id,
-        //   })
-        // );
-
-        //вызываем mutation
-        // commit("setCertificatesSub", certificatesSub);
         commit("setCertificatesSub", data);
       } catch (e) {
         dispatch(
@@ -87,32 +84,17 @@ export default {
       }
     },
 
-    async loadOwner({ commit, dispatch }, certId) {
+    async loadOwner(
+      { dispatch }: ActionContext<State, any>,
+      certId: string
+    ): Promise<ICertificate> {
       try {
-        const { data } = await $api.get("api/certificate-sub", {
+        const { data } = await $api.get<ICertificate>("api/certificate-sub", {
           params: {
             certId: certId,
           },
         });
 
-        // console.log("certificate-sub.module/load data::: ", data);
-
-        // сначала вывод новых записей, добавляем поле id
-        // const certificatesSub = Object.keys(data.slice().reverse()).map(
-        //   (id) => ({
-        //     ...data.slice().reverse()[id],
-        //     id,
-        //   })
-        // );
-
-        // console.log(
-        //   "certificate-sub.module/load certificatesSub::: ",
-        //   certificatesSub
-        // );
-
-        //вызываем mutation
-        // commit("setCertificatesSub", certificatesSub);
-        // commit("setCertificatesSub", data);
         return data;
       } catch (e) {
         dispatch(
@@ -128,16 +110,22 @@ export default {
       }
     },
 
-    async loadById({ commit, dispatch }, id) {
+    async loadById(
+      { dispatch }: ActionContext<State, any>,
+      id: string
+    ): Promise<ICertificate> {
       try {
         const headers = {
           "Content-Type": "application/json",
         };
 
         //загрузка с БД сервера
-        const { data } = await axios.get(`/api/certificate-sub/${id}`, {
-          headers: headers,
-        });
+        const { data } = await axios.get<ICertificate>(
+          `/api/certificate-sub/${id}`,
+          {
+            headers: headers,
+          }
+        );
 
         return data;
       } catch (e) {
@@ -154,18 +142,18 @@ export default {
       }
     },
 
-    async update({ dispatch }, payload) {
+    async update(
+      { dispatch }: ActionContext<State, any>,
+      payload
+    ): Promise<void> {
       try {
         //получаем id
         const id = payload.id;
         // данные для передачи в БД на сервере
         const dataload = payload.values;
 
-        // console.log(payload);
-
         if (id) {
-          // console.log("certificate id", id);
-          const data = await $api.put(`api/certificate-sub/${id}`, dataload);
+          await $api.put(`api/certificate-sub/${id}`, dataload);
 
           dispatch(
             "setMessage",
@@ -185,7 +173,7 @@ export default {
             { root: true }
           );
         }
-      } catch (e) {
+      } catch (e: any) {
         dispatch(
           "setMessage",
           {
@@ -197,9 +185,12 @@ export default {
       }
     },
 
-    async remove({ commit, dispatch }, id) {
+    async remove(
+      { dispatch }: ActionContext<State, any>,
+      id: string
+    ): Promise<void> {
       try {
-        const { data } = await $api.delete(`api/certificate-sub/${id}`);
+        await $api.delete(`api/certificate-sub/${id}`);
 
         dispatch(
           "setMessage",
@@ -209,7 +200,7 @@ export default {
           },
           { root: true }
         );
-      } catch (e) {
+      } catch (e: any) {
         dispatch(
           "setMessage",
           {
@@ -222,7 +213,7 @@ export default {
     },
   },
   getters: {
-    certificatesSub(state) {
+    certificatesSub(state: State) {
       return state.certificatesSub;
     },
   },

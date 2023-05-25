@@ -1,27 +1,36 @@
 import axios from "../../axios/request";
 import $api from "../../axios/request";
+import { ActionContext } from "vuex";
+import type { ICertificate } from "@/types/ICertificate";
+
+interface State {
+  certificates: ICertificate[];
+}
 
 export default {
   namespaced: true,
-  state() {
+  state(): State {
     return {
       certificates: [],
     };
   },
   mutations: {
     //обновление в хранилище []
-    setCertificates(state, certificates) {
+    setCertificates(state: State, certificates: ICertificate[]) {
       state.certificates = certificates;
     },
     //добавление новых значений в хранилище []
-    addCertificate(state, certificate) {
+    addCertificate(state: State, certificate: ICertificate) {
       state.certificates.push(certificate);
     },
   },
   actions: {
-    async create({ commit, dispatch }, payload) {
+    async create(
+      { dispatch }: ActionContext<State, any>,
+      payload
+    ): Promise<void> {
       try {
-        const { data } = await $api.post("api/certificate/create", payload);
+        await $api.post("api/certificate/create", payload);
 
         dispatch(
           "setMessage",
@@ -31,7 +40,7 @@ export default {
           },
           { root: true }
         );
-      } catch (e) {
+      } catch (e: any) {
         if (e.message === "Request failed with status code 400") {
           dispatch(
             "setMessage",
@@ -55,18 +64,10 @@ export default {
         throw e;
       }
     },
-    async load({ commit, dispatch }) {
+    async load({ commit, dispatch }: ActionContext<State, any>): Promise<void> {
       try {
-        const { data } = await $api.get("api/certificate");
+        const { data } = await $api.get<ICertificate[]>("api/certificate");
 
-        // сначала вывод новых записей, добавляем поле id
-        // const certificates = Object.keys(data.slice().reverse()).map((id) => ({
-        //   ...data.slice().reverse()[id],
-        //   id,
-        // }));
-
-        //вызываем mutation
-        // commit("setCertificates", certificates);
         commit("setCertificates", data);
       } catch (e) {
         dispatch(
@@ -82,16 +83,22 @@ export default {
       }
     },
 
-    async loadById({ commit, dispatch }, id) {
+    async loadById(
+      { dispatch }: ActionContext<State, any>,
+      id: string
+    ): Promise<ICertificate> {
       try {
         const headers = {
           "Content-Type": "application/json",
         };
 
         //загрузка с БД сервера
-        const { data } = await axios.get(`/api/certificate/${id}`, {
-          headers: headers,
-        });
+        const { data } = await axios.get<ICertificate>(
+          `/api/certificate/${id}`,
+          {
+            headers: headers,
+          }
+        );
 
         return data;
       } catch (e) {
@@ -108,25 +115,17 @@ export default {
       }
     },
 
-    async update({ dispatch }, payload) {
+    async update(
+      { dispatch }: ActionContext<State, any>,
+      payload
+    ): Promise<void> {
       try {
-        //получаем токен из store
-        // const token = store.getters["auth/token"];
-        // id
         const id = payload.id;
-        // данные для передачи в БД на сервере
+
         const dataload = payload.values;
 
-        // console.log(payload);
-
-        // const headers = {
-        //   "Content-Type": "application/json",
-        //   Authorization: `Bearer ${token}`,
-        // };
-
         if (id) {
-          // console.log("certificate id", id);
-          const data = await $api.put(`api/certificate/${id}`, dataload);
+          await $api.put(`api/certificate/${id}`, dataload);
 
           dispatch(
             "setMessage",
@@ -146,7 +145,7 @@ export default {
             { root: true }
           );
         }
-      } catch (e) {
+      } catch (e: any) {
         dispatch(
           "setMessage",
           {
@@ -158,17 +157,12 @@ export default {
       }
     },
 
-    async remove({ commit, dispatch }, id) {
+    async remove(
+      { dispatch }: ActionContext<State, any>,
+      id: string
+    ): Promise<void> {
       try {
-        //получаем токен из store
-        // const token = store.getters["auth/token"];
-
-        // const headers = {
-        //   "Content-Type": "application/json",
-        //   Authorization: `Bearer ${token}`,
-        // };
-
-        const { data } = await $api.delete(`api/certificate/${id}`);
+        await $api.delete(`api/certificate/${id}`);
 
         dispatch(
           "setMessage",
@@ -178,7 +172,7 @@ export default {
           },
           { root: true }
         );
-      } catch (e) {
+      } catch (e: any) {
         dispatch(
           "setMessage",
           {
@@ -191,7 +185,7 @@ export default {
     },
   },
   getters: {
-    certificates(state) {
+    certificates(state: State) {
       return state.certificates;
     },
   },
