@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{ title: string }>();
-const emits = defineEmits<{
+const emit = defineEmits<{
   (e: "close"): void;
 }>();
 </script>

@@ -9,7 +9,7 @@
       </div>
       <div>
         <new-certificate-form
-          :certValues="$route.params"
+          :certValues="subCertificateparams"
           :certSubmit="'create'"
         ></new-certificate-form>
       </div>
@@ -20,6 +20,8 @@
 <script setup lang="ts">
 import AppPage from "../components/ui/AppPage.vue";
 import NewCertificateForm from "../components/certificates/NewCertificateForm.vue";
+
+const subCertificateparams = window.history.state.params;
 </script>
 
 <style scoped></style>

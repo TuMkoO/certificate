@@ -7,6 +7,11 @@ interface State {
   certificates: ICertificate[];
 }
 
+interface ICertificateUpdatePayload {
+  id: string;
+  values: ICertificate;
+}
+
 export default {
   namespaced: true,
   state(): State {
@@ -27,7 +32,7 @@ export default {
   actions: {
     async create(
       { dispatch }: ActionContext<State, any>,
-      payload
+      payload: ICertificate
     ): Promise<void> {
       try {
         await $api.post("api/certificate/create", payload);
@@ -117,7 +122,7 @@ export default {
 
     async update(
       { dispatch }: ActionContext<State, any>,
-      payload
+      payload: ICertificateUpdatePayload
     ): Promise<void> {
       try {
         const id = payload.id;

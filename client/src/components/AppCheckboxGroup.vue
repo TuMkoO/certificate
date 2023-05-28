@@ -43,7 +43,7 @@ const props = defineProps<{
   title: string;
   defaultOptions?: object;
 }>();
-const emits = defineEmits<{
+const emit = defineEmits<{
   (e: "checked"): void;
 }>();
 

@@ -292,7 +292,7 @@
             label="Квалификационный разряд"
             :options="optionsQualifyingRank"
             :invalid="!!qRankError"
-            :selectedDefault="certValues.qualifyingRank"
+            :selectedDefault="certValues?.qualifyingRank"
             @select="selectQualifyingRank"
           />
 
@@ -308,7 +308,7 @@
             label="Вид аттестации"
             :options="optionsAttestationType"
             :invalid="!!aTypeError"
-            :selectedDefault="certValues.attestationType"
+            :selectedDefault="certValues?.attestationType"
             @select="selectAttestationType"
           />
 
@@ -1187,7 +1187,7 @@
       <certificate-form-quality-control
         :optionsGrade="optionsGrade"
         :optionsType="optionsControl"
-        :defaultOptions="certValues.controls"
+        :defaultOptions="certValues?.controls"
         @changeControlsItem="onCheckedQualityControls"
       ></certificate-form-quality-control>
 
@@ -1272,7 +1272,7 @@
             :key="item._id"
             :mainItem="[item.value, item._id]"
             :items="checkboxDropdownAccessItems"
-            :defaultItems="certValues.accesses"
+            :defaultItems="certValues?.accesses"
             :collapseId="'collapseCheckbox' + idx"
             @checked="onCheckedAccessSubItems"
           ></app-checkbox-dropdown>
@@ -1310,7 +1310,7 @@
           <app-checkbox-group
             title="Аттестационная комиссия:"
             :options="optionsComission"
-            :defaultOptions="certValues.comission"
+            :defaultOptions="certValues?.comission"
             @checked="onCheckedComission"
           >
           </app-checkbox-group>
@@ -1349,7 +1349,7 @@
           <app-checkbox-group
             title="Вид свариваемых деталей:"
             :options="optionsWeldedType"
-            :defaultOptions="certValues.weldedTypeScope"
+            :defaultOptions="certValues?.weldedTypeScope"
             @checked="onCheckedWeldedTypeScope"
           >
           </app-checkbox-group>
@@ -1365,7 +1365,7 @@
           <app-checkbox-group
             title="Вид шва:"
             :options="optionsWeldedSeam"
-            :defaultOptions="certValues.weldedSeamScope"
+            :defaultOptions="certValues?.weldedSeamScope"
             @checked="onCheckedWeldedSeamScope"
           >
           </app-checkbox-group>
@@ -1380,7 +1380,7 @@
           <app-checkbox-group
             title="Марка и группа:"
             :options="optionsBrand"
-            :defaultOptions="certValues.brandScope"
+            :defaultOptions="certValues?.brandScope"
             @checked="onCheckedBrandScope"
           >
           </app-checkbox-group>
@@ -1396,7 +1396,7 @@
           <app-checkbox-group
             title="Тип присадочного металла:"
             :options="optionsElectrode"
-            :defaultOptions="certValues.electrodeScope"
+            :defaultOptions="certValues?.electrodeScope"
             @checked="onCheckedElectrodeScope"
           >
           </app-checkbox-group>
@@ -1486,7 +1486,7 @@
           <app-checkbox-group
             title="Положение при сварке:"
             :options="optionsWeldedPosition"
-            :defaultOptions="certValues.weldedPositionScope"
+            :defaultOptions="certValues?.weldedPositionScope"
             @checked="onCheckedWeldedPositionScope"
           >
           </app-checkbox-group>
@@ -1501,7 +1501,7 @@
           <app-checkbox-group
             title="Исполнение сварного шва:"
             :options="optionsWeldedConnection"
-            :defaultOptions="certValues.weldedConnectionScope"
+            :defaultOptions="certValues?.weldedConnectionScope"
             @checked="onCheckedWeldedConnectionScope"
           >
           </app-checkbox-group>
@@ -1647,8 +1647,8 @@
         @close="closeModal"
       >
         <div class="modal-body">
-          Запись удостоверения №{{ certValues.numCertificate }} будет изменена в
-          реестре. Вы подтверждаете внесение изменений?
+          Запись удостоверения №{{ certValues?.numCertificate }} будет изменена
+          в реестре. Вы подтверждаете внесение изменений?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" @click="onSubmit">
@@ -1682,7 +1682,7 @@ const props = defineProps<{
   certSubmit: string;
 }>();
 
-const emits = defineEmits<{
+const emit = defineEmits<{
   (e: "hide"): void;
   (e: "update"): void;
 }>();
@@ -1887,12 +1887,12 @@ onMounted(async () => {
   axesPositionScope.value = [];
 
   //Значения по умолчанию для создания вкладыша
-  if (props.certValues.id && props.certSubmit == "create") {
+  if (props.certValues?.id && props.certSubmit == "create") {
     numOldCert.value = props.certValues.numCertificate;
     dateOldCert.value = dateFormatForInput(props.certValues.date);
   }
 
-  if (props.certValues.id || props.certValues._id) {
+  if (props.certValues?.id || props.certValues?._id) {
     firstname.value = props.certValues.firstname;
     secondname.value = props.certValues.secondname;
     lastname.value = props.certValues.lastname;
@@ -1905,8 +1905,8 @@ onMounted(async () => {
 
   //Значения для редактирования вкладыша
   if (
-    props.certValues.numOldCert &&
-    props.certValues.dateOldCert &&
+    props.certValues?.numOldCert &&
+    props.certValues?.dateOldCert &&
     props.certSubmit == "edit"
   ) {
     numOldCert.value = props.certValues.numOldCert;
@@ -1914,7 +1914,7 @@ onMounted(async () => {
   }
 
   //Значения по умолчанию для редактирования
-  if (props.certValues._id && props.certSubmit == "edit") {
+  if (props.certValues?._id && props.certSubmit == "edit") {
     certType.value = props.certValues.certType;
     date.value = dateFormatForInput(props.certValues.date);
     numProtocol.value = props.certValues.numProtocol;

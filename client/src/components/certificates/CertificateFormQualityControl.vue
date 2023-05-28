@@ -810,7 +810,7 @@ const props = defineProps<{
   optionsGrade: [];
   defaultOptions?: [];
 }>();
-const emits = defineEmits<{
+const emit = defineEmits<{
   (e: "changeControlsItem"): void;
   (e: "changeType"): void;
 }>();

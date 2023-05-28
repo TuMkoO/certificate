@@ -52,4 +52,5 @@ export interface ICertificate {
   weldedJointScope: [];
   axesPositionScope: [];
   owner?: string;
+  _id?: string;
 }

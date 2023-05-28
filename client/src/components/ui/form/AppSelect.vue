@@ -45,7 +45,7 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits<{
+const emit = defineEmits<{
   (e: "select"): void;
 }>();
 

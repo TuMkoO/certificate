@@ -241,7 +241,7 @@ onMounted(async () => {
 //сохранить введенное значение
 const onSubmitTextHead = handleSubmit(async (values) => {
   const link = "certificate-text-head";
-  const id = textHeadValue.value.value[0]._id;
+  const id = textHeadValue.value[0]._id;
   const newValues = { value: values.textHead };
 
   // вызываем метод update для обновления записи в БД
