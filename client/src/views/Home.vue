@@ -37,22 +37,14 @@ import AppLoader from "../components/ui/AppLoader.vue";
 import CertificatesFilter from "../components/certificates/CertificatesFilter.vue";
 import CertificatesTable from "../components/certificates/CertificatesTable.vue";
 import type { ICertificate } from "@/types/ICertificate";
-
-interface Filter {
-  firstname: string;
-  secondname: string;
-  numCertificate: string;
-  stigmaGeneral: string;
-  expiration: Date;
-  sortType: string;
-}
+import type { ICertificatesFilter } from "@/types/ICertificatesFilter";
 
 //store
 const store = useStore();
 //loader
 const loading = ref<boolean>(false);
 //поля фильтра
-const filter = ref<Filter>({} as Filter);
+const filter = ref<ICertificatesFilter>({} as ICertificatesFilter);
 //список удостоверений
 const storeData: ICertificate[] = [];
 
@@ -167,42 +159,4 @@ onMounted(async () => {
 
   loading.value = false;
 });
-
-// function sorting(a: ICertificate, b: ICertificate) {
-//   switch (filter.value.sortType) {
-//     case "1":
-//       if (a.numCertificate > b.numCertificate) return 1;
-//       if (a.numCertificate == b.numCertificate) return 0;
-//       if (a.numCertificate < b.numCertificate) return -1;
-//       break;
-//     case "2":
-//       if (a.numCertificate > b.numCertificate) return -1;
-//       if (a.numCertificate == b.numCertificate) return 0;
-//       if (a.numCertificate < b.numCertificate) return 1;
-//       break;
-//     case "3":
-//       if (a.firstname > b.firstname) return 1;
-//       if (a.firstname == b.firstname) return 0;
-//       if (a.firstname < b.firstname) return -1;
-//       break;
-//     case "4":
-//       if (a.firstname > b.firstname) return -1;
-//       if (a.firstname == b.firstname) return 0;
-//       if (a.firstname < b.firstname) return 1;
-//       break;
-//     case "5":
-//       if (new Date(a.expiration) > new Date(b.expiration)) return 1;
-//       if (new Date(a.expiration) == new Date(b.expiration)) return 0;
-//       if (new Date(a.expiration) < new Date(b.expiration)) return -1;
-//       break;
-//     case "6":
-//       if (new Date(a.expiration) > new Date(b.expiration)) return -1;
-//       if (new Date(a.expiration) == new Date(b.expiration)) return 0;
-//       if (new Date(a.expiration) < new Date(b.expiration)) return 1;
-//       break;
-
-//     default:
-//       break;
-//   }
-// }
 </script>

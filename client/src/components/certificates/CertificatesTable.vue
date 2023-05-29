@@ -29,7 +29,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="cert in paginatedData" :key="cert.id">
+                <tr v-for="cert in paginatedData" :key="cert._id">
                   <td>{{ cert.numCertificate }}</td>
                   <td>
                     {{
@@ -174,208 +174,168 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import { dateFormat } from "../../utils/dateFormat";
 import { shortingTableItems } from "../../utils/shortingTableItems";
 import { arrayFormat } from "../../utils/arrayFormat";
-import router from "../../router";
+import type { ICertificate } from "@/types/ICertificate";
 
-export default {
-  props: ["certificates", "perPage"],
-  setup(props) {
-    const store = useStore();
-    const userRole = store.getters["auth/user"].roles;
-    const access = ref(false);
+const props = defineProps<{
+  certificates: ICertificate[];
+  perPage: number;
+}>();
 
-    //максимальное количество нуерных кнопок страниц
-    const maxVisibleButtons = ref(5);
-    //количество на странице
-    const perPage = ref(props.perPage);
-    //текущая страница
-    const currentPage = ref(1);
-    //всего страниц
-    const totalPages = ref(
-      Math.ceil(props.certificates.length / props.perPage)
+const store = useStore();
+const router = useRouter();
+const userRole = computed(() => store.getters["auth/user"].roles);
+const access = ref<boolean>(false);
+
+//максимальное количество нуерных кнопок страниц
+const maxVisibleButtons = ref<number>(5);
+//количество на странице
+const perPage = ref<number>(props.perPage);
+//текущая страница
+const currentPage = ref<number>(1);
+//всего страниц
+const totalPages = ref<number>(
+  Math.ceil(props.certificates.length / props.perPage)
+);
+
+//проверка адресной строки браузера
+onMounted(() => {
+  if (userRole) {
+    userRole.value.includes("admin") || userRole.value.includes("god")
+      ? (access.value = true)
+      : (access.value = false);
+  }
+
+  const href: string = router.currentRoute.value.fullPath;
+  const pageNum = Number(href.substring(12));
+
+  if (
+    href.substring(0, 12) === "/index?page=" &&
+    !isNaN(pageNum) &&
+    pageNum > 0 &&
+    pageNum <= totalPages.value
+  ) {
+    currentPage.value = pageNum;
+  } else if (pageNum === 0) {
+    currentPage.value = 1;
+    router.push("/");
+  } else if (pageNum < 0) {
+    currentPage.value = 1;
+    router.push("/");
+  } else if (pageNum > totalPages.value) {
+    currentPage.value = totalPages.value;
+    router.push(`/index?page=${currentPage.value}`);
+  } else {
+    router.push("/");
+  }
+});
+
+const paginatedData = computed(() => {
+  let start = (currentPage.value - 1) * perPage.value,
+    end = start + perPage.value;
+
+  return props.certificates.slice(start, end);
+});
+
+const startPage = computed(() => {
+  if (currentPage.value === 1) return 1;
+  if (currentPage.value === totalPages.value)
+    return (
+      totalPages.value - maxVisibleButtons.value + (maxVisibleButtons.value - 1)
     );
+  return currentPage.value - 1;
+});
 
-    //проверка адресной строки браузера
-    onMounted(() => {
-      if (userRole) {
-        userRole.includes("admin") || userRole.includes("god")
-          ? (access.value = true)
-          : (access.value = false);
-      }
+const endPage = computed(() => {
+  return Math.min(
+    startPage.value + maxVisibleButtons.value - 1,
+    totalPages.value
+  );
+});
 
-      const href = router.currentRoute.value.href;
-      const pageNum = +href.substr(12);
+const pages = computed(() => {
+  let range = [];
+  if (props.certificates.length && endPage.value) {
+    for (let i = startPage.value; i <= endPage.value; i++) {
+      range.push({
+        number: i,
+        isDisabled: i === currentPage.value,
+      });
+    }
+  }
+  return range;
+});
 
-      if (
-        href.substr(0, 12) === "/index?page=" &&
-        !isNaN(pageNum) &&
-        pageNum > 0 &&
-        pageNum <= totalPages.value
-      ) {
-        currentPage.value = pageNum;
-      } else if (pageNum === 0) {
-        currentPage.value = 1;
-        router.push("/");
-      } else if (pageNum < 0) {
-        currentPage.value = 1;
-        router.push("/");
-      } else if (pageNum > totalPages.value) {
-        currentPage.value = totalPages.value;
-        router.push(`/index?page=${currentPage.value}`);
-      } else {
-        router.push("/");
-      }
-    });
+const isInFirstPage = computed(() => {
+  return currentPage.value === 1;
+});
 
-    const paginatedData = computed(() => {
-      let start = (currentPage.value - 1) * perPage.value,
-        end = start + perPage.value;
+const isInLastPage = computed(() => {
+  return currentPage.value === totalPages.value;
+});
 
-      return props.certificates.slice(start, end);
-    });
+const onClickFirstPage = () => {
+  currentPage.value = 1;
+  router.push("/index?page=1");
+};
+const onClickPreviousPage = () => {
+  currentPage.value = currentPage.value - 1;
+  router.push(`/index?page=${currentPage.value}`);
+};
+const onClickPage = (page: number) => {
+  currentPage.value = page;
 
-    const startPage = computed(() => {
-      if (currentPage.value === 1) return 1;
-      if (currentPage.value === totalPages.value)
-        return (
-          totalPages.value -
-          maxVisibleButtons.value +
-          (maxVisibleButtons.value - 1)
-        );
-      return currentPage.value - 1;
-    });
+  // /home?page=1
+  router.push(`/index?page=${page}`);
+};
+const onClickNextPage = () => {
+  currentPage.value = currentPage.value + 1;
+  router.push(`/index?page=${currentPage.value}`);
+};
+const onClickLastPage = () => {
+  currentPage.value = totalPages.value;
+  router.push(`/index?page=${currentPage.value}`);
+};
+const isPageActive = (page: number) => {
+  return currentPage.value === page;
+};
 
-    const endPage = computed(() => {
-      return Math.min(
-        startPage.value + maxVisibleButtons.value - 1,
-        totalPages.value
-      );
-    });
+//правильность отображения списка при фильтрации, если показана текущая страница != 1
+//обновление общего числа страниц
+watch(
+  () => props.certificates,
+  (certificatesList) => {
+    //обновление общего числа страниц
+    totalPages.value = Math.ceil(props.certificates.length / props.perPage);
 
-    const pages = computed(() => {
-      let range = [];
-      if (props.certificates.length && endPage.value) {
-        for (let i = startPage.value; i <= endPage.value; i++) {
-          range.push({
-            number: i,
-            isDisabled: i === currentPage.value,
-          });
-        }
-      }
-      return range;
-    });
-
-    const isInFirstPage = computed(() => {
-      return currentPage.value === 1;
-    });
-
-    const isInLastPage = computed(() => {
-      return currentPage.value === totalPages.value;
-    });
-
-    const onClickFirstPage = () => {
+    if (certificatesList.length < props.perPage + 1 && currentPage.value > 1) {
       currentPage.value = 1;
       router.push("/index?page=1");
-    };
-    const onClickPreviousPage = () => {
-      currentPage.value = currentPage.value - 1;
-      router.push(`/index?page=${currentPage.value}`);
-    };
-    const onClickPage = (page) => {
-      currentPage.value = page;
+    }
 
-      // /home?page=1
-      router.push(`/index?page=${page}`);
-    };
-    const onClickNextPage = () => {
-      currentPage.value = currentPage.value + 1;
-      router.push(`/index?page=${currentPage.value}`);
-    };
-    const onClickLastPage = () => {
-      currentPage.value = totalPages.value;
-      router.push(`/index?page=${currentPage.value}`);
-    };
-    const isPageActive = (page) => {
-      return currentPage.value === page;
-    };
-    const onPageChange = (page) => {
-      currentPage.value = page;
-    };
+    if (currentPage.value > certificatesList.length / props.perPage + 1) {
+      currentPage.value = 1;
+      router.push("/index?page=1");
+    }
+  }
+);
 
-    //правильность отображения списка при фильтрации, если показана текущая страница != 1
-    //обновление общего числа страниц
-    watch(
-      () => props.certificates,
-      (certificatesList) => {
-        //обновление общего числа страниц
-        totalPages.value = Math.ceil(props.certificates.length / props.perPage);
-
-        if (
-          certificatesList.length < props.perPage + 1 &&
-          currentPage.value > 1
-        ) {
-          currentPage.value = 1;
-          router.push("/index?page=1");
-        }
-
-        if (currentPage.value > certificatesList.length / props.perPage + 1) {
-          currentPage.value = 1;
-          router.push("/index?page=1");
-        }
-      }
-    );
-
-    watch(
-      () => router.currentRoute.value.href,
-      (newVal) => {
-        //если пользователь находится на странице > 1 и переходит из меню на главную
-        if (newVal == "/") {
-          //сбрасываем пагинацию на начало
-          currentPage.value = 1;
-        }
-      }
-    );
-
-    return {
-      dateFormat,
-      shortingTableItems,
-      arrayFormat,
-
-      maxVisibleButtons,
-      // total,
-      perPage,
-      currentPage,
-      totalPages,
-
-      paginatedData,
-      startPage,
-      endPage,
-      pages,
-      isInFirstPage,
-      isInLastPage,
-
-      onClickFirstPage,
-      onClickPreviousPage,
-      onClickPage,
-      onClickNextPage,
-      onClickLastPage,
-      isPageActive,
-      onPageChange,
-
-      access,
-
-      // sortType,
-      // changeSort,
-    };
-  },
-
-  components: {},
-};
+watch(
+  () => router.currentRoute.value.fullPath,
+  (newVal) => {
+    //если пользователь находится на странице > 1 и переходит из меню на главную
+    if (newVal == "/") {
+      //сбрасываем пагинацию на начало
+      currentPage.value = 1;
+    }
+  }
+);
 </script>
 
 <style></style>

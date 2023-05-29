@@ -110,67 +110,52 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { computed, ref, watch } from "vue";
+import type { ICertificatesFilter } from "@/types/ICertificatesFilter";
 
-export default {
-  emits: ["update:modelValue"],
-  props: ["modelValue"],
-  setup(_, { emit }) {
-    const firstname = ref();
-    const secondname = ref();
-    const numCertificate = ref();
-    const stigmaGeneral = ref();
-    const expiration = ref();
-    const sortType = ref(0);
+const props = defineProps<{ modelValue: ICertificatesFilter }>();
 
-    watch(
-      [
-        firstname,
-        secondname,
-        numCertificate,
-        stigmaGeneral,
-        expiration,
-        sortType,
-      ],
-      (values) => {
-        emit("update:modelValue", {
-          firstname: values[0],
-          secondname: values[1],
-          numCertificate: values[2],
-          stigmaGeneral: values[3],
-          expiration: values[4],
-          sortType: values[5],
-        });
-      }
-    );
+const emit = defineEmits<{
+  (e: "update:modelValue", payload: ICertificatesFilter): void;
+}>();
 
-    const showClearBtn = computed(
-      () =>
-        firstname.value ||
-        secondname.value ||
-        numCertificate.value ||
-        stigmaGeneral.value ||
-        expiration.value
-    );
+const firstname = ref<string>();
+const secondname = ref<string>();
+const numCertificate = ref<string>();
+const stigmaGeneral = ref<string>();
+const expiration = ref<Date | string>();
+const sortType = ref<number>(0);
 
-    return {
-      firstname,
-      secondname,
-      expiration,
-      numCertificate,
-      stigmaGeneral,
-      showClearBtn,
-      sortType,
-      resetFilter: () => {
-        firstname.value = "";
-        secondname.value = "";
-        numCertificate.value = "";
-        stigmaGeneral.value = "";
-        expiration.value = "";
-      },
-    };
-  },
+watch(
+  [firstname, secondname, numCertificate, stigmaGeneral, expiration, sortType],
+  (values) => {
+    emit("update:modelValue", {
+      firstname: values[0],
+      secondname: values[1],
+      numCertificate: values[2],
+      stigmaGeneral: values[3],
+      expiration: values[4],
+      sortType: values[5],
+    } as ICertificatesFilter);
+  }
+);
+
+const showClearBtn = computed(
+  () =>
+    firstname.value ||
+    secondname.value ||
+    numCertificate.value ||
+    stigmaGeneral.value ||
+    expiration.value
+);
+
+const resetFilter = () => {
+  firstname.value = "";
+  secondname.value = "";
+  numCertificate.value = "";
+  stigmaGeneral.value = "";
+  expiration.value = "";
 };
 </script>
 
