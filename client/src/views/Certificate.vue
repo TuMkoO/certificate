@@ -54,7 +54,7 @@
                 ><span
                   class="d-flex h-100 align-items-center justify-content-center"
                 >
-                  Вкладыш №{{ c.numCertificate }}
+                  Вкладыш №{{ c["numCertificate"] }}
                 </span></label
               >
             </div>
@@ -578,7 +578,10 @@
                     </td>
                     <td class="w-50 border-bottom">
                       <div
-                        v-if="certificate.certType == 'sheetPipe'"
+                        v-if="
+                          certificate.certType == 'sheetPipe' &&
+                          certificate.preheating
+                        "
                         class="row"
                       >
                         <div
@@ -620,7 +623,10 @@
                         </div>
                       </div>
                       <div
-                        v-if="certificate.certType == 'fittings'"
+                        v-if="
+                          certificate.certType == 'fittings' &&
+                          certificate.axesPosition
+                        "
                         class="row"
                       >
                         <div
@@ -683,7 +689,10 @@
                     </td>
                     <td class="w-50 border-bottom">
                       <div
-                        v-if="certificate.certType == 'sheetPipe'"
+                        v-if="
+                          certificate.certType == 'sheetPipe' &&
+                          certificate.heatTreatment
+                        "
                         class="row"
                       >
                         <div
@@ -729,7 +738,10 @@
                         </div>
                       </div>
                       <div
-                        v-if="certificate.certType == 'fittings'"
+                        v-if="
+                          certificate.certType == 'fittings' &&
+                          certificate.weldedJoint
+                        "
                         class="row"
                       >
                         <div
@@ -1293,15 +1305,6 @@
                     <td class="w-50 border-bottom text-center">
                       {{ certificate.npa + "" }}
                     </td>
-                    <!-- <td class="w-100">
-                      <p class="text-center border-bottom">
-                        <span
-                          class="w-50 d-block float-start text-start border-bottom border-white"
-                          >Наименование НПА по нормам оценки качества</span
-                        >
-                        {{ certificate.npa + "" }}
-                      </p>
-                    </td> -->
                   </tr>
                   <tr class="d-flex">
                     <th scope="row">11.</th>
@@ -1522,22 +1525,6 @@
                       {{ arrayFormat(certificate.comission) + "" }}
                     </td>
                   </tr>
-                  <!-- <tr class="d-flex print">
-                    <td class="d-flex pt-3">
-                      <div class="me-2">Аттестационная комиссия:</div>
-
-                      <ul class="list-unstyled">
-                        <li
-                          v-for="member in certificate.comission"
-                          :key="member"
-                          class="mb-4"
-                        >
-                          <span class="signature"><sub>(подпись)</sub></span>
-                          {{ member }}
-                        </li>
-                      </ul>
-                    </td>
-                  </tr> -->
                 </table>
               </div>
 
@@ -1883,7 +1870,7 @@ import NewCertificateForm from "../components/certificates/NewCertificateForm.vu
 import CertificateQr from "../components/certificates/CertificateQr.vue";
 import type { ICertificate } from "@/types/ICertificate";
 
-function loadFile(url, callback) {
+function loadFile(url: string, callback: any) {
   PizZipUtils.getBinaryContent(url, callback);
 }
 
@@ -1924,14 +1911,22 @@ const classCol_4 = computed(() => {
     certificate.value.flux.length == 3 ||
     (certificate.value.weldedConnection.length == 3 &&
       certificate.value.weldedSeam.length == 3);
-  let variableBool: boolean;
-  let controlsBool: boolean;
+  let variableBool: boolean = false;
+  let controlsBool: boolean = false;
 
-  if (certificate.value.certType == "sheetPipe") {
+  if (
+    certificate.value.certType == "sheetPipe" &&
+    certificate.value.heatTreatment &&
+    certificate.value.preheating
+  ) {
     variableBool =
       certificate.value.preheating.length == 3 ||
       certificate.value.heatTreatment.length == 3;
-  } else if (certificate.value.certType == "fittings") {
+  } else if (
+    certificate.value.certType == "fittings" &&
+    certificate.value.axesPosition &&
+    certificate.value.weldedJoint
+  ) {
     variableBool =
       certificate.value.axesPosition.length == 3 ||
       certificate.value.weldedJoint.length == 3;
@@ -1940,15 +1935,19 @@ const classCol_4 = computed(() => {
   if (certificate.value.controls[0]) {
     controlsBool = certificate.value.controls[0].values.length == 3;
   }
-  if (certificate.value.controls[1]) {
+  if (certificate.value.controls[0] && certificate.value.controls[1]) {
     controlsBool =
-      certificate.value.controls[0]?.values.length == 3 &&
+      certificate.value.controls[0].values.length == 3 &&
       certificate.value.controls[1].values.length == 3;
   }
-  if (certificate.value.controls[2]) {
+  if (
+    certificate.value.controls[0] &&
+    certificate.value.controls[1] &&
+    certificate.value.controls[2]
+  ) {
     controlsBool =
-      certificate.value.controls[0]?.values.length == 3 &&
-      certificate.value.controls[1]?.values.length == 3 &&
+      certificate.value.controls[0].values.length == 3 &&
+      certificate.value.controls[1].values.length == 3 &&
       certificate.value.controls[2].values.length == 3;
   }
 
@@ -1982,10 +1981,10 @@ const classCol_6 = computed(() => {
     (certificate.value.weldedConnection.length > 1 &&
       certificate.value.weldedSeam.length > 1);
 
-  let variableBoolAND: boolean;
-  let variableBoolOR: boolean;
-  let controlsBoolAND: boolean;
-  let controlsBoolOR: boolean;
+  let variableBoolAND: boolean = false;
+  let variableBoolOR: boolean = false;
+  let controlsBoolAND: boolean = false;
+  let controlsBoolOR: boolean = false;
 
   if (
     certificate.value.certType == "sheetPipe" &&
@@ -2015,22 +2014,26 @@ const classCol_6 = computed(() => {
     controlsBoolAND = certificate.value.controls[0].values.length < 3;
     controlsBoolOR = certificate.value.controls[0].values.length > 1;
   }
-  if (certificate.value.controls[1]) {
+  if (certificate.value.controls[0] && certificate.value.controls[1]) {
     controlsBoolAND =
-      certificate.value.controls[0]?.values.length < 3 &&
+      certificate.value.controls[0].values.length < 3 &&
       certificate.value.controls[1].values.length < 3;
     controlsBoolOR =
-      certificate.value.controls[0]?.values.length > 1 ||
+      certificate.value.controls[0].values.length > 1 ||
       certificate.value.controls[1].values.length > 1;
   }
-  if (certificate.value.controls[2]) {
+  if (
+    certificate.value.controls[0] &&
+    certificate.value.controls[1] &&
+    certificate.value.controls[2]
+  ) {
     controlsBoolAND =
-      certificate.value.controls[0]?.values.length < 3 &&
-      certificate.value.controls[1]?.values.length < 3 &&
+      certificate.value.controls[0].values.length < 3 &&
+      certificate.value.controls[1].values.length < 3 &&
       certificate.value.controls[2].values.length < 3;
     controlsBoolOR =
-      certificate.value.controls[0]?.values.length > 1 ||
-      certificate.value.controls[1]?.values.length > 1 ||
+      certificate.value.controls[0].values.length > 1 ||
+      certificate.value.controls[1].values.length > 1 ||
       certificate.value.controls[2].values.length > 1;
   }
 
@@ -2055,14 +2058,22 @@ const classCol_12 = computed(() => {
     certificate.value.diameter.length == 1 &&
     certificate.value.electrode.length == 1 &&
     certificate.value.flux.length == 1;
-  let variableBool: boolean;
-  let controlsBool: boolean;
+  let variableBool: boolean = false;
+  let controlsBool: boolean = false;
 
-  if (certificate.value.certType == "sheetPipe") {
+  if (
+    certificate.value.certType == "sheetPipe" &&
+    certificate.value.preheating &&
+    certificate.value.heatTreatment
+  ) {
     variableBool =
       certificate.value.preheating.length == 1 &&
       certificate.value.heatTreatment.length == 1;
-  } else if (certificate.value.certType == "fittings") {
+  } else if (
+    certificate.value.certType == "fittings" &&
+    certificate.value.axesPosition &&
+    certificate.value.weldedJoint
+  ) {
     variableBool =
       certificate.value.axesPosition.length == 1 &&
       certificate.value.weldedJoint.length == 1;
@@ -2071,12 +2082,16 @@ const classCol_12 = computed(() => {
   if (certificate.value.controls[0]) {
     controlsBool = certificate.value.controls[0].values.length == 1;
   }
-  if (certificate.value.controls[1]) {
+  if (certificate.value.controls[0] && certificate.value.controls[1]) {
     controlsBool =
       certificate.value.controls[0].values.length == 1 &&
       certificate.value.controls[1].values.length == 1;
   }
-  if (certificate.value.controls[2]) {
+  if (
+    certificate.value.controls[0] &&
+    certificate.value.controls[1] &&
+    certificate.value.controls[2]
+  ) {
     controlsBool =
       certificate.value.controls[0].values.length == 1 &&
       certificate.value.controls[1].values.length == 1 &&
@@ -2206,28 +2221,28 @@ const exportToWord = () => {
   let templateFile: string = "";
   let col2: boolean =
     certificate.value.stigma.length == 2 &&
-    certificate.value.weldingMethod == 2 &&
-    certificate.value.weldedType == 2 &&
-    certificate.value.weldedSeam == 2 &&
-    certificate.value.weldedConnection == 2 &&
-    certificate.value.weldedPosition == 2 &&
-    certificate.value.brand == 2 &&
-    certificate.value.thickness == 2 &&
-    certificate.value.diameter == 2 &&
-    certificate.value.electrode == 2 &&
-    certificate.value.flux == 2;
+    certificate.value.weldingMethod.length == 2 &&
+    certificate.value.weldedType.length == 2 &&
+    certificate.value.weldedSeam.length == 2 &&
+    certificate.value.weldedConnection.length == 2 &&
+    certificate.value.weldedPosition.length == 2 &&
+    certificate.value.brand.length == 2 &&
+    certificate.value.thickness.length == 2 &&
+    certificate.value.diameter.length == 2 &&
+    certificate.value.electrode.length == 2 &&
+    certificate.value.flux.length == 2;
   let col3: boolean =
     certificate.value.stigma.length == 3 ||
-    certificate.value.weldingMethod == 3 ||
-    certificate.value.weldedType == 3 ||
-    certificate.value.weldedSeam == 3 ||
-    certificate.value.weldedConnection == 3 ||
-    certificate.value.weldedPosition == 3 ||
-    certificate.value.brand == 3 ||
-    certificate.value.thickness == 3 ||
-    certificate.value.diameter == 3 ||
-    certificate.value.electrode == 3 ||
-    certificate.value.flux == 3;
+    certificate.value.weldingMethod.length == 3 ||
+    certificate.value.weldedType.length == 3 ||
+    certificate.value.weldedSeam.length == 3 ||
+    certificate.value.weldedConnection.length == 3 ||
+    certificate.value.weldedPosition.length == 3 ||
+    certificate.value.brand.length == 3 ||
+    certificate.value.thickness.length == 3 ||
+    certificate.value.diameter.length == 3 ||
+    certificate.value.electrode.length == 3 ||
+    certificate.value.flux.length == 3;
 
   if (
     certificate.value.controls[0]?.values.length == 1 &&
@@ -2351,32 +2366,36 @@ const exportToWord = () => {
     templateFile = "/temp-col3-controls3v.docx";
   }
 
-  let variableTitle1: string,
-    variableTitle2: string,
-    variableTitle3: string,
-    variableTitle4: string,
-    variableTitle5: string,
-    variableString1Val1: string,
-    variableString1Val2: string,
-    variableString1Val3: string,
-    variableString2Val1: string,
-    variableString2Val2: string,
-    variableString2Val3: string,
-    variableString3Val: string,
-    variableString4Val: string = "";
+  let variableTitle1: string = "";
+  let variableTitle2: string = "";
+  let variableTitle3: string = "";
+  let variableTitle4: string = "";
+  let variableTitle5: string = "";
+  let variableString1Val1: string = "";
+  let variableString1Val2: string = "";
+  let variableString1Val3: string = "";
+  let variableString2Val1: string = "";
+  let variableString2Val2: string = "";
+  let variableString2Val3: string = "";
+  let variableString3Val: string = "";
+  let variableString4Val: string = "";
 
-  if (certificate.value.certType == "sheetPipe") {
+  if (
+    certificate.value.certType == "sheetPipe" &&
+    certificate.value.preheating &&
+    certificate.value.heatTreatment
+  ) {
     variableTitle1 = "Предварительный и сопутствующий подогрев";
     variableTitle2 = "Термическая обработка";
     variableTitle3 = "Наружный диаметр трубы, мм";
     variableTitle4 = "Положение при сварке";
     variableTitle5 = "Исполнение сварного шва";
-    variableString1Val1 = certificate.value.preheating[0];
-    variableString1Val2 = certificate.value.preheating[1];
-    variableString1Val3 = certificate.value.preheating[2];
-    variableString2Val1 = certificate.value.heatTreatment[0];
-    variableString2Val2 = certificate.value.heatTreatment[1];
-    variableString2Val3 = certificate.value.heatTreatment[2];
+    variableString1Val1 = certificate.value.preheating[0] || "";
+    variableString1Val2 = certificate.value.preheating[1] || "";
+    variableString1Val3 = certificate.value.preheating[2] || "";
+    variableString2Val1 = certificate.value.heatTreatment[0] || "";
+    variableString2Val2 = certificate.value.heatTreatment[1] || "";
+    variableString2Val3 = certificate.value.heatTreatment[2] || "";
     variableString3Val =
       arrayFormat(certificate.value.weldedPositionScope) + "";
     variableString4Val =
@@ -2387,17 +2406,21 @@ const exportToWord = () => {
     variableTitle3 = "Диаметр стержня, мм";
     variableTitle4 = "Положение осей стержней";
     variableTitle5 = "Тип сварного соединения";
-    variableString1Val1 = arrayFormat(certificate.value.axesPosition[0]) + "";
-    variableString1Val2 = arrayFormat(certificate.value.axesPosition[1]) + "";
-    variableString1Val3 = arrayFormat(certificate.value.axesPosition[2]) + "";
-    variableString2Val1 = arrayFormat(certificate.value.weldedJoint[0]) + "";
-    variableString2Val2 = arrayFormat(certificate.value.weldedJoint[1]) + "";
-    variableString2Val3 = arrayFormat(certificate.value.weldedJoint[2]) + "";
+    if (certificate.value.axesPosition) {
+      variableString1Val1 = arrayFormat(certificate.value.axesPosition[0]) + "";
+      variableString1Val2 = arrayFormat(certificate.value.axesPosition[1]) + "";
+      variableString1Val3 = arrayFormat(certificate.value.axesPosition[2]) + "";
+    }
+    if (certificate.value.weldedJoint) {
+      variableString2Val1 = arrayFormat(certificate.value.weldedJoint[0]) + "";
+      variableString2Val2 = arrayFormat(certificate.value.weldedJoint[1]) + "";
+      variableString2Val3 = arrayFormat(certificate.value.weldedJoint[2]) + "";
+    }
     variableString3Val = arrayFormat(certificate.value.axesPositionScope) + "";
     variableString4Val = arrayFormat(certificate.value.weldedJointScope) + "";
   }
 
-  loadFile(templateFile, function (error, content) {
+  loadFile(templateFile, function (error: any, content: any) {
     if (error) {
       // console.log("ERROR");
       throw error;
@@ -2405,7 +2428,7 @@ const exportToWord = () => {
     const zip = new PizZip(content);
 
     const base64Regex = /^data:image\/(png|jpg|svg|svg\+xml);base64,/;
-    function base64Parser(dataURL) {
+    function base64Parser(dataURL: string) {
       if (typeof dataURL !== "string" || !base64Regex.test(dataURL)) {
         return false;
       }
@@ -2424,15 +2447,16 @@ const exportToWord = () => {
 
     const imageOpts = {
       centered: false,
-      getImage: function (tagValue, tagName) {
+      getImage: function (tagValue: string, tagName: string) {
         const canvas = document.getElementsByTagName("canvas")[0];
         const ctx = canvas.getContext("2d");
-        ctx.beginPath();
-        ctx.arc(100, 75, 50, 0, 2 * Math.PI);
-        ctx.stroke();
+
+        ctx?.beginPath();
+        ctx?.arc(100, 75, 50, 0, 2 * Math.PI);
+        ctx?.stroke();
         return base64Parser(canvas.toDataURL());
       },
-      getSize: function (img, tagValue, tagName) {
+      getSize: function (img: object, tagValue: string, tagName: string) {
         // FOR FIXED SIZE IMAGE :
         return [150, 150];
 
@@ -2652,9 +2676,9 @@ const exportToWord = () => {
     try {
       // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
       doc.render();
-    } catch (error) {
+    } catch (error: any) {
       // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
-      function replaceErrors(key, value) {
+      function replaceErrors(key: any, value: any) {
         if (value instanceof Error) {
           return Object.getOwnPropertyNames(value).reduce(function (
             error,
@@ -2671,7 +2695,7 @@ const exportToWord = () => {
 
       if (error.properties && error.properties.errors instanceof Array) {
         const errorMessages = error.properties.errors
-          .map(function (error) {
+          .map(function (error: any) {
             return error.properties.explanation;
           })
           .join("\n");

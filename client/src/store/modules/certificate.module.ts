@@ -2,14 +2,10 @@ import axios from "../../axios/request";
 import $api from "../../axios/request";
 import { ActionContext } from "vuex";
 import type { ICertificate } from "@/types/ICertificate";
+import type { ICertificateUpdatePayload } from "@/types/ICertificateUpdatePayload";
 
 interface State {
   certificates: ICertificate[];
-}
-
-interface ICertificateUpdatePayload {
-  id: string;
-  values: ICertificate;
 }
 
 export default {

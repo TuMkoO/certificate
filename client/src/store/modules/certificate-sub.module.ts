@@ -2,6 +2,7 @@ import axios from "../../axios/request";
 import $api from "../../axios/request";
 import { ActionContext } from "vuex";
 import type { ICertificate } from "@/types/ICertificate";
+import type { ICertificateUpdatePayload } from "@/types/ICertificateUpdatePayload";
 
 interface State {
   certificatesSub: ICertificate[];
@@ -27,7 +28,7 @@ export default {
   actions: {
     async create(
       { dispatch }: ActionContext<State, any>,
-      payload
+      payload: ICertificate
     ): Promise<void> {
       try {
         await $api.post("api/certificate-sub/create", payload);
@@ -144,7 +145,7 @@ export default {
 
     async update(
       { dispatch }: ActionContext<State, any>,
-      payload
+      payload: ICertificateUpdatePayload
     ): Promise<void> {
       try {
         //получаем id

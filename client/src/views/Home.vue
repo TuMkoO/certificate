@@ -65,8 +65,6 @@ export default {
         if (a.numCertificate < b.numCertificate) return 1;
       });
 
-      // console.log("storeData::", storeData);
-
       loading.value = false;
     });
 
@@ -119,9 +117,6 @@ export default {
     );
 
     function sorting(a, b) {
-      // console.log(a, b);
-      // console.log(filter.value.sortType);
-
       switch (filter.value.sortType) {
         case "1":
           if (a.numCertificate > b.numCertificate) return 1;
