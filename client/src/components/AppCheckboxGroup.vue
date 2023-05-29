@@ -38,30 +38,37 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 
+interface Option {
+  _id?: string;
+  id: string;
+  value: string;
+  checked: boolean;
+}
+
+interface Values {
+  values: string[];
+}
+
 const props = defineProps<{
-  options: [];
+  options: Option[];
   title: string;
-  defaultOptions?: object;
+  defaultOptions?: string[] | undefined;
 }>();
+
 const emit = defineEmits<{
-  (e: "checked"): void;
+  (e: "checked", values: Values): void;
 }>();
 
-//массив всех начальных значений
-const checkboxItems = ref([]);
-
-const checkbox = ref([]);
+const checkbox = ref<string[]>([]);
 
 onMounted(() => {
-  // console.log("props.defaultOptions ::", props.defaultOptions);
-
   //если указаны дефольные значения
   if (props.defaultOptions && props.defaultOptions.length) {
     checkbox.value = props.defaultOptions;
   }
 });
 
-const check = (val) => {
+const check = (val: string[]) => {
   emit("checked", {
     values: val,
   });

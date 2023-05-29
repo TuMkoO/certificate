@@ -38,16 +38,7 @@ import type { Message, MessageTypes } from "@/types/MessageTypes";
 
 const store = useStore();
 
-// const messageTypes: MessageTypes = {
-//   primary: "primary",
-//   danger: "danger",
-//   warning: "warning",
-// };
-
 const message = computed<Message>(() => store.state.message);
-// const messageType = computed(() =>
-//   message.value ? messageTypes[message.value.type] : null
-// );
 
 const close = () => store.commit("clearMessage");
 </script>

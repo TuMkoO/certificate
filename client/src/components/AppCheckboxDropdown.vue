@@ -16,7 +16,7 @@
           v-model="mainCheckbox"
         />
         <label class="form-check-label d-block">
-          {{ mainItem[0] }}
+          {{ mainItem.value }}
         </label>
       </div>
     </a>
@@ -44,37 +44,57 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 
+interface CheckboxDropdownItem {
+  value: string;
+  owner: string;
+  id: string;
+  _id: string;
+}
+interface CheckboxDropdownDefaultItem {
+  item: string;
+  values: string[];
+}
+interface CheckboxDropdownCheckedValues {
+  values: {
+    item: string;
+    values?: string[];
+  };
+}
+interface CheckboxDropdownMainItem {
+  value: string;
+  id: string;
+}
+
 const props = defineProps<{
   collapseId: string;
-  mainItem: [];
-  items?: [];
-  defaultItems?: [];
+  mainItem: CheckboxDropdownMainItem;
+  items: CheckboxDropdownItem[];
+  defaultItems?: CheckboxDropdownDefaultItem[];
 }>();
 
 const emit = defineEmits<{
-  (e: "checked"): void;
+  (e: "checked", values: CheckboxDropdownCheckedValues): void;
 }>();
 
-//дефолтное значение главное чекбокса
-const mainCheckbox = ref(false);
+//дефолтное значение главного чекбокса
+const mainCheckbox = ref<boolean>(false);
 
 //массив выбранных значений чекбоксов
-const checkbox = ref([]);
+const checkbox = ref<string[]>([]);
 
-const checkboxItems = ref([]);
+//все значения
+const checkboxItems = ref<CheckboxDropdownItem[]>([]);
 
-//
-const defaultItems = ref();
+//дефолтные значения по умолчанию
+const defaultItems = ref<CheckboxDropdownDefaultItem>();
 
 onMounted(() => {
-  checkboxItems.value = props.items.filter(
-    (item) => item.owner == props.mainItem[1]
-  );
+  checkboxItems.value = props.items;
 
   //дефолтные значения
   if (props.defaultItems) {
     defaultItems.value = props.defaultItems.find(
-      (item) => item.item == props.mainItem[0]
+      (item) => item.item == props.mainItem.value
     );
 
     if (defaultItems.value) {
@@ -97,25 +117,25 @@ const checkMainCheckbox = () => {
 
   if (mainCheckbox.value) {
     emit("checked", {
-      values: { item: props.mainItem[0] },
+      values: { item: props.mainItem.value },
     });
   } else {
     //сбросить значения всех чекбоксов
     checkbox.value = [];
     emit("checked", {
-      values: { item: props.mainItem[0], values: [] },
+      values: { item: props.mainItem.value, values: [] },
     });
   }
 };
 
-const check = (val) => {
+const check = (val: string[]) => {
   if (val.length) {
     emit("checked", {
-      values: { item: props.mainItem[0], values: val },
+      values: { item: props.mainItem.value, values: val },
     });
   } else {
     emit("checked", {
-      values: { item: props.mainItem[0] },
+      values: { item: props.mainItem.value },
     });
   }
 };

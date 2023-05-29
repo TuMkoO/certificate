@@ -22,42 +22,43 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 
-const props = defineProps({
-  options: {
-    type: Array,
-    default: () => [],
-  },
-  selectedDefault: {
-    type: String,
-    default: "",
-  },
-  label: {
-    type: String,
-    default: "",
-  },
-  name: {
-    type: String,
-    default: "",
-    required: true,
-  },
-  invalid: {
-    type: Boolean,
-  },
-});
+interface Option {
+  value: string;
+  _id: string;
+  id: string;
+}
+
+const props = withDefaults(
+  defineProps<{
+    options: Option[];
+    selectedDefault: string;
+    label: string;
+    name: string;
+    invalid: boolean;
+  }>(),
+  {
+    options: () => [],
+    selectedDefault: "",
+    label: "",
+    name: "",
+  }
+);
 
 const emit = defineEmits<{
-  (e: "select"): void;
+  (e: "select", value: { value: string }): void;
 }>();
 
-const value = ref("");
+const value = ref<string>("");
 
 onMounted(() => {
+  console.log(props);
+
   if (props.selectedDefault) {
     value.value = props.selectedDefault;
   }
 });
 
-const select = (value) => {
+const select = (value: string) => {
   emit("select", {
     value: value,
   });

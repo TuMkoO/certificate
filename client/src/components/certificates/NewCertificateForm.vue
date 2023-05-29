@@ -1270,8 +1270,12 @@
           <app-checkbox-dropdown
             v-for="(item, idx) in checkboxDropdownAccess"
             :key="item._id"
-            :mainItem="[item.value, item._id]"
-            :items="checkboxDropdownAccessItems"
+            :mainItem="{ value: item.value, id: item._id }"
+            :items="
+              checkboxDropdownAccessItems.filter(
+                (aItem) => aItem.owner == item._id
+              )
+            "
             :defaultItems="certValues?.accesses"
             :collapseId="'collapseCheckbox' + idx"
             @checked="onCheckedAccessSubItems"
