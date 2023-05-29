@@ -48,15 +48,13 @@ onMounted(() => {
 });
 
 // функция изменения
-const submit = handleSubmit(async (values) => {
+const onSubmit = handleSubmit(async (values) => {
   const id = linkId.value;
 
   try {
     await store.dispatch("qr/update", { values, id });
   } catch (e) {}
 });
-
-const onSubmit = handleSubmit(submit);
 </script>
 
 <style></style>
