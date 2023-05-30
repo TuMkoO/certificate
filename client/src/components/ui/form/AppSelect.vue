@@ -34,7 +34,7 @@ const props = withDefaults(
     selectedDefault: string;
     label: string;
     name: string;
-    invalid: boolean;
+    invalid?: boolean;
   }>(),
   {
     options: () => [],
@@ -51,8 +51,6 @@ const emit = defineEmits<{
 const value = ref<string>("");
 
 onMounted(() => {
-  console.log(props);
-
   if (props.selectedDefault) {
     value.value = props.selectedDefault;
   }

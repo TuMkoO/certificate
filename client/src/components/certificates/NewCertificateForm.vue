@@ -1626,7 +1626,7 @@
         class="btn btn-cert-control btn-cert-control-danger rounded-circle mx-3"
         type="button"
         title="Отмена"
-        @click="this.$emit('hide')"
+        @click="$emit('hide')"
       >
         <span>
           <svg
@@ -1680,9 +1680,30 @@ import AppLoader from "../ui/AppLoader.vue";
 import AppSelect from "../ui/form/AppSelect.vue";
 import AppModal from "../AppModal.vue";
 import CertificateFormQualityControl from "./CertificateFormQualityControl.vue";
+import type { ICheckboxGroupOption } from "@/types/ICheckboxGroupOption";
+import type { ICertificate } from "@/types/ICertificate";
+
+interface IOptionsItem {
+  id: string;
+  _id: string;
+  value: string;
+}
+interface ISubCertificateProps {
+  birthday: Date;
+  date: Date;
+  firstname: string;
+  id: string;
+  lastname: string;
+  numCertificate: string;
+  passport: string;
+  qualifyingRank: string;
+  secondname: string;
+  work: string;
+  workYears: number;
+}
 
 const props = defineProps<{
-  certValues?: object;
+  certValues?: ICertificate | ISubCertificateProps;
   certSubmit: string;
 }>();
 
@@ -1696,29 +1717,28 @@ const store = useStore();
 //
 const router = useRouter();
 //loader
-const loading = ref(true);
+const loading = ref<boolean>(true);
 //Показ модального окна
-const modal = ref(false);
+const modal = ref<boolean>(false);
 
 //Тип протокола
-const certType = ref();
+const certType = ref<string>("sheetPipe");
 
 //значение input
-const textHeadValue = ref({});
-const stigma2 = ref();
-const stigma3 = ref();
-const weldingMethod2 = ref();
-const weldingMethod3 = ref();
-const preheating2 = ref();
-const preheating3 = ref();
-const heatTreatment2 = ref();
-const heatTreatment3 = ref();
-const thickness2 = ref();
-const thickness3 = ref();
-const diameter2 = ref();
-const diameter3 = ref();
-const flux2 = ref();
-const flux3 = ref();
+const stigma2 = ref<string>("");
+const stigma3 = ref<string>("");
+const weldingMethod2 = ref<string>("");
+const weldingMethod3 = ref<string>("");
+const preheating2 = ref<string>("");
+const preheating3 = ref<string>("");
+const heatTreatment2 = ref<string>("");
+const heatTreatment3 = ref<string>("");
+const thickness2 = ref<string>("");
+const thickness3 = ref<string>("");
+const diameter2 = ref<string>("");
+const diameter3 = ref<string>("");
+const flux2 = ref<string>("");
+const flux3 = ref<string>("");
 
 //переменные для значений по умолчанию для полей, зависимых от типа протокола
 const axesPositionDefault = ref();
@@ -1750,32 +1770,32 @@ const electrodeDefault2 = ref();
 const electrodeDefault3 = ref();
 
 //значения вариационных параметров для отпрпавки в БД
-const stigmaVal = ref([]);
-const weldingMethodVal = ref([]);
-const weldedTypeVal = ref([]);
-const weldedSeamVal = ref([]);
-const weldedConnectionVal = ref([]);
-const weldedPositionVal = ref([]);
-const axesPositionVal = ref([]);
-const weldedJointVal = ref([]);
-const preheatingVal = ref([]);
-const heatTreatmentVal = ref([]);
-const brandVal = ref([]);
-const thicknessVal = ref([]);
-const diameterVal = ref([]);
-const electrodeVal = ref([]);
-const fluxVal = ref([]);
+const stigmaVal = ref<string[]>([]);
+const weldingMethodVal = ref<string[]>([]);
+const weldedTypeVal = ref<string[]>([]);
+const weldedSeamVal = ref<string[]>([]);
+const weldedConnectionVal = ref<string[]>([]);
+const weldedPositionVal = ref<string[]>([]);
+const axesPositionVal = ref<string[]>([]);
+const weldedJointVal = ref<string[]>([]);
+const preheatingVal = ref<string[]>([]);
+const heatTreatmentVal = ref<string[]>([]);
+const brandVal = ref<string[]>([]);
+const thicknessVal = ref<string[]>([]);
+const diameterVal = ref<string[]>([]);
+const electrodeVal = ref<string[]>([]);
+const fluxVal = ref<string[]>([]);
 
 //список option в мультиселекте
-const optionsWeldedPosition = [];
-const optionsAxesPosition = [];
-const optionsWeldedJoint = [];
-const optionsWeldedType = [];
-const optionsWeldedSeam = [];
-const optionsWeldedConnection = [];
-const optionsBrand = [];
-const optionsElectrode = [];
-const optionsComission = [];
+const optionsWeldedPosition: ICheckboxGroupOption[] = [];
+const optionsAxesPosition: ICheckboxGroupOption[] = [];
+const optionsWeldedJoint: ICheckboxGroupOption[] = [];
+const optionsWeldedType: ICheckboxGroupOption[] = [];
+const optionsWeldedSeam: ICheckboxGroupOption[] = [];
+const optionsWeldedConnection: ICheckboxGroupOption[] = [];
+const optionsBrand: ICheckboxGroupOption[] = [];
+const optionsElectrode: ICheckboxGroupOption[] = [];
+const optionsComission: ICheckboxGroupOption[] = [];
 
 //значение для групп технических устройств
 const checkboxDropdownAccess = ref([]);
@@ -1823,7 +1843,7 @@ onMounted(async () => {
   await store.dispatch("certItem/load", linkGrade);
   await store.dispatch("certItem/load", linkTextHead);
 
-  // возвращаем значение из store (берем список значений из store)
+  // возвращаем значение из store
   const dataAccesses = store.getters["certItem/certAccesses"];
   const dataAccessItems = store.getters["certItem/certAccessItems"];
   const dataWeldedPositions = store.getters["certItem/certWeldedPositions"];
@@ -1837,58 +1857,57 @@ onMounted(async () => {
   const dataComissions = store.getters["certItem/certComissions"];
 
   //добавляем полученные значения в массив options
-  dataWeldedPositions.forEach((item) => {
+  dataWeldedPositions.forEach((item: IOptionsItem) => {
     const newItem = Object.assign(item, { checked: false });
     optionsWeldedPosition.push(newItem);
   });
-  dataAxesPositions.forEach((item) => {
+  dataAxesPositions.forEach((item: IOptionsItem) => {
     const newItem = Object.assign(item, { checked: false });
     optionsAxesPosition.push(newItem);
   });
-  dataWeldedJoints.forEach((item) => {
+  dataWeldedJoints.forEach((item: IOptionsItem) => {
     const newItem = Object.assign(item, { checked: false });
     optionsWeldedJoint.push(newItem);
   });
-  dataWeldedTypes.forEach((item) => {
+
+  dataWeldedTypes.forEach((item: IOptionsItem) => {
     const newItem = Object.assign(item, { checked: false });
     optionsWeldedType.push(newItem);
   });
-  dataWeldedSeams.forEach((item) => {
+  dataWeldedSeams.forEach((item: IOptionsItem) => {
     const newItem = Object.assign(item, { checked: false });
     optionsWeldedSeam.push(newItem);
   });
-  dataWeldedConnections.forEach((item) => {
+  dataWeldedConnections.forEach((item: IOptionsItem) => {
     const newItem = Object.assign(item, { checked: false });
     optionsWeldedConnection.push(newItem);
   });
-  dataBrands.forEach((item) => {
+  dataBrands.forEach((item: IOptionsItem) => {
     const newItem = Object.assign(item, { checked: false });
     optionsBrand.push(newItem);
   });
-  dataElectrodes.forEach((item) => {
+  dataElectrodes.forEach((item: IOptionsItem) => {
     const newItem = Object.assign(item, { checked: false });
     optionsElectrode.push(newItem);
   });
-  dataComissions.forEach((item) => {
+  dataComissions.forEach((item: IOptionsItem) => {
     const newItem = Object.assign(item, { checked: false });
     optionsComission.push(newItem);
   });
 
-  //получаем значение input
-  textHeadValue.value = computed(() => store.getters["certItem/certTextHeads"]);
   //добавляем значение в input
-  textHead.value = textHeadValue.value.value[0].value;
+  textHead.value = store.getters["certItem/certTextHeads"][0].value;
 
   //заносим значение групп технических устройств
   checkboxDropdownAccess.value = dataAccesses;
   checkboxDropdownAccessItems.value = dataAccessItems;
 
-  //Задаем тип протокола по умолчанию
-  certType.value = "sheetPipe";
   weldedJoint.value = [];
   weldedJointScope.value = [];
   axesPosition.value = [];
   axesPositionScope.value = [];
+
+  console.log(props.certValues);
 
   //Значения по умолчанию для создания вкладыша
   if (props.certValues?.id && props.certSubmit == "create") {

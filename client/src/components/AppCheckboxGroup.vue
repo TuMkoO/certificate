@@ -37,20 +37,14 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-
-interface Option {
-  _id?: string;
-  id: string;
-  value: string;
-  checked: boolean;
-}
+import type { ICheckboxGroupOption } from "@/types/ICheckboxGroupOption";
 
 interface Values {
   values: string[];
 }
 
 const props = defineProps<{
-  options: Option[];
+  options: ICheckboxGroupOption[];
   title: string;
   defaultOptions?: string[] | undefined;
 }>();
