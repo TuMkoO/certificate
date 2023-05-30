@@ -54,12 +54,11 @@ import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
 import AppPage from "../components/ui/AppPage.vue";
-import AppLoader from "../components/ui/AppLoader.vue";
 
 //store
 const store = useStore();
 
-const { handleSubmit, isSubmitting, resetForm, submitCount } = useForm();
+const { handleSubmit, resetForm } = useForm();
 
 const PASSWORD_MIN_LENGTH = 7;
 

@@ -57,7 +57,9 @@ class UserService {
       { new: true }
     );
 
-    return user;
+    const userDto = new UserDto(user);
+
+    return userDto;
   }
 
   async updatePassword(id, oldPassword, newPassword) {

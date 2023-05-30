@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, computed, watch } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { useStore } from "vuex";
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
@@ -82,13 +82,11 @@ import AppLoader from "../components/ui/AppLoader.vue";
 //store
 const store = useStore();
 //loader
-const loading = ref(false);
+const loading = ref<boolean>(false);
 //user
-const user = ref(null);
-//user id
-const id = ref(null);
+const user = computed(() => store.getters["auth/user"]);
 //user role
-const roles = ref(null);
+const roles = ref<string[]>([]);
 
 const { handleSubmit } = useForm();
 
@@ -112,12 +110,6 @@ const { value: name, errorMessage: nError } = useField(
 
 onMounted(async () => {
   loading.value = true;
-
-  id.value = store.getters["auth/user"].id;
-  if (!id.value) {
-    id.value = await store.dispatch("auth/loadCurrentUserId");
-  }
-  user.value = await store.dispatch("auth/loadUserById", id.value);
 
   email.value = user.value.email;
   name.value = user.value.name;
