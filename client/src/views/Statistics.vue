@@ -179,6 +179,7 @@ import {
   LinearScale,
   ArcElement,
 } from "chart.js";
+import type { ICertificate } from "@/types/ICertificate";
 
 ChartJS.register(
   Title,
@@ -195,25 +196,39 @@ interface ChartData {
   datasets: ChartDataDatasets[];
 }
 interface ChartDataDatasets {
-  label: string;
+  label: string | number;
   backgroundColor: string | string[];
   data: number[];
+}
+interface UniqueValResult {
+  [key: string]: number;
+}
+interface Access {
+  item: string;
+  values: string[];
+}
+interface sortedWorkYearsItem {
+  val: string;
+  item: [string, number];
+}
+interface MonthsValues {
+  [key: string]: string[];
 }
 
 //store
 const store = useStore();
 //loader
-const loading = ref(false);
+const loading = ref<boolean>(false);
 
 //Подсчитанное количество отобранных значений
-let weldingMethodResult = {};
-let accessesResult = {};
-let agesResult = {};
-let workYearsResult = {};
-let qualifyingRankResult = {};
-let workResult = {};
-let typeWorkResult = {};
-let yearsAttestationResult = {};
+let weldingMethodResult: UniqueValResult = {};
+let accessesResult: UniqueValResult = {};
+let agesResult: UniqueValResult = {};
+let workYearsResult: UniqueValResult = {};
+let qualifyingRankResult: UniqueValResult = {};
+let workResult: UniqueValResult = {};
+let typeWorkResult: UniqueValResult = {};
+let yearsAttestationResult: UniqueValResult = {};
 
 //Подписи значений графика
 const weldingMethodLabels: string[] = [];
@@ -235,9 +250,9 @@ const workData: number[] = [];
 const typeWorkData: number[] = [];
 const yearsAttestationData: number[] = [];
 const monthAttestationData: number[] = [];
-const alltimeAttestationData = [];
+const alltimeAttestationData: ChartDataDatasets[] = [];
 
-const weldingMethodChartData: ChartData = {
+const weldingMethodChartData = {
   labels: weldingMethodLabels,
   datasets: [
     {
@@ -248,7 +263,7 @@ const weldingMethodChartData: ChartData = {
   ],
 };
 
-const accessesChartData: ChartData = {
+const accessesChartData = {
   labels: accessesLabels,
   datasets: [
     {
@@ -267,7 +282,7 @@ const accessesChartData: ChartData = {
   ],
 };
 
-const agesChartData: ChartData = {
+const agesChartData = {
   labels: agesLabels,
   datasets: [
     {
@@ -278,7 +293,7 @@ const agesChartData: ChartData = {
   ],
 };
 
-const workYearsChartData: ChartData = {
+const workYearsChartData = {
   labels: workYearsLabels,
   datasets: [
     {
@@ -289,7 +304,7 @@ const workYearsChartData: ChartData = {
   ],
 };
 
-const qualifyingRankChartData: ChartData = {
+const qualifyingRankChartData = {
   labels: qualifyingRankLabels,
   datasets: [
     {
@@ -300,7 +315,7 @@ const qualifyingRankChartData: ChartData = {
   ],
 };
 
-const workChartData: ChartData = {
+const workChartData = {
   labels: workLabels,
   datasets: [
     {
@@ -311,7 +326,7 @@ const workChartData: ChartData = {
   ],
 };
 
-const typeWorkChartData: ChartData = {
+const typeWorkChartData = {
   labels: typeWorkLabels,
   datasets: [
     {
@@ -322,7 +337,7 @@ const typeWorkChartData: ChartData = {
   ],
 };
 
-const yearsAttestationChartData: ChartData = {
+const yearsAttestationChartData = {
   labels: yearsAttestationLabels,
   datasets: [
     {
@@ -333,7 +348,7 @@ const yearsAttestationChartData: ChartData = {
   ],
 };
 
-const monthAttestationChartData: ChartData = {
+const monthAttestationChartData = {
   labels: [
     "январь",
     "февраль",
@@ -356,7 +371,7 @@ const monthAttestationChartData: ChartData = {
     },
   ],
 };
-const alltimeAttestationChartData: ChartData = {
+const alltimeAttestationChartData = {
   labels: [
     "январь",
     "февраль",
@@ -392,16 +407,16 @@ onMounted(async () => {
   await store.dispatch("certificate/load");
 
   //Все отобранные значения для графиков
-  const weldingMethod = [];
-  const accesses = [];
-  const certArr = [];
-  const qualifyingRank = [];
-  const work = [];
-  const yearsAttestation = [];
-  const dateAttestation = [];
+  const weldingMethod: string[] = [];
+  const accesses: Array<Access[]> = [];
+  const certArr: ICertificate[] = [];
+  const qualifyingRank: string[] = [];
+  const work: string[] = [];
+  const yearsAttestation: number[] = [];
+  const dateAttestation: Date[] = [];
 
   //Получение данных с сервера
-  store.getters["certificate/certificates"].forEach((item) => {
+  store.getters["certificate/certificates"].forEach((item: ICertificate) => {
     weldingMethod.push(item.weldingMethodScope);
     accesses.push(item.accesses);
     qualifyingRank.push(item.qualifyingRank);
@@ -429,6 +444,8 @@ onMounted(async () => {
   /*
    * Логика графика по объектам контроля
    */
+  // console.log(accesses);
+
   accesses.forEach((item) => {
     item.forEach(function (a) {
       accessesResult[a.item] = accessesResult[a.item] + 1 || 1;
@@ -450,7 +467,7 @@ onMounted(async () => {
    * Логика графика по возрасту
    */
   //Отбор возраста по уникальным данным
-  const uniquePerson = {};
+  const uniquePerson: UniqueValResult = {};
   certArr.forEach((cert) => {
     uniquePerson[
       cert.firstname + cert.secondname + cert.lastname + cert.birthday
@@ -459,7 +476,8 @@ onMounted(async () => {
         cert.firstname + cert.secondname + cert.lastname + cert.birthday
       ] + 1 ||
       Math.trunc(
-        (new Date() - new Date(cert.birthday)) / (24 * 3600 * 365.25 * 1000)
+        (new Date().getTime() - new Date(cert.birthday).getTime()) /
+          (24 * 3600 * 365.25 * 1000)
       );
   });
   //Подсчет возрастов по категориям
@@ -504,7 +522,7 @@ onMounted(async () => {
    * Логика графика по стажу
    */
   //Отбор стажа по уникальным данным
-  const uniqueWorkYears = {};
+  const uniqueWorkYears: UniqueValResult = {};
   certArr.forEach((cert) => {
     uniqueWorkYears[
       cert.firstname + cert.secondname + cert.lastname + cert.birthday
@@ -514,7 +532,7 @@ onMounted(async () => {
       ] + 1 || cert.workYears;
   });
   //Подсчет стажа по категориям
-  Object.values(uniqueWorkYears).forEach((item) => {
+  Object.values(uniqueWorkYears).forEach((item: number) => {
     if (item < 5) {
       workYearsResult["до 05 лет"] = workYearsResult["до 05 лет"] + 1 || 1;
     } else if (item >= 6 && item <= 10) {
@@ -532,6 +550,7 @@ onMounted(async () => {
         workYearsResult["более 30 лет"] + 1 || 1;
     }
   });
+
   //Сортировка возрастных категорий
   const sortedWorkYears = Object.entries(workYearsResult)
     .map((n) => ({
@@ -541,9 +560,9 @@ onMounted(async () => {
     .sort((a, b) => {
       return a.val.localeCompare(b.val);
     })
-    .map((n) => {
+    .map((n: sortedWorkYearsItem) => {
       let item = n.item;
-      if (n.item[0][0] == 0) {
+      if (n.item[0][0] == "0") {
         item[0] = n.item[0].slice(1);
       } else if (n.item[0][0] == "д") {
         item[0] = "до " + n.item[0].slice(4);
@@ -564,6 +583,7 @@ onMounted(async () => {
   qualifyingRank.forEach(function (a) {
     qualifyingRankResult[a] = qualifyingRankResult[a] + 1 || 1;
   });
+
   //Сортировка и распределение отобранных значений и их количества
   Object.entries(qualifyingRankResult)
     .sort((a, b) => {
@@ -593,9 +613,11 @@ onMounted(async () => {
   /*
    * Логика графика по форме собственности предприятий
    */
-  work.forEach(function (a) {
-    typeWorkResult[a.split(",")[1].trim()] =
-      typeWorkResult[a.split(",")[1].trim()] + 1 || 1;
+  work.forEach(function (companyName) {
+    if (companyName.split(",").length) {
+      typeWorkResult[companyName.split(",")[1].trim()] =
+        typeWorkResult[companyName.split(",")[1].trim()] + 1 || 1;
+    }
   });
 
   Object.entries(typeWorkResult)
@@ -638,8 +660,8 @@ onMounted(async () => {
     });
 
   //распределение дат по месяцам
-  const generateMonthsValues = (arr) => {
-    const months = {
+  const generateMonthsValues = (arr: string[]) => {
+    const months: MonthsValues = {
       "01": [],
       "02": [],
       "03": [],
@@ -699,7 +721,7 @@ onMounted(async () => {
       "#20c997",
     ];
 
-    const bgColor = (num) => {
+    const bgColor = (num: number) => {
       let color = "";
       colors[num]
         ? (color = colors[num])
