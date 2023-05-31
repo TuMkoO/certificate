@@ -818,39 +818,41 @@ const emit = defineEmits<{
 //массив полей
 const controls = ref([]);
 
-const controlsType1 = ref("");
-const controlsType2 = ref("");
-const controlsType3 = ref("");
+const controlsType1 = ref<string>("");
+const controlsType2 = ref<string>("");
+const controlsType3 = ref<string>("");
 
-const controlsNum1 = ref("");
-const controlsNum2 = ref("");
-const controlsNum3 = ref("");
-const controlsNum4 = ref("");
-const controlsNum5 = ref("");
-const controlsNum6 = ref("");
-const controlsNum7 = ref("");
-const controlsNum8 = ref("");
-const controlsNum9 = ref("");
-const controlsGrade1 = ref("");
-const controlsGrade2 = ref("");
-const controlsGrade3 = ref("");
-const controlsGrade4 = ref("");
-const controlsGrade5 = ref("");
-const controlsGrade6 = ref("");
-const controlsGrade7 = ref("");
-const controlsGrade8 = ref("");
-const controlsGrade9 = ref("");
-const controlsDate1 = ref("");
-const controlsDate2 = ref("");
-const controlsDate3 = ref("");
-const controlsDate4 = ref("");
-const controlsDate5 = ref("");
-const controlsDate6 = ref("");
-const controlsDate7 = ref("");
-const controlsDate8 = ref("");
-const controlsDate9 = ref("");
+const controlsNum1 = ref<string>("");
+const controlsNum2 = ref<string>("");
+const controlsNum3 = ref<string>("");
+const controlsNum4 = ref<string>("");
+const controlsNum5 = ref<string>("");
+const controlsNum6 = ref<string>("");
+const controlsNum7 = ref<string>("");
+const controlsNum8 = ref<string>("");
+const controlsNum9 = ref<string>("");
+const controlsGrade1 = ref<string>("");
+const controlsGrade2 = ref<string>("");
+const controlsGrade3 = ref<string>("");
+const controlsGrade4 = ref<string>("");
+const controlsGrade5 = ref<string>("");
+const controlsGrade6 = ref<string>("");
+const controlsGrade7 = ref<string>("");
+const controlsGrade8 = ref<string>("");
+const controlsGrade9 = ref<string>("");
+const controlsDate1 = ref<string>("");
+const controlsDate2 = ref<string>("");
+const controlsDate3 = ref<string>("");
+const controlsDate4 = ref<string>("");
+const controlsDate5 = ref<string>("");
+const controlsDate6 = ref<string>("");
+const controlsDate7 = ref<string>("");
+const controlsDate8 = ref<string>("");
+const controlsDate9 = ref<string>("");
 
 onMounted(() => {
+  console.log(props);
+
   //когда есть значения по умолчанию
   if (props.defaultOptions) {
     controls.value = props.defaultOptions;

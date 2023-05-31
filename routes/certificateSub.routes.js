@@ -63,9 +63,8 @@ router.post(
         weldedConnectionScope,
         weldedJointScope,
         axesPositionScope,
+        owner,
       } = req.body;
-
-      const { certId } = req.body;
 
       const existing = await CertificateSub.findOne({ numCertificate });
 
@@ -128,7 +127,7 @@ router.post(
         weldedConnectionScope,
         weldedJointScope,
         axesPositionScope,
-        owner: certId,
+        owner,
       });
 
       await certificateSub.save();

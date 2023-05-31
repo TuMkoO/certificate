@@ -1,12 +1,13 @@
-export function dateFormatForInput(date) {
-  let dd = "";
-  let mm = "";
-  let yy = "";
+export function dateFormatForInput(date: string | Date): string {
+  let dd: number | string = 0;
+  let mm: number | string = 0;
+  let yy: number | string = 0;
 
   if (date) {
     const d = new Date(date);
 
     dd = d.getDate();
+
     if (dd < 10) {
       dd = "0" + dd;
     }

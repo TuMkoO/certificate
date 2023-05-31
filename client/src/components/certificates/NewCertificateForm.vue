@@ -456,6 +456,7 @@
                       v-model="stigma"
                       @change="onChangeItem(stigmaVal, 0, stigma)"
                     />
+
                     <label for="stigma1">Маркировка образца (клеймо)</label>
                   </div>
                   <div class="form-text text-danger" v-if="sError">
@@ -1685,6 +1686,10 @@ import type { ICheckboxGroupValues } from "@/types/ICheckboxGroupValues";
 import type { ICertificate } from "@/types/ICertificate";
 import type { ISelectValue } from "@/types/ISelectValue";
 import type { ICheckboxDropdownCheckedValues } from "@/types/ICheckboxDropdownCheckedValues";
+import type { ICheckboxDropdownDefaultItem } from "@/types/ICheckboxDropdownDefaultItem";
+import type { ICheckboxDropdownItem } from "@/types/ICheckboxDropdownItem";
+
+type ItemsVal = string | undefined;
 
 interface IOptionsItem {
   id: string;
@@ -1772,23 +1777,21 @@ const electrodeDefault = ref();
 const electrodeDefault2 = ref();
 const electrodeDefault3 = ref();
 
-type ItemsVal = string | undefined;
-
 //значения вариационных параметров для отпрпавки в БД
-const stigmaVal = ref<string[] | undefined>([]);
-const weldingMethodVal = ref<string[]>([]);
-const weldedTypeVal = ref<string[]>([]);
-const weldedSeamVal = ref<string[]>([]);
-const weldedConnectionVal = ref<string[]>([]);
-const weldedPositionVal = ref<string[]>([]);
-const axesPositionVal = ref<string[] | undefined>([]);
+const stigmaVal = ref<string[]>([]);
+const weldingMethodVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
+const weldedTypeVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
+const weldedSeamVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
+const weldedConnectionVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
+const weldedPositionVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
+const axesPositionVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
 const weldedJointVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
-const preheatingVal = ref<string[] | undefined>([]);
-const heatTreatmentVal = ref<string[] | undefined>([]);
-const brandVal = ref<string[]>([]);
+const preheatingVal = ref<string[]>([]);
+const heatTreatmentVal = ref<string[]>([]);
+const brandVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
 const thicknessVal = ref<string[]>([]);
 const diameterVal = ref<string[]>([]);
-const electrodeVal = ref<string[]>([]);
+const electrodeVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
 const fluxVal = ref<string[]>([]);
 
 //список option в мультиселекте
@@ -1803,8 +1806,8 @@ const optionsElectrode: ICheckboxGroupOption[] = [];
 const optionsComission: ICheckboxGroupOption[] = [];
 
 //значение для групп технических устройств
-const checkboxDropdownAccess = ref([]);
-const checkboxDropdownAccessItems = ref([]);
+const checkboxDropdownAccess = ref<ICheckboxDropdownItem[]>([]);
+const checkboxDropdownAccessItems = ref<ICheckboxDropdownItem[]>([]);
 
 onMounted(async () => {
   //лоадер
@@ -2088,14 +2091,18 @@ onMounted(async () => {
     weldedPositionVal.value = props.certValues.weldedPosition;
     weldedJointVal.value = props.certValues.weldedJoint;
     axesPositionVal.value = props.certValues.axesPosition;
-    preheatingVal.value = props.certValues.preheating;
-    heatTreatmentVal.value = props.certValues.heatTreatment;
     brandVal.value = props.certValues.brand;
     thicknessVal.value = props.certValues.thickness;
     diameterVal.value = props.certValues.diameter;
     electrodeVal.value = props.certValues.electrode;
     fluxVal.value = props.certValues.flux;
     controls.value = props.certValues.controls;
+    if (props.certValues.preheating) {
+      preheatingVal.value = props.certValues.preheating;
+    }
+    if (props.certValues.heatTreatment) {
+      heatTreatmentVal.value = props.certValues.heatTreatment;
+    }
 
     //значения по умолчанию для мультичекбоксов, зависимых от типа протокола
     if (props.certValues.axesPosition && props.certValues.axesPosition[0]) {
@@ -2133,27 +2140,27 @@ const onCheckedWeldedPosition = (data: ICheckboxGroupValues) => {
     weldedPosition.value = [];
   }
 
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedPositionVal.value) {
     weldedPosition.value = undefined;
     weldedPositionVal.value[0] = undefined;
-  } else {
+  } else if (weldedPositionVal.value) {
     weldedPosition.value = data.values;
     weldedPositionVal.value[0] = data.values;
   }
 };
 const onCheckedWeldedPosition2 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedPositionVal.value) {
     if (weldedPositionVal.value.length == 2) {
       weldedPositionVal.value.splice(1, 1);
-    } else {
+    } else if (weldedPositionVal.value) {
       weldedPositionVal.value[1] = "";
     }
-  } else {
+  } else if (weldedPositionVal.value) {
     weldedPositionVal.value[1] = data.values;
   }
 };
 const onCheckedWeldedPosition3 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedPositionVal.value) {
     if (
       weldedPositionVal.value[1] == "" ||
       weldedPositionVal.value[1] == null
@@ -2162,7 +2169,7 @@ const onCheckedWeldedPosition3 = (data: ICheckboxGroupValues) => {
     } else if (weldedPositionVal.value.length == 3) {
       weldedPositionVal.value.splice(2, 1);
     }
-  } else {
+  } else if (weldedPositionVal.value) {
     weldedPositionVal.value[2] = data.values;
   }
 };
@@ -2209,33 +2216,33 @@ const onCheckedAxesPosition = (data: ICheckboxGroupValues) => {
     axesPosition.value = [];
   }
 
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && axesPositionVal.value) {
     axesPosition.value = undefined;
     axesPositionVal.value[0] = undefined;
-  } else {
+  } else if (axesPositionVal.value) {
     axesPosition.value = data.values;
     axesPositionVal.value[0] = data.values;
   }
 };
 const onCheckedAxesPosition2 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && axesPositionVal.value) {
     if (axesPositionVal.value.length == 2) {
       axesPositionVal.value.splice(1, 1);
     } else {
       axesPositionVal.value[1] = "";
     }
-  } else {
+  } else if (axesPositionVal.value) {
     axesPositionVal.value[1] = data.values;
   }
 };
 const onCheckedAxesPosition3 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && axesPositionVal.value) {
     if (axesPositionVal.value[1] == "" || axesPositionVal.value[1] == null) {
       axesPositionVal.value.splice(1, 2);
     } else if (axesPositionVal.value.length == 3) {
       axesPositionVal.value.splice(2, 1);
     }
-  } else {
+  } else if (axesPositionVal.value) {
     axesPositionVal.value[2] = data.values;
   }
 };
@@ -2245,33 +2252,33 @@ const onCheckedWeldedType = (data: ICheckboxGroupValues) => {
     weldedType.value = [];
   }
 
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedTypeVal.value) {
     weldedType.value = undefined;
     weldedTypeVal.value[0] = undefined;
-  } else {
+  } else if (weldedTypeVal.value) {
     weldedType.value = data.values;
     weldedTypeVal.value[0] = data.values;
   }
 };
 const onCheckedWeldedType2 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedTypeVal.value) {
     if (weldedTypeVal.value.length == 2) {
       weldedTypeVal.value.splice(1, 1);
     } else {
       weldedTypeVal.value[1] = "";
     }
-  } else {
+  } else if (weldedTypeVal.value) {
     weldedTypeVal.value[1] = data.values;
   }
 };
 const onCheckedWeldedType3 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedTypeVal.value) {
     if (weldedTypeVal.value[1] == "" || weldedTypeVal.value[1] == null) {
       weldedTypeVal.value.splice(1, 2);
     } else if (weldedTypeVal.value.length == 3) {
       weldedTypeVal.value.splice(2, 1);
     }
-  } else {
+  } else if (weldedTypeVal.value) {
     weldedTypeVal.value[2] = data.values;
   }
 };
@@ -2281,33 +2288,33 @@ const onCheckedWeldedSeam = (data: ICheckboxGroupValues) => {
     weldedSeam.value = [];
   }
 
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedSeamVal.value) {
     weldedSeam.value = undefined;
     weldedSeamVal.value[0] = undefined;
-  } else {
+  } else if (weldedSeamVal.value) {
     weldedSeam.value = data.values;
     weldedSeamVal.value[0] = data.values;
   }
 };
 const onCheckedWeldedSeam2 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedSeamVal.value) {
     if (weldedSeamVal.value.length == 2) {
       weldedSeamVal.value.splice(1, 1);
     } else {
       weldedSeamVal.value[1] = "";
     }
-  } else {
+  } else if (weldedSeamVal.value) {
     weldedSeamVal.value[1] = data.values;
   }
 };
 const onCheckedWeldedSeam3 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedSeamVal.value) {
     if (weldedSeamVal.value[1] == "" || weldedSeamVal.value[1] == null) {
       weldedSeamVal.value.splice(1, 2);
     } else if (weldedSeamVal.value.length == 3) {
       weldedSeamVal.value.splice(2, 1);
     }
-  } else {
+  } else if (weldedSeamVal.value) {
     weldedSeamVal.value[2] = data.values;
   }
 };
@@ -2316,27 +2323,27 @@ const onCheckedWeldedConnection = (data: ICheckboxGroupValues) => {
     weldedConnection.value = [];
   }
 
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedConnectionVal.value) {
     weldedConnection.value = undefined;
     weldedConnectionVal.value[0] = undefined;
-  } else {
+  } else if (weldedConnectionVal.value) {
     weldedConnection.value = data.values;
     weldedConnectionVal.value[0] = data.values;
   }
 };
 const onCheckedWeldedConnection2 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedConnectionVal.value) {
     if (weldedConnectionVal.value.length == 2) {
       weldedConnectionVal.value.splice(1, 1);
     } else {
       weldedConnectionVal.value[1] = "";
     }
-  } else {
+  } else if (weldedConnectionVal.value) {
     weldedConnectionVal.value[1] = data.values;
   }
 };
 const onCheckedWeldedConnection3 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedConnectionVal.value) {
     if (
       weldedConnectionVal.value[1] == "" ||
       weldedConnectionVal.value[1] == null
@@ -2345,7 +2352,7 @@ const onCheckedWeldedConnection3 = (data: ICheckboxGroupValues) => {
     } else if (weldedConnectionVal.value.length == 3) {
       weldedConnectionVal.value.splice(2, 1);
     }
-  } else {
+  } else if (weldedConnectionVal.value) {
     weldedConnectionVal.value[2] = data.values;
   }
 };
@@ -2354,33 +2361,33 @@ const onCheckedBrand = (data: ICheckboxGroupValues) => {
     brand.value = [];
   }
 
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && brandVal.value) {
     brand.value = undefined;
     brandVal.value[0] = undefined;
-  } else {
+  } else if (brandVal.value) {
     brand.value = data.values;
     brandVal.value[0] = data.values;
   }
 };
 const onCheckedBrand2 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && brandVal.value) {
     if (brandVal.value.length == 2) {
       brandVal.value.splice(1, 1);
     } else {
       brandVal.value[1] = "";
     }
-  } else {
+  } else if (brandVal.value) {
     brandVal.value[1] = data.values;
   }
 };
 const onCheckedBrand3 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && brandVal.value) {
     if (brandVal.value[1] == "" || brandVal.value[1] == null) {
       brandVal.value.splice(1, 2);
     } else if (brandVal.value.length == 3) {
       brandVal.value.splice(2, 1);
     }
-  } else {
+  } else if (brandVal.value) {
     brandVal.value[2] = data.values;
   }
 };
@@ -2389,33 +2396,33 @@ const onCheckedElectrode = (data: ICheckboxGroupValues) => {
     electrode.value = [];
   }
 
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && electrodeVal.value) {
     electrode.value = undefined;
     electrodeVal.value[0] = undefined;
-  } else {
+  } else if (electrodeVal.value) {
     electrode.value = data.values;
     electrodeVal.value[0] = data.values;
   }
 };
 const onCheckedElectrode2 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && electrodeVal.value) {
     if (electrodeVal.value.length == 2) {
       electrodeVal.value.splice(1, 1);
     } else {
       electrodeVal.value[1] = "";
     }
-  } else {
+  } else if (electrodeVal.value) {
     electrodeVal.value[1] = data.values;
   }
 };
 const onCheckedElectrode3 = (data: ICheckboxGroupValues) => {
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && electrodeVal.value) {
     if (electrodeVal.value[1] == "" || electrodeVal.value[1] == null) {
       electrodeVal.value.splice(1, 2);
     } else if (electrodeVal.value.length == 3) {
       electrodeVal.value.splice(2, 1);
     }
-  } else {
+  } else if (electrodeVal.value) {
     electrodeVal.value[2] = data.values;
   }
 };
@@ -2519,14 +2526,16 @@ const selectWeldingMethodScope = (value: ISelectValue) => {
   weldingMethodScope.value = value.value;
 };
 
-//функция добавления значений Групп технических устройств в массиив
+//функция добавления значений Групп технических устройств в массив
 const onCheckedAccessSubItems = (data: ICheckboxDropdownCheckedValues) => {
   if (!accesses.value) {
     accesses.value = [];
   }
 
   //поиск элемента в массиаве
-  const idx = accesses.value.findIndex((item) => item.item == data.values.item);
+  const idx = accesses.value.findIndex(
+    (item: ICheckboxDropdownDefaultItem) => item.item == data.values.item
+  );
 
   //если уже есть в массиве
   if (idx > -1) {
@@ -2611,7 +2620,9 @@ const optionsControl = computed(() => store.getters["certItem/certControls"]);
 const optionsGrade = computed(() => store.getters["certItem/certGrades"]);
 
 //обработчик изменения полей с вариациями значений
-const onChangeItem = (item, itemNum, currentItem) => {
+const onChangeItem = (item: string[], itemNum: number, currentItem: string) => {
+  console.log(item);
+
   if (itemNum == 1) {
     if (currentItem.length == 0) {
       if (item.length == 2) {
@@ -2641,64 +2652,64 @@ const onChangeItem = (item, itemNum, currentItem) => {
 };
 
 //Vee-validate
-const { handleSubmit, isSubmitting } = useForm();
+const { handleSubmit } = useForm();
 
-const { value: date, errorMessage: dError } = useField(
+const { value: date, errorMessage: dError } = useField<string>(
   "date",
   yup.string().trim().required("Пожалуйста, введите дату протокола")
 );
 
-const { value: numProtocol, errorMessage: numProtError } = useField(
+const { value: numProtocol, errorMessage: numProtError } = useField<string>(
   "numProtocol",
   yup.string().trim().required("Пожалуйста, введите номер протокола")
 );
 
-const { value: textHead, errorMessage: tHeadError } = useField(
+const { value: textHead, errorMessage: tHeadError } = useField<string>(
   "textHead",
   yup.string().trim().required("Пожалуйста, введите текст в шапке протокола")
 );
 
-const { value: firstname, errorMessage: fNameError } = useField(
+const { value: firstname, errorMessage: fNameError } = useField<string>(
   "firstname",
   yup.string().trim().required("Пожалуйста, введите Фамилию")
 );
 
-const { value: secondname, errorMessage: sNameError } = useField(
+const { value: secondname, errorMessage: sNameError } = useField<string>(
   "secondname",
   yup.string().trim().required("Пожалуйста, введите Имя")
 );
 
-const { value: lastname, errorMessage: lNameError } = useField(
+const { value: lastname, errorMessage: lNameError } = useField<string>(
   "lastname",
   yup.string().trim().required("Пожалуйста, введите Отчество")
 );
 
-const { value: birthday, errorMessage: bDayError } = useField(
+const { value: birthday, errorMessage: bDayError } = useField<string>(
   "birthday",
   yup.string().trim().required("Пожалуйста, введите дату рождения")
 );
 
-const { value: passport, errorMessage: passportError } = useField(
+const { value: passport, errorMessage: passportError } = useField<string>(
   "passport",
   yup.string().trim().required("Пожалуйста, введите серию и номер паспорта")
 );
 
-const { value: numOldCert, errorMessage: numOldCertError } = useField(
+const { value: numOldCert, errorMessage: numOldCertError } = useField<string>(
   "numOldCert",
   yup.string().trim()
 );
 
-const { value: dateOldCert, errorMessage: dateOldCertError } = useField(
+const { value: dateOldCert, errorMessage: dateOldCertError } = useField<string>(
   "dateOldCert",
   yup.string().trim()
 );
 
-const { value: work, errorMessage: wError } = useField(
+const { value: work, errorMessage: wError } = useField<string>(
   "work",
   yup.string().trim().required("Пожалуйста, введите место работы")
 );
 
-const { value: workYears, errorMessage: wYearsError } = useField(
+const { value: workYears, errorMessage: wYearsError } = useField<number>(
   "workYears",
   yup
     .number()
@@ -2707,17 +2718,17 @@ const { value: workYears, errorMessage: wYearsError } = useField(
     .integer("Пожалуйста, введите целое число")
 );
 
-const { value: qualifyingRank, errorMessage: qRankError } = useField(
+const { value: qualifyingRank, errorMessage: qRankError } = useField<string>(
   "qualifyingRank",
   yup.string().trim().required("Пожалуйста, введите квалификационный разряд")
 );
 
-const { value: attestationType, errorMessage: aTypeError } = useField(
+const { value: attestationType, errorMessage: aTypeError } = useField<string>(
   "attestationType",
   yup.string().trim().required("Пожалуйста, введите вид аттестации")
 );
 
-const { value: stigma, errorMessage: sError } = useField(
+const { value: stigma, errorMessage: sError } = useField<string>(
   "stigma",
   yup
     .string()
@@ -2725,7 +2736,7 @@ const { value: stigma, errorMessage: sError } = useField(
     .required("Пожалуйста, введите маркировку образца (клеймо)")
 );
 
-const { value: stigmaGeneral, errorMessage: sGError } = useField(
+const { value: stigmaGeneral, errorMessage: sGError } = useField<string>(
   "stigmaGeneral",
   yup
     .string()
@@ -2733,14 +2744,15 @@ const { value: stigmaGeneral, errorMessage: sGError } = useField(
     .required("Пожалуйста, введите маркировку образца (клеймо)(общее значение)")
 );
 
-const { value: weldingMethod, errorMessage: wMethodError } = useField(
+const { value: weldingMethod, errorMessage: wMethodError } = useField<string>(
   "weldingMethod",
   yup.string().trim().required("Пожалуйста, укажите способ сварки")
 );
-const { value: weldingMethodScope, errorMessage: wMethodSError } = useField(
-  "weldingMethodScope",
-  yup.string().trim().required("Пожалуйста, укажите способ сварки")
-);
+const { value: weldingMethodScope, errorMessage: wMethodSError } =
+  useField<string>(
+    "weldingMethodScope",
+    yup.string().trim().required("Пожалуйста, укажите способ сварки")
+  );
 
 const { value: weldedType, errorMessage: wTypeError } = useField(
   "weldedType",
@@ -2793,17 +2805,18 @@ const { value: weldedJointScope, errorMessage: wjSError } = useField(
   "weldedJointScope",
   yup.array().required("Пожалуйста, укажите тип сварного соединения")
 );
-const { value: preheating, errorMessage: pError } = useField(
+const { value: preheating, errorMessage: pError } = useField<string>(
   "preheating",
   yup
     .string()
     .trim()
     .required("Пожалуйста, введите предварительный и сопутствующий подогрев")
 );
-const { value: heatTreatment, errorMessage: hTreatmentError } = useField(
-  "heatTreatment",
-  yup.string().trim().required("Пожалуйста, введите термическую обработку")
-);
+const { value: heatTreatment, errorMessage: hTreatmentError } =
+  useField<string>(
+    "heatTreatment",
+    yup.string().trim().required("Пожалуйста, введите термическую обработку")
+  );
 const { value: brand, errorMessage: bError } = useField(
   "brand",
   yup.array().required("Пожалуйста, укажите марку и группу")
@@ -2812,22 +2825,22 @@ const { value: brandScope, errorMessage: bSError } = useField(
   "brandScope",
   yup.array().required("Пожалуйста, укажите марку и группу")
 );
-const { value: thickness, errorMessage: tError } = useField(
+const { value: thickness, errorMessage: tError } = useField<string>(
   "thickness",
   yup.string().trim().required("Пожалуйста, введите толщину образца (мм)")
 );
-const { value: thicknessScope, errorMessage: tSError } = useField(
+const { value: thicknessScope, errorMessage: tSError } = useField<string>(
   "thicknessScope",
   yup.string().trim().required("Пожалуйста, введите толщину образца (мм)")
 );
-const { value: diameter, errorMessage: diameterError } = useField(
+const { value: diameter, errorMessage: diameterError } = useField<string>(
   "diameter",
   yup
     .string()
     .trim()
     .required("Пожалуйста, введите наружный диаметр трубы (мм)")
 );
-const { value: diameterScope, errorMessage: diameterSError } = useField(
+const { value: diameterScope, errorMessage: diameterSError } = useField<string>(
   "diameterScope",
   yup
     .string()
@@ -2842,39 +2855,43 @@ const { value: electrodeScope, errorMessage: eSError } = useField(
   "electrodeScope",
   yup.array().required("Пожалуйста, укажите электрод или присадочную проволоку")
 );
-const { value: flux, errorMessage: fError } = useField(
+const { value: flux, errorMessage: fError } = useField<string>(
   "flux",
   yup.string().trim().required("Пожалуйста, введите защитный газ и флюс")
 );
-const { value: fluxScope, errorMessage: fSError } = useField(
+const { value: fluxScope, errorMessage: fSError } = useField<string>(
   "fluxScope",
   yup.string().trim().required("Пожалуйста, введите защитный газ и флюс")
 );
 
-const { value: npa, errorMessage: npaError } = useField(
+const { value: npa, errorMessage: npaError } = useField<string>(
   "npa",
   yup
     .string()
     .trim()
     .required("Пожалуйста, введите наименование НПА по нормам оценки качества")
 );
-const { value: auxiliaryScope, errorMessage: auxiliarySError } = useField(
-  "auxiliaryScope",
-  yup.string().trim().required("Пожалуйста, введите вспомогательные материалы")
-);
-const { value: grade, errorMessage: gError } = useField(
+const { value: auxiliaryScope, errorMessage: auxiliarySError } =
+  useField<string>(
+    "auxiliaryScope",
+    yup
+      .string()
+      .trim()
+      .required("Пожалуйста, введите вспомогательные материалы")
+  );
+const { value: grade, errorMessage: gError } = useField<string>(
   "grade",
   yup
     .string()
     .trim()
     .required("Пожалуйста, введите оценку теоретических знаний")
 );
-const { value: decision, errorMessage: decisionError } = useField(
+const { value: decision, errorMessage: decisionError } = useField<string>(
   "decision",
   yup.string().trim().required("Пожалуйста, введите решение комиссии")
 );
 
-const { value: expiration, errorMessage: expError } = useField(
+const { value: expiration, errorMessage: expError } = useField<string>(
   "expiration",
   yup
     .string()
@@ -2901,14 +2918,14 @@ const { value: accesses, errorMessage: accessesError } = useField(
       "Пожалуйста, укажите группы технических устройств опасных производственных объектов"
     )
 );
-const { value: numCertificate, errorMessage: numCertError } = useField(
+const { value: numCertificate, errorMessage: numCertError } = useField<string>(
   "numCertificate",
   yup.string().trim().required("Пожалуйста, введите номер удостоверения")
 );
 
 //функция автоматического изменения даты окончания срока действия удостоверения
 const dateChange = () => {
-  let newDate = new Date(date.value);
+  let newDate: Date = new Date(<string>date.value);
 
   newDate.setFullYear(newDate.getFullYear() + 2);
 
@@ -2932,7 +2949,7 @@ function showModal() {
   modal.value = true;
   setTimeout(() => {
     let systemModal = document.getElementById("systemModal");
-    systemModal.classList.add("show");
+    systemModal?.classList.add("show");
   }, 0);
 }
 
@@ -2994,11 +3011,11 @@ const createCertificate = async () => {
       auxiliaryScope: auxiliaryScope.value,
     };
 
-    let link = "certificate/create";
+    let link: string = "certificate/create";
 
-    if (props.certValues.id) {
+    if (props.certValues?.id) {
       link = "certificateSub/create";
-      values.certId = props.certValues.id;
+      values.owner = props.certValues.id;
     }
 
     await store.dispatch(link, values);
@@ -3022,7 +3039,7 @@ function onInvalidSubmit({ values, errors, results }) {
 
 //Функция сохранения изменений значений протокола
 const updateCertificate = async () => {
-  const id = props.certValues._id;
+  const id = props.certValues?._id;
 
   try {
     const values = {
@@ -3081,7 +3098,7 @@ const updateCertificate = async () => {
     };
 
     // вызываем метод update для обновления записи в БД
-    if (props.certValues.owner) {
+    if (props.certValues?.owner) {
       await store.dispatch("certificateSub/update", { values, id });
     } else {
       await store.dispatch("certificate/update", { values, id });

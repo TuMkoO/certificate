@@ -15,16 +15,16 @@ interface Access {
 
 export interface ICertificate {
   certType: string;
-  date: Date;
+  date: Date | string;
   numProtocol: string;
   textHead: string;
   firstname: string;
   secondname: string;
   lastname: string;
-  birthday: Date;
+  birthday: Date | string;
   passport: string;
   numOldCert?: string;
-  dateOldCert?: Date;
+  dateOldCert?: Date | string;
   work: string;
   workYears: number;
   qualifyingRank: string;
@@ -50,7 +50,7 @@ export interface ICertificate {
   grade: string;
   decision: string;
   accesses: Access[];
-  expiration: Date;
+  expiration: Date | string;
   comission: string[];
   numCertificate: string;
   weldingMethodScope: string;

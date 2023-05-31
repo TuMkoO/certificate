@@ -44,17 +44,19 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import type { ICheckboxDropdownCheckedValues } from "@/types/ICheckboxDropdownCheckedValues";
+import type { ICheckboxDropdownDefaultItem } from "@/types/ICheckboxDropdownDefaultItem";
+import type { ICheckboxDropdownItem } from "@/types/ICheckboxDropdownItem";
 
-interface CheckboxDropdownItem {
-  value: string;
-  owner: string;
-  id: string;
-  _id: string;
-}
-interface CheckboxDropdownDefaultItem {
-  item: string;
-  values: string[];
-}
+// interface CheckboxDropdownItem {
+//   value: string;
+//   owner: string;
+//   id: string;
+//   _id: string;
+// }
+// interface CheckboxDropdownDefaultItem {
+//   item: string;
+//   values: string[];
+// }
 // interface CheckboxDropdownCheckedValues {
 //   values: {
 //     item: string;
@@ -69,8 +71,8 @@ interface CheckboxDropdownMainItem {
 const props = defineProps<{
   collapseId: string;
   mainItem: CheckboxDropdownMainItem;
-  items: CheckboxDropdownItem[];
-  defaultItems?: CheckboxDropdownDefaultItem[];
+  items: ICheckboxDropdownItem[];
+  defaultItems?: ICheckboxDropdownDefaultItem[];
 }>();
 
 const emit = defineEmits<{
@@ -84,10 +86,10 @@ const mainCheckbox = ref<boolean>(false);
 const checkbox = ref<string[]>([]);
 
 //все значения
-const checkboxItems = ref<CheckboxDropdownItem[]>([]);
+const checkboxItems = ref<ICheckboxDropdownItem[]>([]);
 
 //дефолтные значения по умолчанию
-const defaultItems = ref<CheckboxDropdownDefaultItem>();
+const defaultItems = ref<ICheckboxDropdownDefaultItem>();
 
 onMounted(() => {
   checkboxItems.value = props.items;
