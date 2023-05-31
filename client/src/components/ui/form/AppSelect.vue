@@ -21,6 +21,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+import type { ISelectValue } from "@/types/ISelectValue";
 
 interface Option {
   value: string;
@@ -45,7 +46,7 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (e: "select", value: { value: string }): void;
+  (e: "select", value: ISelectValue): void;
 }>();
 
 const value = ref<string>("");

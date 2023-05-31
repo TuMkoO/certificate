@@ -1681,7 +1681,10 @@ import AppSelect from "../ui/form/AppSelect.vue";
 import AppModal from "../AppModal.vue";
 import CertificateFormQualityControl from "./CertificateFormQualityControl.vue";
 import type { ICheckboxGroupOption } from "@/types/ICheckboxGroupOption";
+import type { ICheckboxGroupValues } from "@/types/ICheckboxGroupValues";
 import type { ICertificate } from "@/types/ICertificate";
+import type { ISelectValue } from "@/types/ISelectValue";
+import type { ICheckboxDropdownCheckedValues } from "@/types/ICheckboxDropdownCheckedValues";
 
 interface IOptionsItem {
   id: string;
@@ -1703,7 +1706,7 @@ interface ISubCertificateProps {
 }
 
 const props = defineProps<{
-  certValues?: ICertificate | ISubCertificateProps;
+  certValues?: ICertificate & ISubCertificateProps;
   certSubmit: string;
 }>();
 
@@ -1769,17 +1772,19 @@ const electrodeDefault = ref();
 const electrodeDefault2 = ref();
 const electrodeDefault3 = ref();
 
+type ItemsVal = string | undefined;
+
 //значения вариационных параметров для отпрпавки в БД
-const stigmaVal = ref<string[]>([]);
+const stigmaVal = ref<string[] | undefined>([]);
 const weldingMethodVal = ref<string[]>([]);
 const weldedTypeVal = ref<string[]>([]);
 const weldedSeamVal = ref<string[]>([]);
 const weldedConnectionVal = ref<string[]>([]);
 const weldedPositionVal = ref<string[]>([]);
-const axesPositionVal = ref<string[]>([]);
-const weldedJointVal = ref<string[]>([]);
-const preheatingVal = ref<string[]>([]);
-const heatTreatmentVal = ref<string[]>([]);
+const axesPositionVal = ref<string[] | undefined>([]);
+const weldedJointVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
+const preheatingVal = ref<string[] | undefined>([]);
+const heatTreatmentVal = ref<string[] | undefined>([]);
 const brandVal = ref<string[]>([]);
 const thicknessVal = ref<string[]>([]);
 const diameterVal = ref<string[]>([]);
@@ -1907,8 +1912,6 @@ onMounted(async () => {
   axesPosition.value = [];
   axesPositionScope.value = [];
 
-  console.log(props.certValues);
-
   //Значения по умолчанию для создания вкладыша
   if (props.certValues?.id && props.certSubmit == "create") {
     numOldCert.value = props.certValues.numCertificate;
@@ -1966,10 +1969,10 @@ onMounted(async () => {
       preheating.value = "-";
       heatTreatment.value = "-";
 
-      if (props.certValues.axesPosition[0]) {
+      if (props.certValues.axesPosition && props.certValues.axesPosition[0]) {
         axesPosition.value = props.certValues.axesPosition[0];
       }
-      if (props.certValues.weldedJoint[0]) {
+      if (props.certValues.weldedJoint && props.certValues.weldedJoint[0]) {
         weldedJoint.value = props.certValues.weldedJoint[0];
       }
       if (props.certValues.weldedJointScope.length) {
@@ -1978,7 +1981,11 @@ onMounted(async () => {
       if (props.certValues.axesPositionScope.length) {
         axesPositionScope.value = props.certValues.axesPositionScope;
       }
-    } else if (certType.value == "sheetPipe") {
+    } else if (
+      certType.value == "sheetPipe" &&
+      props.certValues.preheating &&
+      props.certValues.heatTreatment
+    ) {
       preheating.value = props.certValues.preheating[0];
       heatTreatment.value = props.certValues.heatTreatment[0];
       weldedJoint.value = [];
@@ -1987,17 +1994,17 @@ onMounted(async () => {
       axesPositionScope.value = [];
     }
 
-    if (props.certValues.preheating[1]) {
+    if (props.certValues.preheating && props.certValues.preheating[1]) {
       preheating2.value = props.certValues.preheating[1];
     }
-    if (props.certValues.preheating[2]) {
+    if (props.certValues.preheating && props.certValues.preheating[2]) {
       preheating3.value = props.certValues.preheating[2];
     }
 
-    if (props.certValues.heatTreatment[1]) {
+    if (props.certValues.heatTreatment && props.certValues.heatTreatment[1]) {
       heatTreatment2.value = props.certValues.heatTreatment[1];
     }
-    if (props.certValues.heatTreatment[2]) {
+    if (props.certValues.heatTreatment && props.certValues.heatTreatment[2]) {
       heatTreatment3.value = props.certValues.heatTreatment[2];
     }
 
@@ -2091,25 +2098,25 @@ onMounted(async () => {
     controls.value = props.certValues.controls;
 
     //значения по умолчанию для мультичекбоксов, зависимых от типа протокола
-    if (props.certValues.axesPosition[0]) {
+    if (props.certValues.axesPosition && props.certValues.axesPosition[0]) {
       axesPositionDefault.value = props.certValues.axesPosition[0];
     }
-    if (props.certValues.axesPosition[1]) {
+    if (props.certValues.axesPosition && props.certValues.axesPosition[1]) {
       axesPositionDefault2.value = props.certValues.axesPosition[1];
     }
-    if (props.certValues.axesPosition[2]) {
+    if (props.certValues.axesPosition && props.certValues.axesPosition[2]) {
       axesPositionDefault3.value = props.certValues.axesPosition[2];
     }
 
     axesPositionScopeDefault.value = props.certValues.axesPositionScope;
 
-    if (props.certValues.weldedJoint[0]) {
+    if (props.certValues.weldedJoint && props.certValues.weldedJoint[0]) {
       weldedJointDefault.value = props.certValues.weldedJoint[0];
     }
-    if (props.certValues.weldedJoint[1]) {
+    if (props.certValues.weldedJoint && props.certValues.weldedJoint[1]) {
       weldedJointDefault2.value = props.certValues.weldedJoint[1];
     }
-    if (props.certValues.weldedJoint[2]) {
+    if (props.certValues.weldedJoint && props.certValues.weldedJoint[2]) {
       weldedJointDefault3.value = props.certValues.weldedJoint[2];
     }
 
@@ -2121,7 +2128,7 @@ onMounted(async () => {
 });
 
 //заносим значения мультичекбоксов
-const onCheckedWeldedPosition = (data) => {
+const onCheckedWeldedPosition = (data: ICheckboxGroupValues) => {
   if (!weldedPosition.value) {
     weldedPosition.value = [];
   }
@@ -2134,7 +2141,7 @@ const onCheckedWeldedPosition = (data) => {
     weldedPositionVal.value[0] = data.values;
   }
 };
-const onCheckedWeldedPosition2 = (data) => {
+const onCheckedWeldedPosition2 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (weldedPositionVal.value.length == 2) {
       weldedPositionVal.value.splice(1, 1);
@@ -2145,7 +2152,7 @@ const onCheckedWeldedPosition2 = (data) => {
     weldedPositionVal.value[1] = data.values;
   }
 };
-const onCheckedWeldedPosition3 = (data) => {
+const onCheckedWeldedPosition3 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (
       weldedPositionVal.value[1] == "" ||
@@ -2160,43 +2167,44 @@ const onCheckedWeldedPosition3 = (data) => {
   }
 };
 
-const onCheckedWeldedJoint = (data) => {
+const onCheckedWeldedJoint = (data: ICheckboxGroupValues) => {
   if (!weldedJoint.value) {
     weldedJoint.value = [];
   }
 
-  if (data.values.length == 0) {
+  if (data.values.length == 0 && weldedJointVal.value) {
     weldedJoint.value = undefined;
     weldedJointVal.value[0] = undefined;
-  } else {
+  } else if (weldedJointVal.value) {
     weldedJoint.value = data.values;
     weldedJointVal.value[0] = data.values;
+    console.log(weldedJointVal.value[0]);
   }
 };
-const onCheckedWeldedJoint2 = (data) => {
+const onCheckedWeldedJoint2 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
-    if (weldedJointVal.value.length == 2) {
+    if (weldedJointVal.value?.length == 2) {
       weldedJointVal.value.splice(1, 1);
-    } else {
+    } else if (weldedJointVal.value) {
       weldedJointVal.value[1] = "";
     }
-  } else {
+  } else if (weldedJointVal.value) {
     weldedJointVal.value[1] = data.values;
   }
 };
-const onCheckedWeldedJoint3 = (data) => {
-  if (data.values.length == 0) {
+const onCheckedWeldedJoint3 = (data: ICheckboxGroupValues) => {
+  if (data.values.length == 0 && weldedJointVal.value) {
     if (weldedJointVal.value[1] == "" || weldedJointVal.value[1] == null) {
       weldedJointVal.value.splice(1, 2);
     } else if (weldedJointVal.value.length == 3) {
       weldedJointVal.value.splice(2, 1);
     }
-  } else {
+  } else if (weldedJointVal.value) {
     weldedJointVal.value[2] = data.values;
   }
 };
 
-const onCheckedAxesPosition = (data) => {
+const onCheckedAxesPosition = (data: ICheckboxGroupValues) => {
   if (!axesPosition.value) {
     axesPosition.value = [];
   }
@@ -2209,7 +2217,7 @@ const onCheckedAxesPosition = (data) => {
     axesPositionVal.value[0] = data.values;
   }
 };
-const onCheckedAxesPosition2 = (data) => {
+const onCheckedAxesPosition2 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (axesPositionVal.value.length == 2) {
       axesPositionVal.value.splice(1, 1);
@@ -2220,7 +2228,7 @@ const onCheckedAxesPosition2 = (data) => {
     axesPositionVal.value[1] = data.values;
   }
 };
-const onCheckedAxesPosition3 = (data) => {
+const onCheckedAxesPosition3 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (axesPositionVal.value[1] == "" || axesPositionVal.value[1] == null) {
       axesPositionVal.value.splice(1, 2);
@@ -2232,7 +2240,7 @@ const onCheckedAxesPosition3 = (data) => {
   }
 };
 
-const onCheckedWeldedType = (data) => {
+const onCheckedWeldedType = (data: ICheckboxGroupValues) => {
   if (!weldedType.value) {
     weldedType.value = [];
   }
@@ -2245,7 +2253,7 @@ const onCheckedWeldedType = (data) => {
     weldedTypeVal.value[0] = data.values;
   }
 };
-const onCheckedWeldedType2 = (data) => {
+const onCheckedWeldedType2 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (weldedTypeVal.value.length == 2) {
       weldedTypeVal.value.splice(1, 1);
@@ -2256,7 +2264,7 @@ const onCheckedWeldedType2 = (data) => {
     weldedTypeVal.value[1] = data.values;
   }
 };
-const onCheckedWeldedType3 = (data) => {
+const onCheckedWeldedType3 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (weldedTypeVal.value[1] == "" || weldedTypeVal.value[1] == null) {
       weldedTypeVal.value.splice(1, 2);
@@ -2268,7 +2276,7 @@ const onCheckedWeldedType3 = (data) => {
   }
 };
 
-const onCheckedWeldedSeam = (data) => {
+const onCheckedWeldedSeam = (data: ICheckboxGroupValues) => {
   if (!weldedSeam.value) {
     weldedSeam.value = [];
   }
@@ -2281,7 +2289,7 @@ const onCheckedWeldedSeam = (data) => {
     weldedSeamVal.value[0] = data.values;
   }
 };
-const onCheckedWeldedSeam2 = (data) => {
+const onCheckedWeldedSeam2 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (weldedSeamVal.value.length == 2) {
       weldedSeamVal.value.splice(1, 1);
@@ -2292,7 +2300,7 @@ const onCheckedWeldedSeam2 = (data) => {
     weldedSeamVal.value[1] = data.values;
   }
 };
-const onCheckedWeldedSeam3 = (data) => {
+const onCheckedWeldedSeam3 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (weldedSeamVal.value[1] == "" || weldedSeamVal.value[1] == null) {
       weldedSeamVal.value.splice(1, 2);
@@ -2303,7 +2311,7 @@ const onCheckedWeldedSeam3 = (data) => {
     weldedSeamVal.value[2] = data.values;
   }
 };
-const onCheckedWeldedConnection = (data) => {
+const onCheckedWeldedConnection = (data: ICheckboxGroupValues) => {
   if (!weldedConnection.value) {
     weldedConnection.value = [];
   }
@@ -2316,7 +2324,7 @@ const onCheckedWeldedConnection = (data) => {
     weldedConnectionVal.value[0] = data.values;
   }
 };
-const onCheckedWeldedConnection2 = (data) => {
+const onCheckedWeldedConnection2 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (weldedConnectionVal.value.length == 2) {
       weldedConnectionVal.value.splice(1, 1);
@@ -2327,7 +2335,7 @@ const onCheckedWeldedConnection2 = (data) => {
     weldedConnectionVal.value[1] = data.values;
   }
 };
-const onCheckedWeldedConnection3 = (data) => {
+const onCheckedWeldedConnection3 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (
       weldedConnectionVal.value[1] == "" ||
@@ -2341,7 +2349,7 @@ const onCheckedWeldedConnection3 = (data) => {
     weldedConnectionVal.value[2] = data.values;
   }
 };
-const onCheckedBrand = (data) => {
+const onCheckedBrand = (data: ICheckboxGroupValues) => {
   if (!brand.value) {
     brand.value = [];
   }
@@ -2354,7 +2362,7 @@ const onCheckedBrand = (data) => {
     brandVal.value[0] = data.values;
   }
 };
-const onCheckedBrand2 = (data) => {
+const onCheckedBrand2 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (brandVal.value.length == 2) {
       brandVal.value.splice(1, 1);
@@ -2365,7 +2373,7 @@ const onCheckedBrand2 = (data) => {
     brandVal.value[1] = data.values;
   }
 };
-const onCheckedBrand3 = (data) => {
+const onCheckedBrand3 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (brandVal.value[1] == "" || brandVal.value[1] == null) {
       brandVal.value.splice(1, 2);
@@ -2376,7 +2384,7 @@ const onCheckedBrand3 = (data) => {
     brandVal.value[2] = data.values;
   }
 };
-const onCheckedElectrode = (data) => {
+const onCheckedElectrode = (data: ICheckboxGroupValues) => {
   if (!electrode.value) {
     electrode.value = [];
   }
@@ -2389,7 +2397,7 @@ const onCheckedElectrode = (data) => {
     electrodeVal.value[0] = data.values;
   }
 };
-const onCheckedElectrode2 = (data) => {
+const onCheckedElectrode2 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (electrodeVal.value.length == 2) {
       electrodeVal.value.splice(1, 1);
@@ -2400,7 +2408,7 @@ const onCheckedElectrode2 = (data) => {
     electrodeVal.value[1] = data.values;
   }
 };
-const onCheckedElectrode3 = (data) => {
+const onCheckedElectrode3 = (data: ICheckboxGroupValues) => {
   if (data.values.length == 0) {
     if (electrodeVal.value[1] == "" || electrodeVal.value[1] == null) {
       electrodeVal.value.splice(1, 2);
@@ -2420,7 +2428,7 @@ const onCheckedQualityControls = (data) => {
   }
 };
 
-const onCheckedComission = (data) => {
+const onCheckedComission = (data: ICheckboxGroupValues) => {
   if (!data.values.length) {
     comission.value = undefined;
   } else {
@@ -2428,56 +2436,56 @@ const onCheckedComission = (data) => {
   }
 };
 
-const onCheckedWeldedPositionScope = (data) => {
+const onCheckedWeldedPositionScope = (data: ICheckboxGroupValues) => {
   if (!data.values.length) {
     weldedPositionScope.value = undefined;
   } else {
     weldedPositionScope.value = data.values;
   }
 };
-const onCheckedAxesPositionScope = (data) => {
+const onCheckedAxesPositionScope = (data: ICheckboxGroupValues) => {
   if (!data.values.length) {
     axesPositionScope.value = undefined;
   } else {
     axesPositionScope.value = data.values;
   }
 };
-const onCheckedWeldedJointScope = (data) => {
+const onCheckedWeldedJointScope = (data: ICheckboxGroupValues) => {
   if (!data.values.length) {
     weldedJointScope.value = undefined;
   } else {
     weldedJointScope.value = data.values;
   }
 };
-const onCheckedWeldedTypeScope = (data) => {
+const onCheckedWeldedTypeScope = (data: ICheckboxGroupValues) => {
   if (!data.values.length) {
     weldedTypeScope.value = undefined;
   } else {
     weldedTypeScope.value = data.values;
   }
 };
-const onCheckedWeldedSeamScope = (data) => {
+const onCheckedWeldedSeamScope = (data: ICheckboxGroupValues) => {
   if (!data.values.length) {
     weldedSeamScope.value = undefined;
   } else {
     weldedSeamScope.value = data.values;
   }
 };
-const onCheckedWeldedConnectionScope = (data) => {
+const onCheckedWeldedConnectionScope = (data: ICheckboxGroupValues) => {
   if (!data.values.length) {
     weldedConnectionScope.value = undefined;
   } else {
     weldedConnectionScope.value = data.values;
   }
 };
-const onCheckedBrandScope = (data) => {
+const onCheckedBrandScope = (data: ICheckboxGroupValues) => {
   if (!data.values.length) {
     brandScope.value = undefined;
   } else {
     brandScope.value = data.values;
   }
 };
-const onCheckedElectrodeScope = (data) => {
+const onCheckedElectrodeScope = (data: ICheckboxGroupValues) => {
   if (!data.values.length) {
     electrodeScope.value = undefined;
   } else {
@@ -2486,33 +2494,33 @@ const onCheckedElectrodeScope = (data) => {
 };
 
 //Заносим значения селектов
-const selectQualifyingRank = (value) => {
+const selectQualifyingRank = (value: ISelectValue) => {
   qualifyingRank.value = value.value;
 };
-const selectAttestationType = (value) => {
+const selectAttestationType = (value: ISelectValue) => {
   attestationType.value = value.value;
 };
-const selectWeldingMethod1 = (value) => {
+const selectWeldingMethod1 = (value: ISelectValue) => {
   weldingMethod.value = value.value;
   onChangeItem(weldingMethodVal.value, 0, weldingMethod.value);
 };
-const selectWeldingMethod2 = (value) => {
+const selectWeldingMethod2 = (value: ISelectValue) => {
   weldingMethod2.value = value.value;
   onChangeItem(weldingMethodVal.value, 1, weldingMethod2.value);
 };
-const selectWeldingMethod3 = (value) => {
+const selectWeldingMethod3 = (value: ISelectValue) => {
   weldingMethod3.value = value.value;
   onChangeItem(weldingMethodVal.value, 2, weldingMethod3.value);
 };
-const selectGrade = (value) => {
+const selectGrade = (value: ISelectValue) => {
   grade.value = value.value;
 };
-const selectWeldingMethodScope = (value) => {
+const selectWeldingMethodScope = (value: ISelectValue) => {
   weldingMethodScope.value = value.value;
 };
 
 //функция добавления значений Групп технических устройств в массиив
-const onCheckedAccessSubItems = (data) => {
+const onCheckedAccessSubItems = (data: ICheckboxDropdownCheckedValues) => {
   if (!accesses.value) {
     accesses.value = [];
   }
@@ -2541,8 +2549,6 @@ const onCheckedAccessSubItems = (data) => {
 
 //функция смены тип протокола
 const changeCertType = () => {
-  // console.log(certType.value);
-
   if (certType.value == "sheetPipe") {
     weldedJoint.value = [];
     weldedJointScope.value = [];

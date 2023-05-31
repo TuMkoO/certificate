@@ -38,10 +38,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import type { ICheckboxGroupOption } from "@/types/ICheckboxGroupOption";
-
-interface Values {
-  values: string[];
-}
+import type { ICheckboxGroupValues } from "@/types/ICheckboxGroupValues";
 
 const props = defineProps<{
   options: ICheckboxGroupOption[];
@@ -50,7 +47,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "checked", values: Values): void;
+  (e: "checked", values: ICheckboxGroupValues): void;
 }>();
 
 const checkbox = ref<string[]>([]);

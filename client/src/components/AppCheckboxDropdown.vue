@@ -43,6 +43,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
+import type { ICheckboxDropdownCheckedValues } from "@/types/ICheckboxDropdownCheckedValues";
 
 interface CheckboxDropdownItem {
   value: string;
@@ -54,12 +55,12 @@ interface CheckboxDropdownDefaultItem {
   item: string;
   values: string[];
 }
-interface CheckboxDropdownCheckedValues {
-  values: {
-    item: string;
-    values?: string[];
-  };
-}
+// interface CheckboxDropdownCheckedValues {
+//   values: {
+//     item: string;
+//     values?: string[];
+//   };
+// }
 interface CheckboxDropdownMainItem {
   value: string;
   id: string;
@@ -73,7 +74,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "checked", values: CheckboxDropdownCheckedValues): void;
+  (e: "checked", values: ICheckboxDropdownCheckedValues): void;
 }>();
 
 //дефолтное значение главного чекбокса
