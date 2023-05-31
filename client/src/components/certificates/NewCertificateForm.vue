@@ -2185,7 +2185,6 @@ const onCheckedWeldedJoint = (data: ICheckboxGroupValues) => {
   } else if (weldedJointVal.value) {
     weldedJoint.value = data.values;
     weldedJointVal.value[0] = data.values;
-    console.log(weldedJointVal.value[0]);
   }
 };
 const onCheckedWeldedJoint2 = (data: ICheckboxGroupValues) => {
@@ -2621,8 +2620,6 @@ const optionsGrade = computed(() => store.getters["certItem/certGrades"]);
 
 //обработчик изменения полей с вариациями значений
 const onChangeItem = (item: string[], itemNum: number, currentItem: string) => {
-  console.log(item);
-
   if (itemNum == 1) {
     if (currentItem.length == 0) {
       if (item.length == 2) {

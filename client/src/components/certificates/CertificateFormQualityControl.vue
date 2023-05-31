@@ -805,18 +805,40 @@
 import { ref, onMounted, watch } from "vue";
 import AppSelect from "../ui/form/AppSelect.vue";
 
+interface IQualityControlOptionValue {
+  num: string;
+  grade: string;
+  date: string;
+}
+interface IQualityControlOptions {
+  controlId: number;
+  type: string;
+  values: IQualityControlOptionValue[];
+}
+interface IQualityControlOptionsItem {
+  id: string;
+  _id: string;
+  value: string;
+}
+interface IQualityControlEmitChangeControlsItem {
+  values: IQualityControlOptions[];
+}
+
 const props = defineProps<{
-  optionsType: [];
-  optionsGrade: [];
-  defaultOptions?: [];
+  optionsType: IQualityControlOptionsItem[];
+  optionsGrade: IQualityControlOptionsItem[];
+  defaultOptions?: IQualityControlOptions[];
 }>();
 const emit = defineEmits<{
-  (e: "changeControlsItem"): void;
+  (
+    e: "changeControlsItem",
+    values: IQualityControlEmitChangeControlsItem
+  ): void;
   (e: "changeType"): void;
 }>();
 
 //массив полей
-const controls = ref([]);
+const controls = ref<IQualityControlOptions[]>([]);
 
 const controlsType1 = ref<string>("");
 const controlsType2 = ref<string>("");
@@ -947,7 +969,7 @@ onMounted(() => {
 });
 
 //Функция очистки селектов
-const clear = (val) => {
+const clear = (val: string) => {
   switch (val) {
     case "controlsType1":
       controlsType1.value = "";
@@ -991,19 +1013,24 @@ const clear = (val) => {
   }
 };
 
-function changeControlsFields(val, controlsId) {
+function changeControlsFields(val: string[], controlsId: number) {
   if (!controls.value[controlsId]) {
-    controls.value[controlsId] = {};
+    controls.value[controlsId] = {} as IQualityControlOptions;
   }
 
   if (val[0]) {
     controls.value[controlsId] = {
       controlId: controlsId,
       type: val[0],
-    };
+    } as IQualityControlOptions;
   }
 
-  function checkValues(val1, val2, val3, valuesNum) {
+  function checkValues(
+    val1: number,
+    val2: number,
+    val3: number,
+    valuesNum: number
+  ) {
     //если все основные значения заполнены:
     if (val[val1] && val[val2] && val[val3]) {
       //добавляем в массив значений
