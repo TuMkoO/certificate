@@ -5,49 +5,39 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { useStore } from "vuex";
 import { ref, onBeforeMount, computed } from "vue";
 import QrcodeVue from "qrcode.vue";
 
-export default {
-  props: ["data"],
-  setup(props) {
-    const store = useStore();
-    const basicLink = ref(null);
-    const valueLink = ref("");
+const props = defineProps<{ data: string[] }>();
 
-    const size = 150;
+const store = useStore();
+const basicLink = computed(() => store.getters["qr/qrs"]);
+const valueLink = ref<string>("");
 
-    onBeforeMount(async () => {
-      await store.dispatch("qr/load");
-      basicLink.value = computed(() => store.getters["qr/qrs"]);
+const size = 150;
 
-      valueLink.value =
-        props.data[0] +
-        " " +
-        props.data[1] +
-        " " +
-        props.data[2] +
-        "\n" +
-        props.data[3] +
-        " от " +
-        props.data[4] +
-        "\n" +
-        "Проверить по ссылке: " +
-        basicLink.value.value[0].link +
-        "certificate/" +
-        props.data[5] +
-        "/";
-    });
+onBeforeMount(async () => {
+  await store.dispatch("qr/load");
 
-    return {
-      valueLink,
-      size,
-    };
-  },
-  components: { QrcodeVue },
-};
+  valueLink.value =
+    props.data[0] +
+    " " +
+    props.data[1] +
+    " " +
+    props.data[2] +
+    "\n" +
+    props.data[3] +
+    " от " +
+    props.data[4] +
+    "\n" +
+    "Проверить по ссылке: " +
+    basicLink.value[0].link +
+    "certificate/" +
+    props.data[5] +
+    "/";
+});
 </script>
 
 <style></style>
