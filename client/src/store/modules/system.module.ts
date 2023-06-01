@@ -1,6 +1,5 @@
 import axios from "axios";
 import $api from "../../axios/request";
-import store from "../index";
 import { ActionContext } from "vuex";
 import type { SystemsSettings } from "@/types/SettingsSystem";
 
@@ -35,12 +34,16 @@ export default {
   actions: {
     async load({ commit, dispatch }: ActionContext<State, any>): Promise<void> {
       try {
+        process.env.NODE_ENV === "production"
+          ? (axios.defaults.baseURL = import.meta.env.VITE_DB_URL_HOSTING)
+          : (axios.defaults.baseURL = import.meta.env.VITE_DB_URL);
+
         const headers = {
           "Content-Type": "application/json",
         };
 
         //загрузка с БД сервера
-        const { data } = await axios.get<SystemsSettings[]>("/api/system/", {
+        const { data } = await axios.get<SystemsSettings[]>("api/system/", {
           headers: headers,
         });
 

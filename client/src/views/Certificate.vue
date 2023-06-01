@@ -2105,7 +2105,7 @@ const loadingData = async () => {
   try {
     loading.value = true;
 
-    if (userRole.value.length) {
+    if (userRole.value?.length) {
       userRole.value.includes("admin") || userRole.value.includes("god")
         ? (access.value = true)
         : (access.value = false);
@@ -2132,6 +2132,8 @@ const loadingData = async () => {
 
     loading.value = false;
   } catch (error) {
+    console.log(error);
+
     isId.value = false;
     loading.value = false;
   }
