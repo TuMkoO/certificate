@@ -1,5 +1,5 @@
-export function arrayFormat(array) {
-  const arrFormatted = [];
+export function arrayFormat(array: string[]): string[] {
+  const arrFormatted: string[] = [];
 
   if (array) {
     array.map((item, idx) => {

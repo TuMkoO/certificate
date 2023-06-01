@@ -1,15 +1,15 @@
-export function dateFormat(date) {
+export function dateFormat(date: string | Date): string {
   const d = new Date(date);
 
-  let dd = d.getDate();
+  let dd: number | string = d.getDate();
   if (dd < 10) {
     dd = "0" + dd;
   }
-  let mm = d.getMonth() + 1;
+  let mm: number | string = d.getMonth() + 1;
   if (mm < 10) {
     mm = "0" + mm;
   }
-  let yy = d.getFullYear();
+  let yy: number | string = d.getFullYear();
 
   return dd + "." + mm + "." + yy;
 }

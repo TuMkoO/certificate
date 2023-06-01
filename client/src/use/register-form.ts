@@ -2,11 +2,9 @@ import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
 import { computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
-// import { useRouter } from "vue-router";
 
 export function useRegisterForm() {
   const store = useStore();
-  // const router = useRouter();
   const { handleSubmit, isSubmitting, submitCount, resetForm } = useForm();
 
   const PASSWORD_MIN_LENGTH = 7;
@@ -79,7 +77,6 @@ export function useRegisterForm() {
   // функция регистрации
   const onRegisterSubmit = handleSubmit(async (values) => {
     try {
-      // console.log("onRegisterSubmit");
       await store.dispatch("auth/register", values);
 
       // очистка полей после успешной регистрации

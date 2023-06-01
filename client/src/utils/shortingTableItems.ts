@@ -1,21 +1,15 @@
-export function shortingTableItems(accesessItems) {
-  // const arr = [];
-  // // console.log(item);
-  // if (item) {
-  //   item.map((i) => {
-  //     arr.push(Number(i.replace(/\D+/g, "")));
-  //   });
-  // }
+import type { ICheckboxDropdownDefaultItem } from "@/types/ICheckboxDropdownDefaultItem";
 
-  // return arr;
-
-  const result = [];
+export function shortingTableItems(
+  accesessItems: ICheckboxDropdownDefaultItem[]
+): string[] {
+  const result: string[] = [];
 
   accesessItems.map((item) => {
     let regExp = /\(([^)]+)\)/;
     let matches = regExp.exec(item.item);
 
-    const arrValues = [];
+    const arrValues: number[] = [];
 
     if (item.values) {
       item.values.map((i) => {
@@ -23,8 +17,12 @@ export function shortingTableItems(accesessItems) {
       });
     }
 
-    let str = matches[1] + " (п. " + arrValues + ")";
-    result.push(str);
+    let str: string = "";
+    if (matches) {
+      str = matches[1] + " (п. " + arrValues + ")";
+
+      result.push(str);
+    }
   });
 
   return result;

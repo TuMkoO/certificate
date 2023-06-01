@@ -1,7 +1,7 @@
-export function protocolDateFormat(date) {
-  let dd = "";
-  let mm = "";
-  let yy = "";
+export function protocolDateFormat(date: string | Date): string {
+  let dd: number | string = "";
+  let mm: number | string = "";
+  let yy: number | string = "";
 
   if (date) {
     const d = new Date(date);

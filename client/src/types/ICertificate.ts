@@ -1,3 +1,4 @@
+import type { ICheckboxDropdownDefaultItem } from "@/types/ICheckboxDropdownDefaultItem";
 interface ControlValue {
   num: string;
   grade: string;
@@ -8,10 +9,10 @@ interface Control {
   values: ControlValue[];
   controlId: number;
 }
-interface Access {
-  item: string;
-  values: string[];
-}
+// interface Access {
+//   item: string;
+//   values: string[];
+// }
 
 export interface ICertificate {
   certType: string;
@@ -49,7 +50,7 @@ export interface ICertificate {
   npa: string;
   grade: string;
   decision: string;
-  accesses: Access[];
+  accesses: ICheckboxDropdownDefaultItem[];
   expiration: Date | string;
   comission: string[];
   numCertificate: string;
