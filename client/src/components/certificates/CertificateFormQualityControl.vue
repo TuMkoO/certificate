@@ -804,24 +804,13 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import AppSelect from "../ui/form/AppSelect.vue";
+import type { IQualityControlOptions } from "@/types/IQualityControlOptions";
+import type { IQualityControlEmitChangeControlsItem } from "@/types/IQualityControlEmitChangeControlsItem";
 
-interface IQualityControlOptionValue {
-  num: string;
-  grade: string;
-  date: string;
-}
-interface IQualityControlOptions {
-  controlId: number;
-  type: string;
-  values: IQualityControlOptionValue[];
-}
 interface IQualityControlOptionsItem {
   id: string;
   _id: string;
   value: string;
-}
-interface IQualityControlEmitChangeControlsItem {
-  values: IQualityControlOptions[];
 }
 
 const props = defineProps<{
@@ -873,8 +862,6 @@ const controlsDate8 = ref<string>("");
 const controlsDate9 = ref<string>("");
 
 onMounted(() => {
-  console.log(props);
-
   //когда есть значения по умолчанию
   if (props.defaultOptions) {
     controls.value = props.defaultOptions;

@@ -1688,6 +1688,7 @@ import type { ISelectValue } from "@/types/ISelectValue";
 import type { ICheckboxDropdownCheckedValues } from "@/types/ICheckboxDropdownCheckedValues";
 import type { ICheckboxDropdownDefaultItem } from "@/types/ICheckboxDropdownDefaultItem";
 import type { ICheckboxDropdownItem } from "@/types/ICheckboxDropdownItem";
+import type { IQualityControlEmitChangeControlsItem } from "@/types/IQualityControlEmitChangeControlsItem";
 
 type ItemsVal = string | undefined;
 
@@ -1749,37 +1750,39 @@ const flux2 = ref<string>("");
 const flux3 = ref<string>("");
 
 //переменные для значений по умолчанию для полей, зависимых от типа протокола
-const axesPositionDefault = ref();
-const axesPositionDefault2 = ref();
-const axesPositionDefault3 = ref();
-const axesPositionScopeDefault = ref();
-const weldedJointDefault = ref();
-const weldedJointDefault2 = ref();
-const weldedJointDefault3 = ref();
-const weldedJointScopeDefault = ref();
+const axesPositionDefault = ref<string[]>([]);
+const axesPositionDefault2 = ref<string[]>([]);
+const axesPositionDefault3 = ref<string[]>([]);
+const axesPositionScopeDefault = ref<string[]>([]);
+const weldedJointDefault = ref<string[]>([]);
+const weldedJointDefault2 = ref<string[]>([]);
+const weldedJointDefault3 = ref<string[]>([]);
+const weldedJointScopeDefault = ref<string[]>([]);
 
-const weldedTypeDefault = ref();
-const weldedTypeDefault2 = ref();
-const weldedTypeDefault3 = ref();
-const weldedSeamDefault = ref();
-const weldedSeamDefault2 = ref();
-const weldedSeamDefault3 = ref();
-const weldedConnectionDefault = ref();
-const weldedConnectionDefault2 = ref();
-const weldedConnectionDefault3 = ref();
-const weldedPositionDefault = ref();
-const weldedPositionDefault2 = ref();
-const weldedPositionDefault3 = ref();
-const brandDefault = ref();
-const brandDefault2 = ref();
-const brandDefault3 = ref();
-const electrodeDefault = ref();
-const electrodeDefault2 = ref();
-const electrodeDefault3 = ref();
+const weldedTypeDefault = ref<string[]>([]);
+const weldedTypeDefault2 = ref<string[]>([]);
+const weldedTypeDefault3 = ref<string[]>([]);
+const weldedSeamDefault = ref<string[]>([]);
+const weldedSeamDefault2 = ref<string[]>([]);
+const weldedSeamDefault3 = ref<string[]>([]);
+const weldedConnectionDefault = ref<string[]>([]);
+const weldedConnectionDefault2 = ref<string[]>([]);
+const weldedConnectionDefault3 = ref<string[]>([]);
+const weldedPositionDefault = ref<string[]>([]);
+const weldedPositionDefault2 = ref<string[]>([]);
+const weldedPositionDefault3 = ref<string[]>([]);
+const brandDefault = ref<string[]>([]);
+const brandDefault2 = ref<string[]>([]);
+const brandDefault3 = ref<string[]>([]);
+const electrodeDefault = ref<string[]>([]);
+const electrodeDefault2 = ref<string[]>([]);
+const electrodeDefault3 = ref<string[]>([]);
 
 //значения вариационных параметров для отпрпавки в БД
 const stigmaVal = ref<string[]>([]);
-const weldingMethodVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
+const weldingMethodVal = ref<
+  Array<ItemsVal[]> | ItemsVal[] | string[] | undefined
+>([]);
 const weldedTypeVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
 const weldedSeamVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
 const weldedConnectionVal = ref<Array<ItemsVal[]> | ItemsVal[] | undefined>([]);
@@ -2063,6 +2066,9 @@ onMounted(async () => {
     electrodeDefault.value = props.certValues.electrode[0];
     electrodeDefault2.value = props.certValues.electrode[1];
     electrodeDefault3.value = props.certValues.electrode[2];
+
+    console.log(props.certValues.weldedType[0]);
+    console.log(weldedTypeDefault.value);
 
     weldedTypeScope.value = props.certValues.weldedTypeScope;
     weldedSeamScope.value = props.certValues.weldedSeamScope;
@@ -2426,7 +2432,9 @@ const onCheckedElectrode3 = (data: ICheckboxGroupValues) => {
   }
 };
 
-const onCheckedQualityControls = (data) => {
+const onCheckedQualityControls = (
+  data: IQualityControlEmitChangeControlsItem[]
+) => {
   if (!data.values || data.values.length == 0 || !data.values[0]) {
     controls.value = undefined;
   } else {
@@ -2508,6 +2516,7 @@ const selectAttestationType = (value: ISelectValue) => {
 };
 const selectWeldingMethod1 = (value: ISelectValue) => {
   weldingMethod.value = value.value;
+
   onChangeItem(weldingMethodVal.value, 0, weldingMethod.value);
 };
 const selectWeldingMethod2 = (value: ISelectValue) => {
@@ -2551,7 +2560,9 @@ const onCheckedAccessSubItems = (data: ICheckboxDropdownCheckedValues) => {
     }
   } else {
     //если нет в массиве, добавить
-    accesses.value.push(data.values);
+    if (data.values) {
+      accesses.value.push(data.values);
+    }
   }
 };
 
@@ -2907,7 +2918,9 @@ const { value: controls, errorMessage: controlsError } = useField(
       "Пожалуйста, укажите в первой сроке основного раздела данные контроля качества образца"
     )
 );
-const { value: accesses, errorMessage: accessesError } = useField(
+const { value: accesses, errorMessage: accessesError } = useField<
+  ICheckboxDropdownDefaultItem[] | undefined
+>(
   "accesses",
   yup
     .array()
