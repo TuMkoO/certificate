@@ -1,5 +1,4 @@
 import $api from "../../axios/request";
-import store from "../index";
 import { ActionContext } from "vuex";
 import type { ICertificateItem } from "@/types/ICertificateItem";
 

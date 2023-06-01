@@ -256,11 +256,14 @@
             <input
               type="text"
               id="work"
-              placeholder="Место работы"
+              placeholder="Место работы (в формате: [Название, форма собственности сокращенно])"
               :class="['form-control', { 'is-invalid': wError }]"
               v-model="work"
             />
-            <label for="work">Место работы</label>
+            <label for="work"
+              >Место работы (в формате: [Название, форма собственности
+              сокращенно])</label
+            >
           </div>
           <div class="form-text text-danger" v-if="wError">
             {{ wError }}
@@ -2043,6 +2046,7 @@ onMounted(async () => {
     }
 
     weldedType.value = props.certValues.weldedType[0];
+
     weldedTypeDefault.value = props.certValues.weldedType[0];
     weldedTypeDefault2.value = props.certValues.weldedType[1];
     weldedTypeDefault3.value = props.certValues.weldedType[2];
@@ -2066,9 +2070,6 @@ onMounted(async () => {
     electrodeDefault.value = props.certValues.electrode[0];
     electrodeDefault2.value = props.certValues.electrode[1];
     electrodeDefault3.value = props.certValues.electrode[2];
-
-    console.log(props.certValues.weldedType[0]);
-    console.log(weldedTypeDefault.value);
 
     weldedTypeScope.value = props.certValues.weldedTypeScope;
     weldedSeamScope.value = props.certValues.weldedSeamScope;
@@ -2112,25 +2113,25 @@ onMounted(async () => {
 
     //значения по умолчанию для мультичекбоксов, зависимых от типа протокола
     if (props.certValues.axesPosition && props.certValues.axesPosition[0]) {
-      axesPositionDefault.value = props.certValues.axesPosition[0];
+      axesPositionDefault.value[0] = props.certValues.axesPosition[0];
     }
     if (props.certValues.axesPosition && props.certValues.axesPosition[1]) {
-      axesPositionDefault2.value = props.certValues.axesPosition[1];
+      axesPositionDefault2.value[1] = props.certValues.axesPosition[1];
     }
     if (props.certValues.axesPosition && props.certValues.axesPosition[2]) {
-      axesPositionDefault3.value = props.certValues.axesPosition[2];
+      axesPositionDefault3.value[2] = props.certValues.axesPosition[2];
     }
 
     axesPositionScopeDefault.value = props.certValues.axesPositionScope;
 
     if (props.certValues.weldedJoint && props.certValues.weldedJoint[0]) {
-      weldedJointDefault.value = props.certValues.weldedJoint[0];
+      weldedJointDefault.value[0] = props.certValues.weldedJoint[0];
     }
     if (props.certValues.weldedJoint && props.certValues.weldedJoint[1]) {
-      weldedJointDefault2.value = props.certValues.weldedJoint[1];
+      weldedJointDefault2.value[1] = props.certValues.weldedJoint[1];
     }
     if (props.certValues.weldedJoint && props.certValues.weldedJoint[2]) {
-      weldedJointDefault3.value = props.certValues.weldedJoint[2];
+      weldedJointDefault3.value[2] = props.certValues.weldedJoint[2];
     }
 
     weldedJointScopeDefault.value = props.certValues.weldedJointScope;
@@ -2433,7 +2434,7 @@ const onCheckedElectrode3 = (data: ICheckboxGroupValues) => {
 };
 
 const onCheckedQualityControls = (
-  data: IQualityControlEmitChangeControlsItem[]
+  data: IQualityControlEmitChangeControlsItem
 ) => {
   if (!data.values || data.values.length == 0 || !data.values[0]) {
     controls.value = undefined;
@@ -2560,9 +2561,7 @@ const onCheckedAccessSubItems = (data: ICheckboxDropdownCheckedValues) => {
     }
   } else {
     //если нет в массиве, добавить
-    if (data.values) {
-      accesses.value.push(data.values);
-    }
+    accesses.value.push(data.values);
   }
 };
 
