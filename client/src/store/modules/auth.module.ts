@@ -1,5 +1,6 @@
 import axios, { type AxiosPromise } from "axios";
 import store from "../index";
+import router from "../../router";
 import $api from "../../axios/request";
 import { ActionContext } from "vuex";
 import type { IUser } from "@/types/IUser";
@@ -399,7 +400,7 @@ export default {
           ? (axios.defaults.baseURL = import.meta.env.VITE_DB_URL_HOSTING)
           : (axios.defaults.baseURL = import.meta.env.VITE_DB_URL);
 
-        const { data } = await axios.get<AuthResponse>("/api/auth/refresh", {
+        const { data } = await axios.get<AuthResponse>("api/auth/refresh", {
           withCredentials: true,
         });
 
@@ -412,7 +413,13 @@ export default {
           commit("setUser", data.user);
         }
       } catch (e) {
-        console.log(e);
+        //необходимо очистить isAuth в store
+        commit("clearIsAuth");
+
+        //удалить токен
+        localStorage.removeItem("token");
+
+        router.push("/auth?message=auth");
       }
     },
   },
