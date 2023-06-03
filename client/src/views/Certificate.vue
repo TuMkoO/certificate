@@ -1861,7 +1861,7 @@ import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 import { saveAs } from "file-saver";
-import * as ImageModule from "docxtemplater-image-module-free/build/imagemodule";
+import * as ImageModule from "docxtemplater-image-module-free/build/imagemodule.js";
 import * as html2pdf from "html2pdf.js";
 import AppPage from "../components/ui/AppPage.vue";
 import AppModal from "../components/AppModal.vue";
